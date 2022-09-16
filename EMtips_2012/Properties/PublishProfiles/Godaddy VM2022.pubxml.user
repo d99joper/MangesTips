@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>
+    </EncryptedPassword>
+    <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2022/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Admin.Master">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Admin/Default.aspx">
+      <publishTime>09/15/2022 11:11:07</publishTime>
+    </File>
+    <File Include="Admin/login.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Admin/Site.Master">
+      <publishTime>09/15/2022 11:14:21</publishTime>
+    </File>
+    <File Include="Admin/Web.config">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Answers.aspx">
+      <publishTime>09/15/2022 11:02:29</publishTime>
+    </File>
+    <File Include="AwaitingConfirmation.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="bin/ceTe.DynamicPDF.35.dll">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/13/2022 15:11:33</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>09/13/2022 15:11:33</publishTime>
+    </File>
+    <File Include="bin/VMTips_2014.dll">
+      <publishTime>06/15/2014 10:14:07</publishTime>
+    </File>
+    <File Include="bin/VMTips_2018.dll">
+      <publishTime>06/14/2018 10:32:58</publishTime>
+    </File>
+    <File Include="bin/VMTips_2018.pdb">
+      <publishTime>06/14/2018 10:32:58</publishTime>
+    </File>
+    <File Include="bin/VMTips_2022.dll">
+      <publishTime>09/15/2022 13:56:45</publishTime>
+    </File>
+    <File Include="bin/VMTips_2022.pdb">
+      <publishTime>09/15/2022 13:56:45</publishTime>
+    </File>
+    <File Include="Blog.aspx">
+      <publishTime>09/14/2022 14:58:36</publishTime>
+    </File>
+    <File Include="BlogPage.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="confirm.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="CSS/autocomplete.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/Blue.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/EM2012_Green.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/EM2012_Purple.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/EM2016.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/FadingOrange.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/FadingOrange_old.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/Green.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/Orange.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/PaleBlue.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/Silver.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/Site.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/SkyBlue.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="CSS/VM2014.css">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>09/15/2022 11:02:30</publishTime>
+    </File>
+    <File Include="Details.aspx">
+      <publishTime>09/15/2022 11:02:29</publishTime>
+    </File>
+    <File Include="Docs/tipset2018.docx">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Docs/tipset2018.xlsx">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Docs/tipset2022.xlsx">
+      <publishTime>09/15/2022 13:54:47</publishTime>
+    </File>
+    <File Include="Docs/vmtipset2014.doc">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Helpers/TopScorer.asmx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Helpers/TopScorers.ashx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="images/egoboy.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/fadingBackground.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/gradient.jpeg">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/greengradient.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/icon-edit.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/icon_delete.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/Image411.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/loggacolor.png">
+      <publishTime>09/15/2022 10:51:04</publishTime>
+    </File>
+    <File Include="images/loggan2012.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/loggan2012.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/loggan2012400.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/loggo2018.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/loggo2018.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/logo.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/logo_2014.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/logo_2014.jpg">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/logo_2014.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/logo_header_2014.jpg">
+      <publishTime>04/29/2014 15:19:02</publishTime>
+    </File>
+    <File Include="images/logo_header_2014.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/mangesvmtips.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/mangesvmtips.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/orangeGradient.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/overstlogga.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/overstlogga2022small3.png">
+      <publishTime>09/15/2022 10:51:04</publishTime>
+    </File>
+    <File Include="images/progress_indicator.gif">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="images/purpleGradient.png">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Models/SettingsExtensions.xml">
+      <publishTime>09/14/2022 15:08:28</publishTime>
+    </File>
+    <File Include="Models/Tips.edmx.diagram">
+      <publishTime>09/13/2022 16:09:34</publishTime>
+    </File>
+    <File Include="NyKupong.aspx">
+      <publishTime>09/15/2022 11:14:21</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/13/2022 15:11:33</publishTime>
+    </File>
+    <File Include="pdfGenerator.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Rules.aspx">
+      <publishTime>09/15/2022 13:47:52</publishTime>
+    </File>
+    <File Include="Script/autocomplete.js">
+      <publishTime>09/13/2022 15:11:32</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>09/15/2022 11:14:03</publishTime>
+    </File>
+    <File Include="StatDetails.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Statistics.aspx">
+      <publishTime>09/13/2022 16:01:39</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/13/2022 15:19:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

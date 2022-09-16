@@ -1,0 +1,46 @@
+﻿    <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="VMTips_2018.Admin.Admin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <link href="../CSS/Site.css" rel="Stylesheet" type="text/css" />
+    <title>Manges VM-tips :: Admin</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+        <div class="page">
+
+            <div id="header">
+                <div id="title">
+                    <h1>Manges VM-tips</h1>
+                </div>
+                
+                <div id="logindisplay">
+                    &nbsp;
+                </div> 
+            
+                <div id="menucontainer">
+                
+                    <ul id="menu">              
+                        <li><a href="#" >Statistik</a></li>
+                        <li><a href="#" >Regler</a></li>
+                    </ul>
+                
+                </div>
+            </div>
+
+            <div id="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+
+                <div id="footer">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://personablesolutions.com/mangesemtips_2012" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="ftp://personablesolutions.com/mangesemtips_2012" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Live" publishMethod="FTP" replaceMatchingFiles="True" userName="d99joper" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAgG0tsu124Ey5THUZUvF2TgAAAAACAAAAAAAQZgAAAAEAACAAAADg6cEBa/bee+hSbg+exaWjUj0iKTpA/RQArWLn9FvSpQAAAAAOgAAAAAIAACAAAABd64pZiL2QwekFzIY2qMlMu9ntJv7V21lZIRx9njCB1CAAAAC07iHccCVGA+wuTnLqOc12bfVT/Re3Eecu8ANy0hxSQUAAAAChgdUtI2jU0GT3OvBL/1fd2v5mFpbO5pqS1RzIHMWQBij1lm6JIk0/trBihE1JUUbsESKUwBk01NAcBvJlUnoP" SelectedForPublish="True">
+    <file relUrl="Details.aspx" publishTime="03/26/2012 21:17:24" />
+    <file relUrl="NyKupong.aspx" publishTime="03/26/2012 21:17:24" />
+    <file relUrl="Models/SettingsExtensions.xml" publishTime="06/08/2012 19:27:26" />
+    <file relUrl="images/logo.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/progress_indicator.gif" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/loggan2012.png" publishTime="03/08/2012 22:17:30" />
+    <file relUrl="Site.Master" publishTime="04/28/2012 21:17:09" />
+    <file relUrl="CSS/EM2012_Green.css" publishTime="03/26/2012 21:45:53" />
+    <file relUrl="Admin.Master" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="bin/EMTips_2012.dll" publishTime="06/08/2012 21:35:14" />
+    <file relUrl="AwaitingConfirmation.aspx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/orangeGradient.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="CSS/Blue.css" publishTime="03/26/2012 19:28:54" />
+    <file relUrl="Helpers/TopScorers.ashx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Script/autocomplete.js" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Statistics.aspx" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="CSS/Site.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="images/loggan2012.gif" publishTime="03/08/2012 22:17:25" />
+    <file relUrl="CSS/Orange.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="pdfGenerator.aspx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/fadingBackground.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Rules.aspx" publishTime="03/08/2012 22:42:48" />
+    <file relUrl="Answers.aspx" publishTime="03/26/2012 21:17:24" />
+    <file relUrl="CSS/PaleBlue.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="bin/AjaxControlToolkit.dll" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Admin/Web.config" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="CSS/FadingOrange_old.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="images/gradient.jpeg" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/icon-edit.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Default.aspx" publishTime="03/26/2012 21:45:35" />
+    <file relUrl="Admin/login.aspx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="CSS/Green.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="images/mangesvmtips.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/loggan2012400.png" publishTime="03/26/2012 21:15:15" />
+    <file relUrl="CSS/EM2012_Purple.css" publishTime="05/27/2012 13:59:51" />
+    <file relUrl="Helpers/TopScorer.asmx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="CSS/autocomplete.css" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/greengradient.png" publishTime="03/26/2012 20:52:22" />
+    <file relUrl="CSS/SkyBlue.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="images/egoboy.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="confirm.aspx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="StatDetails.aspx" publishTime="03/03/2012 15:19:56" />
+    <file relUrl="CSS/FadingOrange.css" publishTime="03/26/2012 19:28:55" />
+    <file relUrl="BlogPage.aspx" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Admin/Site.Master" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="Admin/Default.aspx" publishTime="06/06/2012 20:32:18" />
+    <file relUrl="Web.config" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="bin/EMTips_2012.pdb" publishTime="06/08/2012 21:35:14" />
+    <file relUrl="images/Image411.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="bin/ceTe.DynamicPDF.35.dll" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/icon_delete.gif" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/mangesvmtips.gif" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="images/purpleGradient.png" publishTime="02/28/2012 21:20:14" />
+    <file relUrl="CSS/Silver.css" publishTime="03/26/2012 19:28:55" />
+  </publishProfile>
+</publishData>

@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA82Ur/GDcYk2+60jQ4ZIJZAAAAAACAAAAAAAQZgAAAAEAACAAAABQ8YD/dFqDJp7i2968e5IVnhokZtB7Tfb2lnZr0XHkHwAAAAAOgAAAAAIAACAAAACcABXBqXtN/bvMCAIfn/DsYJYTx7lCsvm8b57nJXmY0yAAAAApuZ6Ekm80vwQS+m0ZDiji5/O1fpzbaujgBM2XwWsnS0AAAAAuD8PLRuI9VhbN+joH+T8hJRKRW85dUHU+xHUcc5svEcZ5MsWUmBQq3zrxDx6KViOl75zSPyj4aW0y7FGU4uii</EncryptedPassword>
+    <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2018/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Admin.Master">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Admin/Default.aspx">
+      <publishTime>05/29/2018 10:15:47</publishTime>
+    </File>
+    <File Include="Admin/login.aspx">
+      <publishTime>04/13/2018 14:00:18</publishTime>
+    </File>
+    <File Include="Admin/Site.Master">
+      <publishTime>05/09/2018 11:06:48</publishTime>
+    </File>
+    <File Include="Admin/Web.config">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="Answers.aspx">
+      <publishTime>05/08/2018 15:14:12</publishTime>
+    </File>
+    <File Include="AwaitingConfirmation.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>04/13/2018 13:58:16</publishTime>
+    </File>
+    <File Include="bin/ceTe.DynamicPDF.35.dll">
+      <publishTime>04/13/2018 13:58:15</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>02/25/2014 01:34:42</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>02/25/2014 01:34:42</publishTime>
+    </File>
+    <File Include="bin/VMTips_2014.dll">
+      <publishTime>06/15/2014 10:14:07</publishTime>
+    </File>
+    <File Include="bin/VMTips_2018.dll">
+      <publishTime>06/14/2018 10:32:58</publishTime>
+    </File>
+    <File Include="bin/VMTips_2018.pdb">
+      <publishTime>06/14/2018 10:32:58</publishTime>
+    </File>
+    <File Include="BlogPage.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="confirm.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="CSS/autocomplete.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/Blue.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/EM2012_Green.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/EM2012_Purple.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/EM2016.css">
+      <publishTime>05/08/2018 15:04:55</publishTime>
+    </File>
+    <File Include="CSS/FadingOrange.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/FadingOrange_old.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/Green.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/Orange.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/PaleBlue.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/Silver.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/Site.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/SkyBlue.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="CSS/VM2014.css">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>05/08/2018 15:14:12</publishTime>
+    </File>
+    <File Include="Details.aspx">
+      <publishTime>05/17/2018 13:17:33</publishTime>
+    </File>
+    <File Include="Docs/tipset2018.docx">
+      <publishTime>05/08/2018 15:04:25</publishTime>
+    </File>
+    <File Include="Docs/tipset2018.xlsx">
+      <publishTime>05/17/2018 12:04:46</publishTime>
+    </File>
+    <File Include="Docs/vmtipset2014.doc">
+      <publishTime>04/13/2018 13:18:33</publishTime>
+    </File>
+    <File Include="Helpers/TopScorer.asmx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Helpers/TopScorers.ashx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="images/egoboy.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/fadingBackground.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/gradient.jpeg">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/greengradient.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/icon-edit.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/icon_delete.gif">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/Image411.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/loggan2012.gif">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/loggan2012.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/loggan2012400.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/loggo2018.gif">
+      <publishTime>05/09/2018 11:02:58</publishTime>
+    </File>
+    <File Include="images/loggo2018.png">
+      <publishTime>05/08/2018 15:05:19</publishTime>
+    </File>
+    <File Include="images/logo.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/logo_2014.gif">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/logo_2014.jpg">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/logo_2014.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/logo_header_2014.jpg">
+      <publishTime>04/29/2014 15:19:02</publishTime>
+    </File>
+    <File Include="images/logo_header_2014.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/mangesvmtips.gif">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/mangesvmtips.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/orangeGradient.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/overstlogga.png">
+      <publishTime>05/08/2018 15:05:15</publishTime>
+    </File>
+    <File Include="images/progress_indicator.gif">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="images/purpleGradient.png">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="Models/SettingsExtensions.xml">
+      <publishTime>05/17/2018 13:31:56</publishTime>
+    </File>
+    <File Include="Models/Tips.edmx.diagram">
+      <publishTime>04/13/2018 14:43:54</publishTime>
+    </File>
+    <File Include="NyKupong.aspx">
+      <publishTime>05/17/2018 09:54:17</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="pdfGenerator.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Rules.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Script/autocomplete.js">
+      <publishTime>04/13/2018 13:18:34</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>06/14/2018 10:26:59</publishTime>
+    </File>
+    <File Include="StatDetails.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Statistics.aspx">
+      <publishTime>04/13/2018 14:00:19</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/13/2018 13:30:30</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

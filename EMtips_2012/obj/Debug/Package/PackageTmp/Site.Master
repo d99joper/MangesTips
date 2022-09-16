@@ -1,0 +1,83 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="VMTips_2018.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <link href="" rel="Stylesheet" type="text/css" />
+    <title>Manges VM-tips 2018</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    
+    </asp:ContentPlaceHolder>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-50845606-1', 'personablesolutions.com');
+        ga('send', 'pageview');
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-4565723-8', 'personablesolutions.com');
+        ga('send', 'pageview');
+    </script>    
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="300">
+    </asp:ScriptManager>
+        <div class="page">
+            <div id="header">
+                <div id="title">
+                    <a href="Default.aspx"><img src="images/overstlogga.png" alt="Manges VM-tips" style="margin-top:25px;" /></a>
+                </div>
+                
+                <div id="logindisplay">
+                    &nbsp;
+                </div> 
+            
+                <div id="menucontainer">
+                
+                    <ul id="menu">              
+                        <li runat="server" id="mHome"><a href="Default.aspx">Första sidan</a></li>
+                        <li runat="server" id="mStats"><a href="Statistics.aspx">Statistik</a></li>
+                        <li runat="server" id="mAnswers"><a href="Answers.aspx">Facit</a></li>
+                        <li runat="server" id="mNew"><a href="NyKupong.aspx">Anmälan</a></li>
+                        <li runat="server" id="mRules"><a href="Rules.aspx" >Regler</a></li>
+                        <li runat="server" id="mWiki"><a href="http://mangesvmochemtips.wikia.com/wiki/Manges_VM-_och_EM-tips_Wiki" target="_blank" >Wiki</a></li>
+                    </ul>
+                
+                </div>
+            </div>
+
+            <div id="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+
+                <div id="footer">
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117542595-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117542595-1');
+    </script>
+</body>
+</html>

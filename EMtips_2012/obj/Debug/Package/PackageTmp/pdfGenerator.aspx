@@ -1,0 +1,3 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pdfGenerator.aspx.cs" Inherits="VMTips_2018.pdfGenerator" %>
+
+<html><head runat="server"><title>Manges VM-tips</title></head></html>

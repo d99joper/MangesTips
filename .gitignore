@@ -48,3 +48,8 @@ Thumbs.db
 *.mov
 *.wmv
 
+/.vs/VMTips_2022/v15/Server/sqlite3/db.lock
+/.vs/VMTips_2022/v15/Server/sqlite3/storage.ide
+/.vs/VMTips_2022/v15/Server/sqlite3/storage.ide-shm
+/.vs/VMTips_2022/v15/Server/sqlite3/storage.ide-wal
+/.vs/VMTips_2022/v15/.suo
