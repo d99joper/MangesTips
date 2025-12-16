@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VMTips_2022", "EMtips_2012\VMTips_2022.csproj", "{ACB165DD-7A3A-4F92-8664-F24A06793C56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tips", "Tips\Tips.csproj", "{ACB165DD-7A3A-4F92-8664-F24A06793C56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
