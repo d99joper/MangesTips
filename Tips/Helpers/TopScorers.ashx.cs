@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 
-namespace VMTips_2022.Helpers
+namespace Tips.Helpers
 {
     /// <summary>
     /// Summary description for $codebehindclassname$

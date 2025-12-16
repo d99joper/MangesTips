@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace VMTips_2022.Models
+namespace Tips.Models
 {
     public partial class User
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VMTips_2022.Models
+namespace Tips.Models
 {
     using System;
     using System.Collections.Generic;

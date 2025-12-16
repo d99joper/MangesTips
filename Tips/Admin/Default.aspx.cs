@@ -9,13 +9,13 @@ using System.Web.Security;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace VMTips_2022.Admin
+namespace Tips.Admin
 {
     public partial class Default : System.Web.UI.Page
     {
-        Models.TeamRepository teamRepository = new VMTips_2022.Models.TeamRepository();
-        Models.MatchRepository matchRepository = new VMTips_2022.Models.MatchRepository();
-        Models.UserRepository userRepository = new VMTips_2022.Models.UserRepository();
+        Models.TeamRepository teamRepository = new Tips.Models.TeamRepository();
+        Models.MatchRepository matchRepository = new Tips.Models.MatchRepository();
+        Models.UserRepository userRepository = new Tips.Models.UserRepository();
         Models.BlogRepository blogRepository = new Models.BlogRepository();
         Models.TopScorerRepository topScorerRepository = new Models.TopScorerRepository();
         TimeZone localZone = TimeZone.CurrentTimeZone;

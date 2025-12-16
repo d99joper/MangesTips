@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VMTips_2022 {
+namespace Tips {
     
     
     public partial class Rules {
@@ -18,9 +18,9 @@ namespace VMTips_2022 {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new VMTips_2022.Site Master {
+        public new Tips.Site Master {
             get {
-                return ((VMTips_2022.Site)(base.Master));
+                return ((Tips.Site)(base.Master));
             }
         }
     }

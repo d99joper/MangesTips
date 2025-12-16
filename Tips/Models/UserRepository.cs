@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VMTips_2022.Models
+namespace Tips.Models
 {
     public class UserRepository : IUserRepository
     {
