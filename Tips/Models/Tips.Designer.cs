@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Jonas\Source\Repos\vmtips2022\EMtips_2012\Models\Tips.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\jonas\Source\Repos\MangesTips\Tips\Models\Tips.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

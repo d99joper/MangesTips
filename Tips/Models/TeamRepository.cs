@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VMTips_2022.Models
+namespace Tips.Models
 {
-    public class TeamRepository : VMTips_2022.Models.ITeamRepository 
+    public class TeamRepository : Tips.Models.ITeamRepository 
     {
         public enum TeamInqueryType
         {
