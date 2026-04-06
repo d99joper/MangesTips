@@ -12,11 +12,11 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TopScorer
+    public partial class TopScorer_2026
     {
-        public TopScorer()
+        public TopScorer_2026()
         {
-            this.Users = new HashSet<User>();
+            this.User_2026 = new HashSet<User_2026>();
         }
     
         public int ID { get; set; }
@@ -27,7 +27,7 @@ namespace Tips.Models
         public Nullable<bool> IsWinner { get; set; }
         public Nullable<double> WinPercent { get; set; }
     
-        public virtual Team Team { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Team_2026 Team_2026 { get; set; }
+        public virtual ICollection<User_2026> User_2026 { get; set; }
     }
 }

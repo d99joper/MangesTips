@@ -12,11 +12,11 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Match
+    public partial class Match_2026
     {
-        public Match()
+        public Match_2026()
         {
-            this.UserMatch = new HashSet<UserMatch>();
+            this.UserMatch_2026 = new HashSet<UserMatch_2026>();
         }
     
         public int ID { get; set; }
@@ -30,8 +30,8 @@ namespace Tips.Models
         public Nullable<double> DrawPercent { get; set; }
         public Nullable<double> AwayWinPercent { get; set; }
     
-        public virtual Team HomeTeam { get; set; }
-        public virtual Team AwayTeam { get; set; }
-        public virtual ICollection<UserMatch> UserMatch { get; set; }
+        public virtual Team_2026 Team_2026 { get; set; }
+        public virtual Team_2026 Team_20261 { get; set; }
+        public virtual ICollection<UserMatch_2026> UserMatch_2026 { get; set; }
     }
 }
