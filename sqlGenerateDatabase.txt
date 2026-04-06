@@ -2,7 +2,7 @@ USE [pslive1]
 
 GO
 
-/****** Object:  Table [dbo].[Team_2022]    Script Date: 02/19/2012 12:58:26 ******/
+/****** Object:  Table [dbo].[Team_2026]    Script Date: 02/19/2012 12:58:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[Team_2022](
+CREATE TABLE [dbo].[Team_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[GroupID] [char](1) NOT NULL,
 	[TeamName] [nvarchar](50) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[Team_2022](
 	[WonSilver] [bit] NOT NULL,
 	[WonBronze] [bit] NOT NULL,
 	[PlayOffPos] [tinyint] NULL,
- CONSTRAINT [PK_Team_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Team_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -35,37 +35,37 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_IsInPlayOffs_2022]  DEFAULT ((0)) FOR [IsInPlayOffs]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_IsInPlayOffs_2026]  DEFAULT ((0)) FOR [IsInPlayOffs]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_IsInQuarterFinals_2022]  DEFAULT ((0)) FOR [IsInQuarterFinals]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_IsInQuarterFinals_2026]  DEFAULT ((0)) FOR [IsInQuarterFinals]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_IsInSemiFinals_2022]  DEFAULT ((0)) FOR [IsInSemiFinals]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_IsInSemiFinals_2026]  DEFAULT ((0)) FOR [IsInSemiFinals]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_IsInFinal_2022]  DEFAULT ((0)) FOR [IsInFinal]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_IsInFinal_2026]  DEFAULT ((0)) FOR [IsInFinal]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_WonGold_2022]  DEFAULT ((0)) FOR [WonGold]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_WonGold_2026]  DEFAULT ((0)) FOR [WonGold]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_WonSilver_2022]  DEFAULT ((0)) FOR [WonSilver]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_WonSilver_2026]  DEFAULT ((0)) FOR [WonSilver]
 GO
 
-ALTER TABLE [dbo].[Team_2022] ADD  CONSTRAINT [DF_Team_WonBronze_2022]  DEFAULT ((0)) FOR [WonBronze]
+ALTER TABLE [dbo].[Team_2026] ADD  CONSTRAINT [DF_Team_WonBronze_2026]  DEFAULT ((0)) FOR [WonBronze]
 GO
 
 GO
 
-/****** Object:  Table [dbo].[TopScorer_2022]    Script Date: 02/19/2012 12:59:09 ******/
+/****** Object:  Table [dbo].[TopScorer_2026]    Script Date: 02/19/2012 12:59:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[TopScorer_2022](
+CREATE TABLE [dbo].[TopScorer_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[DisplayName] [nvarchar](100) NOT NULL,
 	[FirstName] [nvarchar](50) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE [dbo].[TopScorer_2022](
 	[TeamID] [int] NULL,
 	[IsWinner] [bit] NULL,
 	[WinPercent] [float] NULL,
- CONSTRAINT [TopScorer_PrimaryKey_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [TopScorer_PrimaryKey_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -81,24 +81,24 @@ CREATE TABLE [dbo].[TopScorer_2022](
 
 GO
 
-ALTER TABLE [dbo].[TopScorer_2022]  WITH NOCHECK ADD  CONSTRAINT [Team_TopScorer_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[TopScorer_2026]  WITH NOCHECK ADD  CONSTRAINT [Team_TopScorer_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 NOT FOR REPLICATION 
 GO
 
-ALTER TABLE [dbo].[TopScorer_2022] CHECK CONSTRAINT [Team_TopScorer_2022]
+ALTER TABLE [dbo].[TopScorer_2026] CHECK CONSTRAINT [Team_TopScorer_2026]
 GO
 
 GO
 
-/****** Object:  Table [dbo].[User_2022]    Script Date: 02/19/2012 12:59:23 ******/
+/****** Object:  Table [dbo].[User_2026]    Script Date: 02/19/2012 12:59:23 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[User_2022](
+CREATE TABLE [dbo].[User_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [nvarchar](50) NOT NULL,
 	[LastName] [nvarchar](50) NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[User_2022](
 	[PayCode] [nvarchar](50) NULL,
 	[TopScorerID] [int] NULL,
 	[IsWinner] [bit] NOT NULL,
- CONSTRAINT [PK_User_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_User_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -119,23 +119,23 @@ CREATE TABLE [dbo].[User_2022](
 
 GO
 
-ALTER TABLE [dbo].[User_2022]  WITH NOCHECK ADD  CONSTRAINT [User_Topscorer_2022] FOREIGN KEY([TopScorerID])
-REFERENCES [dbo].[TopScorer_2022] ([ID])
+ALTER TABLE [dbo].[User_2026]  WITH NOCHECK ADD  CONSTRAINT [User_Topscorer_2026] FOREIGN KEY([TopScorerID])
+REFERENCES [dbo].[TopScorer_2026] ([ID])
 NOT FOR REPLICATION 
 GO
 
-ALTER TABLE [dbo].[User_2022] CHECK CONSTRAINT [User_Topscorer_2022]
+ALTER TABLE [dbo].[User_2026] CHECK CONSTRAINT [User_Topscorer_2026]
 GO
 
-ALTER TABLE [dbo].[User_2022] ADD  CONSTRAINT [DF_User_IsPaid_2022]  DEFAULT ((0)) FOR [HasPaid]
+ALTER TABLE [dbo].[User_2026] ADD  CONSTRAINT [DF_User_IsPaid_2026]  DEFAULT ((0)) FOR [HasPaid]
 GO
 
-ALTER TABLE [dbo].[User_2022] ADD  CONSTRAINT [DF_User_IsConfirmed_2022]  DEFAULT ((0)) FOR [IsConfirmed]
+ALTER TABLE [dbo].[User_2026] ADD  CONSTRAINT [DF_User_IsConfirmed_2026]  DEFAULT ((0)) FOR [IsConfirmed]
 GO
 
 GO
 
-/****** Object:  Table [dbo].[Match_2022]    Script Date: 02/19/2012 12:57:31 ******/
+/****** Object:  Table [dbo].[Match_2026]    Script Date: 02/19/2012 12:57:31 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -145,7 +145,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[Match_2022](
+CREATE TABLE [dbo].[Match_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[HomeTeamID] [int] NOT NULL,
 	[AwayTeamID] [int] NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE [dbo].[Match_2022](
 	[HomeWinPercent] [float] NULL,
 	[DrawPercent] [float] NULL,
 	[AwayWinPercent] [float] NULL,
- CONSTRAINT [PK_Match_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Match_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -167,35 +167,35 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[Match_2022]  WITH CHECK ADD  CONSTRAINT [FK_Match_AwayTeam_2022] FOREIGN KEY([AwayTeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[Match_2026]  WITH CHECK ADD  CONSTRAINT [FK_Match_AwayTeam_2026] FOREIGN KEY([AwayTeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[Match_2022] CHECK CONSTRAINT [FK_Match_AwayTeam_2022]
+ALTER TABLE [dbo].[Match_2026] CHECK CONSTRAINT [FK_Match_AwayTeam_2026]
 GO
 
-ALTER TABLE [dbo].[Match_2022]  WITH CHECK ADD  CONSTRAINT [FK_Match_HomeTeam_2022] FOREIGN KEY([HomeTeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[Match_2026]  WITH CHECK ADD  CONSTRAINT [FK_Match_HomeTeam_2026] FOREIGN KEY([HomeTeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[Match_2022] CHECK CONSTRAINT [FK_Match_HomeTeam_2022]
+ALTER TABLE [dbo].[Match_2026] CHECK CONSTRAINT [FK_Match_HomeTeam_2026]
 GO
 
 GO
 
-/****** Object:  Table [dbo].[BlogEntry_2022]    Script Date: 02/19/2012 12:56:12 ******/
+/****** Object:  Table [dbo].[BlogEntry_2026]    Script Date: 02/19/2012 12:56:12 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[BlogEntry_2022](
+CREATE TABLE [dbo].[BlogEntry_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](50) NOT NULL,
 	[Text] [nvarchar](4000) NOT NULL,
 	[PostedDate] [datetime] NOT NULL,
- CONSTRAINT [BlogEntry_PrimaryKey_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [BlogEntry_PrimaryKey_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -205,7 +205,7 @@ GO
 
 GO
 
-/****** Object:  Table [dbo].[BonusPoints_2022]    Script Date: 02/19/2012 12:56:49 ******/
+/****** Object:  Table [dbo].[BonusPoints_2026]    Script Date: 02/19/2012 12:56:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -215,13 +215,13 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[BonusPoints_2022](
+CREATE TABLE [dbo].[BonusPoints_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[UserID] [int] NOT NULL,
 	[GroupID] [char](1) NOT NULL,
 	[Point] [tinyint] NOT NULL,
 	[HalfPoint] [bit] NOT NULL,
- CONSTRAINT [BonusPoint_PrimaryKey_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [BonusPoint_PrimaryKey_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -232,18 +232,18 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[BonusPoints_2022]  WITH NOCHECK ADD  CONSTRAINT [BonusPoints2_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[BonusPoints_2026]  WITH NOCHECK ADD  CONSTRAINT [BonusPoints2_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 NOT FOR REPLICATION 
 GO
 
-ALTER TABLE [dbo].[BonusPoints_2022] CHECK CONSTRAINT [BonusPoints2_2022]
+ALTER TABLE [dbo].[BonusPoints_2026] CHECK CONSTRAINT [BonusPoints2_2026]
 GO
 
-ALTER TABLE [dbo].[BonusPoints_2022] ADD  CONSTRAINT [BonusPointPointDefault_2022]  DEFAULT ((0)) FOR [Point]
+ALTER TABLE [dbo].[BonusPoints_2026] ADD  CONSTRAINT [BonusPointPointDefault_2026]  DEFAULT ((0)) FOR [Point]
 GO
 
-ALTER TABLE [dbo].[BonusPoints_2022] ADD  CONSTRAINT [BonusPointHalfPointDefault_2022]  DEFAULT ((0)) FOR [HalfPoint]
+ALTER TABLE [dbo].[BonusPoints_2026] ADD  CONSTRAINT [BonusPointHalfPointDefault_2026]  DEFAULT ((0)) FOR [HalfPoint]
 GO
 
 
@@ -252,20 +252,20 @@ GO
 
 GO
 
-/****** Object:  Table [dbo].[Comment_2022]    Script Date: 02/19/2012 12:57:15 ******/
+/****** Object:  Table [dbo].[Comment_2026]    Script Date: 02/19/2012 12:57:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Comment_2022](
+CREATE TABLE [dbo].[Comment_2026](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[PostedBy] [nvarchar](100) NOT NULL,
 	[PostedDate] [datetime] NOT NULL,
 	[Text] [text] NOT NULL,
 	[BlogEntryID] [int] NULL,
- CONSTRAINT [Comment_PrimaryKey_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [Comment_PrimaryKey_2026] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -273,30 +273,30 @@ CREATE TABLE [dbo].[Comment_2022](
 
 GO
 
-ALTER TABLE [dbo].[Comment_2022]  WITH NOCHECK ADD  CONSTRAINT [Blog_Comment_2022] FOREIGN KEY([BlogEntryID])
-REFERENCES [dbo].[BlogEntry_2022] ([ID])
+ALTER TABLE [dbo].[Comment_2026]  WITH NOCHECK ADD  CONSTRAINT [Blog_Comment_2026] FOREIGN KEY([BlogEntryID])
+REFERENCES [dbo].[BlogEntry_2026] ([ID])
 NOT FOR REPLICATION 
 GO
 
-ALTER TABLE [dbo].[Comment_2022] CHECK CONSTRAINT [Blog_Comment_2022]
+ALTER TABLE [dbo].[Comment_2026] CHECK CONSTRAINT [Blog_Comment_2026]
 GO
 
 GO
 
-/****** Object:  Table [dbo].[Standings_2022]    Script Date: 02/19/2012 12:58:04 ******/
+/****** Object:  Table [dbo].[Standings_2026]    Script Date: 02/19/2012 12:58:04 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Standings_2022](
+CREATE TABLE [dbo].[Standings_2026](
 	[UserID] [int] NOT NULL,
 	[UpdateDate] [datetime] NOT NULL,
 	[TotalPoints] [smallint] NOT NULL,
 	[Guid] [uniqueidentifier] NULL,
 	[Position] [smallint] NULL,
- CONSTRAINT [PK_Standings_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Standings_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[UpdateDate] ASC
@@ -305,25 +305,25 @@ CREATE TABLE [dbo].[Standings_2022](
 
 GO
 
-ALTER TABLE [dbo].[Standings_2022]  WITH CHECK ADD  CONSTRAINT [FK_Standings_Standings_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[Standings_2026]  WITH CHECK ADD  CONSTRAINT [FK_Standings_Standings_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[Standings_2022] CHECK CONSTRAINT [FK_Standings_Standings_2022]
+ALTER TABLE [dbo].[Standings_2026] CHECK CONSTRAINT [FK_Standings_Standings_2026]
 GO
 
 
 
 GO
 
-/****** Object:  Table [dbo].[TeamStats_2022]    Script Date: 02/19/2012 12:58:55 ******/
+/****** Object:  Table [dbo].[TeamStats_2026]    Script Date: 02/19/2012 12:58:55 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[TeamStats_2022](
+CREATE TABLE [dbo].[TeamStats_2026](
 	[TeamID] [int] NOT NULL,
 	[PlayoffPercent] [float] NULL,
 	[QuarterFinalPercent] [float] NULL,
@@ -334,7 +334,7 @@ CREATE TABLE [dbo].[TeamStats_2022](
 	[GoldPercent] [float] NULL,
 	[ScoredGoals] [tinyint] NULL,
 	[ConcededGoals] [tinyint] NULL,
- CONSTRAINT [TeamStats_PrimaryKey_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [TeamStats_PrimaryKey_2026] PRIMARY KEY CLUSTERED 
 (
 	[TeamID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -342,12 +342,12 @@ CREATE TABLE [dbo].[TeamStats_2022](
 
 GO
 
-ALTER TABLE [dbo].[TeamStats_2022]  WITH NOCHECK ADD  CONSTRAINT [Team_TeamStats_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[TeamStats_2026]  WITH NOCHECK ADD  CONSTRAINT [Team_TeamStats_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 NOT FOR REPLICATION 
 GO
 
-ALTER TABLE [dbo].[TeamStats_2022] CHECK CONSTRAINT [Team_TeamStats_2022]
+ALTER TABLE [dbo].[TeamStats_2026] CHECK CONSTRAINT [Team_TeamStats_2026]
 GO
 
 
@@ -355,18 +355,18 @@ GO
 
 GO
 
-/****** Object:  Table [dbo].[UserBronzeTeam_2022]    Script Date: 02/19/2012 12:59:51 ******/
+/****** Object:  Table [dbo].[UserBronzeTeam_2026]    Script Date: 02/19/2012 12:59:51 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserBronzeTeam_2022](
+CREATE TABLE [dbo].[UserBronzeTeam_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserBronzeTeam_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserBronzeTeam_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -375,35 +375,35 @@ CREATE TABLE [dbo].[UserBronzeTeam_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserBronzeTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserBronzeTeam_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserBronzeTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserBronzeTeam_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserBronzeTeam_2022] CHECK CONSTRAINT [FK_UserBronzeTeam_Team_2022]
+ALTER TABLE [dbo].[UserBronzeTeam_2026] CHECK CONSTRAINT [FK_UserBronzeTeam_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserBronzeTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserBronzeTeam_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserBronzeTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserBronzeTeam_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserBronzeTeam_2022] CHECK CONSTRAINT [FK_UserBronzeTeam_User_2022]
+ALTER TABLE [dbo].[UserBronzeTeam_2026] CHECK CONSTRAINT [FK_UserBronzeTeam_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserFinalTeams_2022]    Script Date: 02/19/2012 13:00:21 ******/
+/****** Object:  Table [dbo].[UserFinalTeams_2026]    Script Date: 02/19/2012 13:00:21 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserFinalTeams_2022](
+CREATE TABLE [dbo].[UserFinalTeams_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserFinalTeams_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserFinalTeams_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -412,35 +412,35 @@ CREATE TABLE [dbo].[UserFinalTeams_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserFinalTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserFinalTeams_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserFinalTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserFinalTeams_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserFinalTeams_2022] CHECK CONSTRAINT [FK_UserFinalTeams_Team_2022]
+ALTER TABLE [dbo].[UserFinalTeams_2026] CHECK CONSTRAINT [FK_UserFinalTeams_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserFinalTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserFinalTeams_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserFinalTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserFinalTeams_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserFinalTeams_2022] CHECK CONSTRAINT [FK_UserFinalTeams_User_2022]
+ALTER TABLE [dbo].[UserFinalTeams_2026] CHECK CONSTRAINT [FK_UserFinalTeams_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserGoldTeam_2022]    Script Date: 02/19/2012 13:00:37 ******/
+/****** Object:  Table [dbo].[UserGoldTeam_2026]    Script Date: 02/19/2012 13:00:37 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserGoldTeam_2022](
+CREATE TABLE [dbo].[UserGoldTeam_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserGoldTeam_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserGoldTeam_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -449,24 +449,24 @@ CREATE TABLE [dbo].[UserGoldTeam_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserGoldTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserGoldTeam_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserGoldTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserGoldTeam_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserGoldTeam_2022] CHECK CONSTRAINT [FK_UserGoldTeam_Team_2022]
+ALTER TABLE [dbo].[UserGoldTeam_2026] CHECK CONSTRAINT [FK_UserGoldTeam_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserGoldTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserGoldTeam_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserGoldTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserGoldTeam_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserGoldTeam_2022] CHECK CONSTRAINT [FK_UserGoldTeam_User_2022]
+ALTER TABLE [dbo].[UserGoldTeam_2026] CHECK CONSTRAINT [FK_UserGoldTeam_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserMatch_2022]    Script Date: 02/19/2012 13:00:54 ******/
+/****** Object:  Table [dbo].[UserMatch_2026]    Script Date: 02/19/2012 13:00:54 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -476,14 +476,14 @@ GO
 SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[UserMatch_2022](
+CREATE TABLE [dbo].[UserMatch_2026](
 	[UserID] [int] NOT NULL,
 	[MatchID] [int] NOT NULL,
 	[HomeGoals] [tinyint] NULL,
 	[AwayGoals] [tinyint] NULL,
 	[ResultMark] [char](1) NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserMatch_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserMatch_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[MatchID] ASC
@@ -495,36 +495,36 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[UserMatch_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserMatch_Match_2022] FOREIGN KEY([MatchID])
-REFERENCES [dbo].[Match_2022] ([ID])
+ALTER TABLE [dbo].[UserMatch_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserMatch_Match_2026] FOREIGN KEY([MatchID])
+REFERENCES [dbo].[Match_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserMatch_2022] CHECK CONSTRAINT [FK_UserMatch_Match_2022]
+ALTER TABLE [dbo].[UserMatch_2026] CHECK CONSTRAINT [FK_UserMatch_Match_2026]
 GO
 
-ALTER TABLE [dbo].[UserMatch_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserMatch_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserMatch_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserMatch_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserMatch_2022] CHECK CONSTRAINT [FK_UserMatch_User_2022]
+ALTER TABLE [dbo].[UserMatch_2026] CHECK CONSTRAINT [FK_UserMatch_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserPlayoffTeams_2022]    Script Date: 02/19/2012 13:01:10 ******/
+/****** Object:  Table [dbo].[UserPlayoffTeams_2026]    Script Date: 02/19/2012 13:01:10 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserPlayoffTeams_2022](
+CREATE TABLE [dbo].[UserPlayoffTeams_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
 	[Position] [tinyint] NULL,
- CONSTRAINT [PK_UserPlayoffTeams_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserPlayoffTeams_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -533,35 +533,35 @@ CREATE TABLE [dbo].[UserPlayoffTeams_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserPlayoffTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserPlayoffTeams_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserPlayoffTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserPlayoffTeams_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserPlayoffTeams_2022] CHECK CONSTRAINT [FK_UserPlayoffTeams_Team_2022]
+ALTER TABLE [dbo].[UserPlayoffTeams_2026] CHECK CONSTRAINT [FK_UserPlayoffTeams_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserPlayoffTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserPlayoffTeams_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserPlayoffTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserPlayoffTeams_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserPlayoffTeams_2022] CHECK CONSTRAINT [FK_UserPlayoffTeams_User_2022]
+ALTER TABLE [dbo].[UserPlayoffTeams_2026] CHECK CONSTRAINT [FK_UserPlayoffTeams_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserQFTeams_2022]    Script Date: 02/19/2012 13:01:33 ******/
+/****** Object:  Table [dbo].[UserQFTeams_2026]    Script Date: 02/19/2012 13:01:33 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserQFTeams_2022](
+CREATE TABLE [dbo].[UserQFTeams_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserQFTeams_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserQFTeams_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -570,35 +570,35 @@ CREATE TABLE [dbo].[UserQFTeams_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserQFTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserQFTeams_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserQFTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserQFTeams_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserQFTeams_2022] CHECK CONSTRAINT [FK_UserQFTeams_Team_2022]
+ALTER TABLE [dbo].[UserQFTeams_2026] CHECK CONSTRAINT [FK_UserQFTeams_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserQFTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserQFTeams_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserQFTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserQFTeams_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserQFTeams_2022] CHECK CONSTRAINT [FK_UserQFTeams_User_2022]
+ALTER TABLE [dbo].[UserQFTeams_2026] CHECK CONSTRAINT [FK_UserQFTeams_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserSFTeams_2022]    Script Date: 02/19/2012 13:01:47 ******/
+/****** Object:  Table [dbo].[UserSFTeams_2026]    Script Date: 02/19/2012 13:01:47 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserSFTeams_2022](
+CREATE TABLE [dbo].[UserSFTeams_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserSFTeams_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserSFTeams_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -607,35 +607,35 @@ CREATE TABLE [dbo].[UserSFTeams_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserSFTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserSFTeams_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserSFTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserSFTeams_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserSFTeams_2022] CHECK CONSTRAINT [FK_UserSFTeams_Team_2022]
+ALTER TABLE [dbo].[UserSFTeams_2026] CHECK CONSTRAINT [FK_UserSFTeams_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserSFTeams_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserSFTeams_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserSFTeams_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserSFTeams_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserSFTeams_2022] CHECK CONSTRAINT [FK_UserSFTeams_User_2022]
+ALTER TABLE [dbo].[UserSFTeams_2026] CHECK CONSTRAINT [FK_UserSFTeams_User_2026]
 GO
 
 
 GO
 
-/****** Object:  Table [dbo].[UserSilverTeam_2022]    Script Date: 02/19/2012 13:02:04 ******/
+/****** Object:  Table [dbo].[UserSilverTeam_2026]    Script Date: 02/19/2012 13:02:04 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[UserSilverTeam_2022](
+CREATE TABLE [dbo].[UserSilverTeam_2026](
 	[UserID] [int] NOT NULL,
 	[TeamID] [int] NOT NULL,
 	[Points] [tinyint] NULL,
- CONSTRAINT [PK_UserSilverTeam_2022] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_UserSilverTeam_2026] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC,
 	[TeamID] ASC
@@ -644,17 +644,17 @@ CREATE TABLE [dbo].[UserSilverTeam_2022](
 
 GO
 
-ALTER TABLE [dbo].[UserSilverTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserSilverTeam_Team_2022] FOREIGN KEY([TeamID])
-REFERENCES [dbo].[Team_2022] ([ID])
+ALTER TABLE [dbo].[UserSilverTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserSilverTeam_Team_2026] FOREIGN KEY([TeamID])
+REFERENCES [dbo].[Team_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserSilverTeam_2022] CHECK CONSTRAINT [FK_UserSilverTeam_Team_2022]
+ALTER TABLE [dbo].[UserSilverTeam_2026] CHECK CONSTRAINT [FK_UserSilverTeam_Team_2026]
 GO
 
-ALTER TABLE [dbo].[UserSilverTeam_2022]  WITH CHECK ADD  CONSTRAINT [FK_UserSilverTeam_User_2022] FOREIGN KEY([UserID])
-REFERENCES [dbo].[User_2022] ([ID])
+ALTER TABLE [dbo].[UserSilverTeam_2026]  WITH CHECK ADD  CONSTRAINT [FK_UserSilverTeam_User_2026] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User_2026] ([ID])
 GO
 
-ALTER TABLE [dbo].[UserSilverTeam_2022] CHECK CONSTRAINT [FK_UserSilverTeam_User_2022]
+ALTER TABLE [dbo].[UserSilverTeam_2026] CHECK CONSTRAINT [FK_UserSilverTeam_User_2026]
 GO
 

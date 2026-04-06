@@ -33,26 +33,27 @@ namespace Tips.Models
         public DbSet<Standings_2012> Standings_2012 { get; set; }
         public DbSet<Standings_2014> Standings_2014 { get; set; }
         public DbSet<Standings_2016> Standings_2016 { get; set; }
-        public DbSet<BlogEntry> BlogEntry { get; set; }
-        public DbSet<BonusPoints> BonusPoints { get; set; }
-        public DbSet<Comment> Comment { get; set; }
-        public DbSet<Match> Matches { get; set; }
         public DbSet<Standings_2018> Standings_2018 { get; set; }
         public DbSet<Standings_2021> Standings_2021 { get; set; }
-        public DbSet<Standing> Standings { get; set; }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamStats> TeamStats { get; set; }
-        public DbSet<TopScorer> TopScorers { get; set; }
         public DbSet<User_2018> User_2018 { get; set; }
         public DbSet<User_2021> User_2021 { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserBronzeTeam> UserBronzeTeam { get; set; }
-        public DbSet<UserFinalTeam> UserFinalTeam { get; set; }
-        public DbSet<UserGoldTeam> UserGoldTeam { get; set; }
-        public DbSet<UserMatch> UserMatches { get; set; }
-        public DbSet<UserPlayoffTeam> UserPlayoffTeam { get; set; }
-        public DbSet<UserQFTeam> UserQFTeam { get; set; }
-        public DbSet<UserSFTeam> UserSFTeam { get; set; }
-        public DbSet<UserSilverTeam> UserSilverTeam { get; set; }
+        public DbSet<BlogEntry_2026> BlogEntry_2026 { get; set; }
+        public DbSet<BonusPoints_2026> BonusPoints_2026 { get; set; }
+        public DbSet<Comment_2026> Comment_2026 { get; set; }
+        public DbSet<Match_2026> Match_2026 { get; set; }
+        public DbSet<Standings_2024> Standings_2024 { get; set; }
+        public DbSet<Standings_2026> Standings_2026 { get; set; }
+        public DbSet<Team_2026> Team_2026 { get; set; }
+        public DbSet<TopScorer_2026> TopScorer_2026 { get; set; }
+        public DbSet<User_2024> User_2024 { get; set; }
+        public DbSet<User_2026> User_2026 { get; set; }
+        public DbSet<UserBronzeTeam_2026> UserBronzeTeam_2026 { get; set; }
+        public DbSet<UserFinalTeams_2026> UserFinalTeams_2026 { get; set; }
+        public DbSet<UserGoldTeam_2026> UserGoldTeam_2026 { get; set; }
+        public DbSet<UserMatch_2026> UserMatch_2026 { get; set; }
+        public DbSet<UserPlayoffTeams_2026> UserPlayoffTeams_2026 { get; set; }
+        public DbSet<UserQFTeams_2026> UserQFTeams_2026 { get; set; }
+        public DbSet<UserSFTeams_2026> UserSFTeams_2026 { get; set; }
+        public DbSet<UserSilverTeam_2026> UserSilverTeam_2026 { get; set; }
     }
 }

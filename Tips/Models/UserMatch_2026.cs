@@ -12,14 +12,16 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BonusPoints
+    public partial class UserMatch_2026
     {
-        public int ID { get; set; }
         public int UserID { get; set; }
-        public string GroupID { get; set; }
-        public byte Point { get; set; }
-        public bool HalfPoint { get; set; }
+        public int MatchID { get; set; }
+        public Nullable<byte> HomeGoals { get; set; }
+        public Nullable<byte> AwayGoals { get; set; }
+        public string ResultMark { get; set; }
+        public Nullable<byte> Points { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual Match_2026 Match_2026 { get; set; }
+        public virtual User_2026 User_2026 { get; set; }
     }
 }
