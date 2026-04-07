@@ -16,7 +16,7 @@ namespace Tips.Models
     {
         public TopScorer()
         {
-            this.User = new HashSet<User>();
+            this.Users = new HashSet<User>();
         }
     
         public int ID { get; set; }
@@ -28,6 +28,6 @@ namespace Tips.Models
         public Nullable<double> WinPercent { get; set; }
     
         public virtual Team Team { get; set; }
-        public virtual ICollection<User> User { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

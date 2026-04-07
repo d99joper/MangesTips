@@ -40,13 +40,13 @@ namespace Tips.Models
         public DbSet<BlogEntry> BlogEntry { get; set; }
         public DbSet<BonusPoints> BonusPoints { get; set; }
         public DbSet<Comment> Comment { get; set; }
-        public DbSet<Match> Match { get; set; }
+        public DbSet<Match> Matches { get; set; }
         public DbSet<Standings_2024> Standings_2024 { get; set; }
         public DbSet<Standing> Standings { get; set; }
-        public DbSet<Team> Team { get; set; }
-        public DbSet<TopScorer> TopScorer { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TopScorer> TopScorers { get; set; }
         public DbSet<User_2024> User_2024 { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<UserBronzeTeam> UserBronzeTeam { get; set; }
         public DbSet<UserFinalTeam> UserFinalTeam { get; set; }
         public DbSet<UserGoldTeam> UserGoldTeam { get; set; }
@@ -55,5 +55,6 @@ namespace Tips.Models
         public DbSet<UserQFTeam> UserQFTeam { get; set; }
         public DbSet<UserSFTeam> UserSFTeam { get; set; }
         public DbSet<UserSilverTeam> UserSilverTeam { get; set; }
+        public DbSet<TeamStats> TeamStats { get; set; }
     }
 }

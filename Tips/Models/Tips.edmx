@@ -5,50 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BlogEntry">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Text" Type="nvarchar" MaxLength="4000" Nullable="false" />
-          <Property Name="PostedDate" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BonusPoints">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="GroupID" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Point" Type="tinyint" Nullable="false" />
-          <Property Name="HalfPoint" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Comment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PostedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PostedDate" Type="datetime" Nullable="false" />
-          <Property Name="Text" Type="text" Nullable="false" />
-          <Property Name="BlogEntryID" Type="int" />
-        </EntityType>
-        <EntityType Name="Match">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HomeTeamID" Type="int" Nullable="false" />
-          <Property Name="AwayTeamID" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="HomeGoals" Type="tinyint" />
-          <Property Name="AwayGoals" Type="tinyint" />
-          <Property Name="ResultMark" Type="char" MaxLength="1" />
-          <Property Name="HomeWinPercent" Type="float" />
-          <Property Name="DrawPercent" Type="float" />
-          <Property Name="AwayWinPercent" Type="float" />
-        </EntityType>
         <EntityType Name="Standings_2010">
           <Key>
             <PropertyRef Name="UserID" />
@@ -126,44 +82,20 @@
           <Property Name="Guid" Type="uniqueidentifier" />
           <Property Name="Position" Type="smallint" />
         </EntityType>
-        <EntityType Name="Standing">
+        <EntityType Name="TeamStats_2026">
           <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="UpdateDate" />
+            <PropertyRef Name="TeamID" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
-          <Property Name="TotalPoints" Type="smallint" Nullable="false" />
-          <Property Name="Guid" Type="uniqueidentifier" />
-          <Property Name="Position" Type="smallint" />
-        </EntityType>
-        <EntityType Name="Team">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GroupID" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="TeamName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsInPlayOffs" Type="bit" Nullable="false" />
-          <Property Name="IsInQuarterFinals" Type="bit" Nullable="false" />
-          <Property Name="IsInSemiFinals" Type="bit" Nullable="false" />
-          <Property Name="IsInFinal" Type="bit" Nullable="false" />
-          <Property Name="WonGold" Type="bit" Nullable="false" />
-          <Property Name="WonSilver" Type="bit" Nullable="false" />
-          <Property Name="WonBronze" Type="bit" Nullable="false" />
-          <Property Name="PlayOffPos" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="TopScorer">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="TeamID" Type="int" />
-          <Property Name="IsWinner" Type="bit" />
-          <Property Name="WinPercent" Type="float" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="PlayoffPercent" Type="float" />
+          <Property Name="QuarterFinalPercent" Type="float" />
+          <Property Name="SemiFinalPercent" Type="float" />
+          <Property Name="FinalPercent" Type="float" />
+          <Property Name="BronzePercent" Type="float" />
+          <Property Name="SilverPercent" Type="float" />
+          <Property Name="GoldPercent" Type="float" />
+          <Property Name="ScoredGoals" Type="tinyint" />
+          <Property Name="ConcededGoals" Type="tinyint" />
         </EntityType>
         <EntityType Name="User_2010">
           <Key>
@@ -284,148 +216,7 @@
           <Property Name="TopScorerID" Type="int" />
           <Property Name="IsWinner" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="HasPaid" Type="bit" Nullable="false" />
-          <Property Name="PostedDate" Type="datetime" Nullable="false" />
-          <Property Name="IsConfirmed" Type="bit" Nullable="false" />
-          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="PayCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="TopScorerID" Type="int" />
-          <Property Name="IsWinner" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserBronzeTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserFinalTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserGoldTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserMatch">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="MatchID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="MatchID" Type="int" Nullable="false" />
-          <Property Name="HomeGoals" Type="tinyint" />
-          <Property Name="AwayGoals" Type="tinyint" />
-          <Property Name="ResultMark" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserPlayoffTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-          <Property Name="Position" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserQFTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserSFTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="UserSilverTeam">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TeamID" />
-          </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="TeamID" Type="int" Nullable="false" />
-          <Property Name="Points" Type="tinyint" />
-        </EntityType>
-        <Association Name="Blog_Comment">
-          <End Role="BlogEntry" Type="Self.BlogEntry" Multiplicity="0..1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BlogEntry">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="BlogEntryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BonusPoints2">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="BonusPoints" Type="Self.BonusPoints" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="BonusPoints">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Match_AwayTeam">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="Match" Type="Self.Match" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Match">
-              <PropertyRef Name="AwayTeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Match_HomeTeam">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="Match" Type="Self.Match" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Match">
-              <PropertyRef Name="HomeTeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Standings_Standings_2010">
+        <Association Name="FK_Standings_Standings">
           <End Role="User_2010" Type="Self.User_2010" Multiplicity="1" />
           <End Role="Standings_2010" Type="Self.Standings_2010" Multiplicity="*" />
           <ReferentialConstraint>
@@ -509,239 +300,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Standing_Standing">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Standing" Type="Self.Standing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Standing">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserBronzeTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserBronzeTeam" Type="Self.UserBronzeTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserBronzeTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserBronzeTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserBronzeTeam" Type="Self.UserBronzeTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserBronzeTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserFinalTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserFinalTeam" Type="Self.UserFinalTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserFinalTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserFinalTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserFinalTeam" Type="Self.UserFinalTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserFinalTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserGoldTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserGoldTeam" Type="Self.UserGoldTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserGoldTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserGoldTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserGoldTeam" Type="Self.UserGoldTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserGoldTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserMatch_Match">
-          <End Role="Match" Type="Self.Match" Multiplicity="1" />
-          <End Role="UserMatch" Type="Self.UserMatch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Match">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserMatch">
-              <PropertyRef Name="MatchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserMatch_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserMatch" Type="Self.UserMatch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserMatch">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPlayoffTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserPlayoffTeam" Type="Self.UserPlayoffTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserPlayoffTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPlayoffTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserPlayoffTeam" Type="Self.UserPlayoffTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserPlayoffTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserQFTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserQFTeam" Type="Self.UserQFTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserQFTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserQFTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserQFTeam" Type="Self.UserQFTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserQFTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserSFTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserSFTeam" Type="Self.UserSFTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserSFTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserSFTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserSFTeam" Type="Self.UserSFTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserSFTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserSilverTeam_Team">
-          <End Role="Team" Type="Self.Team" Multiplicity="1" />
-          <End Role="UserSilverTeam" Type="Self.UserSilverTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserSilverTeam">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserSilverTeam_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserSilverTeam" Type="Self.UserSilverTeam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="UserSilverTeam">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Team_TopScorer">
-          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
-          <End Role="TopScorer" Type="Self.TopScorer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TopScorer">
-              <PropertyRef Name="TeamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="User_Topscorer">
-          <End Role="TopScorer" Type="Self.TopScorer" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TopScorer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="TopScorerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="BlogEntry" EntityType="Self.BlogEntry" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BonusPoints" EntityType="Self.BonusPoints" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2010" EntityType="Self.Standings_2010" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2012" EntityType="Self.Standings_2012" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2014" EntityType="Self.Standings_2014" Schema="dbo" store:Type="Tables" />
@@ -749,9 +308,7 @@
           <EntitySet Name="Standings_2018" EntityType="Self.Standings_2018" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2021" EntityType="Self.Standings_2021" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2024" EntityType="Self.Standings_2024" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Standings" EntityType="Self.Standing" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TopScorer" EntityType="Self.TopScorer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamStats_2026" EntityType="Self.TeamStats_2026" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2010" EntityType="Self.User_2010" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2012" EntityType="Self.User_2012" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2014" EntityType="Self.User_2014" Schema="dbo" store:Type="Tables" />
@@ -759,32 +316,7 @@
           <EntitySet Name="User_2018" EntityType="Self.User_2018" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2021" EntityType="Self.User_2021" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2024" EntityType="Self.User_2024" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserBronzeTeam" EntityType="Self.UserBronzeTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserFinalTeam" EntityType="Self.UserFinalTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserGoldTeam" EntityType="Self.UserGoldTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMatch" EntityType="Self.UserMatch" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserPlayoffTeam" EntityType="Self.UserPlayoffTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserQFTeam" EntityType="Self.UserQFTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSFTeam" EntityType="Self.UserSFTeam" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSilverTeam" EntityType="Self.UserSilverTeam" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Blog_Comment" Association="Self.Blog_Comment">
-            <End Role="BlogEntry" EntitySet="BlogEntry" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="BonusPoints2" Association="Self.BonusPoints2">
-            <End Role="User" EntitySet="User" />
-            <End Role="BonusPoints" EntitySet="BonusPoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Match_AwayTeam" Association="Self.FK_Match_AwayTeam">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Match" EntitySet="Match" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Match_HomeTeam" Association="Self.FK_Match_HomeTeam">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Match" EntitySet="Match" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Standings_Standings_2010" Association="Self.FK_Standings_Standings_2010">
+          <AssociationSet Name="FK_Standings_Standings" Association="Self.FK_Standings_Standings">
             <End Role="User_2010" EntitySet="User_2010" />
             <End Role="Standings_2010" EntitySet="Standings_2010" />
           </AssociationSet>
@@ -811,82 +343,6 @@
           <AssociationSet Name="FK_Standings_Standings_2024" Association="Self.FK_Standings_Standings_2024">
             <End Role="User_2024" EntitySet="User_2024" />
             <End Role="Standings_2024" EntitySet="Standings_2024" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Standing_Standing" Association="Self.FK_Standing_Standing">
-            <End Role="User" EntitySet="User" />
-            <End Role="Standing" EntitySet="Standings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_Team" Association="Self.FK_UserBronzeTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_User" Association="Self.FK_UserBronzeTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeam_Team" Association="Self.FK_UserFinalTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeam_User" Association="Self.FK_UserFinalTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_Team" Association="Self.FK_UserGoldTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_User" Association="Self.FK_UserGoldTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_Match" Association="Self.FK_UserMatch_Match">
-            <End Role="Match" EntitySet="Match" />
-            <End Role="UserMatch" EntitySet="UserMatch" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_User" Association="Self.FK_UserMatch_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserMatch" EntitySet="UserMatch" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeam_Team" Association="Self.FK_UserPlayoffTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeam_User" Association="Self.FK_UserPlayoffTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeam_Team" Association="Self.FK_UserQFTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeam_User" Association="Self.FK_UserQFTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeam_Team" Association="Self.FK_UserSFTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeam_User" Association="Self.FK_UserSFTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_Team" Association="Self.FK_UserSilverTeam_Team">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_User" Association="Self.FK_UserSilverTeam_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
-          </AssociationSet>
-          <AssociationSet Name="Team_TopScorer" Association="Self.Team_TopScorer">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="TopScorer" EntitySet="TopScorer" />
-          </AssociationSet>
-          <AssociationSet Name="User_Topscorer" Association="Self.User_Topscorer">
-            <End Role="TopScorer" EntitySet="TopScorer" />
-            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -933,13 +389,13 @@
           <EntitySet Name="BlogEntry" EntityType="Model.BlogEntry" />
           <EntitySet Name="BonusPoints" EntityType="Model.BonusPoints" />
           <EntitySet Name="Comment" EntityType="Model.Comment" />
-          <EntitySet Name="Match" EntityType="Model.Match" />
+          <EntitySet Name="Matches" EntityType="Model.Match" />
           <EntitySet Name="Standings_2024" EntityType="Model.Standings_2024" />
           <EntitySet Name="Standings" EntityType="Model.Standing" />
-          <EntitySet Name="Team" EntityType="Model.Team" />
-          <EntitySet Name="TopScorer" EntityType="Model.TopScorer" />
+          <EntitySet Name="Teams" EntityType="Model.Team" />
+          <EntitySet Name="TopScorers" EntityType="Model.TopScorer" />
           <EntitySet Name="User_2024" EntityType="Model.User_2024" />
-          <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="Users" EntityType="Model.User" />
           <EntitySet Name="UserBronzeTeam" EntityType="Model.UserBronzeTeam" />
           <EntitySet Name="UserFinalTeam" EntityType="Model.UserFinalTeam" />
           <EntitySet Name="UserGoldTeam" EntityType="Model.UserGoldTeam" />
@@ -953,19 +409,19 @@
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="BonusPoints2" Association="Model.BonusPoints2">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="BonusPoints" EntitySet="BonusPoints" />
           </AssociationSet>
           <AssociationSet Name="FK_Match_AwayTeam" Association="Model.FK_Match_AwayTeam">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Match" EntitySet="Match" />
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Match" EntitySet="Matches" />
           </AssociationSet>
           <AssociationSet Name="FK_Match_HomeTeam" Association="Model.FK_Match_HomeTeam">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Match" EntitySet="Match" />
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Match" EntitySet="Matches" />
           </AssociationSet>
           <AssociationSet Name="FK_UserMatch_Match" Association="Model.FK_UserMatch_Match">
-            <End Role="Match" EntitySet="Match" />
+            <End Role="Match" EntitySet="Matches" />
             <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
           <AssociationSet Name="FK_Standings_Standings_2024" Association="Model.FK_Standings_Standings_2024">
@@ -973,77 +429,78 @@
             <End Role="Standings_2024" EntitySet="Standings_2024" />
           </AssociationSet>
           <AssociationSet Name="FK_Standing_Standing" Association="Model.FK_Standing_Standing">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="Standing" EntitySet="Standings" />
           </AssociationSet>
           <AssociationSet Name="FK_UserBronzeTeam_Team" Association="Model.FK_UserBronzeTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserFinalTeam_Team" Association="Model.FK_UserFinalTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserGoldTeam_Team" Association="Model.FK_UserGoldTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPlayoffTeam_Team" Association="Model.FK_UserPlayoffTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserQFTeam_Team" Association="Model.FK_UserQFTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserSFTeam_Team" Association="Model.FK_UserSFTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserSilverTeam_Team" Association="Model.FK_UserSilverTeam_Team">
-            <End Role="Team" EntitySet="Team" />
+            <End Role="Team" EntitySet="Teams" />
             <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
           <AssociationSet Name="Team_TopScorer" Association="Model.Team_TopScorer">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="TopScorer" EntitySet="TopScorer" />
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TopScorer" EntitySet="TopScorers" />
           </AssociationSet>
           <AssociationSet Name="User_Topscorer" Association="Model.User_Topscorer">
-            <End Role="TopScorer" EntitySet="TopScorer" />
-            <End Role="User" EntitySet="User" />
+            <End Role="TopScorer" EntitySet="TopScorers" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_UserBronzeTeam_User" Association="Model.FK_UserBronzeTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserFinalTeam_User" Association="Model.FK_UserFinalTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserGoldTeam_User" Association="Model.FK_UserGoldTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserMatch_User" Association="Model.FK_UserMatch_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPlayoffTeam_User" Association="Model.FK_UserPlayoffTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserQFTeam_User" Association="Model.FK_UserQFTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserSFTeam_User" Association="Model.FK_UserSFTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
           <AssociationSet Name="FK_UserSilverTeam_User" Association="Model.FK_UserSilverTeam_User">
-            <End Role="User" EntitySet="User" />
+            <End Role="User" EntitySet="Users" />
             <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
+          <EntitySet Name="TeamStats" EntityType="Model.TeamStats" />
         </EntityContainer>
         <EntityType Name="User_2010">
           <Key>
@@ -1305,7 +762,7 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Text" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Comment" Relationship="Model.Blog_Comment" FromRole="BlogEntry" ToRole="Comment" />
+          <NavigationProperty Name="Comments" Relationship="Model.Blog_Comment" FromRole="BlogEntry" ToRole="Comment" />
         </EntityType>
         <EntityType Name="BonusPoints">
           <Key>
@@ -1343,8 +800,8 @@
           <Property Name="HomeWinPercent" Type="Double" />
           <Property Name="DrawPercent" Type="Double" />
           <Property Name="AwayWinPercent" Type="Double" />
-          <NavigationProperty Name="Team" Relationship="Model.FK_Match_AwayTeam" FromRole="Match" ToRole="Team" />
-          <NavigationProperty Name="Team1" Relationship="Model.FK_Match_HomeTeam" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="AwayTeam" Relationship="Model.FK_Match_AwayTeam" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="HomeTeam" Relationship="Model.FK_Match_HomeTeam" FromRole="Match" ToRole="Team" />
           <NavigationProperty Name="UserMatch" Relationship="Model.FK_UserMatch_Match" FromRole="Match" ToRole="UserMatch" />
         </EntityType>
         <EntityType Name="Standings_2024">
@@ -1409,7 +866,7 @@
           <Property Name="IsWinner" Type="Boolean" />
           <Property Name="WinPercent" Type="Double" />
           <NavigationProperty Name="Team" Relationship="Model.Team_TopScorer" FromRole="TopScorer" ToRole="Team" />
-          <NavigationProperty Name="User" Relationship="Model.User_Topscorer" FromRole="TopScorer" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="Model.User_Topscorer" FromRole="TopScorer" ToRole="User" />
         </EntityType>
         <EntityType Name="User_2024">
           <Key>
@@ -1451,7 +908,7 @@
           <NavigationProperty Name="UserBronzeTeam" Relationship="Model.FK_UserBronzeTeam_User" FromRole="User" ToRole="UserBronzeTeam" />
           <NavigationProperty Name="UserFinalTeams" Relationship="Model.FK_UserFinalTeam_User" FromRole="User" ToRole="UserFinalTeam" />
           <NavigationProperty Name="UserGoldTeam" Relationship="Model.FK_UserGoldTeam_User" FromRole="User" ToRole="UserGoldTeam" />
-          <NavigationProperty Name="UserMatch" Relationship="Model.FK_UserMatch_User" FromRole="User" ToRole="UserMatch" />
+          <NavigationProperty Name="UserMatches" Relationship="Model.FK_UserMatch_User" FromRole="User" ToRole="UserMatch" />
           <NavigationProperty Name="UserPlayoffTeams" Relationship="Model.FK_UserPlayoffTeam_User" FromRole="User" ToRole="UserPlayoffTeam" />
           <NavigationProperty Name="UserQFTeams" Relationship="Model.FK_UserQFTeam_User" FromRole="User" ToRole="UserQFTeam" />
           <NavigationProperty Name="UserSFTeams" Relationship="Model.FK_UserSFTeam_User" FromRole="User" ToRole="UserSFTeam" />
@@ -1837,6 +1294,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TeamStats">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="PlayoffPercent" Type="Double" />
+          <Property Name="QuarterFinalPercent" Type="Double" />
+          <Property Name="SemiFinalPercent" Type="Double" />
+          <Property Name="FinalPercent" Type="Double" />
+          <Property Name="BronzePercent" Type="Double" />
+          <Property Name="SilverPercent" Type="Double" />
+          <Property Name="GoldPercent" Type="Double" />
+          <Property Name="ScoredGoals" Type="Byte" />
+          <Property Name="ConcededGoals" Type="Byte" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2017,54 +1489,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BlogEntry">
-            <EntityTypeMapping TypeName="Model.BlogEntry">
-              <MappingFragment StoreEntitySet="BlogEntry">
-                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BonusPoints">
-            <EntityTypeMapping TypeName="Model.BonusPoints">
-              <MappingFragment StoreEntitySet="BonusPoints">
-                <ScalarProperty Name="HalfPoint" ColumnName="HalfPoint" />
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Comment">
-            <EntityTypeMapping TypeName="Model.Comment">
-              <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="BlogEntryID" ColumnName="BlogEntryID" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
-                <ScalarProperty Name="PostedBy" ColumnName="PostedBy" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Match">
-            <EntityTypeMapping TypeName="Model.Match">
-              <MappingFragment StoreEntitySet="Match">
-                <ScalarProperty Name="AwayWinPercent" ColumnName="AwayWinPercent" />
-                <ScalarProperty Name="DrawPercent" ColumnName="DrawPercent" />
-                <ScalarProperty Name="HomeWinPercent" ColumnName="HomeWinPercent" />
-                <ScalarProperty Name="ResultMark" ColumnName="ResultMark" />
-                <ScalarProperty Name="AwayGoals" ColumnName="AwayGoals" />
-                <ScalarProperty Name="HomeGoals" ColumnName="HomeGoals" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="AwayTeamID" ColumnName="AwayTeamID" />
-                <ScalarProperty Name="HomeTeamID" ColumnName="HomeTeamID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Standings_2024">
             <EntityTypeMapping TypeName="Model.Standings_2024">
               <MappingFragment StoreEntitySet="Standings_2024">
@@ -2073,47 +1497,6 @@
                 <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Standings">
-            <EntityTypeMapping TypeName="Model.Standing">
-              <MappingFragment StoreEntitySet="Standings">
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Team">
-            <EntityTypeMapping TypeName="Model.Team">
-              <MappingFragment StoreEntitySet="Team">
-                <ScalarProperty Name="PlayOffPos" ColumnName="PlayOffPos" />
-                <ScalarProperty Name="WonBronze" ColumnName="WonBronze" />
-                <ScalarProperty Name="WonSilver" ColumnName="WonSilver" />
-                <ScalarProperty Name="WonGold" ColumnName="WonGold" />
-                <ScalarProperty Name="IsInFinal" ColumnName="IsInFinal" />
-                <ScalarProperty Name="IsInSemiFinals" ColumnName="IsInSemiFinals" />
-                <ScalarProperty Name="IsInQuarterFinals" ColumnName="IsInQuarterFinals" />
-                <ScalarProperty Name="IsInPlayOffs" ColumnName="IsInPlayOffs" />
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TopScorer">
-            <EntityTypeMapping TypeName="Model.TopScorer">
-              <MappingFragment StoreEntitySet="TopScorer">
-                <ScalarProperty Name="WinPercent" ColumnName="WinPercent" />
-                <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2135,101 +1518,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="Model.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
-                <ScalarProperty Name="TopScorerID" ColumnName="TopScorerID" />
-                <ScalarProperty Name="PayCode" ColumnName="PayCode" />
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
-                <ScalarProperty Name="HasPaid" ColumnName="HasPaid" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserBronzeTeam">
-            <EntityTypeMapping TypeName="Model.UserBronzeTeam">
-              <MappingFragment StoreEntitySet="UserBronzeTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
+          <EntitySetMapping Name="TeamStats">
+            <EntityTypeMapping TypeName="Model.TeamStats">
+              <MappingFragment StoreEntitySet="TeamStats_2026">
+                <ScalarProperty Name="ConcededGoals" ColumnName="ConcededGoals" />
+                <ScalarProperty Name="ScoredGoals" ColumnName="ScoredGoals" />
+                <ScalarProperty Name="GoldPercent" ColumnName="GoldPercent" />
+                <ScalarProperty Name="SilverPercent" ColumnName="SilverPercent" />
+                <ScalarProperty Name="BronzePercent" ColumnName="BronzePercent" />
+                <ScalarProperty Name="FinalPercent" ColumnName="FinalPercent" />
+                <ScalarProperty Name="SemiFinalPercent" ColumnName="SemiFinalPercent" />
+                <ScalarProperty Name="QuarterFinalPercent" ColumnName="QuarterFinalPercent" />
+                <ScalarProperty Name="PlayoffPercent" ColumnName="PlayoffPercent" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserFinalTeam">
-            <EntityTypeMapping TypeName="Model.UserFinalTeam">
-              <MappingFragment StoreEntitySet="UserFinalTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserGoldTeam">
-            <EntityTypeMapping TypeName="Model.UserGoldTeam">
-              <MappingFragment StoreEntitySet="UserGoldTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserMatch">
-            <EntityTypeMapping TypeName="Model.UserMatch">
-              <MappingFragment StoreEntitySet="UserMatch">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="ResultMark" ColumnName="ResultMark" />
-                <ScalarProperty Name="AwayGoals" ColumnName="AwayGoals" />
-                <ScalarProperty Name="HomeGoals" ColumnName="HomeGoals" />
-                <ScalarProperty Name="MatchID" ColumnName="MatchID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserPlayoffTeam">
-            <EntityTypeMapping TypeName="Model.UserPlayoffTeam">
-              <MappingFragment StoreEntitySet="UserPlayoffTeam">
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserQFTeam">
-            <EntityTypeMapping TypeName="Model.UserQFTeam">
-              <MappingFragment StoreEntitySet="UserQFTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserSFTeam">
-            <EntityTypeMapping TypeName="Model.UserSFTeam">
-              <MappingFragment StoreEntitySet="UserSFTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserSilverTeam">
-            <EntityTypeMapping TypeName="Model.UserSilverTeam">
-              <MappingFragment StoreEntitySet="UserSilverTeam">
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

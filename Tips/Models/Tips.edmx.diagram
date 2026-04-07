@@ -43,14 +43,14 @@
         <AssociationConnector Association="Model.User_Topscorer" />
         <!-- ===== Team and Match Section ===== -->
         <EntityTypeShape EntityType="Model.Team" Width="1.5" PointX="8.5" PointY="12" />
-        <EntityTypeShape EntityType="Model.Match" Width="1.5" PointX="8.5" PointY="8" />
+        <EntityTypeShape EntityType="Model.Match" Width="1.5" PointX="8.5" PointY="7.625" />
         <!-- Team-Match, Team-TopScorer -->
         <AssociationConnector Association="Model.FK_Match_HomeTeam" />
         <AssociationConnector Association="Model.FK_Match_AwayTeam" />
         <AssociationConnector Association="Model.Team_TopScorer" />
         <!-- ===== User-Team Junction Tables ===== -->
         <EntityTypeShape EntityType="Model.UserMatch" Width="1.5" PointX="5.5" PointY="15" />
-        <EntityTypeShape EntityType="Model.UserPlayoffTeam" Width="1.5" PointX="8.5" PointY="16" />
+        <EntityTypeShape EntityType="Model.UserPlayoffTeam" Width="1.5" PointX="10.625" PointY="12.875" />
         <EntityTypeShape EntityType="Model.UserQFTeam" Width="1.5" PointX="10.5" PointY="16" />
         <EntityTypeShape EntityType="Model.UserSFTeam" Width="1.5" PointX="12.5" PointY="16" />
         <EntityTypeShape EntityType="Model.UserFinalTeam" Width="1.5" PointX="8.5" PointY="19" />
@@ -74,6 +74,7 @@
         <AssociationConnector Association="Model.FK_UserSilverTeam_User" />
         <AssociationConnector Association="Model.FK_UserGoldTeam_Team" />
         <AssociationConnector Association="Model.FK_UserGoldTeam_User" />
+        <EntityTypeShape EntityType="Model.TeamStats" Width="1.5" PointX="5.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

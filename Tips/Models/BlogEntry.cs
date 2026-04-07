@@ -16,7 +16,7 @@ namespace Tips.Models
     {
         public BlogEntry()
         {
-            this.Comment = new HashSet<Comment>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public int ID { get; set; }
@@ -24,6 +24,6 @@ namespace Tips.Models
         public string Text { get; set; }
         public System.DateTime PostedDate { get; set; }
     
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

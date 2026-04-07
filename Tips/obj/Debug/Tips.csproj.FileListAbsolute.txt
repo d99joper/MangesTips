@@ -1,12 +1,2 @@
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\Tips.dll
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\Tips.pdb
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\EntityFramework.dll
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\EntityFramework.SqlServer.dll
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\EntityFramework.xml
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\EntityFramework.SqlServer.xml
 C:\Users\jonas\Source\Repos\MangesTips\Tips\obj\Debug\Tips.csproj.AssemblyReference.cache
 C:\Users\jonas\Source\Repos\MangesTips\Tips\obj\Debug\Tips.csproj.CoreCompileInputs.cache
-C:\Users\jonas\Source\Repos\MangesTips\Tips\obj\Debug\Tips.csproj.Up2Date
-C:\Users\jonas\Source\Repos\MangesTips\Tips\obj\Debug\Tips.dll
-C:\Users\jonas\Source\Repos\MangesTips\Tips\obj\Debug\Tips.pdb
-C:\Users\jonas\Source\Repos\MangesTips\Tips\bin\Tips.dll.config

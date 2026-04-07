@@ -30,8 +30,8 @@ namespace Tips.Models
         public Nullable<double> DrawPercent { get; set; }
         public Nullable<double> AwayWinPercent { get; set; }
     
-        public virtual Team Team { get; set; }
-        public virtual Team Team1 { get; set; }
+        public virtual Team AwayTeam { get; set; }
+        public virtual Team HomeTeam { get; set; }
         public virtual ICollection<UserMatch> UserMatch { get; set; }
     }
 }

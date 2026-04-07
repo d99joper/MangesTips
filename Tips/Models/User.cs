@@ -21,7 +21,7 @@ namespace Tips.Models
             this.UserBronzeTeam = new HashSet<UserBronzeTeam>();
             this.UserFinalTeams = new HashSet<UserFinalTeam>();
             this.UserGoldTeam = new HashSet<UserGoldTeam>();
-            this.UserMatch = new HashSet<UserMatch>();
+            this.UserMatches = new HashSet<UserMatch>();
             this.UserPlayoffTeams = new HashSet<UserPlayoffTeam>();
             this.UserQFTeams = new HashSet<UserQFTeam>();
             this.UserSFTeams = new HashSet<UserSFTeam>();
@@ -47,7 +47,7 @@ namespace Tips.Models
         public virtual ICollection<UserBronzeTeam> UserBronzeTeam { get; set; }
         public virtual ICollection<UserFinalTeam> UserFinalTeams { get; set; }
         public virtual ICollection<UserGoldTeam> UserGoldTeam { get; set; }
-        public virtual ICollection<UserMatch> UserMatch { get; set; }
+        public virtual ICollection<UserMatch> UserMatches { get; set; }
         public virtual ICollection<UserPlayoffTeam> UserPlayoffTeams { get; set; }
         public virtual ICollection<UserQFTeam> UserQFTeams { get; set; }
         public virtual ICollection<UserSFTeam> UserSFTeams { get; set; }
