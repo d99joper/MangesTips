@@ -211,9 +211,6 @@
     <Compile Include="Models\Standings_2021.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Standings_2024.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Team.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
@@ -285,9 +282,6 @@
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_2021.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2024.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
     <Compile Include="NyKupong.aspx.cs">
