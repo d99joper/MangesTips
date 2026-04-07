@@ -12,18 +12,13 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BlogEntry_2026
+    public partial class UserGoldTeam
     {
-        public BlogEntry_2026()
-        {
-            this.Comment_2026 = new HashSet<Comment_2026>();
-        }
+        public int UserID { get; set; }
+        public int TeamID { get; set; }
+        public Nullable<byte> Points { get; set; }
     
-        public int ID { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }
-        public System.DateTime PostedDate { get; set; }
-    
-        public virtual ICollection<Comment_2026> Comment_2026 { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual User User { get; set; }
     }
 }

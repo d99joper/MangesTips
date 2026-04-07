@@ -12,7 +12,7 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Standings_2026
+    public partial class Standing
     {
         public int UserID { get; set; }
         public System.DateTime UpdateDate { get; set; }
@@ -20,6 +20,6 @@ namespace Tips.Models
         public Nullable<System.Guid> Guid { get; set; }
         public Nullable<short> Position { get; set; }
     
-        public virtual User_2026 User_2026 { get; set; }
+        public virtual User User { get; set; }
     }
 }

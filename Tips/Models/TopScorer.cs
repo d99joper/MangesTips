@@ -12,14 +12,22 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BonusPoints_2026
+    public partial class TopScorer
     {
-        public int ID { get; set; }
-        public int UserID { get; set; }
-        public string GroupID { get; set; }
-        public byte Point { get; set; }
-        public bool HalfPoint { get; set; }
+        public TopScorer()
+        {
+            this.User = new HashSet<User>();
+        }
     
-        public virtual User_2026 User_2026 { get; set; }
+        public int ID { get; set; }
+        public string DisplayName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public Nullable<int> TeamID { get; set; }
+        public Nullable<bool> IsWinner { get; set; }
+        public Nullable<double> WinPercent { get; set; }
+    
+        public virtual Team Team { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }
