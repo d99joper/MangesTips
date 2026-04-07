@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BlogEntry_2026">
+        <EntityType Name="BlogEntry">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -14,7 +14,7 @@
           <Property Name="Text" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="PostedDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="BonusPoints_2026">
+        <EntityType Name="BonusPoints">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -24,7 +24,7 @@
           <Property Name="Point" Type="tinyint" Nullable="false" />
           <Property Name="HalfPoint" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Comment_2026">
+        <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -34,7 +34,7 @@
           <Property Name="Text" Type="text" Nullable="false" />
           <Property Name="BlogEntryID" Type="int" />
         </EntityType>
-        <EntityType Name="Match_2026">
+        <EntityType Name="Match">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -126,7 +126,7 @@
           <Property Name="Guid" Type="uniqueidentifier" />
           <Property Name="Position" Type="smallint" />
         </EntityType>
-        <EntityType Name="Standings_2026">
+        <EntityType Name="Standing">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="UpdateDate" />
@@ -137,7 +137,7 @@
           <Property Name="Guid" Type="uniqueidentifier" />
           <Property Name="Position" Type="smallint" />
         </EntityType>
-        <EntityType Name="Team_2026">
+        <EntityType Name="Team">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -153,7 +153,7 @@
           <Property Name="WonBronze" Type="bit" Nullable="false" />
           <Property Name="PlayOffPos" Type="tinyint" />
         </EntityType>
-        <EntityType Name="TopScorer_2026">
+        <EntityType Name="TopScorer">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -284,7 +284,7 @@
           <Property Name="TopScorerID" Type="int" />
           <Property Name="IsWinner" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="User_2026">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -301,7 +301,7 @@
           <Property Name="TopScorerID" Type="int" />
           <Property Name="IsWinner" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="UserBronzeTeam_2026">
+        <EntityType Name="UserBronzeTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -310,7 +310,7 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserFinalTeams_2026">
+        <EntityType Name="UserFinalTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -319,7 +319,7 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserGoldTeam_2026">
+        <EntityType Name="UserGoldTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -328,7 +328,7 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserMatch_2026">
+        <EntityType Name="UserMatch">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="MatchID" />
@@ -340,7 +340,7 @@
           <Property Name="ResultMark" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserPlayoffTeams_2026">
+        <EntityType Name="UserPlayoffTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -350,7 +350,7 @@
           <Property Name="Points" Type="tinyint" />
           <Property Name="Position" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserQFTeams_2026">
+        <EntityType Name="UserQFTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -359,7 +359,7 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserSFTeams_2026">
+        <EntityType Name="UserSFTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -368,7 +368,7 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <EntityType Name="UserSilverTeam_2026">
+        <EntityType Name="UserSilverTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -377,55 +377,55 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="Points" Type="tinyint" />
         </EntityType>
-        <Association Name="Blog_Comment_2026">
-          <End Role="BlogEntry_2026" Type="Self.BlogEntry_2026" Multiplicity="0..1" />
-          <End Role="Comment_2026" Type="Self.Comment_2026" Multiplicity="*" />
+        <Association Name="Blog_Comment">
+          <End Role="BlogEntry" Type="Self.BlogEntry" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BlogEntry_2026">
+            <Principal Role="BlogEntry">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Comment_2026">
+            <Dependent Role="Comment">
               <PropertyRef Name="BlogEntryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="BonusPoints2_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="BonusPoints_2026" Type="Self.BonusPoints_2026" Multiplicity="*" />
+        <Association Name="BonusPoints2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BonusPoints" Type="Self.BonusPoints" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BonusPoints_2026">
+            <Dependent Role="BonusPoints">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Match_AwayTeam_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="Match_2026" Type="Self.Match_2026" Multiplicity="*" />
+        <Association Name="FK_Match_AwayTeam">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Match_2026">
+            <Dependent Role="Match">
               <PropertyRef Name="AwayTeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Match_HomeTeam_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="Match_2026" Type="Self.Match_2026" Multiplicity="*" />
+        <Association Name="FK_Match_HomeTeam">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Match" Type="Self.Match" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Match_2026">
+            <Dependent Role="Match">
               <PropertyRef Name="HomeTeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Standings_Standings">
+        <Association Name="FK_Standings_Standings_2010">
           <End Role="User_2010" Type="Self.User_2010" Multiplicity="1" />
           <End Role="Standings_2010" Type="Self.Standings_2010" Multiplicity="*" />
           <ReferentialConstraint>
@@ -509,239 +509,239 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Standings_Standings_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="Standings_2026" Type="Self.Standings_2026" Multiplicity="*" />
+        <Association Name="FK_Standing_Standing">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Standing" Type="Self.Standing" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Standings_2026">
+            <Dependent Role="Standing">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserBronzeTeam_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserBronzeTeam_2026" Type="Self.UserBronzeTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserBronzeTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserBronzeTeam" Type="Self.UserBronzeTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserBronzeTeam_2026">
+            <Dependent Role="UserBronzeTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserBronzeTeam_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserBronzeTeam_2026" Type="Self.UserBronzeTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserBronzeTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserBronzeTeam" Type="Self.UserBronzeTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserBronzeTeam_2026">
+            <Dependent Role="UserBronzeTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserFinalTeams_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserFinalTeams_2026" Type="Self.UserFinalTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserFinalTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserFinalTeam" Type="Self.UserFinalTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserFinalTeams_2026">
+            <Dependent Role="UserFinalTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserFinalTeams_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserFinalTeams_2026" Type="Self.UserFinalTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserFinalTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserFinalTeam" Type="Self.UserFinalTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserFinalTeams_2026">
+            <Dependent Role="UserFinalTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserGoldTeam_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserGoldTeam_2026" Type="Self.UserGoldTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserGoldTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserGoldTeam" Type="Self.UserGoldTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserGoldTeam_2026">
+            <Dependent Role="UserGoldTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserGoldTeam_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserGoldTeam_2026" Type="Self.UserGoldTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserGoldTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserGoldTeam" Type="Self.UserGoldTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserGoldTeam_2026">
+            <Dependent Role="UserGoldTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMatch_Match_2026">
-          <End Role="Match_2026" Type="Self.Match_2026" Multiplicity="1" />
-          <End Role="UserMatch_2026" Type="Self.UserMatch_2026" Multiplicity="*" />
+        <Association Name="FK_UserMatch_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1" />
+          <End Role="UserMatch" Type="Self.UserMatch" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Match_2026">
+            <Principal Role="Match">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserMatch_2026">
+            <Dependent Role="UserMatch">
               <PropertyRef Name="MatchID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMatch_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserMatch_2026" Type="Self.UserMatch_2026" Multiplicity="*" />
+        <Association Name="FK_UserMatch_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserMatch" Type="Self.UserMatch" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserMatch_2026">
+            <Dependent Role="UserMatch">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPlayoffTeams_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserPlayoffTeams_2026" Type="Self.UserPlayoffTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserPlayoffTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserPlayoffTeam" Type="Self.UserPlayoffTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserPlayoffTeams_2026">
+            <Dependent Role="UserPlayoffTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPlayoffTeams_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserPlayoffTeams_2026" Type="Self.UserPlayoffTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserPlayoffTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPlayoffTeam" Type="Self.UserPlayoffTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserPlayoffTeams_2026">
+            <Dependent Role="UserPlayoffTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQFTeams_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserQFTeams_2026" Type="Self.UserQFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserQFTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserQFTeam" Type="Self.UserQFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserQFTeams_2026">
+            <Dependent Role="UserQFTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQFTeams_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserQFTeams_2026" Type="Self.UserQFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserQFTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserQFTeam" Type="Self.UserQFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserQFTeams_2026">
+            <Dependent Role="UserQFTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSFTeams_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserSFTeams_2026" Type="Self.UserSFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserSFTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserSFTeam" Type="Self.UserSFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSFTeams_2026">
+            <Dependent Role="UserSFTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSFTeams_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserSFTeams_2026" Type="Self.UserSFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserSFTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSFTeam" Type="Self.UserSFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSFTeams_2026">
+            <Dependent Role="UserSFTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSilverTeam_Team_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="1" />
-          <End Role="UserSilverTeam_2026" Type="Self.UserSilverTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserSilverTeam_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="UserSilverTeam" Type="Self.UserSilverTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSilverTeam_2026">
+            <Dependent Role="UserSilverTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSilverTeam_User_2026">
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="1" />
-          <End Role="UserSilverTeam_2026" Type="Self.UserSilverTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserSilverTeam_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSilverTeam" Type="Self.UserSilverTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSilverTeam_2026">
+            <Dependent Role="UserSilverTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Team_TopScorer_2026">
-          <End Role="Team_2026" Type="Self.Team_2026" Multiplicity="0..1" />
-          <End Role="TopScorer_2026" Type="Self.TopScorer_2026" Multiplicity="*" />
+        <Association Name="Team_TopScorer">
+          <End Role="Team" Type="Self.Team" Multiplicity="0..1" />
+          <End Role="TopScorer" Type="Self.TopScorer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="TopScorer_2026">
+            <Dependent Role="TopScorer">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="User_Topscorer_2026">
-          <End Role="TopScorer_2026" Type="Self.TopScorer_2026" Multiplicity="0..1" />
-          <End Role="User_2026" Type="Self.User_2026" Multiplicity="*" />
+        <Association Name="User_Topscorer">
+          <End Role="TopScorer" Type="Self.TopScorer" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TopScorer_2026">
+            <Principal Role="TopScorer">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="User_2026">
+            <Dependent Role="User">
               <PropertyRef Name="TopScorerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="BlogEntry_2026" EntityType="Self.BlogEntry_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BonusPoints_2026" EntityType="Self.BonusPoints_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Comment_2026" EntityType="Self.Comment_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Match_2026" EntityType="Self.Match_2026" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogEntry" EntityType="Self.BlogEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BonusPoints" EntityType="Self.BonusPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2010" EntityType="Self.Standings_2010" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2012" EntityType="Self.Standings_2012" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2014" EntityType="Self.Standings_2014" Schema="dbo" store:Type="Tables" />
@@ -749,9 +749,9 @@
           <EntitySet Name="Standings_2018" EntityType="Self.Standings_2018" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2021" EntityType="Self.Standings_2021" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Standings_2024" EntityType="Self.Standings_2024" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Standings_2026" EntityType="Self.Standings_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Team_2026" EntityType="Self.Team_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TopScorer_2026" EntityType="Self.TopScorer_2026" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Standings" EntityType="Self.Standing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopScorer" EntityType="Self.TopScorer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2010" EntityType="Self.User_2010" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2012" EntityType="Self.User_2012" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2014" EntityType="Self.User_2014" Schema="dbo" store:Type="Tables" />
@@ -759,32 +759,32 @@
           <EntitySet Name="User_2018" EntityType="Self.User_2018" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2021" EntityType="Self.User_2021" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_2024" EntityType="Self.User_2024" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User_2026" EntityType="Self.User_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserBronzeTeam_2026" EntityType="Self.UserBronzeTeam_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserFinalTeams_2026" EntityType="Self.UserFinalTeams_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserGoldTeam_2026" EntityType="Self.UserGoldTeam_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserMatch_2026" EntityType="Self.UserMatch_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserPlayoffTeams_2026" EntityType="Self.UserPlayoffTeams_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserQFTeams_2026" EntityType="Self.UserQFTeams_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSFTeams_2026" EntityType="Self.UserSFTeams_2026" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSilverTeam_2026" EntityType="Self.UserSilverTeam_2026" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Blog_Comment_2026" Association="Self.Blog_Comment_2026">
-            <End Role="BlogEntry_2026" EntitySet="BlogEntry_2026" />
-            <End Role="Comment_2026" EntitySet="Comment_2026" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBronzeTeam" EntityType="Self.UserBronzeTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFinalTeam" EntityType="Self.UserFinalTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGoldTeam" EntityType="Self.UserGoldTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMatch" EntityType="Self.UserMatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPlayoffTeam" EntityType="Self.UserPlayoffTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserQFTeam" EntityType="Self.UserQFTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSFTeam" EntityType="Self.UserSFTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSilverTeam" EntityType="Self.UserSilverTeam" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Blog_Comment" Association="Self.Blog_Comment">
+            <End Role="BlogEntry" EntitySet="BlogEntry" />
+            <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="BonusPoints2_2026" Association="Self.BonusPoints2_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="BonusPoints_2026" EntitySet="BonusPoints_2026" />
+          <AssociationSet Name="BonusPoints2" Association="Self.BonusPoints2">
+            <End Role="User" EntitySet="User" />
+            <End Role="BonusPoints" EntitySet="BonusPoints" />
           </AssociationSet>
-          <AssociationSet Name="FK_Match_AwayTeam_2026" Association="Self.FK_Match_AwayTeam_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="Match_2026" EntitySet="Match_2026" />
+          <AssociationSet Name="FK_Match_AwayTeam" Association="Self.FK_Match_AwayTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK_Match_HomeTeam_2026" Association="Self.FK_Match_HomeTeam_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="Match_2026" EntitySet="Match_2026" />
+          <AssociationSet Name="FK_Match_HomeTeam" Association="Self.FK_Match_HomeTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK_Standings_Standings" Association="Self.FK_Standings_Standings">
+          <AssociationSet Name="FK_Standings_Standings_2010" Association="Self.FK_Standings_Standings_2010">
             <End Role="User_2010" EntitySet="User_2010" />
             <End Role="Standings_2010" EntitySet="Standings_2010" />
           </AssociationSet>
@@ -812,81 +812,81 @@
             <End Role="User_2024" EntitySet="User_2024" />
             <End Role="Standings_2024" EntitySet="Standings_2024" />
           </AssociationSet>
-          <AssociationSet Name="FK_Standings_Standings_2026" Association="Self.FK_Standings_Standings_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="Standings_2026" EntitySet="Standings_2026" />
+          <AssociationSet Name="FK_Standing_Standing" Association="Self.FK_Standing_Standing">
+            <End Role="User" EntitySet="User" />
+            <End Role="Standing" EntitySet="Standings" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_Team_2026" Association="Self.FK_UserBronzeTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserBronzeTeam_2026" EntitySet="UserBronzeTeam_2026" />
+          <AssociationSet Name="FK_UserBronzeTeam_Team" Association="Self.FK_UserBronzeTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_User_2026" Association="Self.FK_UserBronzeTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserBronzeTeam_2026" EntitySet="UserBronzeTeam_2026" />
+          <AssociationSet Name="FK_UserBronzeTeam_User" Association="Self.FK_UserBronzeTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeams_Team_2026" Association="Self.FK_UserFinalTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserFinalTeams_2026" EntitySet="UserFinalTeams_2026" />
+          <AssociationSet Name="FK_UserFinalTeam_Team" Association="Self.FK_UserFinalTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeams_User_2026" Association="Self.FK_UserFinalTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserFinalTeams_2026" EntitySet="UserFinalTeams_2026" />
+          <AssociationSet Name="FK_UserFinalTeam_User" Association="Self.FK_UserFinalTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_Team_2026" Association="Self.FK_UserGoldTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserGoldTeam_2026" EntitySet="UserGoldTeam_2026" />
+          <AssociationSet Name="FK_UserGoldTeam_Team" Association="Self.FK_UserGoldTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_User_2026" Association="Self.FK_UserGoldTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserGoldTeam_2026" EntitySet="UserGoldTeam_2026" />
+          <AssociationSet Name="FK_UserGoldTeam_User" Association="Self.FK_UserGoldTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_Match_2026" Association="Self.FK_UserMatch_Match_2026">
-            <End Role="Match_2026" EntitySet="Match_2026" />
-            <End Role="UserMatch_2026" EntitySet="UserMatch_2026" />
+          <AssociationSet Name="FK_UserMatch_Match" Association="Self.FK_UserMatch_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_User_2026" Association="Self.FK_UserMatch_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserMatch_2026" EntitySet="UserMatch_2026" />
+          <AssociationSet Name="FK_UserMatch_User" Association="Self.FK_UserMatch_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeams_Team_2026" Association="Self.FK_UserPlayoffTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserPlayoffTeams_2026" EntitySet="UserPlayoffTeams_2026" />
+          <AssociationSet Name="FK_UserPlayoffTeam_Team" Association="Self.FK_UserPlayoffTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeams_User_2026" Association="Self.FK_UserPlayoffTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserPlayoffTeams_2026" EntitySet="UserPlayoffTeams_2026" />
+          <AssociationSet Name="FK_UserPlayoffTeam_User" Association="Self.FK_UserPlayoffTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeams_Team_2026" Association="Self.FK_UserQFTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserQFTeams_2026" EntitySet="UserQFTeams_2026" />
+          <AssociationSet Name="FK_UserQFTeam_Team" Association="Self.FK_UserQFTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeams_User_2026" Association="Self.FK_UserQFTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserQFTeams_2026" EntitySet="UserQFTeams_2026" />
+          <AssociationSet Name="FK_UserQFTeam_User" Association="Self.FK_UserQFTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeams_Team_2026" Association="Self.FK_UserSFTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserSFTeams_2026" EntitySet="UserSFTeams_2026" />
+          <AssociationSet Name="FK_UserSFTeam_Team" Association="Self.FK_UserSFTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeams_User_2026" Association="Self.FK_UserSFTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserSFTeams_2026" EntitySet="UserSFTeams_2026" />
+          <AssociationSet Name="FK_UserSFTeam_User" Association="Self.FK_UserSFTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_Team_2026" Association="Self.FK_UserSilverTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserSilverTeam_2026" EntitySet="UserSilverTeam_2026" />
+          <AssociationSet Name="FK_UserSilverTeam_Team" Association="Self.FK_UserSilverTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_User_2026" Association="Self.FK_UserSilverTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserSilverTeam_2026" EntitySet="UserSilverTeam_2026" />
+          <AssociationSet Name="FK_UserSilverTeam_User" Association="Self.FK_UserSilverTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
-          <AssociationSet Name="Team_TopScorer_2026" Association="Self.Team_TopScorer_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="TopScorer_2026" EntitySet="TopScorer_2026" />
+          <AssociationSet Name="Team_TopScorer" Association="Self.Team_TopScorer">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TopScorer" EntitySet="TopScorer" />
           </AssociationSet>
-          <AssociationSet Name="User_Topscorer_2026" Association="Self.User_Topscorer_2026">
-            <End Role="TopScorer_2026" EntitySet="TopScorer_2026" />
-            <End Role="User_2026" EntitySet="User_2026" />
+          <AssociationSet Name="User_Topscorer" Association="Self.User_Topscorer">
+            <End Role="TopScorer" EntitySet="TopScorer" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -902,7 +902,7 @@
           <EntitySet Name="Standings_2012" EntityType="Model.Standings_2012" />
           <EntitySet Name="Standings_2014" EntityType="Model.Standings_2014" />
           <EntitySet Name="Standings_2016" EntityType="Model.Standings_2016" />
-          <AssociationSet Name="FK_Standings_Standings" Association="Model.FK_Standings_Standings">
+          <AssociationSet Name="FK_Standings_Standings_2010" Association="Model.FK_Standings_Standings_2010">
             <End Role="User_2010" EntitySet="User_2010" />
             <End Role="Standings_2010" EntitySet="Standings_2010" />
           </AssociationSet>
@@ -930,119 +930,119 @@
             <End Role="User_2021" EntitySet="User_2021" />
             <End Role="Standings_2021" EntitySet="Standings_2021" />
           </AssociationSet>
-          <EntitySet Name="BlogEntry_2026" EntityType="Model.BlogEntry_2026" />
-          <EntitySet Name="BonusPoints_2026" EntityType="Model.BonusPoints_2026" />
-          <EntitySet Name="Comment_2026" EntityType="Model.Comment_2026" />
-          <EntitySet Name="Match_2026" EntityType="Model.Match_2026" />
+          <EntitySet Name="BlogEntry" EntityType="Model.BlogEntry" />
+          <EntitySet Name="BonusPoints" EntityType="Model.BonusPoints" />
+          <EntitySet Name="Comment" EntityType="Model.Comment" />
+          <EntitySet Name="Match" EntityType="Model.Match" />
           <EntitySet Name="Standings_2024" EntityType="Model.Standings_2024" />
-          <EntitySet Name="Standings_2026" EntityType="Model.Standings_2026" />
-          <EntitySet Name="Team_2026" EntityType="Model.Team_2026" />
-          <EntitySet Name="TopScorer_2026" EntityType="Model.TopScorer_2026" />
+          <EntitySet Name="Standings" EntityType="Model.Standing" />
+          <EntitySet Name="Team" EntityType="Model.Team" />
+          <EntitySet Name="TopScorer" EntityType="Model.TopScorer" />
           <EntitySet Name="User_2024" EntityType="Model.User_2024" />
-          <EntitySet Name="User_2026" EntityType="Model.User_2026" />
-          <EntitySet Name="UserBronzeTeam_2026" EntityType="Model.UserBronzeTeam_2026" />
-          <EntitySet Name="UserFinalTeams_2026" EntityType="Model.UserFinalTeams_2026" />
-          <EntitySet Name="UserGoldTeam_2026" EntityType="Model.UserGoldTeam_2026" />
-          <EntitySet Name="UserMatch_2026" EntityType="Model.UserMatch_2026" />
-          <EntitySet Name="UserPlayoffTeams_2026" EntityType="Model.UserPlayoffTeams_2026" />
-          <EntitySet Name="UserQFTeams_2026" EntityType="Model.UserQFTeams_2026" />
-          <EntitySet Name="UserSFTeams_2026" EntityType="Model.UserSFTeams_2026" />
-          <EntitySet Name="UserSilverTeam_2026" EntityType="Model.UserSilverTeam_2026" />
-          <AssociationSet Name="Blog_Comment_2026" Association="Model.Blog_Comment_2026">
-            <End Role="BlogEntry_2026" EntitySet="BlogEntry_2026" />
-            <End Role="Comment_2026" EntitySet="Comment_2026" />
+          <EntitySet Name="User" EntityType="Model.User" />
+          <EntitySet Name="UserBronzeTeam" EntityType="Model.UserBronzeTeam" />
+          <EntitySet Name="UserFinalTeam" EntityType="Model.UserFinalTeam" />
+          <EntitySet Name="UserGoldTeam" EntityType="Model.UserGoldTeam" />
+          <EntitySet Name="UserMatch" EntityType="Model.UserMatch" />
+          <EntitySet Name="UserPlayoffTeam" EntityType="Model.UserPlayoffTeam" />
+          <EntitySet Name="UserQFTeam" EntityType="Model.UserQFTeam" />
+          <EntitySet Name="UserSFTeam" EntityType="Model.UserSFTeam" />
+          <EntitySet Name="UserSilverTeam" EntityType="Model.UserSilverTeam" />
+          <AssociationSet Name="Blog_Comment" Association="Model.Blog_Comment">
+            <End Role="BlogEntry" EntitySet="BlogEntry" />
+            <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="BonusPoints2_2026" Association="Model.BonusPoints2_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="BonusPoints_2026" EntitySet="BonusPoints_2026" />
+          <AssociationSet Name="BonusPoints2" Association="Model.BonusPoints2">
+            <End Role="User" EntitySet="User" />
+            <End Role="BonusPoints" EntitySet="BonusPoints" />
           </AssociationSet>
-          <AssociationSet Name="FK_Match_AwayTeam_2026" Association="Model.FK_Match_AwayTeam_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="Match_2026" EntitySet="Match_2026" />
+          <AssociationSet Name="FK_Match_AwayTeam" Association="Model.FK_Match_AwayTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK_Match_HomeTeam_2026" Association="Model.FK_Match_HomeTeam_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="Match_2026" EntitySet="Match_2026" />
+          <AssociationSet Name="FK_Match_HomeTeam" Association="Model.FK_Match_HomeTeam">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Match" EntitySet="Match" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_Match_2026" Association="Model.FK_UserMatch_Match_2026">
-            <End Role="Match_2026" EntitySet="Match_2026" />
-            <End Role="UserMatch_2026" EntitySet="UserMatch_2026" />
+          <AssociationSet Name="FK_UserMatch_Match" Association="Model.FK_UserMatch_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
           <AssociationSet Name="FK_Standings_Standings_2024" Association="Model.FK_Standings_Standings_2024">
             <End Role="User_2024" EntitySet="User_2024" />
             <End Role="Standings_2024" EntitySet="Standings_2024" />
           </AssociationSet>
-          <AssociationSet Name="FK_Standings_Standings_2026" Association="Model.FK_Standings_Standings_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="Standings_2026" EntitySet="Standings_2026" />
+          <AssociationSet Name="FK_Standing_Standing" Association="Model.FK_Standing_Standing">
+            <End Role="User" EntitySet="User" />
+            <End Role="Standing" EntitySet="Standings" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_Team_2026" Association="Model.FK_UserBronzeTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserBronzeTeam_2026" EntitySet="UserBronzeTeam_2026" />
+          <AssociationSet Name="FK_UserBronzeTeam_Team" Association="Model.FK_UserBronzeTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeams_Team_2026" Association="Model.FK_UserFinalTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserFinalTeams_2026" EntitySet="UserFinalTeams_2026" />
+          <AssociationSet Name="FK_UserFinalTeam_Team" Association="Model.FK_UserFinalTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_Team_2026" Association="Model.FK_UserGoldTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserGoldTeam_2026" EntitySet="UserGoldTeam_2026" />
+          <AssociationSet Name="FK_UserGoldTeam_Team" Association="Model.FK_UserGoldTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeams_Team_2026" Association="Model.FK_UserPlayoffTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserPlayoffTeams_2026" EntitySet="UserPlayoffTeams_2026" />
+          <AssociationSet Name="FK_UserPlayoffTeam_Team" Association="Model.FK_UserPlayoffTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeams_Team_2026" Association="Model.FK_UserQFTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserQFTeams_2026" EntitySet="UserQFTeams_2026" />
+          <AssociationSet Name="FK_UserQFTeam_Team" Association="Model.FK_UserQFTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeams_Team_2026" Association="Model.FK_UserSFTeams_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserSFTeams_2026" EntitySet="UserSFTeams_2026" />
+          <AssociationSet Name="FK_UserSFTeam_Team" Association="Model.FK_UserSFTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_Team_2026" Association="Model.FK_UserSilverTeam_Team_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="UserSilverTeam_2026" EntitySet="UserSilverTeam_2026" />
+          <AssociationSet Name="FK_UserSilverTeam_Team" Association="Model.FK_UserSilverTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
-          <AssociationSet Name="Team_TopScorer_2026" Association="Model.Team_TopScorer_2026">
-            <End Role="Team_2026" EntitySet="Team_2026" />
-            <End Role="TopScorer_2026" EntitySet="TopScorer_2026" />
+          <AssociationSet Name="Team_TopScorer" Association="Model.Team_TopScorer">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TopScorer" EntitySet="TopScorer" />
           </AssociationSet>
-          <AssociationSet Name="User_Topscorer_2026" Association="Model.User_Topscorer_2026">
-            <End Role="TopScorer_2026" EntitySet="TopScorer_2026" />
-            <End Role="User_2026" EntitySet="User_2026" />
+          <AssociationSet Name="User_Topscorer" Association="Model.User_Topscorer">
+            <End Role="TopScorer" EntitySet="TopScorer" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserBronzeTeam_User_2026" Association="Model.FK_UserBronzeTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserBronzeTeam_2026" EntitySet="UserBronzeTeam_2026" />
+          <AssociationSet Name="FK_UserBronzeTeam_User" Association="Model.FK_UserBronzeTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserBronzeTeam" EntitySet="UserBronzeTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserFinalTeams_User_2026" Association="Model.FK_UserFinalTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserFinalTeams_2026" EntitySet="UserFinalTeams_2026" />
+          <AssociationSet Name="FK_UserFinalTeam_User" Association="Model.FK_UserFinalTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFinalTeam" EntitySet="UserFinalTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserGoldTeam_User_2026" Association="Model.FK_UserGoldTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserGoldTeam_2026" EntitySet="UserGoldTeam_2026" />
+          <AssociationSet Name="FK_UserGoldTeam_User" Association="Model.FK_UserGoldTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserGoldTeam" EntitySet="UserGoldTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserMatch_User_2026" Association="Model.FK_UserMatch_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserMatch_2026" EntitySet="UserMatch_2026" />
+          <AssociationSet Name="FK_UserMatch_User" Association="Model.FK_UserMatch_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserMatch" EntitySet="UserMatch" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserPlayoffTeams_User_2026" Association="Model.FK_UserPlayoffTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserPlayoffTeams_2026" EntitySet="UserPlayoffTeams_2026" />
+          <AssociationSet Name="FK_UserPlayoffTeam_User" Association="Model.FK_UserPlayoffTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPlayoffTeam" EntitySet="UserPlayoffTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserQFTeams_User_2026" Association="Model.FK_UserQFTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserQFTeams_2026" EntitySet="UserQFTeams_2026" />
+          <AssociationSet Name="FK_UserQFTeam_User" Association="Model.FK_UserQFTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserQFTeam" EntitySet="UserQFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSFTeams_User_2026" Association="Model.FK_UserSFTeams_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserSFTeams_2026" EntitySet="UserSFTeams_2026" />
+          <AssociationSet Name="FK_UserSFTeam_User" Association="Model.FK_UserSFTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSFTeam" EntitySet="UserSFTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserSilverTeam_User_2026" Association="Model.FK_UserSilverTeam_User_2026">
-            <End Role="User_2026" EntitySet="User_2026" />
-            <End Role="UserSilverTeam_2026" EntitySet="UserSilverTeam_2026" />
+          <AssociationSet Name="FK_UserSilverTeam_User" Association="Model.FK_UserSilverTeam_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSilverTeam" EntitySet="UserSilverTeam" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User_2010">
@@ -1061,7 +1061,7 @@
           <Property Name="PayCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TopScorerID" Type="Int32" />
           <Property Name="IsWinner" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Standings_2010" Relationship="Model.FK_Standings_Standings" FromRole="User_2010" ToRole="Standings_2010" />
+          <NavigationProperty Name="Standings_2010" Relationship="Model.FK_Standings_Standings_2010" FromRole="User_2010" ToRole="Standings_2010" />
         </EntityType>
         <EntityType Name="User_2012">
           <Key>
@@ -1127,7 +1127,7 @@
           <Property Name="TotalPoints" Type="Int16" Nullable="false" />
           <Property Name="Guid" Type="Guid" />
           <Property Name="Position" Type="Int16" />
-          <NavigationProperty Name="User_2010" Relationship="Model.FK_Standings_Standings" FromRole="Standings_2010" ToRole="User_2010" />
+          <NavigationProperty Name="User_2010" Relationship="Model.FK_Standings_Standings_2010" FromRole="Standings_2010" ToRole="User_2010" />
         </EntityType>
         <EntityType Name="Standings_2012">
           <Key>
@@ -1165,7 +1165,7 @@
           <Property Name="Position" Type="Int16" />
           <NavigationProperty Name="User_2016" Relationship="Model.FK_Standings_Standings_2016" FromRole="Standings_2016" ToRole="User_2016" />
         </EntityType>
-        <Association Name="FK_Standings_Standings">
+        <Association Name="FK_Standings_Standings_2010">
           <End Type="Model.User_2010" Role="User_2010" Multiplicity="1" />
           <End Type="Model.Standings_2010" Role="Standings_2010" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1297,7 +1297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BlogEntry_2026">
+        <EntityType Name="BlogEntry">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1305,9 +1305,9 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Text" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Comment_2026" Relationship="Model.Blog_Comment_2026" FromRole="BlogEntry_2026" ToRole="Comment_2026" />
+          <NavigationProperty Name="Comment" Relationship="Model.Blog_Comment" FromRole="BlogEntry" ToRole="Comment" />
         </EntityType>
-        <EntityType Name="BonusPoints_2026">
+        <EntityType Name="BonusPoints">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1316,9 +1316,9 @@
           <Property Name="GroupID" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Point" Type="Byte" Nullable="false" />
           <Property Name="HalfPoint" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User_2026" Relationship="Model.BonusPoints2_2026" FromRole="BonusPoints_2026" ToRole="User_2026" />
+          <NavigationProperty Name="User" Relationship="Model.BonusPoints2" FromRole="BonusPoints" ToRole="User" />
         </EntityType>
-        <EntityType Name="Comment_2026">
+        <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1327,9 +1327,9 @@
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BlogEntryID" Type="Int32" />
-          <NavigationProperty Name="BlogEntry_2026" Relationship="Model.Blog_Comment_2026" FromRole="Comment_2026" ToRole="BlogEntry_2026" />
+          <NavigationProperty Name="BlogEntry" Relationship="Model.Blog_Comment" FromRole="Comment" ToRole="BlogEntry" />
         </EntityType>
-        <EntityType Name="Match_2026">
+        <EntityType Name="Match">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1343,9 +1343,9 @@
           <Property Name="HomeWinPercent" Type="Double" />
           <Property Name="DrawPercent" Type="Double" />
           <Property Name="AwayWinPercent" Type="Double" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_Match_AwayTeam_2026" FromRole="Match_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="Team_20261" Relationship="Model.FK_Match_HomeTeam_2026" FromRole="Match_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="UserMatch_2026" Relationship="Model.FK_UserMatch_Match_2026" FromRole="Match_2026" ToRole="UserMatch_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_Match_AwayTeam" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="Team1" Relationship="Model.FK_Match_HomeTeam" FromRole="Match" ToRole="Team" />
+          <NavigationProperty Name="UserMatch" Relationship="Model.FK_UserMatch_Match" FromRole="Match" ToRole="UserMatch" />
         </EntityType>
         <EntityType Name="Standings_2024">
           <Key>
@@ -1359,7 +1359,7 @@
           <Property Name="Position" Type="Int16" />
           <NavigationProperty Name="User_2024" Relationship="Model.FK_Standings_Standings_2024" FromRole="Standings_2024" ToRole="User_2024" />
         </EntityType>
-        <EntityType Name="Standings_2026">
+        <EntityType Name="Standing">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="UpdateDate" />
@@ -1369,9 +1369,9 @@
           <Property Name="TotalPoints" Type="Int16" Nullable="false" />
           <Property Name="Guid" Type="Guid" />
           <Property Name="Position" Type="Int16" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_Standings_Standings_2026" FromRole="Standings_2026" ToRole="User_2026" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Standing_Standing" FromRole="Standing" ToRole="User" />
         </EntityType>
-        <EntityType Name="Team_2026">
+        <EntityType Name="Team">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1386,18 +1386,18 @@
           <Property Name="WonSilver" Type="Boolean" Nullable="false" />
           <Property Name="WonBronze" Type="Boolean" Nullable="false" />
           <Property Name="PlayOffPos" Type="Byte" />
-          <NavigationProperty Name="Match_2026" Relationship="Model.FK_Match_AwayTeam_2026" FromRole="Team_2026" ToRole="Match_2026" />
-          <NavigationProperty Name="Match_20261" Relationship="Model.FK_Match_HomeTeam_2026" FromRole="Team_2026" ToRole="Match_2026" />
-          <NavigationProperty Name="UserBronzeTeam_2026" Relationship="Model.FK_UserBronzeTeam_Team_2026" FromRole="Team_2026" ToRole="UserBronzeTeam_2026" />
-          <NavigationProperty Name="UserFinalTeams_2026" Relationship="Model.FK_UserFinalTeams_Team_2026" FromRole="Team_2026" ToRole="UserFinalTeams_2026" />
-          <NavigationProperty Name="UserGoldTeam_2026" Relationship="Model.FK_UserGoldTeam_Team_2026" FromRole="Team_2026" ToRole="UserGoldTeam_2026" />
-          <NavigationProperty Name="UserPlayoffTeams_2026" Relationship="Model.FK_UserPlayoffTeams_Team_2026" FromRole="Team_2026" ToRole="UserPlayoffTeams_2026" />
-          <NavigationProperty Name="UserQFTeams_2026" Relationship="Model.FK_UserQFTeams_Team_2026" FromRole="Team_2026" ToRole="UserQFTeams_2026" />
-          <NavigationProperty Name="UserSFTeams_2026" Relationship="Model.FK_UserSFTeams_Team_2026" FromRole="Team_2026" ToRole="UserSFTeams_2026" />
-          <NavigationProperty Name="UserSilverTeam_2026" Relationship="Model.FK_UserSilverTeam_Team_2026" FromRole="Team_2026" ToRole="UserSilverTeam_2026" />
-          <NavigationProperty Name="TopScorer_2026" Relationship="Model.Team_TopScorer_2026" FromRole="Team_2026" ToRole="TopScorer_2026" />
+          <NavigationProperty Name="Match" Relationship="Model.FK_Match_AwayTeam" FromRole="Team" ToRole="Match" />
+          <NavigationProperty Name="Match1" Relationship="Model.FK_Match_HomeTeam" FromRole="Team" ToRole="Match" />
+          <NavigationProperty Name="UserBronzeTeam" Relationship="Model.FK_UserBronzeTeam_Team" FromRole="Team" ToRole="UserBronzeTeam" />
+          <NavigationProperty Name="UserFinalTeams" Relationship="Model.FK_UserFinalTeam_Team" FromRole="Team" ToRole="UserFinalTeam" />
+          <NavigationProperty Name="UserGoldTeam" Relationship="Model.FK_UserGoldTeam_Team" FromRole="Team" ToRole="UserGoldTeam" />
+          <NavigationProperty Name="UserPlayoffTeams" Relationship="Model.FK_UserPlayoffTeam_Team" FromRole="Team" ToRole="UserPlayoffTeam" />
+          <NavigationProperty Name="UserQFTeams" Relationship="Model.FK_UserQFTeam_Team" FromRole="Team" ToRole="UserQFTeam" />
+          <NavigationProperty Name="UserSFTeams" Relationship="Model.FK_UserSFTeam_Team" FromRole="Team" ToRole="UserSFTeam" />
+          <NavigationProperty Name="UserSilverTeam" Relationship="Model.FK_UserSilverTeam_Team" FromRole="Team" ToRole="UserSilverTeam" />
+          <NavigationProperty Name="TopScorer" Relationship="Model.Team_TopScorer" FromRole="Team" ToRole="TopScorer" />
         </EntityType>
-        <EntityType Name="TopScorer_2026">
+        <EntityType Name="TopScorer">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1408,8 +1408,8 @@
           <Property Name="TeamID" Type="Int32" />
           <Property Name="IsWinner" Type="Boolean" />
           <Property Name="WinPercent" Type="Double" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.Team_TopScorer_2026" FromRole="TopScorer_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.User_Topscorer_2026" FromRole="TopScorer_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.Team_TopScorer" FromRole="TopScorer" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.User_Topscorer" FromRole="TopScorer" ToRole="User" />
         </EntityType>
         <EntityType Name="User_2024">
           <Key>
@@ -1429,7 +1429,7 @@
           <Property Name="IsWinner" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Standings_2024" Relationship="Model.FK_Standings_Standings_2024" FromRole="User_2024" ToRole="Standings_2024" />
         </EntityType>
-        <EntityType Name="User_2026">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1445,19 +1445,19 @@
           <Property Name="PayCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TopScorerID" Type="Int32" />
           <Property Name="IsWinner" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BonusPoints_2026" Relationship="Model.BonusPoints2_2026" FromRole="User_2026" ToRole="BonusPoints_2026" />
-          <NavigationProperty Name="Standings_2026" Relationship="Model.FK_Standings_Standings_2026" FromRole="User_2026" ToRole="Standings_2026" />
-          <NavigationProperty Name="TopScorer_2026" Relationship="Model.User_Topscorer_2026" FromRole="User_2026" ToRole="TopScorer_2026" />
-          <NavigationProperty Name="UserBronzeTeam_2026" Relationship="Model.FK_UserBronzeTeam_User_2026" FromRole="User_2026" ToRole="UserBronzeTeam_2026" />
-          <NavigationProperty Name="UserFinalTeams_2026" Relationship="Model.FK_UserFinalTeams_User_2026" FromRole="User_2026" ToRole="UserFinalTeams_2026" />
-          <NavigationProperty Name="UserGoldTeam_2026" Relationship="Model.FK_UserGoldTeam_User_2026" FromRole="User_2026" ToRole="UserGoldTeam_2026" />
-          <NavigationProperty Name="UserMatch_2026" Relationship="Model.FK_UserMatch_User_2026" FromRole="User_2026" ToRole="UserMatch_2026" />
-          <NavigationProperty Name="UserPlayoffTeams_2026" Relationship="Model.FK_UserPlayoffTeams_User_2026" FromRole="User_2026" ToRole="UserPlayoffTeams_2026" />
-          <NavigationProperty Name="UserQFTeams_2026" Relationship="Model.FK_UserQFTeams_User_2026" FromRole="User_2026" ToRole="UserQFTeams_2026" />
-          <NavigationProperty Name="UserSFTeams_2026" Relationship="Model.FK_UserSFTeams_User_2026" FromRole="User_2026" ToRole="UserSFTeams_2026" />
-          <NavigationProperty Name="UserSilverTeam_2026" Relationship="Model.FK_UserSilverTeam_User_2026" FromRole="User_2026" ToRole="UserSilverTeam_2026" />
+          <NavigationProperty Name="BonusPoints" Relationship="Model.BonusPoints2" FromRole="User" ToRole="BonusPoints" />
+          <NavigationProperty Name="Standings" Relationship="Model.FK_Standing_Standing" FromRole="User" ToRole="Standing" />
+          <NavigationProperty Name="TopScorer" Relationship="Model.User_Topscorer" FromRole="User" ToRole="TopScorer" />
+          <NavigationProperty Name="UserBronzeTeam" Relationship="Model.FK_UserBronzeTeam_User" FromRole="User" ToRole="UserBronzeTeam" />
+          <NavigationProperty Name="UserFinalTeams" Relationship="Model.FK_UserFinalTeam_User" FromRole="User" ToRole="UserFinalTeam" />
+          <NavigationProperty Name="UserGoldTeam" Relationship="Model.FK_UserGoldTeam_User" FromRole="User" ToRole="UserGoldTeam" />
+          <NavigationProperty Name="UserMatch" Relationship="Model.FK_UserMatch_User" FromRole="User" ToRole="UserMatch" />
+          <NavigationProperty Name="UserPlayoffTeams" Relationship="Model.FK_UserPlayoffTeam_User" FromRole="User" ToRole="UserPlayoffTeam" />
+          <NavigationProperty Name="UserQFTeams" Relationship="Model.FK_UserQFTeam_User" FromRole="User" ToRole="UserQFTeam" />
+          <NavigationProperty Name="UserSFTeams" Relationship="Model.FK_UserSFTeam_User" FromRole="User" ToRole="UserSFTeam" />
+          <NavigationProperty Name="UserSilverTeam" Relationship="Model.FK_UserSilverTeam_User" FromRole="User" ToRole="UserSilverTeam" />
         </EntityType>
-        <EntityType Name="UserBronzeTeam_2026">
+        <EntityType Name="UserBronzeTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1465,10 +1465,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserBronzeTeam_Team_2026" FromRole="UserBronzeTeam_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserBronzeTeam_User_2026" FromRole="UserBronzeTeam_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserBronzeTeam_Team" FromRole="UserBronzeTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserBronzeTeam_User" FromRole="UserBronzeTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserFinalTeams_2026">
+        <EntityType Name="UserFinalTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1476,10 +1476,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserFinalTeams_Team_2026" FromRole="UserFinalTeams_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserFinalTeams_User_2026" FromRole="UserFinalTeams_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserFinalTeam_Team" FromRole="UserFinalTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserFinalTeam_User" FromRole="UserFinalTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserGoldTeam_2026">
+        <EntityType Name="UserGoldTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1487,10 +1487,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserGoldTeam_Team_2026" FromRole="UserGoldTeam_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserGoldTeam_User_2026" FromRole="UserGoldTeam_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserGoldTeam_Team" FromRole="UserGoldTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserGoldTeam_User" FromRole="UserGoldTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserMatch_2026">
+        <EntityType Name="UserMatch">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="MatchID" />
@@ -1501,10 +1501,10 @@
           <Property Name="AwayGoals" Type="Byte" />
           <Property Name="ResultMark" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Match_2026" Relationship="Model.FK_UserMatch_Match_2026" FromRole="UserMatch_2026" ToRole="Match_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserMatch_User_2026" FromRole="UserMatch_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Match" Relationship="Model.FK_UserMatch_Match" FromRole="UserMatch" ToRole="Match" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserMatch_User" FromRole="UserMatch" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserPlayoffTeams_2026">
+        <EntityType Name="UserPlayoffTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1513,10 +1513,10 @@
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
           <Property Name="Position" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserPlayoffTeams_Team_2026" FromRole="UserPlayoffTeams_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserPlayoffTeams_User_2026" FromRole="UserPlayoffTeams_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserPlayoffTeam_Team" FromRole="UserPlayoffTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserPlayoffTeam_User" FromRole="UserPlayoffTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserQFTeams_2026">
+        <EntityType Name="UserQFTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1524,10 +1524,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserQFTeams_Team_2026" FromRole="UserQFTeams_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserQFTeams_User_2026" FromRole="UserQFTeams_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserQFTeam_Team" FromRole="UserQFTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserQFTeam_User" FromRole="UserQFTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserSFTeams_2026">
+        <EntityType Name="UserSFTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1535,10 +1535,10 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserSFTeams_Team_2026" FromRole="UserSFTeams_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserSFTeams_User_2026" FromRole="UserSFTeams_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserSFTeam_Team" FromRole="UserSFTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserSFTeam_User" FromRole="UserSFTeam" ToRole="User" />
         </EntityType>
-        <EntityType Name="UserSilverTeam_2026">
+        <EntityType Name="UserSilverTeam">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="TeamID" />
@@ -1546,65 +1546,65 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TeamID" Type="Int32" Nullable="false" />
           <Property Name="Points" Type="Byte" />
-          <NavigationProperty Name="Team_2026" Relationship="Model.FK_UserSilverTeam_Team_2026" FromRole="UserSilverTeam_2026" ToRole="Team_2026" />
-          <NavigationProperty Name="User_2026" Relationship="Model.FK_UserSilverTeam_User_2026" FromRole="UserSilverTeam_2026" ToRole="User_2026" />
+          <NavigationProperty Name="Team" Relationship="Model.FK_UserSilverTeam_Team" FromRole="UserSilverTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Model.FK_UserSilverTeam_User" FromRole="UserSilverTeam" ToRole="User" />
         </EntityType>
-        <Association Name="Blog_Comment_2026">
-          <End Type="Model.BlogEntry_2026" Role="BlogEntry_2026" Multiplicity="0..1" />
-          <End Type="Model.Comment_2026" Role="Comment_2026" Multiplicity="*" />
+        <Association Name="Blog_Comment">
+          <End Type="Model.BlogEntry" Role="BlogEntry" Multiplicity="0..1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BlogEntry_2026">
+            <Principal Role="BlogEntry">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Comment_2026">
+            <Dependent Role="Comment">
               <PropertyRef Name="BlogEntryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="BonusPoints2_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.BonusPoints_2026" Role="BonusPoints_2026" Multiplicity="*" />
+        <Association Name="BonusPoints2">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.BonusPoints" Role="BonusPoints" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BonusPoints_2026">
+            <Dependent Role="BonusPoints">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Match_AwayTeam_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.Match_2026" Role="Match_2026" Multiplicity="*" />
+        <Association Name="FK_Match_AwayTeam">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.Match" Role="Match" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Match_2026">
+            <Dependent Role="Match">
               <PropertyRef Name="AwayTeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Match_HomeTeam_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.Match_2026" Role="Match_2026" Multiplicity="*" />
+        <Association Name="FK_Match_HomeTeam">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.Match" Role="Match" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Match_2026">
+            <Dependent Role="Match">
               <PropertyRef Name="HomeTeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMatch_Match_2026">
-          <End Type="Model.Match_2026" Role="Match_2026" Multiplicity="1" />
-          <End Type="Model.UserMatch_2026" Role="UserMatch_2026" Multiplicity="*" />
+        <Association Name="FK_UserMatch_Match">
+          <End Type="Model.Match" Role="Match" Multiplicity="1" />
+          <End Type="Model.UserMatch" Role="UserMatch" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Match_2026">
+            <Principal Role="Match">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserMatch_2026">
+            <Dependent Role="UserMatch">
               <PropertyRef Name="MatchID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1621,218 +1621,218 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Standings_Standings_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.Standings_2026" Role="Standings_2026" Multiplicity="*" />
+        <Association Name="FK_Standing_Standing">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Standing" Role="Standing" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Standings_2026">
+            <Dependent Role="Standing">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserBronzeTeam_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserBronzeTeam_2026" Role="UserBronzeTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserBronzeTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserBronzeTeam" Role="UserBronzeTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserBronzeTeam_2026">
+            <Dependent Role="UserBronzeTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserFinalTeams_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserFinalTeams_2026" Role="UserFinalTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserFinalTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserFinalTeam" Role="UserFinalTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserFinalTeams_2026">
+            <Dependent Role="UserFinalTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserGoldTeam_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserGoldTeam_2026" Role="UserGoldTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserGoldTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserGoldTeam" Role="UserGoldTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserGoldTeam_2026">
+            <Dependent Role="UserGoldTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPlayoffTeams_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserPlayoffTeams_2026" Role="UserPlayoffTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserPlayoffTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserPlayoffTeam" Role="UserPlayoffTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserPlayoffTeams_2026">
+            <Dependent Role="UserPlayoffTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQFTeams_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserQFTeams_2026" Role="UserQFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserQFTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserQFTeam" Role="UserQFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserQFTeams_2026">
+            <Dependent Role="UserQFTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSFTeams_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserSFTeams_2026" Role="UserSFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserSFTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserSFTeam" Role="UserSFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSFTeams_2026">
+            <Dependent Role="UserSFTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSilverTeam_Team_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="1" />
-          <End Type="Model.UserSilverTeam_2026" Role="UserSilverTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserSilverTeam_Team">
+          <End Type="Model.Team" Role="Team" Multiplicity="1" />
+          <End Type="Model.UserSilverTeam" Role="UserSilverTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSilverTeam_2026">
+            <Dependent Role="UserSilverTeam">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Team_TopScorer_2026">
-          <End Type="Model.Team_2026" Role="Team_2026" Multiplicity="0..1" />
-          <End Type="Model.TopScorer_2026" Role="TopScorer_2026" Multiplicity="*" />
+        <Association Name="Team_TopScorer">
+          <End Type="Model.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="Model.TopScorer" Role="TopScorer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_2026">
+            <Principal Role="Team">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="TopScorer_2026">
+            <Dependent Role="TopScorer">
               <PropertyRef Name="TeamID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="User_Topscorer_2026">
-          <End Type="Model.TopScorer_2026" Role="TopScorer_2026" Multiplicity="0..1" />
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="*" />
+        <Association Name="User_Topscorer">
+          <End Type="Model.TopScorer" Role="TopScorer" Multiplicity="0..1" />
+          <End Type="Model.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TopScorer_2026">
+            <Principal Role="TopScorer">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="User_2026">
+            <Dependent Role="User">
               <PropertyRef Name="TopScorerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserBronzeTeam_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserBronzeTeam_2026" Role="UserBronzeTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserBronzeTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserBronzeTeam" Role="UserBronzeTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserBronzeTeam_2026">
+            <Dependent Role="UserBronzeTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserFinalTeams_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserFinalTeams_2026" Role="UserFinalTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserFinalTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserFinalTeam" Role="UserFinalTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserFinalTeams_2026">
+            <Dependent Role="UserFinalTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserGoldTeam_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserGoldTeam_2026" Role="UserGoldTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserGoldTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserGoldTeam" Role="UserGoldTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserGoldTeam_2026">
+            <Dependent Role="UserGoldTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserMatch_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserMatch_2026" Role="UserMatch_2026" Multiplicity="*" />
+        <Association Name="FK_UserMatch_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserMatch" Role="UserMatch" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserMatch_2026">
+            <Dependent Role="UserMatch">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserPlayoffTeams_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserPlayoffTeams_2026" Role="UserPlayoffTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserPlayoffTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserPlayoffTeam" Role="UserPlayoffTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserPlayoffTeams_2026">
+            <Dependent Role="UserPlayoffTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserQFTeams_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserQFTeams_2026" Role="UserQFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserQFTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserQFTeam" Role="UserQFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserQFTeams_2026">
+            <Dependent Role="UserQFTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSFTeams_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserSFTeams_2026" Role="UserSFTeams_2026" Multiplicity="*" />
+        <Association Name="FK_UserSFTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserSFTeam" Role="UserSFTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSFTeams_2026">
+            <Dependent Role="UserSFTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserSilverTeam_User_2026">
-          <End Type="Model.User_2026" Role="User_2026" Multiplicity="1" />
-          <End Type="Model.UserSilverTeam_2026" Role="UserSilverTeam_2026" Multiplicity="*" />
+        <Association Name="FK_UserSilverTeam_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.UserSilverTeam" Role="UserSilverTeam" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_2026">
+            <Principal Role="User">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="UserSilverTeam_2026">
+            <Dependent Role="UserSilverTeam">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2017,9 +2017,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BlogEntry_2026">
-            <EntityTypeMapping TypeName="Model.BlogEntry_2026">
-              <MappingFragment StoreEntitySet="BlogEntry_2026">
+          <EntitySetMapping Name="BlogEntry">
+            <EntityTypeMapping TypeName="Model.BlogEntry">
+              <MappingFragment StoreEntitySet="BlogEntry">
                 <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -2027,9 +2027,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BonusPoints_2026">
-            <EntityTypeMapping TypeName="Model.BonusPoints_2026">
-              <MappingFragment StoreEntitySet="BonusPoints_2026">
+          <EntitySetMapping Name="BonusPoints">
+            <EntityTypeMapping TypeName="Model.BonusPoints">
+              <MappingFragment StoreEntitySet="BonusPoints">
                 <ScalarProperty Name="HalfPoint" ColumnName="HalfPoint" />
                 <ScalarProperty Name="Point" ColumnName="Point" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
@@ -2038,9 +2038,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Comment_2026">
-            <EntityTypeMapping TypeName="Model.Comment_2026">
-              <MappingFragment StoreEntitySet="Comment_2026">
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="Model.Comment">
+              <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="BlogEntryID" ColumnName="BlogEntryID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
@@ -2049,9 +2049,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Match_2026">
-            <EntityTypeMapping TypeName="Model.Match_2026">
-              <MappingFragment StoreEntitySet="Match_2026">
+          <EntitySetMapping Name="Match">
+            <EntityTypeMapping TypeName="Model.Match">
+              <MappingFragment StoreEntitySet="Match">
                 <ScalarProperty Name="AwayWinPercent" ColumnName="AwayWinPercent" />
                 <ScalarProperty Name="DrawPercent" ColumnName="DrawPercent" />
                 <ScalarProperty Name="HomeWinPercent" ColumnName="HomeWinPercent" />
@@ -2076,9 +2076,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Standings_2026">
-            <EntityTypeMapping TypeName="Model.Standings_2026">
-              <MappingFragment StoreEntitySet="Standings_2026">
+          <EntitySetMapping Name="Standings">
+            <EntityTypeMapping TypeName="Model.Standing">
+              <MappingFragment StoreEntitySet="Standings">
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
                 <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
@@ -2087,9 +2087,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Team_2026">
-            <EntityTypeMapping TypeName="Model.Team_2026">
-              <MappingFragment StoreEntitySet="Team_2026">
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="Model.Team">
+              <MappingFragment StoreEntitySet="Team">
                 <ScalarProperty Name="PlayOffPos" ColumnName="PlayOffPos" />
                 <ScalarProperty Name="WonBronze" ColumnName="WonBronze" />
                 <ScalarProperty Name="WonSilver" ColumnName="WonSilver" />
@@ -2104,9 +2104,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TopScorer_2026">
-            <EntityTypeMapping TypeName="Model.TopScorer_2026">
-              <MappingFragment StoreEntitySet="TopScorer_2026">
+          <EntitySetMapping Name="TopScorer">
+            <EntityTypeMapping TypeName="Model.TopScorer">
+              <MappingFragment StoreEntitySet="TopScorer">
                 <ScalarProperty Name="WinPercent" ColumnName="WinPercent" />
                 <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
@@ -2135,9 +2135,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User_2026">
-            <EntityTypeMapping TypeName="Model.User_2026">
-              <MappingFragment StoreEntitySet="User_2026">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
                 <ScalarProperty Name="TopScorerID" ColumnName="TopScorerID" />
                 <ScalarProperty Name="PayCode" ColumnName="PayCode" />
@@ -2153,36 +2153,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserBronzeTeam_2026">
-            <EntityTypeMapping TypeName="Model.UserBronzeTeam_2026">
-              <MappingFragment StoreEntitySet="UserBronzeTeam_2026">
+          <EntitySetMapping Name="UserBronzeTeam">
+            <EntityTypeMapping TypeName="Model.UserBronzeTeam">
+              <MappingFragment StoreEntitySet="UserBronzeTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserFinalTeams_2026">
-            <EntityTypeMapping TypeName="Model.UserFinalTeams_2026">
-              <MappingFragment StoreEntitySet="UserFinalTeams_2026">
+          <EntitySetMapping Name="UserFinalTeam">
+            <EntityTypeMapping TypeName="Model.UserFinalTeam">
+              <MappingFragment StoreEntitySet="UserFinalTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserGoldTeam_2026">
-            <EntityTypeMapping TypeName="Model.UserGoldTeam_2026">
-              <MappingFragment StoreEntitySet="UserGoldTeam_2026">
+          <EntitySetMapping Name="UserGoldTeam">
+            <EntityTypeMapping TypeName="Model.UserGoldTeam">
+              <MappingFragment StoreEntitySet="UserGoldTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserMatch_2026">
-            <EntityTypeMapping TypeName="Model.UserMatch_2026">
-              <MappingFragment StoreEntitySet="UserMatch_2026">
+          <EntitySetMapping Name="UserMatch">
+            <EntityTypeMapping TypeName="Model.UserMatch">
+              <MappingFragment StoreEntitySet="UserMatch">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="ResultMark" ColumnName="ResultMark" />
                 <ScalarProperty Name="AwayGoals" ColumnName="AwayGoals" />
@@ -2192,9 +2192,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserPlayoffTeams_2026">
-            <EntityTypeMapping TypeName="Model.UserPlayoffTeams_2026">
-              <MappingFragment StoreEntitySet="UserPlayoffTeams_2026">
+          <EntitySetMapping Name="UserPlayoffTeam">
+            <EntityTypeMapping TypeName="Model.UserPlayoffTeam">
+              <MappingFragment StoreEntitySet="UserPlayoffTeam">
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
@@ -2202,27 +2202,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserQFTeams_2026">
-            <EntityTypeMapping TypeName="Model.UserQFTeams_2026">
-              <MappingFragment StoreEntitySet="UserQFTeams_2026">
+          <EntitySetMapping Name="UserQFTeam">
+            <EntityTypeMapping TypeName="Model.UserQFTeam">
+              <MappingFragment StoreEntitySet="UserQFTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserSFTeams_2026">
-            <EntityTypeMapping TypeName="Model.UserSFTeams_2026">
-              <MappingFragment StoreEntitySet="UserSFTeams_2026">
+          <EntitySetMapping Name="UserSFTeam">
+            <EntityTypeMapping TypeName="Model.UserSFTeam">
+              <MappingFragment StoreEntitySet="UserSFTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserSilverTeam_2026">
-            <EntityTypeMapping TypeName="Model.UserSilverTeam_2026">
-              <MappingFragment StoreEntitySet="UserSilverTeam_2026">
+          <EntitySetMapping Name="UserSilverTeam">
+            <EntityTypeMapping TypeName="Model.UserSilverTeam">
+              <MappingFragment StoreEntitySet="UserSilverTeam">
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />

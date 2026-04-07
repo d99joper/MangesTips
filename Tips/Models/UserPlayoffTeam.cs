@@ -12,14 +12,14 @@ namespace Tips.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment_2026
+    public partial class UserPlayoffTeam
     {
-        public int ID { get; set; }
-        public string PostedBy { get; set; }
-        public System.DateTime PostedDate { get; set; }
-        public string Text { get; set; }
-        public Nullable<int> BlogEntryID { get; set; }
+        public int UserID { get; set; }
+        public int TeamID { get; set; }
+        public Nullable<byte> Points { get; set; }
+        public Nullable<byte> Position { get; set; }
     
-        public virtual BlogEntry_2026 BlogEntry_2026 { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual User User { get; set; }
     }
 }
