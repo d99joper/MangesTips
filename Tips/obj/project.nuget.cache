@@ -1,0 +1,58 @@
+{
+  "version": 2,
+  "dgSpecHash": "iXYJZVarJc8=",
+  "success": false,
+  "projectFilePath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+  "expectedPackageFiles": [
+    "/tmp/codeql-scratch-4c39ceddc0097b72/dbs/csharp/working/packages/microsoft.entityframeworkcore/3.1.32/microsoft.entityframeworkcore.3.1.32.nupkg.sha512",
+    "/tmp/codeql-scratch-4c39ceddc0097b72/dbs/csharp/working/packages/microsoft.entityframeworkcore.proxies/3.1.32/microsoft.entityframeworkcore.proxies.3.1.32.nupkg.sha512",
+    "/tmp/codeql-scratch-4c39ceddc0097b72/dbs/csharp/working/packages/microsoft.entityframeworkcore.sqlserver/3.1.32/microsoft.entityframeworkcore.sqlserver.3.1.32.nupkg.sha512",
+    "/tmp/codeql-scratch-4c39ceddc0097b72/dbs/csharp/working/packages/microsoft.entityframeworkcore.tools/3.1.32/microsoft.entityframeworkcore.tools.3.1.32.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Microsoft.EntityFrameworkCore 3.1.32 is not compatible with net45 (.NETFramework,Version=v4.5). Package Microsoft.EntityFrameworkCore 3.1.32 supports: netstandard2.0 (.NETStandard,Version=v2.0)",
+      "projectPath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "filePath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "libraryId": "Microsoft.EntityFrameworkCore",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Microsoft.EntityFrameworkCore.SqlServer 3.1.32 is not compatible with net45 (.NETFramework,Version=v4.5). Package Microsoft.EntityFrameworkCore.SqlServer 3.1.32 supports: netstandard2.0 (.NETStandard,Version=v2.0)",
+      "projectPath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "filePath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "libraryId": "Microsoft.EntityFrameworkCore.SqlServer",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Microsoft.EntityFrameworkCore.Tools 3.1.32 is not compatible with net45 (.NETFramework,Version=v4.5). Package Microsoft.EntityFrameworkCore.Tools 3.1.32 supports: netstandard2.0 (.NETStandard,Version=v2.0)",
+      "projectPath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "filePath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "libraryId": "Microsoft.EntityFrameworkCore.Tools",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Microsoft.EntityFrameworkCore.Proxies 3.1.32 is not compatible with net45 (.NETFramework,Version=v4.5). Package Microsoft.EntityFrameworkCore.Proxies 3.1.32 supports: netstandard2.0 (.NETStandard,Version=v2.0)",
+      "projectPath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "filePath": "/home/runner/work/MangesTips/MangesTips/Tips/Tips.csproj",
+      "libraryId": "Microsoft.EntityFrameworkCore.Proxies",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5"
+      ]
+    }
+  ]
+}
