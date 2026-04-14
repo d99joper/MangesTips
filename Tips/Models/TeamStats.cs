@@ -24,5 +24,7 @@ namespace Tips.Models
         public Nullable<double> GoldPercent { get; set; }
         public Nullable<byte> ScoredGoals { get; set; }
         public Nullable<byte> ConcededGoals { get; set; }
+    
+        public virtual Team Team_2026 { get; set; }
     }
 }

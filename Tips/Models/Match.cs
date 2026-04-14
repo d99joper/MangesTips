@@ -16,7 +16,7 @@ namespace Tips.Models
     {
         public Match()
         {
-            this.UserMatch = new HashSet<UserMatch>();
+            this.UserMatches = new HashSet<UserMatch>();
         }
     
         public int ID { get; set; }
@@ -32,6 +32,6 @@ namespace Tips.Models
     
         public virtual Team AwayTeam { get; set; }
         public virtual Team HomeTeam { get; set; }
-        public virtual ICollection<UserMatch> UserMatch { get; set; }
+        public virtual ICollection<UserMatch> UserMatches { get; set; }
     }
 }

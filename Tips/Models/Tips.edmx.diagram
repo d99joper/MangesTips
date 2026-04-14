@@ -12,14 +12,14 @@
         <EntityTypeShape EntityType="Model.User_2016" Width="1.5" PointX="6.5" PointY="0.5" />
         <EntityTypeShape EntityType="Model.User_2018" Width="1.5" PointX="8.5" PointY="0.5" />
         <EntityTypeShape EntityType="Model.User_2021" Width="1.5" PointX="10.5" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.User_2024" Width="1.5" PointX="12.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.User_2024" Width="1.5" PointX="14.5" PointY="0.5" />
         <EntityTypeShape EntityType="Model.Standings_2010" Width="1.5" PointX="0.5" PointY="4" />
         <EntityTypeShape EntityType="Model.Standings_2012" Width="1.5" PointX="2.5" PointY="4" />
         <EntityTypeShape EntityType="Model.Standings_2014" Width="1.5" PointX="4.5" PointY="4" />
         <EntityTypeShape EntityType="Model.Standings_2016" Width="1.5" PointX="6.5" PointY="4" />
         <EntityTypeShape EntityType="Model.Standings_2018" Width="1.5" PointX="8.5" PointY="4" />
         <EntityTypeShape EntityType="Model.Standings_2021" Width="1.5" PointX="10.5" PointY="4" />
-        <EntityTypeShape EntityType="Model.Standings_2024" Width="1.5" PointX="12.5" PointY="4" />
+        <EntityTypeShape EntityType="Model.Standings_2024" Width="1.5" PointX="14.5" PointY="4" />
         <!-- Historical associations -->
         <AssociationConnector Association="Model.FK_Standings_Standings_2010" />
         <AssociationConnector Association="Model.FK_Standings_Standings_2012" />
@@ -28,53 +28,57 @@
         <AssociationConnector Association="Model.FK_Standings_Standings_2018" />
         <AssociationConnector Association="Model.FK_Standings_Standings_2021" />
         <AssociationConnector Association="Model.FK_Standings_Standings_2024" />
+        <EntityTypeShape EntityType="Model.BlogEntry" Width="1.5" PointX="4.75" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.BonusPoints" Width="1.5" PointX="7.375" PointY="17.25" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="7" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.Match" Width="1.5" PointX="0.5" PointY="21.375" />
+        <EntityTypeShape EntityType="Model.Standings_2022" Width="1.5" PointX="12.5" PointY="4.125" />
+        <EntityTypeShape EntityType="Model.Standing" Width="1.5" PointX="7.375" PointY="14.875" />
+        <EntityTypeShape EntityType="Model.Team" Width="1.5" PointX="0.5" PointY="11.875" />
+        <EntityTypeShape EntityType="Model.TeamStats" Width="1.5" PointX="0.5" PointY="17.75" />
+        <EntityTypeShape EntityType="Model.TopScorer" Width="1.5" PointX="2.875" PointY="15.625" />
+        <EntityTypeShape EntityType="Model.User_2022" Width="1.5" PointX="12.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="5" PointY="12.875" />
+        <EntityTypeShape EntityType="Model.UserBronzeTeam" Width="1.5" PointX="5.5" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserFinalTeam" Width="1.5" PointX="0.5" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserGoldTeam" Width="1.5" PointX="2.125" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserMatch" Width="1.5" PointX="5" PointY="19.25" />
+        <EntityTypeShape EntityType="Model.UserPlayoffTeam" Width="1.5" PointX="10.625" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserQFTeam" Width="1.5" PointX="8.875" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserSFTeam" Width="1.5" PointX="7.25" PointY="9.5" />
+        <EntityTypeShape EntityType="Model.UserSilverTeam" Width="1.5" PointX="3.875" PointY="9.5" />
+        <AssociationConnector Association="Model.Blog_Comment_2026" />
+        <AssociationConnector Association="Model.BonusPoints2_2026" />
+        <AssociationConnector Association="Model.FK_Match_AwayTeam_2026" />
+        <AssociationConnector Association="Model.FK_Match_HomeTeam_2026" />
+        <AssociationConnector Association="Model.FK_UserMatch_Match_2026" />
+        <AssociationConnector Association="Model.FK_Standings_Standings_2022" />
+        <AssociationConnector Association="Model.FK_Standings_Standings_2026" />
+        <AssociationConnector Association="Model.FK_UserBronzeTeam_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserFinalTeams_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserGoldTeam_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserPlayoffTeams_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserQFTeams_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserSFTeams_Team_2026" />
+        <AssociationConnector Association="Model.FK_UserSilverTeam_Team_2026" />
+        <AssociationConnector Association="Model.Team_TeamStats_2026" />
+        <AssociationConnector Association="Model.Team_TopScorer_2026" />
+        <AssociationConnector Association="Model.User_Topscorer_2026" />
+        <AssociationConnector Association="Model.FK_UserBronzeTeam_User_2026" />
+        <AssociationConnector Association="Model.FK_UserFinalTeams_User_2026" />
+        <AssociationConnector Association="Model.FK_UserGoldTeam_User_2026" />
+        <AssociationConnector Association="Model.FK_UserMatch_User_2026" />
+        <AssociationConnector Association="Model.FK_UserPlayoffTeams_User_2026" />
+        <AssociationConnector Association="Model.FK_UserQFTeams_User_2026" />
+        <AssociationConnector Association="Model.FK_UserSFTeams_User_2026" />
+        <AssociationConnector Association="Model.FK_UserSilverTeam_User_2026" />
         <!-- ===== Blog Section (Top Right) ===== -->
-        <EntityTypeShape EntityType="Model.BlogEntry" Width="1.5" PointX="0.5" PointY="8" />
-        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="3" PointY="8" />
-        <AssociationConnector Association="Model.Blog_Comment" />
         <!-- ===== Current Tournament - Core Entities ===== -->
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="0.5" PointY="12" />
-        <EntityTypeShape EntityType="Model.Standing" Width="1.5" PointX="3" PointY="12" />
-        <EntityTypeShape EntityType="Model.BonusPoints" Width="1.5" PointX="5.5" PointY="12" />
-        <EntityTypeShape EntityType="Model.TopScorer" Width="1.5" PointX="3" PointY="15" />
         <!-- User-Standing, User-BonusPoints, User-TopScorer -->
-        <AssociationConnector Association="Model.FK_Standing_Standing" />
-        <AssociationConnector Association="Model.BonusPoints2" />
-        <AssociationConnector Association="Model.User_Topscorer" />
         <!-- ===== Team and Match Section ===== -->
-        <EntityTypeShape EntityType="Model.Team" Width="1.5" PointX="8.5" PointY="12" />
-        <EntityTypeShape EntityType="Model.Match" Width="1.5" PointX="8.5" PointY="7.625" />
         <!-- Team-Match, Team-TopScorer -->
-        <AssociationConnector Association="Model.FK_Match_HomeTeam" />
-        <AssociationConnector Association="Model.FK_Match_AwayTeam" />
-        <AssociationConnector Association="Model.Team_TopScorer" />
         <!-- ===== User-Team Junction Tables ===== -->
-        <EntityTypeShape EntityType="Model.UserMatch" Width="1.5" PointX="5.5" PointY="15" />
-        <EntityTypeShape EntityType="Model.UserPlayoffTeam" Width="1.5" PointX="10.625" PointY="12.875" />
-        <EntityTypeShape EntityType="Model.UserQFTeam" Width="1.5" PointX="10.5" PointY="16" />
-        <EntityTypeShape EntityType="Model.UserSFTeam" Width="1.5" PointX="12.5" PointY="16" />
-        <EntityTypeShape EntityType="Model.UserFinalTeam" Width="1.5" PointX="8.5" PointY="19" />
-        <EntityTypeShape EntityType="Model.UserBronzeTeam" Width="1.5" PointX="10.5" PointY="19" />
-        <EntityTypeShape EntityType="Model.UserSilverTeam" Width="1.5" PointX="12.5" PointY="19" />
-        <EntityTypeShape EntityType="Model.UserGoldTeam" Width="1.5" PointX="14.5" PointY="19" />
         <!-- User-Team junction associations -->
-        <AssociationConnector Association="Model.FK_UserMatch_Match" />
-        <AssociationConnector Association="Model.FK_UserMatch_User" />
-        <AssociationConnector Association="Model.FK_UserPlayoffTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserPlayoffTeam_User" />
-        <AssociationConnector Association="Model.FK_UserQFTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserQFTeam_User" />
-        <AssociationConnector Association="Model.FK_UserSFTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserSFTeam_User" />
-        <AssociationConnector Association="Model.FK_UserFinalTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserFinalTeam_User" />
-        <AssociationConnector Association="Model.FK_UserBronzeTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserBronzeTeam_User" />
-        <AssociationConnector Association="Model.FK_UserSilverTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserSilverTeam_User" />
-        <AssociationConnector Association="Model.FK_UserGoldTeam_Team" />
-        <AssociationConnector Association="Model.FK_UserGoldTeam_User" />
-        <EntityTypeShape EntityType="Model.TeamStats" Width="1.5" PointX="5.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -37,24 +37,26 @@ namespace Tips.Models
         public DbSet<Standings_2021> Standings_2021 { get; set; }
         public DbSet<User_2018> User_2018 { get; set; }
         public DbSet<User_2021> User_2021 { get; set; }
+        public DbSet<Standings_2024> Standings_2024 { get; set; }
+        public DbSet<User_2024> User_2024 { get; set; }
         public DbSet<BlogEntry> BlogEntry { get; set; }
         public DbSet<BonusPoints> BonusPoints { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Match> Matches { get; set; }
-        public DbSet<Standings_2024> Standings_2024 { get; set; }
+        public DbSet<Standings_2022> Standings_2022 { get; set; }
         public DbSet<Standing> Standings { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamStats> TeamStats { get; set; }
         public DbSet<TopScorer> TopScorers { get; set; }
-        public DbSet<User_2024> User_2024 { get; set; }
+        public DbSet<User_2022> User_2022 { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserBronzeTeam> UserBronzeTeam { get; set; }
         public DbSet<UserFinalTeam> UserFinalTeam { get; set; }
         public DbSet<UserGoldTeam> UserGoldTeam { get; set; }
-        public DbSet<UserMatch> UserMatch { get; set; }
+        public DbSet<UserMatch> UserMatches { get; set; }
         public DbSet<UserPlayoffTeam> UserPlayoffTeam { get; set; }
         public DbSet<UserQFTeam> UserQFTeam { get; set; }
         public DbSet<UserSFTeam> UserSFTeam { get; set; }
         public DbSet<UserSilverTeam> UserSilverTeam { get; set; }
-        public DbSet<TeamStats> TeamStats { get; set; }
     }
 }

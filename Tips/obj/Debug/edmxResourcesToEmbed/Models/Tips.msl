@@ -204,6 +204,93 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BlogEntry">
+      <EntityTypeMapping TypeName="Model.BlogEntry">
+        <MappingFragment StoreEntitySet="BlogEntry_2026">
+          <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BonusPoints">
+      <EntityTypeMapping TypeName="Model.BonusPoints">
+        <MappingFragment StoreEntitySet="BonusPoints_2026">
+          <ScalarProperty Name="HalfPoint" ColumnName="HalfPoint" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="Model.Comment">
+        <MappingFragment StoreEntitySet="Comment_2026">
+          <ScalarProperty Name="BlogEntryID" ColumnName="BlogEntryID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+          <ScalarProperty Name="PostedBy" ColumnName="PostedBy" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matches">
+      <EntityTypeMapping TypeName="Model.Match">
+        <MappingFragment StoreEntitySet="Match_2026">
+          <ScalarProperty Name="AwayWinPercent" ColumnName="AwayWinPercent" />
+          <ScalarProperty Name="DrawPercent" ColumnName="DrawPercent" />
+          <ScalarProperty Name="HomeWinPercent" ColumnName="HomeWinPercent" />
+          <ScalarProperty Name="ResultMark" ColumnName="ResultMark" />
+          <ScalarProperty Name="AwayGoals" ColumnName="AwayGoals" />
+          <ScalarProperty Name="HomeGoals" ColumnName="HomeGoals" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="AwayTeamID" ColumnName="AwayTeamID" />
+          <ScalarProperty Name="HomeTeamID" ColumnName="HomeTeamID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Standings_2022">
+      <EntityTypeMapping TypeName="Model.Standings_2022">
+        <MappingFragment StoreEntitySet="Standings_2022">
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Standings">
+      <EntityTypeMapping TypeName="Model.Standing">
+        <MappingFragment StoreEntitySet="Standings_2026">
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="Model.Team">
+        <MappingFragment StoreEntitySet="Team_2026">
+          <ScalarProperty Name="PlayOffPos" ColumnName="PlayOffPos" />
+          <ScalarProperty Name="WonBronze" ColumnName="WonBronze" />
+          <ScalarProperty Name="WonSilver" ColumnName="WonSilver" />
+          <ScalarProperty Name="WonGold" ColumnName="WonGold" />
+          <ScalarProperty Name="IsInFinal" ColumnName="IsInFinal" />
+          <ScalarProperty Name="IsInSemiFinals" ColumnName="IsInSemiFinals" />
+          <ScalarProperty Name="IsInQuarterFinals" ColumnName="IsInQuarterFinals" />
+          <ScalarProperty Name="IsInPlayOffs" ColumnName="IsInPlayOffs" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TeamStats">
       <EntityTypeMapping TypeName="Model.TeamStats">
         <MappingFragment StoreEntitySet="TeamStats_2026">
@@ -217,6 +304,131 @@
           <ScalarProperty Name="QuarterFinalPercent" ColumnName="QuarterFinalPercent" />
           <ScalarProperty Name="PlayoffPercent" ColumnName="PlayoffPercent" />
           <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopScorers">
+      <EntityTypeMapping TypeName="Model.TopScorer">
+        <MappingFragment StoreEntitySet="TopScorer_2026">
+          <ScalarProperty Name="WinPercent" ColumnName="WinPercent" />
+          <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_2022">
+      <EntityTypeMapping TypeName="Model.User_2022">
+        <MappingFragment StoreEntitySet="User_2022">
+          <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
+          <ScalarProperty Name="TopScorerID" ColumnName="TopScorerID" />
+          <ScalarProperty Name="PayCode" ColumnName="PayCode" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+          <ScalarProperty Name="HasPaid" ColumnName="HasPaid" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Model.User">
+        <MappingFragment StoreEntitySet="User_2026">
+          <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
+          <ScalarProperty Name="TopScorerID" ColumnName="TopScorerID" />
+          <ScalarProperty Name="PayCode" ColumnName="PayCode" />
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+          <ScalarProperty Name="HasPaid" ColumnName="HasPaid" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserBronzeTeam">
+      <EntityTypeMapping TypeName="Model.UserBronzeTeam">
+        <MappingFragment StoreEntitySet="UserBronzeTeam_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserFinalTeam">
+      <EntityTypeMapping TypeName="Model.UserFinalTeam">
+        <MappingFragment StoreEntitySet="UserFinalTeams_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGoldTeam">
+      <EntityTypeMapping TypeName="Model.UserGoldTeam">
+        <MappingFragment StoreEntitySet="UserGoldTeam_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMatches">
+      <EntityTypeMapping TypeName="Model.UserMatch">
+        <MappingFragment StoreEntitySet="UserMatch_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="ResultMark" ColumnName="ResultMark" />
+          <ScalarProperty Name="AwayGoals" ColumnName="AwayGoals" />
+          <ScalarProperty Name="HomeGoals" ColumnName="HomeGoals" />
+          <ScalarProperty Name="MatchID" ColumnName="MatchID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPlayoffTeam">
+      <EntityTypeMapping TypeName="Model.UserPlayoffTeam">
+        <MappingFragment StoreEntitySet="UserPlayoffTeams_2026">
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserQFTeam">
+      <EntityTypeMapping TypeName="Model.UserQFTeam">
+        <MappingFragment StoreEntitySet="UserQFTeams_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSFTeam">
+      <EntityTypeMapping TypeName="Model.UserSFTeam">
+        <MappingFragment StoreEntitySet="UserSFTeams_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSilverTeam">
+      <EntityTypeMapping TypeName="Model.UserSilverTeam">
+        <MappingFragment StoreEntitySet="UserSilverTeam_2026">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

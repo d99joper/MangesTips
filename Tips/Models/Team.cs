@@ -16,8 +16,8 @@ namespace Tips.Models
     {
         public Team()
         {
-            this.Match = new HashSet<Match>();
-            this.Match1 = new HashSet<Match>();
+            this.Matches = new HashSet<Match>();
+            this.Match_20261 = new HashSet<Match>();
             this.UserBronzeTeam = new HashSet<UserBronzeTeam>();
             this.UserFinalTeams = new HashSet<UserFinalTeam>();
             this.UserGoldTeam = new HashSet<UserGoldTeam>();
@@ -40,8 +40,8 @@ namespace Tips.Models
         public bool WonBronze { get; set; }
         public Nullable<byte> PlayOffPos { get; set; }
     
-        public virtual ICollection<Match> Match { get; set; }
-        public virtual ICollection<Match> Match1 { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
+        public virtual ICollection<Match> Match_20261 { get; set; }
         public virtual ICollection<UserBronzeTeam> UserBronzeTeam { get; set; }
         public virtual ICollection<UserFinalTeam> UserFinalTeams { get; set; }
         public virtual ICollection<UserGoldTeam> UserGoldTeam { get; set; }
@@ -49,6 +49,7 @@ namespace Tips.Models
         public virtual ICollection<UserQFTeam> UserQFTeams { get; set; }
         public virtual ICollection<UserSFTeam> UserSFTeams { get; set; }
         public virtual ICollection<UserSilverTeam> UserSilverTeam { get; set; }
+        public virtual TeamStats TeamStats { get; set; }
         public virtual ICollection<TopScorer> TopScorer { get; set; }
     }
 }

@@ -211,6 +211,9 @@
     <Compile Include="Models\Standings_2021.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Standings_2022.cs">
+      <DependentUpon>Tips.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Standings_2024.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
@@ -235,6 +238,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Tips.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tips1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TopScorer.cs">
       <DependentUpon>Tips.tt</DependentUpon>
@@ -285,6 +293,9 @@
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_2021.cs">
+      <DependentUpon>Tips.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_2022.cs">
       <DependentUpon>Tips.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User_2024.cs">
@@ -432,7 +443,7 @@
     <Content Include="Models\Tips.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Tips.edmx</DependentUpon>
-      <LastGenOutput>Tips.cs</LastGenOutput>
+      <LastGenOutput>Tips1.cs</LastGenOutput>
     </Content>
     <Content Include="Docs\vmtipset2014.doc" />
     <Content Include="packages.config" />
