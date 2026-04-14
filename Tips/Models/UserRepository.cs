@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data;
-using System.Data.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.EntityFrameworkCore;
 
 namespace VMTips_2022.Models
 {
@@ -178,8 +177,8 @@ namespace VMTips_2022.Models
             using (Tips_Entities db = new Tips_Entities())
             {
                 return db.UserMatches
-                    .Include("User")
-                    .Include("Match")
+                    .Include(um => um.User)
+                    .Include(um => um.Match)
                     .Where(um => um.MatchID == matchID && um.ResultMark == resultMark && um.User.HasPaid)
                     .OrderBy(um => um.User.DisplayName)
                     .ToList();

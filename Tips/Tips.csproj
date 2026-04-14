@@ -57,24 +57,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\ceTe.DynamicPDF.35.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity.Design" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Web.Entity.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -83,9 +72,17 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.32" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.Master.cs">
@@ -173,117 +170,45 @@
     <Compile Include="Helpers\TopScorers.ashx.cs">
       <DependentUpon>TopScorers.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BlogEntry.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\BlogEntry.cs" />
     <Compile Include="Models\BlogRepository.cs" />
-    <Compile Include="Models\BonusPoints.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\BonusPoints.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IMatchRepository.cs" />
     <Compile Include="Models\ITeamRepository.cs" />
     <Compile Include="Models\IUserRepository.cs" />
-    <Compile Include="Models\Match.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Match.cs" />
     <Compile Include="Models\MatchRepository.cs" />
-    <Compile Include="Models\Standing.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2010.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2012.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2014.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2016.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2018.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Standings_2021.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Team.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Standing.cs" />
+    <Compile Include="Models\Standings_2010.cs" />
+    <Compile Include="Models\Standings_2012.cs" />
+    <Compile Include="Models\Standings_2014.cs" />
+    <Compile Include="Models\Standings_2016.cs" />
+    <Compile Include="Models\Standings_2018.cs" />
+    <Compile Include="Models\Standings_2021.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamRepository.cs" />
-    <Compile Include="Models\TeamStats.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tips.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Tips.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tips.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Tips.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Tips.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TopScorer.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\TeamStats.cs" />
+    <Compile Include="Models\Tips.Context.cs" />
+    <Compile Include="Models\TopScorer.cs" />
     <Compile Include="Models\TopScorerRepository.cs" />
-    <Compile Include="Models\User.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserBronzeTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserBronzeTeam.cs" />
     <Compile Include="Models\UserExtensions.cs" />
-    <Compile Include="Models\UserFinalTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserGoldTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserMatch.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserPlayoffTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserQFTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\UserFinalTeam.cs" />
+    <Compile Include="Models\UserGoldTeam.cs" />
+    <Compile Include="Models\UserMatch.cs" />
+    <Compile Include="Models\UserPlayoffTeam.cs" />
+    <Compile Include="Models\UserQFTeam.cs" />
     <Compile Include="Models\UserRepository.cs" />
-    <Compile Include="Models\UserSFTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserSilverTeam.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2010.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2012.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2014.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2016.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2018.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User_2021.cs">
-      <DependentUpon>Tips.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\UserSFTeam.cs" />
+    <Compile Include="Models\UserSilverTeam.cs" />
+    <Compile Include="Models\User_2010.cs" />
+    <Compile Include="Models\User_2012.cs" />
+    <Compile Include="Models\User_2014.cs" />
+    <Compile Include="Models\User_2016.cs" />
+    <Compile Include="Models\User_2018.cs" />
+    <Compile Include="Models\User_2021.cs" />
     <Compile Include="NyKupong.aspx.cs">
       <DependentUpon>NyKupong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -411,23 +336,6 @@
   <ItemGroup>
     <Content Include="Admin\Site.Master" />
     <None Include="Docs\emtips2012.doc" />
-    <EntityDeploy Include="Models\Tips.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Tips.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Tips.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Tips.edmx</DependentUpon>
-      <LastGenOutput>Tips.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Tips.edmx.diagram">
-      <DependentUpon>Tips.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Tips.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Tips.edmx</DependentUpon>
-      <LastGenOutput>Tips.cs</LastGenOutput>
-    </Content>
     <Content Include="Docs\vmtipset2014.doc" />
     <Content Include="packages.config" />
     <Content Include="Docs\tipset2018.docx" />
