@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace VMTips_2022.Models
+namespace Tipset.Models
 {
     public partial class User
     {

@@ -1,0 +1,63 @@
+﻿@model Tipset.Models.BlogEntry
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div id="wrap">
+    @if (TempData["CommentError"] != null)
+    {
+        <p class="error">@TempData["CommentError"]</p>
+    }
+
+    <span class="blogHeader">@Model.Title</span>
+    <div id="blogEntry">@Html.Raw(Model.Text)</div>
+    <div id="blogFooter">@Model.PostedDate</div>
+
+    <div style="width:350px;">
+        @foreach (var comment in Model.Comments)
+        {
+            <div id="commentText">
+                @Html.Raw(comment.Text)
+                @if (User.Identity.IsAuthenticated)
+                {
+                    using (Html.BeginForm("DeleteComment", "Blog", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div style="float:right;">
+                            <input type="hidden" name="commentId" value="@comment.ID" />
+                            <input type="hidden" name="blogId" value="@Model.ID" />
+                            <button type="submit"
+                                    onclick="return confirm('Är du säker på att du vill radera kommentaren?');"
+                                    style="border:none;background:none;cursor:pointer;padding:0;">
+                                <img src="@Url.Content("~/images/icon_delete.gif")" alt="Ta bort" />
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+            <div id="commentFooter">
+                @Html.Raw(comment.PostedBy) : @comment.PostedDate
+            </div>
+        }
+    </div>
+    <br />
+
+    <div id="divAddComment">
+        @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="id" value="@Model.ID" />
+            <div>
+                Namn: <input type="text" name="name" maxlength="35" />
+            </div>
+            <div>
+                De fem första bokstäverna i alfabetet är:
+                <input type="text" name="control" maxlength="10" style="width:40px;" />
+            </div>
+            <div>
+                <textarea name="text" style="width:270px;height:50px;"></textarea>
+            </div>
+            <input type="submit" value="Kommentera" />
+        }
+    </div>
+</div>

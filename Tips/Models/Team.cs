@@ -1,5 +1,5 @@
-
-namespace VMTips_2022.Models
+﻿
+namespace Tipset.Models
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@ namespace VMTips_2022.Models
     {
         public Team()
         {
-            this.Match = new HashSet<Match>();
-            this.Match_2022 = new HashSet<Match>();
+            this.HomeMatches = new HashSet<Match>();
+            this.AwayMatches = new HashSet<Match>();
             this.UserBronzeTeam = new HashSet<UserBronzeTeam>();
             this.UserFinalTeams = new HashSet<UserFinalTeam>();
             this.UserGoldTeam = new HashSet<UserGoldTeam>();
@@ -32,8 +32,8 @@ namespace VMTips_2022.Models
         public bool WonBronze { get; set; }
         public Nullable<byte> PlayOffPos { get; set; }
     
-        public virtual ICollection<Match> Match { get; set; }
-        public virtual ICollection<Match> Match_2022 { get; set; }
+        public virtual ICollection<Match> HomeMatches { get; set; }
+        public virtual ICollection<Match> AwayMatches { get; set; }
         public virtual ICollection<UserBronzeTeam> UserBronzeTeam { get; set; }
         public virtual ICollection<UserFinalTeam> UserFinalTeams { get; set; }
         public virtual ICollection<UserGoldTeam> UserGoldTeam { get; set; }

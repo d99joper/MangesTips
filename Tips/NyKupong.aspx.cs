@@ -7,12 +7,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class NyKupong : System.Web.UI.Page
     {
         private Models.User thisUser;
-        Models.TeamRepository teamRepository = new VMTips_2022.Models.TeamRepository();
+        Models.TeamRepository teamRepository = new Tipset.Models.TeamRepository();
         Models.TopScorerRepository topScorerRepository = new Models.TopScorerRepository();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace VMTips_2022
             if (!IsPostBack)
             {
                 // UserMatches
-                Models.MatchRepository matchRepository = new VMTips_2022.Models.MatchRepository();
+                Models.MatchRepository matchRepository = new Tipset.Models.MatchRepository();
                 rptUserMatches.DataSource = matchRepository.GetAllMatches().ToList();
                 rptUserMatches.DataBind();
                 
@@ -53,7 +53,7 @@ namespace VMTips_2022
         {
             if (ValidPage())
             {
-                thisUser = new VMTips_2022.Models.User();
+                thisUser = new Tipset.Models.User();
 
                 thisUser.FirstName = txtFirstName.Text;
                 thisUser.LastName = txtLastName.Text;
@@ -67,7 +67,7 @@ namespace VMTips_2022
                     HiddenField hdnMatchID = (HiddenField)rptUserMatches.Items[i].FindControl("hdnMatchID");
                     TextBox txtHomeGoals = (TextBox)rptUserMatches.Items[i].FindControl("txtHomeGoals");
                     TextBox txtAwayGoals = (TextBox)rptUserMatches.Items[i].FindControl("txtAwayGoals");
-                    Models.UserMatch userMatch = new VMTips_2022.Models.UserMatch();
+                    Models.UserMatch userMatch = new Tipset.Models.UserMatch();
                     userMatch.MatchID = Int32.Parse(hdnMatchID.Value);
                     userMatch.HomeGoals = Byte.Parse(txtHomeGoals.Text);
                     userMatch.AwayGoals = Byte.Parse(txtAwayGoals.Text);
@@ -402,7 +402,7 @@ namespace VMTips_2022
 
         }
 
-        private void AddTopScorer(ref VMTips_2022.Models.User thisUser)
+        private void AddTopScorer(ref Tipset.Models.User thisUser)
         {
             Models.TopScorer topScorer = topScorerRepository.GetTopScorer(txtTopScorer.Text);
             thisUser.TopScorerID = topScorer.ID;

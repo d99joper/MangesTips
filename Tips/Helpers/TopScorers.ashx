@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="TopScorers.ashx.cs" Class="VMTips_2022.Helpers.TopScorers" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="TopScorers.ashx.cs" Class="Tipset.Helpers.TopScorers" %>

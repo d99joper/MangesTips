@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VMTips_2022 {
+namespace Tipset {
     
     
     public partial class AwaitingConfirmation {

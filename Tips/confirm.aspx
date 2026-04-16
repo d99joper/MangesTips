@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manges VM-tips: Bekräfta anmälan" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="confirm.aspx.cs" Inherits="VMTips_2022.confirm" %>
+﻿<%@ Page Title="Manges VM-tips: Bekräfta anmälan" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="confirm.aspx.cs" Inherits="Tipset.confirm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

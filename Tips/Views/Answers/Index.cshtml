@@ -1,0 +1,97 @@
+﻿@model Tipset.ViewModels.AnswersViewModel
+@{
+    ViewBag.Title = "Facit";
+}
+
+<div id="wrap">
+    <div id="leftside">
+        <div class="editor-field">1. Tipsraden. Tippa resultatet i gruppspelet, t.ex 2-0.</div>
+        <table class="tips">
+            @foreach (var match in Model.Matches)
+            {
+                <tr>
+                    <td>@match.Date.ToString("d/M", new System.Globalization.CultureInfo("en-US"))</td>
+                    <td>@match.HomeTeam.GroupID&nbsp;</td>
+                    <td>@match.HomeTeam.TeamName</td>
+                    <td>-</td>
+                    <td>@match.AwayTeam.TeamName</td>
+                    <td>@match.HomeGoals</td>
+                    <td>-</td>
+                    <td>@match.AwayGoals</td>
+                </tr>
+            }
+        </table>
+
+        <br /><br />
+        <div class="editor-label">2. Vidare från gruppen</div>
+        <table class="facit">
+            <thead>
+                <tr>
+                    <td>Grupp A</td><td>Grupp B</td><td>Grupp C</td><td>Grupp D</td>
+                </tr>
+            </thead>
+            <tr>
+                @foreach (var g in new[] { "A", "B", "C", "D" }) { <td>1. @Model.PlayoffTeams["1" + g]</td> }
+            </tr>
+            <tr>
+                @foreach (var g in new[] { "A", "B", "C", "D" }) { <td>2. @Model.PlayoffTeams["2" + g]</td> }
+            </tr>
+            <thead>
+                <tr>
+                    <td align="center">Grupp E</td><td align="center">Grupp F</td><td align="center">Grupp G</td><td align="center">Grupp H</td>
+                </tr>
+            </thead>
+            <tr>
+                @foreach (var g in new[] { "E", "F", "G", "H" }) { <td>1. @Model.PlayoffTeams["1" + g]</td> }
+            </tr>
+            <tr>
+                @foreach (var g in new[] { "E", "F", "G", "H" }) { <td>2. @Model.PlayoffTeams["2" + g]</td> }
+            </tr>
+        </table>
+
+        <br />
+        <div class="editor-label">3. Vilka åtta lag går till kvartsfinal?</div>
+        <table>
+            @for (int i = 0; i < Model.QFTeams.Count; i += 2)
+            {
+                <tr>
+                    <td style="width:120px;">@Model.QFTeams[i]</td>
+                    <td style="width:120px;">@(i + 1 < Model.QFTeams.Count ? Model.QFTeams[i + 1] : "")</td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <div class="editor-label">4. Vilka fyra lag går till semifinal?</div>
+        <table>
+            @for (int i = 0; i < Model.SFTeams.Count; i += 2)
+            {
+                <tr>
+                    <td style="width:120px;">@Model.SFTeams[i]</td>
+                    <td style="width:120px;">@(i + 1 < Model.SFTeams.Count ? Model.SFTeams[i + 1] : "")</td>
+                </tr>
+            }
+        </table>
+
+        <br />
+        <div class="editor-label">5. Vilka två lag går till final?</div>
+        <table>
+            <tr>
+                @foreach (var t in Model.FinalTeams) { <td style="width:120px;">@t</td> }
+            </tr>
+        </table>
+
+        <br />
+        <div class="editor-label">6. Skyttekung: @Model.TopScorer</div>
+        <br />
+        <div class="editor-label">7. Brons: @Model.Bronze</div>
+        <br />
+        <div class="editor-label">8. Silver: @Model.Silver</div>
+        <br />
+        <div class="editor-label">9. Guld: @Model.Gold</div>
+    </div>
+
+    <div id="rightside">
+        <center><img src="@Url.Content("~/images/overstlogga2022small3.png")" alt="Manges VM-tips" /></center>
+    </div>
+</div>

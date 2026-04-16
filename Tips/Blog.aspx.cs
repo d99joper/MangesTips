@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class Blog : System.Web.UI.Page
     {

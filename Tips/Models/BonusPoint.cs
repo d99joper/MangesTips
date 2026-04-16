@@ -1,4 +1,4 @@
-
+﻿
 namespace VMTips_2022.Models
 {
     using System;

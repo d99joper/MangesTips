@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class Details : System.Web.UI.Page
     {
@@ -59,7 +59,7 @@ namespace VMTips_2022
             }
         }
 
-        private void SetTopScorer(VMTips_2022.Models.User currentUser)
+        private void SetTopScorer(Tipset.Models.User currentUser)
         {
             List<Models.TopScorer> topScorers = topScorerRepository.GetWinner();
             string postfix = "";

@@ -1,5 +1,5 @@
-
-namespace VMTips_2022.Models
+﻿
+namespace Tipset.Models
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,6 @@ namespace VMTips_2022.Models
         public string Text { get; set; }
         public Nullable<int> BlogEntryID { get; set; }
     
-        public virtual BlogEntry BlogEntry_2022 { get; set; }
+        public virtual BlogEntry BlogEntry { get; set; }
     }
 }

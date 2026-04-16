@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Bekräfta anmälan";
+}
+
+<table>
+    <tr>
+        <td>
+            <h2 class="error">@ViewBag.Message</h2>
+        </td>
+    </tr>
+    @if (ViewBag.MoreInfo != null)
+    {
+        <tr>
+            <td>@Html.Raw(ViewBag.MoreInfo)</td>
+        </tr>
+    }
+</table>
