@@ -112,6 +112,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Global.asax">
       <SubType>Component</SubType>
     </Content>
