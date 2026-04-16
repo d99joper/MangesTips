@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="VMTips_2022.Default" ValidateRequest="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Tipset.Default" ValidateRequest="true" %>
 <%@ MasterType VirtualPath="~/Site.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -15,7 +15,7 @@
             </ProgressTemplate>
         </asp:UpdateProgress>
         <p>
-        Aktuell ställning vid datum: <asp:DropDownList ID="ddlUpdates" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ChangeStandings"
+            Aktuell ställning vid datum: <asp:DropDownList ID="ddlUpdates" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ChangeStandings"
                 AppendDataBoundItems="true" DataTextField="UpdateDate" DataValueField="guid" CssClass="longdate" DataTextFormatString="{0:dd\/MM HH:mm}" />
         </p>
         

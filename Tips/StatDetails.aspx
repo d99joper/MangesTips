@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StatDetails.aspx.cs" Inherits="VMTips_2022.StatDetails" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StatDetails.aspx.cs" Inherits="Tipset.StatDetails" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

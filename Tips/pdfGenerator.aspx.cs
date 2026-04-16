@@ -1,10 +1,10 @@
 ﻿using System;
-using VMTips_2022.Models;
+using Tipset.Models;
 using System.Linq;
 using ceTe.DynamicPDF;
 using ceTe.DynamicPDF.PageElements;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class pdfGenerator : System.Web.UI.Page
     {

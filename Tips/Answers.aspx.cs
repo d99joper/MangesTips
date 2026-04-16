@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class Answers : System.Web.UI.Page
     {
-        Models.TeamRepository teamRepository = new VMTips_2022.Models.TeamRepository();
-        Models.MatchRepository matchRepository = new VMTips_2022.Models.MatchRepository();
-        Models.UserRepository userRepository = new VMTips_2022.Models.UserRepository();
+        Models.TeamRepository teamRepository = new Tipset.Models.TeamRepository();
+        Models.MatchRepository matchRepository = new Tipset.Models.MatchRepository();
+        Models.UserRepository userRepository = new Tipset.Models.UserRepository();
         private DateTime dtUpdateTime = DateTime.Now;
 
         protected void Page_Load(object sender, EventArgs e)

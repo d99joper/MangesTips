@@ -1,5 +1,5 @@
-
-namespace VMTips_2022.Models
+﻿
+namespace Tipset.Models
 {
     using System;
     using System.Collections.Generic;

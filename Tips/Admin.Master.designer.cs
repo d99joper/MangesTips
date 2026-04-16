@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VMTips_2022.Admin {
+namespace Tipset.Admin {
     
     
     public partial class Admin {

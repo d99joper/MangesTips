@@ -1,5 +1,5 @@
 ﻿using System;
-namespace VMTips_2022.Models
+namespace Tipset.Models
 {
     interface IMatchRepository
     {

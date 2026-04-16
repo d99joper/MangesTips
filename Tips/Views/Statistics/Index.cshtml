@@ -1,0 +1,138 @@
+﻿@model Tipset.ViewModels.StatisticsViewModel
+@{
+    ViewBag.Title = "Statistik";
+    string tnDir = (Model.SortColumn == "TeamName"      && Model.SortDir == "asc") ? "desc" : "asc";
+    string poDir = (Model.SortColumn == "Playoff"       && Model.SortDir == "asc") ? "desc" : "asc";
+    string qfDir = (Model.SortColumn == "QuarterFinals" && Model.SortDir == "asc") ? "desc" : "asc";
+    string sfDir = (Model.SortColumn == "SemiFinals"    && Model.SortDir == "asc") ? "desc" : "asc";
+    string fiDir = (Model.SortColumn == "Finals"        && Model.SortDir == "asc") ? "desc" : "asc";
+    string brDir = (Model.SortColumn == "Bronze"        && Model.SortDir == "asc") ? "desc" : "asc";
+    string siDir = (Model.SortColumn == "Silver"        && Model.SortDir == "asc") ? "desc" : "asc";
+    string goDir = (Model.SortColumn == "Gold"          && Model.SortDir == "asc") ? "desc" : "asc";
+}
+@section head {
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.fx.speeds._default = 1000;
+            $('#tabs').tabs({ active: @Model.ActiveTab });
+            $('td a').each(function () {
+                var $link = $(this);
+                $link.click(function () {
+                    var $dialog = $('<div></div>')
+                        .load($link.attr('href') + ' #resultView')
+                        .dialog({
+                            autoOpen: false,
+                            title: $link.attr('title'),
+                            width: 400,
+                            height: 400,
+                            modal: true,
+                            buttons: { 'Stäng': function () { $(this).dialog('close'); } },
+                            show: 'explode',
+                            hide: 'explode'
+                        });
+                    $dialog.dialog('open');
+                    return false;
+                });
+            });
+        });
+    </script>
+}
+
+<div id="wrap">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab-matches">Matchstatistik</a></li>
+            <li><a href="#tab-teams">Lagstatistik</a></li>
+            <li><a href="#tab-topscorer">Skytteligan</a></li>
+        </ul>
+
+        <div id="tab-matches">
+            <table class="stats">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Grupp</th>
+                        <th>Hemmalag</th>
+                        <th></th>
+                        <th>Bortalag</th>
+                        <th>1</th>
+                        <th>X</th>
+                        <th>2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model.Matches)
+                    {
+                        string detailBase = Url.Action("StatDetails", new { type = "Match", id = m.ID });
+                        <tr>
+                            <td>@m.Date.ToString("d/M", new System.Globalization.CultureInfo("en-US"))</td>
+                            <td>@m.HomeTeam.GroupID&nbsp;</td>
+                            <td>@m.HomeTeam.TeamName</td>
+                            <td>-</td>
+                            <td>@m.AwayTeam.TeamName</td>
+                            <td><a href="@detailBase&result=1" title="@m.HomeTeam.TeamName - @m.AwayTeam.TeamName (1)">@string.Format("{0:P0}", m.HomeWinPercent)</a></td>
+                            <td><a href="@detailBase&result=X" title="@m.HomeTeam.TeamName - @m.AwayTeam.TeamName (X)">@string.Format("{0:P0}", m.DrawPercent)</a></td>
+                            <td><a href="@detailBase&result=2" title="@m.HomeTeam.TeamName - @m.AwayTeam.TeamName (2)">@string.Format("{0:P0}", m.AwayWinPercent)</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tab-teams">
+            <table class="stats">
+                <thead>
+                    <tr>
+                        <th><a href="@Url.Action("Index", new { sort = "TeamName",      dir = tnDir, tab = 1 })">Lag</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Playoff",       dir = poDir, tab = 1 })">Slutspel</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "QuarterFinals", dir = qfDir, tab = 1 })">Kvartsfinaler</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "SemiFinals",    dir = sfDir, tab = 1 })">Semifinaler</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Finals",        dir = fiDir, tab = 1 })">Finaler</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Bronze",        dir = brDir, tab = 1 })">Brons</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Silver",        dir = siDir, tab = 1 })">Silver</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Gold",          dir = goDir, tab = 1 })">Guld</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.Teams)
+                    {
+                        var ts = t.TeamStats;
+                        <tr>
+                            <td>@t.TeamName</td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "playoff",       teamid = t.ID })" title="@t.TeamName (Slutspel)">@(ts != null ? string.Format("{0:P0}", ts.PlayoffPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "quarterfinals", teamid = t.ID })" title="@t.TeamName (Kvartsfinaler)">@(ts != null ? string.Format("{0:P0}", ts.QuarterFinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "semifinals",    teamid = t.ID })" title="@t.TeamName (Semifinaler)">@(ts != null ? string.Format("{0:P0}", ts.SemiFinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "finals",        teamid = t.ID })" title="@t.TeamName (Finaler)">@(ts != null ? string.Format("{0:P0}", ts.FinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "bronze",        teamid = t.ID })" title="@t.TeamName (Brons)">@(ts != null ? string.Format("{0:P0}", ts.BronzePercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "silver",        teamid = t.ID })" title="@t.TeamName (Silver)">@(ts != null ? string.Format("{0:P0}", ts.SilverPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "gold",          teamid = t.ID })" title="@t.TeamName (Guld)">@(ts != null ? string.Format("{0:P0}", ts.GoldPercent) : "")</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tab-topscorer">
+            <table class="stats">
+                <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Vinnarchans</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ts in Model.TopScorers)
+                    {
+                        <tr>
+                            <td>@ts.DisplayName</td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "topscorer", id = ts.ID })" title="@ts.DisplayName">@string.Format("{0:P0}", ts.WinPercent)</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

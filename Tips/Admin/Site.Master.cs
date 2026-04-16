@@ -8,7 +8,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 
-namespace VMTips_2022.Admin
+namespace Tipset.Admin
 {
     public partial class Site : System.Web.UI.MasterPage
     {

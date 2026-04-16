@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.EntityFrameworkCore;
 
-namespace VMTips_2022.Models
+namespace Tipset.Models
 {
     public class UserRepository : IUserRepository
     {
@@ -91,13 +91,19 @@ namespace VMTips_2022.Models
                 }
                 else
                     standings[i - 1].Position = i;
-                    
             }
+
+            Save();
         }
 
-        internal object GetStandingDates()
+        internal List<StandingDate> GetStandingDates()
         {
-            return (from s in db.Standings orderby s.UpdateDate descending select new { guid = s.Guid, UpdateDate = s.UpdateDate }).Distinct().OrderBy(s => s.UpdateDate).ToList();            
+            return db.Standings
+                .Where(s => s.Guid.HasValue)
+                .Select(s => new StandingDate { Guid = s.Guid.Value, UpdateDate = s.UpdateDate })
+                .Distinct()
+                .OrderBy(s => s.UpdateDate)
+                .ToList();
         }
 
         public void ResetAllBonusPoints()

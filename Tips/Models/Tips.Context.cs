@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace VMTips_2022.Models
+namespace Tipset.Models
 {
     public partial class Tips_Entities : DbContext
     {
@@ -41,12 +41,16 @@ namespace VMTips_2022.Models
         public DbSet<User_2016> User_2016 { get; set; }
         public DbSet<User_2018> User_2018 { get; set; }
         public DbSet<User_2021> User_2021 { get; set; }
+        public DbSet<User_2022> User_2022 { get; set; }
+        public DbSet<User_2024> User_2024 { get; set; }
         public DbSet<Standings_2010> Standings_2010 { get; set; }
         public DbSet<Standings_2012> Standings_2012 { get; set; }
         public DbSet<Standings_2014> Standings_2014 { get; set; }
         public DbSet<Standings_2016> Standings_2016 { get; set; }
         public DbSet<Standings_2018> Standings_2018 { get; set; }
         public DbSet<Standings_2021> Standings_2021 { get; set; }
+        public DbSet<Standings_2022> Standings_2022 { get; set; }
+        public DbSet<Standings_2024> Standings_2024 { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -64,10 +68,10 @@ namespace VMTips_2022.Models
         {
             // ----- Current tournament table mappings -----
 
-            // User -> User_2022
+            // User -> User_2026
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("User_2022");
+                entity.ToTable("User_2026");
                 entity.HasKey(e => e.ID);
 
                 entity.HasOne(e => e.TopScorer)
@@ -76,34 +80,34 @@ namespace VMTips_2022.Models
                     .IsRequired(false);
             });
 
-            // Match -> Match_2022
+            // Match -> Match_2026
             modelBuilder.Entity<Match>(entity =>
             {
-                entity.ToTable("Match_2022");
+                entity.ToTable("Match_2026");
                 entity.HasKey(e => e.ID);
 
                 entity.HasOne(e => e.HomeTeam)
-                    .WithMany(t => t.Match)
+                    .WithMany(t => t.HomeMatches)
                     .HasForeignKey(e => e.HomeTeamID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(e => e.AwayTeam)
-                    .WithMany(t => t.Match_2022)
+                    .WithMany(t => t.AwayMatches)
                     .HasForeignKey(e => e.AwayTeamID)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            // Team -> Team_2022
+            // Team -> Team_2026
             modelBuilder.Entity<Team>(entity =>
             {
-                entity.ToTable("Team_2022");
+                entity.ToTable("Team_2026");
                 entity.HasKey(e => e.ID);
             });
 
-            // Standing -> Standings_2022
+            // Standing -> Standings_2026
             modelBuilder.Entity<Standing>(entity =>
             {
-                entity.ToTable("Standings_2022");
+                entity.ToTable("Standings_2026");
                 entity.HasKey(e => new { e.UserID, e.UpdateDate });
 
                 entity.HasOne(e => e.User)
@@ -111,10 +115,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.UserID);
             });
 
-            // TeamStats -> TeamStats_2022
+            // TeamStats -> TeamStats_2026
             modelBuilder.Entity<TeamStats>(entity =>
             {
-                entity.ToTable("TeamStats_2022");
+                entity.ToTable("TeamStats_2026");
                 entity.HasKey(e => e.TeamID);
 
                 entity.HasOne(e => e.Team)
@@ -122,10 +126,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey<TeamStats>(e => e.TeamID);
             });
 
-            // TopScorer -> TopScorer_2022
+            // TopScorer -> TopScorer_2026
             modelBuilder.Entity<TopScorer>(entity =>
             {
-                entity.ToTable("TopScorer_2022");
+                entity.ToTable("TopScorer_2026");
                 entity.HasKey(e => e.ID);
 
                 entity.HasOne(e => e.Team)
@@ -134,17 +138,17 @@ namespace VMTips_2022.Models
                     .IsRequired(false);
             });
 
-            // BlogEntry -> BlogEntry_2022
+            // BlogEntry -> BlogEntry_2026
             modelBuilder.Entity<BlogEntry>(entity =>
             {
-                entity.ToTable("BlogEntry_2022");
+                entity.ToTable("BlogEntry_2026");
                 entity.HasKey(e => e.ID);
             });
 
-            // BonusPoints -> BonusPoints_2022
+            // BonusPoints -> BonusPoints_2026
             modelBuilder.Entity<BonusPoints>(entity =>
             {
-                entity.ToTable("BonusPoints_2022");
+                entity.ToTable("BonusPoints_2026");
                 entity.HasKey(e => e.ID);
 
                 entity.HasOne(e => e.User)
@@ -152,22 +156,22 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.UserID);
             });
 
-            // Comment -> Comment_2022
+            // Comment -> Comment_2026
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.ToTable("Comment_2022");
+                entity.ToTable("Comment_2026");
                 entity.HasKey(e => e.ID);
 
-                entity.HasOne(e => e.BlogEntry_2022)
+                entity.HasOne(e => e.BlogEntry)
                     .WithMany(b => b.Comments)
                     .HasForeignKey(e => e.BlogEntryID)
                     .IsRequired(false);
             });
 
-            // UserMatch -> UserMatch_2022 (composite key)
+            // UserMatch -> UserMatch_2026 (composite key)
             modelBuilder.Entity<UserMatch>(entity =>
             {
-                entity.ToTable("UserMatch_2022");
+                entity.ToTable("UserMatch_2026");
                 entity.HasKey(e => new { e.UserID, e.MatchID });
 
                 entity.HasOne(e => e.User)
@@ -179,10 +183,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.MatchID);
             });
 
-            // UserBronzeTeam -> UserBronzeTeam_2022 (composite key)
+            // UserBronzeTeam -> UserBronzeTeam_2026 (composite key)
             modelBuilder.Entity<UserBronzeTeam>(entity =>
             {
-                entity.ToTable("UserBronzeTeam_2022");
+                entity.ToTable("UserBronzeTeam_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -194,10 +198,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserFinalTeam -> UserFinalTeams_2022 (composite key)
+            // UserFinalTeam -> UserFinalTeams_2026 (composite key)
             modelBuilder.Entity<UserFinalTeam>(entity =>
             {
-                entity.ToTable("UserFinalTeams_2022");
+                entity.ToTable("UserFinalTeams_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -209,10 +213,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserGoldTeam -> UserGoldTeam_2022 (composite key)
+            // UserGoldTeam -> UserGoldTeam_2026 (composite key)
             modelBuilder.Entity<UserGoldTeam>(entity =>
             {
-                entity.ToTable("UserGoldTeam_2022");
+                entity.ToTable("UserGoldTeam_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -224,10 +228,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserPlayoffTeam -> UserPlayoffTeams_2022 (composite key)
+            // UserPlayoffTeam -> UserPlayoffTeams_2026 (composite key)
             modelBuilder.Entity<UserPlayoffTeam>(entity =>
             {
-                entity.ToTable("UserPlayoffTeams_2022");
+                entity.ToTable("UserPlayoffTeams_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -239,10 +243,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserQFTeam -> UserQFTeams_2022 (composite key)
+            // UserQFTeam -> UserQFTeams_2026 (composite key)
             modelBuilder.Entity<UserQFTeam>(entity =>
             {
-                entity.ToTable("UserQFTeams_2022");
+                entity.ToTable("UserQFTeams_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -254,10 +258,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserSFTeam -> UserSFTeams_2022 (composite key)
+            // UserSFTeam -> UserSFTeams_2026 (composite key)
             modelBuilder.Entity<UserSFTeam>(entity =>
             {
-                entity.ToTable("UserSFTeams_2022");
+                entity.ToTable("UserSFTeams_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -269,10 +273,10 @@ namespace VMTips_2022.Models
                     .HasForeignKey(e => e.TeamID);
             });
 
-            // UserSilverTeam -> UserSilverTeam_2022 (composite key)
+            // UserSilverTeam -> UserSilverTeam_2026 (composite key)
             modelBuilder.Entity<UserSilverTeam>(entity =>
             {
-                entity.ToTable("UserSilverTeam_2022");
+                entity.ToTable("UserSilverTeam_2026");
                 entity.HasKey(e => new { e.UserID, e.TeamID });
 
                 entity.HasOne(e => e.User)
@@ -325,6 +329,20 @@ namespace VMTips_2022.Models
             modelBuilder.Entity<User_2021>(entity =>
             {
                 entity.ToTable("User_2021");
+                entity.HasKey(e => e.ID);
+            });
+
+            // User_2022
+            modelBuilder.Entity<User_2022>(entity =>
+            {
+                entity.ToTable("User_2022");
+                entity.HasKey(e => e.ID);
+            });
+
+            // User_2024
+            modelBuilder.Entity<User_2024>(entity =>
+            {
+                entity.ToTable("User_2024");
                 entity.HasKey(e => e.ID);
             });
 
@@ -391,6 +409,28 @@ namespace VMTips_2022.Models
 
                 entity.HasOne(e => e.User_2021)
                     .WithMany(u => u.Standings_2021)
+                    .HasForeignKey(e => e.UserID);
+            });
+
+            // Standings_2022 (composite key)
+            modelBuilder.Entity<Standings_2022>(entity =>
+            {
+                entity.ToTable("Standings_2022");
+                entity.HasKey(e => new { e.UserID, e.UpdateDate });
+
+                entity.HasOne(e => e.User_2022)
+                    .WithMany(u => u.Standings_2022)
+                    .HasForeignKey(e => e.UserID);
+            });
+
+            // Standings_2024 (composite key)
+            modelBuilder.Entity<Standings_2024>(entity =>
+            {
+                entity.ToTable("Standings_2024");
+                entity.HasKey(e => new { e.UserID, e.UpdateDate });
+
+                entity.HasOne(e => e.User_2024)
+                    .WithMany(u => u.Standings_2024)
                     .HasForeignKey(e => e.UserID);
             });
         }

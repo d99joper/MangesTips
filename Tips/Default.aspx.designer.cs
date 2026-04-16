@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VMTips_2022 {
+namespace Tipset {
     
     
     public partial class Default {
@@ -63,9 +63,9 @@ namespace VMTips_2022 {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new VMTips_2022.Site Master {
+        public new Tipset.Site Master {
             get {
-                return ((VMTips_2022.Site)(base.Master));
+                return ((Tipset.Site)(base.Master));
             }
         }
     }

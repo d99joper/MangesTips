@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 
-namespace VMTips_2022
+namespace Tipset
 {
     public partial class login : System.Web.UI.Page
     {

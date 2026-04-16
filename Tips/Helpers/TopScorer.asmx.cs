@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 
-namespace VMTips_2022.Helpers
+namespace Tipset.Helpers
 {
     /// <summary>
     /// Summary description for WebServices
