@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <link href="" rel="Stylesheet" type="text/css" />
-    <title>Manges VM-tips 2022</title>
+    <title>Manges VM-tips 2026</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     
     </asp:ContentPlaceHolder>

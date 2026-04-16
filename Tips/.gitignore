@@ -1,1 +1,4 @@
 ﻿.vs/
+*.csproj.user
+obj/
+Tips/bin/
