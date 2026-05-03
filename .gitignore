@@ -56,3 +56,10 @@ Thumbs.db
 /Tips/Web.config
 /Tips/.vs
 /.vs
+
+# Ignore bin and obj folders at any level of the project
+**/bin/
+**/obj/
+/UpgradeLog.htm
+/UpgradeLog2.htm
+/UpgradeLog3.htm
