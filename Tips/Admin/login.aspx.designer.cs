@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tips {
+namespace Tipset {
     
     
     public partial class login {

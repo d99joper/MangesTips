@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tips.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tipset.Site" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <link href="" rel="Stylesheet" type="text/css" />
-    <title>Manges VM-tips 2022</title>
+    <title>Manges VM-tips 2026</title>
     <meta property="og:title" content="Manges VM-tips" />
     <meta property="og:description" content="Det perfekta tillbehöret till fotbolls-VM. Inlägg, resultatlista och statistik på ett ställe." />
     <meta property="og:image" content="http://mangesvmtips2022.personablesolutions.com/images/overstlogga2022small3.png" />

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Data;
-using System.Data.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.EntityFrameworkCore;
 
-namespace Tips.Models
+namespace Tipset.Models
 {
     public class UserRepository : IUserRepository
     {
@@ -92,13 +91,19 @@ namespace Tips.Models
                 }
                 else
                     standings[i - 1].Position = i;
-                    
             }
+
+            Save();
         }
 
-        internal object GetStandingDates()
+        internal List<StandingDate> GetStandingDates()
         {
-            return (from s in db.Standings orderby s.UpdateDate descending select new { guid = s.Guid, UpdateDate = s.UpdateDate }).Distinct().OrderBy(s => s.UpdateDate).ToList();            
+            return db.Standings
+                .Where(s => s.Guid.HasValue)
+                .Select(s => new StandingDate { Guid = s.Guid.Value, UpdateDate = s.UpdateDate })
+                .Distinct()
+                .OrderBy(s => s.UpdateDate)
+                .ToList();
         }
 
         public void ResetAllBonusPoints()
@@ -178,8 +183,8 @@ namespace Tips.Models
             using (Tips_Entities db = new Tips_Entities())
             {
                 return db.UserMatches
-                    .Include("User")
-                    .Include("Match")
+                    .Include(um => um.User)
+                    .Include(um => um.Match)
                     .Where(um => um.MatchID == matchID && um.ResultMark == resultMark && um.User.HasPaid)
                     .OrderBy(um => um.User.DisplayName)
                     .ToList();

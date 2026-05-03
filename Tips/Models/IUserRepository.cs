@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Tips.Models
+namespace Tipset.Models
 {
     interface IUserRepository
     {

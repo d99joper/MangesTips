@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tips.Admin {
+namespace Tipset.Admin {
     
     
     public partial class Default {

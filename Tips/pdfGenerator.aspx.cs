@@ -1,10 +1,10 @@
 ﻿using System;
-using Tips.Models;
+using Tipset.Models;
 using System.Linq;
 using ceTe.DynamicPDF;
 using ceTe.DynamicPDF.PageElements;
 
-namespace Tips
+namespace Tipset
 {
     public partial class pdfGenerator : System.Web.UI.Page
     {

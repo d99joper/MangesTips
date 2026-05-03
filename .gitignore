@@ -54,16 +54,7 @@ Thumbs.db
 /.vs/VMTips_2022/v15/Server/sqlite3/storage.ide-wal
 /.vs/VMTips_2022/v15/.suo
 /Tips/Web.config
-/Tips/.vs
-/.vs
-
-# Ignore bin and obj folders at any level of the project
-**/bin/
-**/obj/
-
+/.vs/Tips
 /UpgradeLog.htm
 /UpgradeLog2.htm
 /UpgradeLog3.htm
-
-Tips/bin
-Tips/obj

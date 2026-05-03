@@ -5,7 +5,7 @@ using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Net.Mail;
 
-namespace Tips.Helpers
+namespace Tipset.Helpers
 {
     public static class SendEmail 
     {

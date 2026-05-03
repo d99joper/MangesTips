@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="TopScorer.asmx.cs" Class="Tips.Helpers.TopScorer" %>
+﻿<%@ WebService Language="C#" CodeBehind="TopScorer.asmx.cs" Class="Tipset.Helpers.TopScorer" %>

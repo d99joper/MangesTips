@@ -1,0 +1,18 @@
+﻿@model Tipset.ViewModels.StatDetailsViewModel
+@{
+    Layout = null;
+}
+<div id="resultView">
+    <table>
+        @foreach (var row in Model.Rows)
+        {
+            <tr>
+                <td class="@(row.IsHighlighted ? "highlight" : "")">@row.DisplayName</td>
+                @if (!string.IsNullOrEmpty(row.Extra))
+                {
+                    <td class="@(row.IsHighlighted ? "highlight" : "")">@row.Extra</td>
+                }
+            </tr>
+        }
+    </table>
+</div>

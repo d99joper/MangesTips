@@ -1,0 +1,210 @@
+﻿@model Tipset.ViewModels.NyKupongViewModel
+@{
+    ViewBag.Title = "Skapa ny tipskupong";
+}
+@section head {
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#txtTopScorer").autocomplete({
+                source: "@Url.Content("~/Helpers/TopScorers.ashx")",
+                delay: 100
+            });
+        });
+    </script>
+}
+
+@if (!Model.IsOpen)
+{
+    <div id="divPassedDeadline">Anmälningstiden till Manges VM-tips har gått ut.</div>
+}
+else
+{
+    using (Html.BeginForm("Index", "NyKupong", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div id="wrap">
+            <h2>Skapa tipskupong</h2>
+            <fieldset>
+                <legend>Kupong</legend>
+
+                <div id="header">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <p class="error">@Model.ErrorMessage</p>
+                    }
+                    <div style="float:right;padding:5px;width:400px;">
+                        Vill du ladda ner tipset och sitta och klura i lugn och ro?
+                        <a href="@Url.Content("~/Docs/vmtipset2022.docx")">Klicka här!</a>
+                        <div id="rightside">
+                            <center><img src="@Url.Content("~/images/overstlogga2022small3.png")" alt="Manges VM-tips" /></center>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="leftside">
+
+                    <div class="editor-label"><label>Förnamn</label></div>
+                    <div class="editor-field">
+                        <input type="text" name="FirstName" value="@Model.FirstName" maxlength="45" required />
+                    </div>
+
+                    <div class="editor-label"><label>Efternamn</label></div>
+                    <div class="editor-field">
+                        <input type="text" name="LastName" value="@Model.LastName" maxlength="45" required />
+                    </div>
+
+                    <div class="editor-label"><label>E-post</label></div>
+                    <div class="editor-field">
+                        <input type="email" name="Email" value="@Model.Email" maxlength="95" required />
+                    </div>
+
+                    <br />
+                    <div class="editor-label">1. Tipsraden. Tippa resultatet i gruppspelet, t.ex 2-0.</div>
+                    <table class="tips">
+                        @for (int i = 0; i < Model.Matches.Count; i++)
+                        {
+                            var m = Model.Matches[i];
+                            var score = i < Model.Scores.Count ? Model.Scores[i] : new Tipset.ViewModels.MatchScoreInput { MatchID = m.ID };
+                            <tr>
+                                <input type="hidden" name="Scores[@i].MatchID" value="@m.ID" />
+                                <td>@m.Date.ToString("d/M", new System.Globalization.CultureInfo("en-US"))</td>
+                                <td>@m.HomeTeam.GroupID&nbsp;</td>
+                                <td>@m.HomeTeam.TeamName</td>
+                                <td>-</td>
+                                <td>@m.AwayTeam.TeamName</td>
+                                <td>
+                                    <input type="number" name="Scores[@i].HomeGoals" value="@score.HomeGoals"
+                                           class="goalInput" min="0" max="99" style="width:35px;" required />
+                                </td>
+                                <td>-</td>
+                                <td>
+                                    <input type="number" name="Scores[@i].AwayGoals" value="@score.AwayGoals"
+                                           class="goalInput" min="0" max="99" style="width:35px;" required />
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <br /><br />
+                    <div class="editor-label">2. Vidare från gruppen</div>
+
+                    @* Groups A-D *@
+                    <table>
+                        <thead><tr>
+                            <td>Grupp A</td><td>Grupp B</td><td>Grupp C</td><td>Grupp D</td>
+                        </tr></thead>
+                        <tr>
+                            @foreach (var g in new[] { "A", "B", "C", "D" })
+                            {
+                                <td>1:a @Html.DropDownList("Playoff" + g + "1",
+                                    new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "1").GetValue(Model)),
+                                    "-- Lag 1 --", new { @class = "groupSelect" })</td>
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var g in new[] { "A", "B", "C", "D" })
+                            {
+                                <td>2:a @Html.DropDownList("Playoff" + g + "2",
+                                    new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "2").GetValue(Model)),
+                                    "-- Lag 2 --", new { @class = "groupSelect" })</td>
+                            }
+                        </tr>
+                    </table>
+
+                    @* Groups E-H *@
+                    <table>
+                        <thead><tr>
+                            <td>Grupp E</td><td>Grupp F</td><td>Grupp G</td><td>Grupp H</td>
+                        </tr></thead>
+                        <tr>
+                            @foreach (var g in new[] { "E", "F", "G", "H" })
+                            {
+                                <td>1:a @Html.DropDownList("Playoff" + g + "1",
+                                    new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "1").GetValue(Model)),
+                                    "-- Lag 1 --", new { @class = "groupSelect" })</td>
+                            }
+                        </tr>
+                        <tr>
+                            @foreach (var g in new[] { "E", "F", "G", "H" })
+                            {
+                                <td>2:a @Html.DropDownList("Playoff" + g + "2",
+                                    new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "2").GetValue(Model)),
+                                    "-- Lag 2 --", new { @class = "groupSelect" })</td>
+                            }
+                        </tr>
+                    </table>
+
+                    <br />
+                    <div class="editor-label">
+                        3. Vilka åtta lag går till kvartsfinal?
+                        @if (Model.QFError) { <span class="error">* Samma lag två gånger.</span> }
+                    </div>
+                    <table>
+                        @for (int i = 0; i < 8; i += 2)
+                        {
+                            <tr>
+                                <td>@Html.DropDownList("QFTeams[" + i + "]",       new SelectList(Model.AllTeams, "ID", "TeamName", Model.QFTeams[i]),     "-- Lag --")</td>
+                                <td>@Html.DropDownList("QFTeams[" + (i+1) + "]",   new SelectList(Model.AllTeams, "ID", "TeamName", Model.QFTeams[i+1]), "-- Lag --")</td>
+                            </tr>
+                        }
+                    </table>
+
+                    <br />
+                    <div class="editor-label">
+                        4. Vilka fyra lag går till semifinal?
+                        @if (Model.SFError) { <span class="error">* Samma lag två gånger.</span> }
+                    </div>
+                    <table>
+                        <tr>
+                            @for (int i = 0; i < 4; i++)
+                            {
+                                <td>@Html.DropDownList("SFTeams[" + i + "]", new SelectList(Model.AllTeams, "ID", "TeamName", Model.SFTeams[i]), "-- Lag --")</td>
+                            }
+                        </tr>
+                    </table>
+
+                    <br />
+                    <div class="editor-label">
+                        5. Vilka två lag går till final?
+                        @if (Model.FinalError) { <span class="error">* Samma lag två gånger.</span> }
+                    </div>
+                    <table>
+                        <tr>
+                            <td>@Html.DropDownList("FinalTeams[0]", new SelectList(Model.AllTeams, "ID", "TeamName", Model.FinalTeams[0]), "-- Lag 1 --")</td>
+                            <td>@Html.DropDownList("FinalTeams[1]", new SelectList(Model.AllTeams, "ID", "TeamName", Model.FinalTeams[1]), "-- Lag 2 --")</td>
+                        </tr>
+                    </table>
+
+                    <br />
+                    <div class="editor-label">
+                        6. Skyttekung:
+                        @if (!string.IsNullOrEmpty(Model.ScorerError)) { <span class="error">@Model.ScorerError</span> }
+                    </div>
+                    <input type="text" id="txtTopScorer" name="TopScorer" value="@Model.TopScorer" autocomplete="off" />
+
+                    <br /><br />
+                    <div class="editor-label">7. Brons:</div>
+                    @Html.DropDownList("BronzeTeam", new SelectList(Model.AllTeams, "ID", "TeamName", Model.BronzeTeam), "-- Lag --")
+
+                    <br /><br />
+                    <div class="editor-label">8. Silver:</div>
+                    @Html.DropDownList("SilverTeam", new SelectList(Model.AllTeams, "ID", "TeamName", Model.SilverTeam), "-- Lag --")
+
+                    <br /><br />
+                    <div class="editor-label">9. Guld:</div>
+                    @Html.DropDownList("GoldTeam", new SelectList(Model.AllTeams, "ID", "TeamName", Model.GoldTeam), "-- Lag --")
+
+                    <br /><br />
+                </div>
+            </fieldset>
+
+            <div id="footer">
+                <button type="submit">Skicka</button>
+            </div>
+        </div>
+    }
+}

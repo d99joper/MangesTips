@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tips.Models
+namespace Tipset.Models
 {
-    public class TeamRepository : Tips.Models.ITeamRepository 
+    public class TeamRepository : Tipset.Models.ITeamRepository 
     {
         public enum TeamInqueryType
         {

@@ -1,0 +1,148 @@
+﻿@model Tipset.ViewModels.DetailsViewModel
+
+<div id="wrap">
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="error">@Model.ErrorMessage</p>
+    }
+
+    <div id="leftside" style="width:530px;">
+        <p>
+            @Model.DisplayName <br />
+            Nuvarande placering: @Model.Position<br />
+            Totalpoäng: @Model.TotalPoints<br />
+            @Html.Raw(Model.Vm2010Html)
+            @Html.Raw(Model.Em2012Html)
+            @Html.Raw(Model.Vm2014Html)
+            @Html.Raw(Model.Em2016Html)
+            Se ursprunglig tipsrad för utskrift (pdf): <a href="@Model.PdfUrl" target="_blank">PDF-fil</a>
+        </p>
+
+        1. Tipsraden
+        <table style="width: 500px;">
+            @foreach (var match in Model.UserMatches)
+            {
+                <tr>
+                    <td>@match.Match.Date.ToString("d/M", new System.Globalization.CultureInfo("en-US"))</td>
+                    <td>@match.Match.HomeTeam.GroupID&nbsp;</td>
+                    <td style="width: 160px">@match.Match.HomeTeam.TeamName</td>
+                    <td>-</td>
+                    <td style="width: 160px">@match.Match.AwayTeam.TeamName</td>
+                    <td style="width: 35px">@match.HomeGoals-@match.AwayGoals</td>
+                    <td style="padding:0 0 0 20px;">@(match.Match.ResultMark != null ? string.Format("{0}p", match.Points) : "")</td>
+                </tr>
+            }
+        </table>
+
+        <br /><br />
+        <div class="editor-label">
+            2. Vidare från gruppen
+        </div>
+        <div id="divPlayoffTeams">
+            <table class="playoff">
+                <thead>
+                    <tr>
+                        <td>Grupp A @Model.GroupBonus["A"]</td>
+                        <td>Grupp B @Model.GroupBonus["B"]</td>
+                        <td>Grupp C @Model.GroupBonus["C"]</td>
+                        <td>Grupp D @Model.GroupBonus["D"]</td>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>1. @Model.PlayoffTeams["1A"]</td>
+                    <td>1. @Model.PlayoffTeams["1B"]</td>
+                    <td>1. @Model.PlayoffTeams["1C"]</td>
+                    <td>1. @Model.PlayoffTeams["1D"]</td>
+                </tr>
+                <tr>
+                    <td>2. @Model.PlayoffTeams["2A"]</td>
+                    <td>2. @Model.PlayoffTeams["2B"]</td>
+                    <td>2. @Model.PlayoffTeams["2C"]</td>
+                    <td>2. @Model.PlayoffTeams["2D"]</td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td align="center">Grupp E @Model.GroupBonus["E"]</td>
+                    <td align="center">Grupp F @Model.GroupBonus["F"]</td>
+                    <td align="center">Grupp G @Model.GroupBonus["G"]</td>
+                    <td align="center">Grupp H @Model.GroupBonus["H"]</td>
+                </tr>
+                <tr>
+                    <td>1. @Model.PlayoffTeams["1E"]</td>
+                    <td>1. @Model.PlayoffTeams["1F"]</td>
+                    <td>1. @Model.PlayoffTeams["1G"]</td>
+                    <td>1. @Model.PlayoffTeams["1H"]</td>
+                </tr>
+                <tr>
+                    <td>2. @Model.PlayoffTeams["2E"]</td>
+                    <td>2. @Model.PlayoffTeams["2F"]</td>
+                    <td>2. @Model.PlayoffTeams["2G"]</td>
+                    <td>2. @Model.PlayoffTeams["2H"]</td>
+                </tr>
+            </table>
+        </div>
+
+        <br /><br />
+        <div class="editor-label">
+            3. Vilka lag går till kvartsfinal?
+        </div>
+        <div id="divQuarterFinalTeams">
+            <table class="playoff">
+                @foreach (var row in Model.QFRows)
+                {
+                    <tr>
+                        <td>@row[0]</td>
+                        <td>@row[1]</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <br /><br />
+        <div class="editor-label">
+            4. Vilka lag går till semifinal?
+        </div>
+        <div id="div1">
+            <table class="playoff">
+                @foreach (var row in Model.SFRows)
+                {
+                    <tr>
+                        <td>@row[0]</td>
+                        <td>@row[1]</td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <br /><br />
+        <div class="editor-label">
+            5. Vilka lag går till final?
+        </div>
+        <div id="div2">
+            <table class="playoff">
+                <tr>
+                    @foreach (var team in Model.FinalTeams)
+                    {
+                        <td>@team</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <br /><br />
+        6. Skytteligan: @Model.TopScorer
+
+        <br /><br />
+        7. Brons: @Model.Bronze
+
+        <br /><br />
+        8. Silver: @Model.Silver
+
+        <br /><br />
+        9. Guld: @Model.Gold
+    </div>
+
+    <div id="rightside" style="width: 330px;">
+        <img src="@Url.Content("~/images/overstlogga2022small3.png")" alt="Manges VM-tips" />
+    </div>
+</div>

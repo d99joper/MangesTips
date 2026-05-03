@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 
-namespace Tips.Helpers
+namespace Tipset.Helpers
 {
     /// <summary>
     /// Summary description for WebServices

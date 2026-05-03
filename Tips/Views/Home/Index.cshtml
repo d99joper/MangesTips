@@ -1,0 +1,71 @@
+﻿@model Tipset.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Ställning";
+    string posDir = (Model.SortColumn == "Position"    && Model.SortDir == "asc") ? "desc" : "asc";
+    string fnDir  = (Model.SortColumn == "FirstName"   && Model.SortDir == "asc") ? "desc" : "asc";
+    string lnDir  = (Model.SortColumn == "LastName"    && Model.SortDir == "asc") ? "desc" : "asc";
+    string tpDir  = (Model.SortColumn == "TotalPoints" && Model.SortDir == "asc") ? "desc" : "asc";
+}
+
+<div id="wrap">
+    <center><img src="@Url.Content("~/images/overstlogga2022small3.png")" alt="Manges VM-tips" /></center>
+
+    @if (Model.EnableNewEntries)
+    {
+        <p>Här kommer den aktuella ställningen dyka upp när<br /> alla tipsrader är inlämnade.</p>
+        <p>
+            För att inte riskera att de du tippar försvinner om <br />överföringen av kupongen misslyckas,<br />
+            rekommenderas att du laddar ner tipset i <a href="@Url.Content("~/Docs/tipset2022.docx")">word</a><br />
+            eller <a href="@Url.Content("~/Docs/tipset2022.xlsx")">excel</a> och tippar i lugn och ro,<br />
+            för att sedan fylla i det du tippat här på sidan.
+        </p>
+        <p>
+            Vill du lämna in en tipsrad följ länken nedan:<br />
+            <a href="@Url.Content("~/NyKupong.aspx")">Fyll i en ny tipskupong</a>
+        </p>
+        <p>Lycka till!</p>
+        <center><img src="@Url.Content("~/images/loggacolor.png")" alt="Manges VM-tips" height="400px" /></center>
+    }
+    else
+    {
+        <p>Aktuell ställning vid datum:</p>
+        <form action="@Url.Action("Index", "Home")" method="get">
+            <select name="date" class="longdate" onchange="this.form.submit()">
+                @foreach (var d in Model.StandingDates)
+                {
+                    <option value="@d.Guid" selected="@(d.Guid == Model.SelectedDate ? "selected" : null)">@d.UpdateDate.ToString("dd/MM HH:mm")</option>
+                }
+            </select>
+            <input type="hidden" name="sort" value="@Model.SortColumn" />
+            <input type="hidden" name="dir" value="@Model.SortDir" />
+        </form>
+
+        if (Model.Standings != null && Model.Standings.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align:center;"><a href="@Url.Action("Index", new { date = Model.SelectedDate, sort = "Position", dir = posDir })">Plats</a></th>
+                        <th><a href="@Url.Action("Index", new { date = Model.SelectedDate, sort = "FirstName", dir = fnDir })">Förnamn</a></th>
+                        <th><a href="@Url.Action("Index", new { date = Model.SelectedDate, sort = "LastName", dir = lnDir })">Efternamn</a></th>
+                        <th style="text-align:center;"><a href="@Url.Action("Index", new { date = Model.SelectedDate, sort = "TotalPoints", dir = tpDir })">Poäng</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model.Standings)
+                    {
+                        <tr class="normalrow" style="cursor:pointer"
+                            onmouseover="this.className='highlightrow';this.style.cursor='hand';"
+                            onmouseout="this.className='normalrow';this.style.cursor='cursor';"
+                            onclick="window.location='@Url.Action("Index", "Details", new { id = s.UserID })'">
+                            <td align="center">@s.Position</td>
+                            <td>@s.User.FirstName</td>
+                            <td>@s.User.LastName</td>
+                            <td align="center">@s.TotalPoints</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>

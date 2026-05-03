@@ -1,0 +1,288 @@
+﻿@model Tipset.ViewModels.AdminIndexViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Översikt";
+    var groups = new[] { "A","B","C","D","E","F","G","H" };
+    var allTeams = Model.AllTeams;
+    Func<int,string> sel = id => id <= 0 ? "selected" : "";
+}
+
+<input type="hidden" id="activeTab" value="@Model.ActiveTab" />
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{ <p class="error">@Model.ErrorMessage</p> }
+
+<div class="tab-nav">
+    <a href="#">Resultat</a>
+    <a href="#">Användare</a>
+    <a href="#">Inställningar</a>
+    <a href="#">Blogg</a>
+    <a href="#">Lag & Matcher</a>
+    <a href="#">Toppscorare</a>
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 0 – Match results
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    @using (Html.BeginForm("SaveResults", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <h3>Matchresultat</h3>
+        <table>
+            <tr><th>#</th><th>Hemma</th><th>Borta</th><th>HM</th><th>BM</th></tr>
+            @for (int i = 0; i < Model.Matches.Count; i++)
+            {
+                var m = Model.Matches[i];
+                <tr>
+                    <td>@m.ID</td>
+                    <td>@m.HomeTeam?.TeamName</td>
+                    <td>@m.AwayTeam?.TeamName</td>
+                    <td>
+                        <input type="hidden" name="Matches[@i].MatchID" value="@m.ID" />
+                        <input type="number" name="Matches[@i].HomeGoals" value="@(m.HomeGoals)" min="0" max="99" style="width:45px" />
+                    </td>
+                    <td>
+                        <input type="number" name="Matches[@i].AwayGoals" value="@(m.AwayGoals)" min="0" max="99" style="width:45px" />
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <h3>Gruppvinnare / tvåor (16-delsfinaler)</h3>
+        <table>
+            <tr><th>Grupp</th><th>1:a</th><th>2:a</th></tr>
+            @foreach (var g in groups)
+            {
+                var teams = allTeams.Where(t => t.GroupID == g).ToList();
+                var s1 = Model.PlayoffSelected.ContainsKey(g+"1") ? Model.PlayoffSelected[g+"1"] : -1;
+                var s2 = Model.PlayoffSelected.ContainsKey(g+"2") ? Model.PlayoffSelected[g+"2"] : -1;
+                <tr>
+                    <td>@g</td>
+                    <td>@Html.DropDownList("Playoff"+g+"1", new SelectList(teams,"ID","TeamName",s1), "-- --")</td>
+                    <td>@Html.DropDownList("Playoff"+g+"2", new SelectList(teams,"ID","TeamName",s2), "-- --")</td>
+                </tr>
+            }
+        </table>
+
+        <h3>Kvartsfinaler (8 lag)</h3>
+        @for (int i = 0; i < 8; i++)
+        {
+            var selId = i < Model.QFSelected.Count ? Model.QFSelected[i] : -1;
+            @Html.DropDownList("QFTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
+        }
+
+        <h3>Semifinaler (4 lag)</h3>
+        @for (int i = 0; i < 4; i++)
+        {
+            var selId = i < Model.SFSelected.Count ? Model.SFSelected[i] : -1;
+            @Html.DropDownList("SFTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
+        }
+
+        <h3>Final (2 lag)</h3>
+        @for (int i = 0; i < 2; i++)
+        {
+            var selId = i < Model.FinSelected.Count ? Model.FinSelected[i] : -1;
+            @Html.DropDownList("FinalTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
+        }
+
+        <h3>Medaljer</h3>
+        <label>Brons: @Html.DropDownList("BronzeTeam", new SelectList(allTeams,"ID","TeamName",Model.BronzeSelected),"-- --")</label>
+        <label>Silver: @Html.DropDownList("SilverTeam", new SelectList(allTeams,"ID","TeamName",Model.SilverSelected),"-- --")</label>
+        <label>Guld: @Html.DropDownList("GoldTeam", new SelectList(allTeams,"ID","TeamName",Model.GoldSelected),"-- --")</label>
+
+        <h3>Toppskytt</h3>
+        <input type="text" name="TopScorer" value="@Model.TopScorer" style="width:220px" />
+        <small>(ytterligare, pipe-separerade)</small>
+        <input type="text" name="AdditionalTopScorers" style="width:300px" />
+
+        <br /><br />
+        <button type="submit" class="btn">Spara resultat &amp; beräkna poäng</button>
+    }
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 1 – Users
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    @if (!string.IsNullOrEmpty(Model.UsersMessage))
+    { <p class="ok">@Model.UsersMessage</p> }
+    @using (Html.BeginForm("SaveUsers", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr><th>ID</th><th>Namn</th><th>E-post</th><th>Betalt</th><th>Bekräftad</th><th>Vinnare</th></tr>
+            @for (int i = 0; i < Model.Users.Count; i++)
+            {
+                var u = Model.Users[i];
+                <tr>
+                    <td>@u.ID</td>
+                    <td>@u.FirstName @u.LastName</td>
+                    <td>@u.Email</td>
+                    <td>
+                        <input type="hidden" name="Users[@i].UserID" value="@u.ID" />
+                        <input type="checkbox" name="Users[@i].HasPaid" value="true" @(u.HasPaid?"checked":"") />
+                        <input type="hidden" name="Users[@i].HasPaid" value="false" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].IsConfirmed" value="true" @(u.IsConfirmed?"checked":"") />
+                        <input type="hidden" name="Users[@i].IsConfirmed" value="false" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].IsWinner" value="true" @(u.IsWinner?"checked":"") />
+                        <input type="hidden" name="Users[@i].IsWinner" value="false" />
+                    </td>
+                </tr>
+            }
+        </table>
+        <button type="submit" class="btn">Spara användare</button>
+    }
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 2 – Settings
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <h3>Inställningar</h3>
+    <p>Nya anmälningar är för tillfället: <strong>@(Model.EnableNewEntries ? "tillåtna" : "förbjudna")</strong></p>
+    @using (Html.BeginForm("ToggleNewEntries", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn">@(Model.EnableNewEntries ? "Förbjud nya anmälningar" : "Tillåt nya anmälningar")</button>
+    }
+    <hr />
+    <h3>Generera statistik</h3>
+    @if (!string.IsNullOrEmpty(Model.StatsMessage)) { <p class="ok">@Model.StatsMessage</p> }
+    @using (Html.BeginForm("GenerateStats", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn">Generera statistik</button>
+    }
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 3 – Blog
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <h3>Blogginlägg</h3>
+    <table>
+        <tr><th>ID</th><th>Titel</th><th>Datum</th><th></th></tr>
+        @foreach (var b in Model.BlogEntries)
+        {
+            <tr>
+                <td>@b.ID</td>
+                <td>@b.Title</td>
+                <td>@b.PostedDate.ToShortDateString()</td>
+                <td>
+                    <a href="#" onclick="editBlog(@b.ID,'@Html.Raw(b.Title.Replace("'","\\'"))');return false;">Redigera</a>
+                    @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, new { style="display:inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" onclick="return confirm('Radera?')">Radera</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    @using (Html.BeginForm("SaveBlogEntry", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" id="hdnBlogEntryID" name="BlogEntryID" value="0" />
+        <label>Titel: <input type="text" name="Title" id="txtBlogTitle" style="width:300px" /></label><br />
+        <label>Text:<br /><textarea name="Text" id="txtBlogText" rows="6" style="width:500px"></textarea></label><br />
+        <button type="submit" id="btnSaveBlog" class="btn">Lägg till</button>
+        <button type="button" onclick="clearBlog()">Rensa</button>
+    }
+    <script>
+        function editBlog(id, title) {
+            document.getElementById('hdnBlogEntryID').value = id;
+            document.getElementById('txtBlogTitle').value = title;
+            document.getElementById('btnSaveBlog').textContent = 'Uppdatera';
+        }
+        function clearBlog() {
+            document.getElementById('hdnBlogEntryID').value = '0';
+            document.getElementById('txtBlogTitle').value = '';
+            document.getElementById('txtBlogText').value = '';
+            document.getElementById('btnSaveBlog').textContent = 'Lägg till';
+        }
+    </script>
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 4 – Teams & Matches
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <h3>Lag</h3>
+    <table>
+        <tr><th>ID</th><th>Namn</th><th>Grupp</th></tr>
+        @foreach (var t in Model.Teams)
+        {
+            <tr><td>@t.ID</td><td>@t.TeamName</td><td>@t.GroupID</td></tr>
+        }
+    </table>
+    @using (Html.BeginForm("SaveTeam", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="TeamID" value="0" />
+        <input type="text" name="TeamName" placeholder="Lagnamn" />
+        <input type="text" name="GroupID"  placeholder="Grupp (A-H)" style="width:50px" />
+        <button type="submit" class="btn">Lägg till lag</button>
+    }
+
+    <h3>Matcher</h3>
+    <table>
+        <tr><th>ID</th><th>Hemma</th><th>Borta</th><th>Datum</th></tr>
+        @foreach (var m in Model.Matches)
+        {
+            <tr>
+                <td>@m.ID</td>
+                <td>@m.HomeTeam?.TeamName</td>
+                <td>@m.AwayTeam?.TeamName</td>
+                <td>@m.Date.ToShortDateString()</td>
+            </tr>
+        }
+    </table>
+    @using (Html.BeginForm("SaveMatch", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="MatchID" value="0" />
+        @Html.DropDownList("HomeTeamID", new SelectList(allTeams,"ID","TeamName"), "-- Hemmalag --")
+        @Html.DropDownList("AwayTeamID", new SelectList(allTeams,"ID","TeamName"), "-- Bortalag --")
+        <input type="text" name="Date" placeholder="yyyy-MM-dd" />
+        <button type="submit" class="btn">Lägg till match</button>
+    }
+</div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 5 – Top scorers
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <h3>Toppscorare</h3>
+    <table>
+        <tr><th>ID</th><th>Namn</th><th>Vinnare</th><th></th></tr>
+        @foreach (var s in Model.TopScorers)
+        {
+            <tr>
+                <td>@s.ID</td>
+                <td>@s.DisplayName</td>
+                <td>@(s.IsWinner ? "✓" : "")</td>
+                <td>
+                    @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, new { style="display:inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" onclick="return confirm('Radera?')">Radera</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    @using (Html.BeginForm("SaveTopScorer", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="TopScorerID" value="0" />
+        <input type="text" name="FirstName" placeholder="Förnamn" />
+        <input type="text" name="LastName"  placeholder="Efternamn" />
+        <button type="submit" class="btn">Lägg till</button>
+    }
+</div>

@@ -1,0 +1,27 @@
+﻿@model System.Collections.Generic.List<Tipset.Models.BlogEntry>
+@{
+    ViewBag.Title = "Blog";
+}
+
+<div id="wrap">
+    <div id="leftside">
+        @foreach (var entry in Model)
+        {
+            <span class="blogHeader"><a href="@Url.Action("Details", "Blog", new { id = entry.ID })">@entry.Title</a></span>
+            <div id="blogEntry">
+                @Html.Raw(entry.Text)
+            </div>
+            <div id="blogFooter">
+                Postat @entry.PostedDate.
+                @if (entry.Comments.Count == 0)
+                {
+                    <a href="@Url.Action("Details", "Blog", new { id = entry.ID })"> Kommentera</a>
+                }
+                else
+                {
+                    <text>Det finns <a href="@Url.Action("Details", "Blog", new { id = entry.ID })"> @entry.Comments.Count kommentarer.</a></text>
+                }
+            </div>
+        }
+    </div>
+</div>

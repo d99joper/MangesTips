@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tips {
+namespace Tipset {
     
     
     public partial class Default {
@@ -63,9 +63,9 @@ namespace Tips {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new Tips.Site Master {
+        public new Tipset.Site Master {
             get {
-                return ((Tips.Site)(base.Master));
+                return ((Tipset.Site)(base.Master));
             }
         }
     }

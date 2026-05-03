@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Linq;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Tips.Models
+namespace Tipset.Models
 {
     public partial class User
     {

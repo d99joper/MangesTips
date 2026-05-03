@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Data;
-using System.Data.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tips.Models
+namespace Tipset.Models
 {
     public class BlogRepository
     {

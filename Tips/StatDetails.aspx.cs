@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Tips
+namespace Tipset
 {
     public partial class StatDetails : System.Web.UI.Page
     {
