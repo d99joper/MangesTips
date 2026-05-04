@@ -98,7 +98,7 @@
 		</div>
 	
 		<div class="rightside">
-			<img src="../images/loggacolor.png" alt="Manges VM-tips" width="350px"/>
+			<img src="../images/logo20262color.png" alt="Manges VM-tips" width="350px"/>
 			<div class="editor-label">
 				2. Vidare från gruppen 
 			</div>

@@ -163,7 +163,7 @@ namespace Tipset.Controllers
         private string BuildEmailBody(Guid guid)
         {
             string url = string.Format(
-                "http://mangesvmtips2022.personablesolutions.com/Confirm?id={0}", guid);
+                "http://mangesvmtips2026.personablesolutions.com/Confirm?id={0}", guid);
             return "<p>Tack för din anmälan till Manges VM-tips.</p>" +
                    "<p>Din kupong är fortfarande inte bekräftad. Klicka på länken nedan för att bekräfta din anmälan.</p>" +
                    string.Format("<p><a href=\"{0}\">{0}</a></p>", url);

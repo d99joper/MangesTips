@@ -27,8 +27,8 @@ namespace Tipset
                 wrap.InnerHtml += "för att sedan fylla i det du tippat här på sidan.</p>";
                 wrap.InnerHtml += "<p>Vill du lämna in en tipsrad följ länken nedan:<br />";
                 wrap.InnerHtml += "<a href=\"Nykupong.aspx\">Fyll i en ny tipskupong</a></p>";
-                wrap.InnerHtml += "<p>Lycka till!</p>";//<center><img src="images/loggan2012400.png" alt="Manges VM-tips" height="320px" /></center> 
-                wrap.InnerHtml += "<center><img src=\"images/loggacolor.png\" alt=\"Manges VM-tips\" height=\"400px\" /></center> ";
+                wrap.InnerHtml += "<p>Lycka till!</p>";
+                wrap.InnerHtml += "<center><img src=\"images/logo20262color.png\" alt=\"Manges VM-tips\" height=\"400px\" /></center> ";
 
                 //Response.Redirect("Nykupong.aspx");
             }

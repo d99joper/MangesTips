@@ -42,7 +42,7 @@ namespace Tipset
                             // set some more info on success
                             lblMoreInfo.Text = "Ett mail har skickats till dig innehållandes en pdf-fil med din tipskupong <br />";
                             lblMoreInfo.Text += "Mailet innehåller även en alfanumerisk kod som du kan använda för att enklare identifiera dig om du tänkt betala via internetbank. <br />";
-                            lblMoreInfo.Text += "Efter den sista anmälningsdagen till Manges VM-tips kommer alla kuponger att visas på http://mangesvmtips2022.personablesolutions.com.  ";
+                            lblMoreInfo.Text += "Efter den sista anmälningsdagen till Manges VM-tips kommer alla kuponger att visas på http://mangesvmtips2026.personablesolutions.com.  ";
                         }
                         catch
                         {
@@ -60,17 +60,6 @@ namespace Tipset
             }
         }
 
-        private string GetMessageBody(string strRandom, string guid)
-        {
-            string strBody = "Hej!<p>Du är nu anmäld till Manges VM-tips.</p>";
-            strBody += "<p>Din kupong har nu skickats till Magnus. Mange kommer att kontakta dig för att bekräfta ditt deltagande och hur betalning ska gå till.</p>";
-            strBody += String.Format("<p>Om du tänkt betala via en internetbank eller swish, var god ange följande kod för att Mange lättare ska kunna identifiera dig: {0}", strRandom);
-            strBody += String.Format("<p>Du kan skriva ut din kupong om du klickar på följande länk:<br /> <a href=\"{0}\">{0}</a>", String.Format("http://mangesvmtips2022.personablesolutions.com/pdfgenerator.aspx?id={0}", guid));
-            strBody += "<p>Tack för din anmälan, och vi önskar dig mycket spänning och lycka till!</p>";
-
-            return strBody;
-        }
-
         private string RandomString(int size, bool lowerCase)
         {
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
@@ -85,5 +74,17 @@ namespace Tipset
                 return builder.ToString().ToLower();
             return builder.ToString();
         }
+
+        private string GetMessageBody(string strRandom, string guid)
+        {
+            string strBody = "Hej!<p>Du är nu anmäld till Manges VM-tips.</p>";
+            strBody += "<p>Din kupong har nu skickats till Mange. Han kommer att kontakta dig för att bekräfta ditt deltagande och hur betalning ska gå till.</p>";
+            strBody += String.Format("<p>Om du tänkt betala via en internetbank eller swish, var god ange följande kod för att Mange lättare ska kunna identifiera dig: {0}", strRandom);
+            strBody += String.Format("<p>Du kan skriva ut din kupong om du klickar på följande länk:<br /> <a href=\"{0}\">{0}</a>", String.Format("http://mangesvmtips2026.personablesolutions.com/pdfgenerator.aspx?id={0}", guid));
+            strBody += "<p>Tack för din anmälan, och vi önskar dig mycket spänning och lycka till!</p>";
+
+            return strBody;
+        }
+
     }
 }

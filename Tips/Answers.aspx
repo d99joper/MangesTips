@@ -243,7 +243,7 @@
         </div>
     
         <div id="rightside">
-            <center><img src="images/overstlogga2022small3.png" alt="Manges VM-tips" /></center>
+            <center><img src="images/oversloggamax2026.png" alt="Manges VM-tips" /></center>
             
         </div>
     

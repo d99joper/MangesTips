@@ -12,7 +12,7 @@
         </h6>
     
         <h6>
-            Ett mail har skickats till den e-postadress du angav.
+            Ett mejl har skickats till den e-postadress du angav. Har du inte fått något mejl kontakta Mange på <a href="mailto:mangesvmtips@gmail.com">mangesvmtips@gmail.com</a>.
         </h6>
         
         <h6>

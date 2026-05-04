@@ -142,8 +142,21 @@ page width. Or, you can specify an exact pixel width. */
     padding: 0;
 }
 
-#header h1
+#title img
 {
+    max-height: 45px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.logo45 {
+    max-height: 45px;
+}
+
+#header h1 {
     font-weight: bold;
     padding: 5px 0;
     margin: 0;
@@ -218,30 +231,24 @@ ul#menu li a:hover
     text-decoration: none;
 }
 
-ul#menu li.active a
+ul#menu li.active a,
+ul#menu li.selected a
 {
-    background-color: #4a86b8; /*#6d035e;*/
-    color: #000000; /*#FFFFFF;*/
-    border: solid 1px black;
-    border-bottom: solid 0px black;
+    background-color: #f0c800;
+    color: #000000;
+    border: solid 2px #b8960a;
+    border-bottom: solid 0px #b8960a;
     text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 -2px 4px rgba(0,0,0,.2);
 }
 
 ul#menu li a:active
 {
-    background-color: #4a86b8; /*#6d035e;*/
-    color: #000000; /*#FFFFFF;*/
-    border: solid 1px black;
-    border-bottom: solid 0px black;
-    text-decoration: none;
-}
-
-ul#menu li.selected a
-{
-    background-color: #4a86b8; /*#6d035e;*/
-    color: #000000; /*#FFFFFF;*/
-    border: solid 1px black;
-    border-bottom: solid 0px black;
+    background-color: #f0c800;
+    color: #000000;
+    border: solid 2px #b8960a;
+    border-bottom: solid 0px #b8960a;
     text-decoration: none;
 }
 

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Admin – @ViewBag.Title</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 13px; margin: 20px; }
+        h2   { color: #444; }
+        .tab-nav { margin-bottom: 12px; }
+        .tab-nav a { margin-right: 8px; padding: 4px 10px; border: 1px solid #999;
+                     border-radius: 3px; text-decoration: none; color: #333; background: #f0f0f0; }
+        .tab-nav a.active { background: #d0e8ff; font-weight: bold; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 10px; }
+        th, td { border: 1px solid #ccc; padding: 4px 6px; }
+        th { background: #eee; }
+        .error  { color: red;   font-weight: bold; }
+        .ok     { color: green; font-weight: bold; }
+        input[type=text], input[type=password], select, textarea
+                { padding: 3px; }
+        .btn    { padding: 4px 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Admin – Manges VM-tips</h2>
+    <p>@Html.ActionLink("Logga ut", "Logout", "Auth")</p>
+    @RenderBody()
+
+    <script>
+        // Simple tab switcher
+        (function () {
+            var active = parseInt(document.getElementById('activeTab').value || '0', 10);
+            var panels = document.querySelectorAll('.tab-panel');
+            var links  = document.querySelectorAll('.tab-nav a');
+            function show(i) {
+                panels.forEach(function(p,idx){ p.classList.toggle('active', idx===i); });
+                links.forEach(function(l,idx){ l.classList.toggle('active', idx===i); });
+            }
+            links.forEach(function(l, i){ l.addEventListener('click', function(e){ e.preventDefault(); show(i); }); });
+            show(active);
+        })();
+    </script>
+</body>
+</html>

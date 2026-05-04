@@ -105,7 +105,7 @@ namespace Tipset
                 {
                     string strBody = "<p>Tack för din anmälan till Manges VM-tips.</p>";
                     strBody = strBody + "<p>Din kupong är fortfarande inte bekräftad.  Genom att klicka på länken nedan bekräftar du automatiskt din anmälan.</p>";
-                    strBody = strBody + String.Format("<p><a href=\"http://mangesvmtips2022.personablesolutions.com/confirm.aspx?id={0}\">http://mangesvmtips2022.personablesolutions.com/confirm.aspx?id={0}</a></p>", thisUser.Guid);
+                    strBody = strBody + String.Format("<p><a href=\"http://mangesvmtips2026.personablesolutions.com/confirm.aspx?id={0}\">http://mangesvmtips2026.personablesolutions.com/confirm.aspx?id={0}</a></p>", thisUser.Guid);
                     Helpers.SendEmail.SendEmail_SMTP("noreply@nodomain.com", "VMTipset", txtEmail.Text, String.Format("{0} {1}", txtFirstName.Text, txtLastName.Text), "Var god bekräfta din anmälan till Manges VM-tips.", strBody);
 
                     // Redirect to an informational page 
