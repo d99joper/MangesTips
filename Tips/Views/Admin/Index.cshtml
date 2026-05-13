@@ -3,8 +3,16 @@
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
     ViewBag.Title = "Översikt";
     var groups = new[] { "A","B","C","D","E","F","G","H" };
-    var allTeams = Model.AllTeams;
-    Func<int,string> sel = id => id <= 0 ? "selected" : "";
+    Func<IEnumerable<Tipset.Models.Team>, int, string, IEnumerable<SelectListItem>> toList =
+        (src, selectedId, label) => {
+            var items = src.Select(t => new SelectListItem {
+                Value    = t.ID.ToString(),
+                Text     = t.TeamName,
+                Selected = t.ID == selectedId
+            }).ToList();
+            items.Insert(0, new SelectListItem { Value = "-1", Text = label, Selected = selectedId <= 0 });
+            return items;
+        };
 }
 
 <input type="hidden" id="activeTab" value="@Model.ActiveTab" />
@@ -12,97 +20,175 @@
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 { <p class="error">@Model.ErrorMessage</p> }
 
+@if (Model.ResultsMessages != null && Model.ResultsMessages.Count > 0)
+{
+    <div class="save-log">
+        @foreach (var msg in Model.ResultsMessages)
+        {
+            <div class="@(msg.StartsWith("❌") ? "save-log-error" : msg.StartsWith("✅") ? "save-log-done" : "save-log-step")">@msg</div>
+        }
+    </div>
+}
+
 <div class="tab-nav">
-    <a href="#">Resultat</a>
+    <a href="#">Facit</a>
     <a href="#">Användare</a>
-    <a href="#">Inställningar</a>
+    <a href="#">Övrigt</a>
     <a href="#">Blogg</a>
-    <a href="#">Lag & Matcher</a>
-    <a href="#">Toppscorare</a>
+    <a href="#">Lag</a>
+    <a href="#">Matcher</a>
+    <a href="#">Potentiella toppskyttar</a>
 </div>
 
 @* ═══════════════════════════════════════════════════════════════════
-   TAB 0 – Match results
+   TAB 0 – Facit
    ═══════════════════════════════════════════════════════════════════ *@
 <div class="tab-panel">
     @using (Html.BeginForm("SaveResults", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <h3>Matchresultat</h3>
-        <table>
-            <tr><th>#</th><th>Hemma</th><th>Borta</th><th>HM</th><th>BM</th></tr>
-            @for (int i = 0; i < Model.Matches.Count; i++)
-            {
-                var m = Model.Matches[i];
-                <tr>
-                    <td>@m.ID</td>
-                    <td>@m.HomeTeam?.TeamName</td>
-                    <td>@m.AwayTeam?.TeamName</td>
-                    <td>
-                        <input type="hidden" name="Matches[@i].MatchID" value="@m.ID" />
-                        <input type="number" name="Matches[@i].HomeGoals" value="@(m.HomeGoals)" min="0" max="99" style="width:45px" />
-                    </td>
-                    <td>
-                        <input type="number" name="Matches[@i].AwayGoals" value="@(m.AwayGoals)" min="0" max="99" style="width:45px" />
-                    </td>
-                </tr>
-            }
-        </table>
+        <div class="wrap">
+            <div class="leftside">
+                <div class="editor-field">1. Tipsraden. Tippa resultatet i gruppspelet, t.ex 2-0.</div>
+                <table class="tips">
+                    @for (int i = 0; i < Model.Matches.Count; i++)
+                    {
+                        var m = Model.Matches[i];
+                        <tr>
+                            <td>@(m.Date.ToString("d/M"))</td>
+                            <td>@(m.HomeTeam != null ? m.HomeTeam.GroupID : "")</td>
+                            <td>@(m.HomeTeam != null ? m.HomeTeam.TeamName : "")</td>
+                            <td>-</td>
+                            <td>@(m.AwayTeam != null ? m.AwayTeam.TeamName : "")</td>
+                            <td>
+                                <input type="hidden" name="Matches[@i].MatchID" value="@m.ID" />
+                                <input type="text" name="Matches[@i].HomeGoals" value="@(m.HomeGoals)" maxlength="2" class="goalInput" style="width:30px" />
+                            </td>
+                            <td>-</td>
+                            <td>
+                                <input type="text" name="Matches[@i].AwayGoals" value="@(m.AwayGoals)" maxlength="2" class="goalInput" style="width:30px" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
 
-        <h3>Gruppvinnare / tvåor (16-delsfinaler)</h3>
-        <table>
-            <tr><th>Grupp</th><th>1:a</th><th>2:a</th></tr>
-            @foreach (var g in groups)
-            {
-                var teams = allTeams.Where(t => t.GroupID == g).ToList();
-                var s1 = Model.PlayoffSelected.ContainsKey(g+"1") ? Model.PlayoffSelected[g+"1"] : -1;
-                var s2 = Model.PlayoffSelected.ContainsKey(g+"2") ? Model.PlayoffSelected[g+"2"] : -1;
-                <tr>
-                    <td>@g</td>
-                    <td>@Html.DropDownList("Playoff"+g+"1", new SelectList(teams,"ID","TeamName",s1), "-- --")</td>
-                    <td>@Html.DropDownList("Playoff"+g+"2", new SelectList(teams,"ID","TeamName",s2), "-- --")</td>
-                </tr>
-            }
-        </table>
+            <div class="rightside">
+                <img src="@Url.Content("~/images/logo20262color.png")" alt="Manges VM-tips" width="350px" />
 
-        <h3>Kvartsfinaler (8 lag)</h3>
-        @for (int i = 0; i < 8; i++)
-        {
-            var selId = i < Model.QFSelected.Count ? Model.QFSelected[i] : -1;
-            @Html.DropDownList("QFTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
-        }
+                <div class="editor-label">2. Vidare från gruppen</div>
+                <table>
+                    <thead>
+                        <tr>
+                            @foreach (var g in new[] {"A","B","C","D"}) { <td>Grupp @g</td> }
+                        </tr>
+                    </thead>
+                    @foreach (var pos in new[] {1, 2})
+                    {
+                        <tr>
+                            @foreach (var g in new[] {"A","B","C","D"})
+                            {
+                                var sid = Model.PlayoffSelected.ContainsKey(g+pos) ? Model.PlayoffSelected[g+pos] : -1;
+                                <td>@pos. @Html.DropDownList("Playoff"+g+pos, toList(Model.AllTeams.Where(t => t.GroupID == g), sid, "Lag " + pos))</td>
+                            }
+                        </tr>
+                    }
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            @foreach (var g in new[] {"E","F","G","I"}) { <td>Grupp @g</td> }
+                        </tr>
+                    </thead>
+                    @foreach (var pos in new[] {1, 2})
+                    {
+                        <tr>
+                            @foreach (var g in new[] {"E","F","G","I"})
+                            {
+                                var sid = Model.PlayoffSelected.ContainsKey(g+pos) ? Model.PlayoffSelected[g+pos] : -1;
+                                <td>@pos. @Html.DropDownList("Playoff"+g+pos, toList(Model.AllTeams.Where(t => t.GroupID == g), sid, "Lag " + pos))</td>
+                            }
+                        </tr>
+                    }
+                </table>
 
-        <h3>Semifinaler (4 lag)</h3>
-        @for (int i = 0; i < 4; i++)
-        {
-            var selId = i < Model.SFSelected.Count ? Model.SFSelected[i] : -1;
-            @Html.DropDownList("SFTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
-        }
+                <div class="editor-label">3. Vilka åtta lag går till kvartsfinal?</div>
+                <table>
+                    @for (int i = 0; i < 8; i += 2)
+                    {
+                        var s1 = i     < Model.QFSelected.Count ? Model.QFSelected[i]   : -1;
+                        var s2 = i + 1 < Model.QFSelected.Count ? Model.QFSelected[i+1] : -1;
+                        <tr>
+                            <td>Lag @(i+1): @Html.DropDownList("QFTeams["+ i    +"]", toList(Model.AllTeams, s1, "Lag " + (i+1)))</td>
+                            <td>Lag @(i+2): @Html.DropDownList("QFTeams["+(i+1)+"]", toList(Model.AllTeams, s2, "Lag " + (i+2)))</td>
+                        </tr>
+                    }
+                </table>
 
-        <h3>Final (2 lag)</h3>
-        @for (int i = 0; i < 2; i++)
-        {
-            var selId = i < Model.FinSelected.Count ? Model.FinSelected[i] : -1;
-            @Html.DropDownList("FinalTeams["+i+"]", new SelectList(allTeams,"ID","TeamName",selId), "-- --")
-        }
+                <div class="editor-label">4. Vilka fyra lag går till semifinal?</div>
+                <table>
+                    @for (int i = 0; i < 4; i += 2)
+                    {
+                        var s1 = i     < Model.SFSelected.Count ? Model.SFSelected[i]   : -1;
+                        var s2 = i + 1 < Model.SFSelected.Count ? Model.SFSelected[i+1] : -1;
+                        <tr>
+                            <td>Lag @(i+1): @Html.DropDownList("SFTeams["+ i    +"]", toList(Model.AllTeams, s1, "Lag " + (i+1)))</td>
+                            <td>Lag @(i+2): @Html.DropDownList("SFTeams["+(i+1)+"]", toList(Model.AllTeams, s2, "Lag " + (i+2)))</td>
+                        </tr>
+                    }
+                </table>
 
-        <h3>Medaljer</h3>
-        <label>Brons: @Html.DropDownList("BronzeTeam", new SelectList(allTeams,"ID","TeamName",Model.BronzeSelected),"-- --")</label>
-        <label>Silver: @Html.DropDownList("SilverTeam", new SelectList(allTeams,"ID","TeamName",Model.SilverSelected),"-- --")</label>
-        <label>Guld: @Html.DropDownList("GoldTeam", new SelectList(allTeams,"ID","TeamName",Model.GoldSelected),"-- --")</label>
+                <div class="editor-label">5. Vilka två lag går till final?</div>
+                <table>
+                    <tr>
+                        @for (int i = 0; i < 2; i++)
+                        {
+                            var sid = i < Model.FinSelected.Count ? Model.FinSelected[i] : -1;
+                            <td>Lag @(i+1): @Html.DropDownList("FinalTeams["+i+"]", toList(Model.AllTeams, sid, "Lag " + (i+1)))</td>
+                        }
+                    </tr>
+                </table>
 
-        <h3>Toppskytt</h3>
-        <input type="text" name="TopScorer" value="@Model.TopScorer" style="width:220px" />
-        <small>(ytterligare, pipe-separerade)</small>
-        <input type="text" name="AdditionalTopScorers" style="width:300px" />
+                <div class="editor-label">6. Skyttekung:</div>
+                @{ var winners = Model.AllTopScorerWinners != null && Model.AllTopScorerWinners.Count > 0
+                        ? Model.AllTopScorerWinners
+                        : new List<string> { "" }; }
+                <div id="topscorer-list">
+                    @for (int ts = 0; ts < winners.Count; ts++)
+                    {
+                        <div class="topscorer-row">
+                            <input type="text" name="TopScorers[@ts]" value="@winners[ts]" class="scorer-ac" autocomplete="off" />
+                            <button type="button" class="btn-icon btn-remove" title="Ta bort">✕</button>
+                        </div>
+                    }
+                </div>
+                <button type="button" id="btn-add-scorer" class="btn">+ En till…</button>
 
-        <br /><br />
-        <button type="submit" class="btn">Spara resultat &amp; beräkna poäng</button>
+                <datalist id="scorer-suggestions">
+                    @foreach (var sc in Model.TopScorers)
+                    {
+                        <option value="@sc.DisplayName"></option>
+                    }
+                </datalist>
+
+                <div class="editor-label">7. Brons:</div>
+                @Html.DropDownList("BronzeTeam", toList(Model.AllTeams, Model.BronzeSelected, "Lag #"))
+
+                <div class="editor-label">8. Silver:</div>
+                @Html.DropDownList("SilverTeam", toList(Model.AllTeams, Model.SilverSelected, "Lag #"))
+
+                <div class="editor-label">9. Guld:</div>
+                @Html.DropDownList("GoldTeam", toList(Model.AllTeams, Model.GoldSelected, "Lag #"))
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <br />
+        <button type="submit" class="btn">Spara facit &amp; beräkna poäng</button>
     }
 </div>
 
 @* ═══════════════════════════════════════════════════════════════════
-   TAB 1 – Users
+   TAB 1 – Användare
    ═══════════════════════════════════════════════════════════════════ *@
 <div class="tab-panel">
     @if (!string.IsNullOrEmpty(Model.UsersMessage))
@@ -110,90 +196,124 @@
     @using (Html.BeginForm("SaveUsers", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <table>
-            <tr><th>ID</th><th>Namn</th><th>E-post</th><th>Betalt</th><th>Bekräftad</th><th>Vinnare</th></tr>
+        <p><button type="submit" class="btn">Spara</button></p>
+        <table class="border">
+            <thead>
+                <tr>
+                    <th>Fullständigt namn</th>
+                    <th>E-post</th>
+                    <th>Personlig kod</th>
+                    <th>Har betalt</th>
+                    <th>Bekräftad</th>
+                    <th>Vinnare</th>
+                    <th>Inskickat</th>
+                </tr>
+            </thead>
             @for (int i = 0; i < Model.Users.Count; i++)
             {
                 var u = Model.Users[i];
                 <tr>
-                    <td>@u.ID</td>
-                    <td>@u.FirstName @u.LastName</td>
-                    <td>@u.Email</td>
                     <td>
+                        @u.DisplayName
                         <input type="hidden" name="Users[@i].UserID" value="@u.ID" />
-                        <input type="checkbox" name="Users[@i].HasPaid" value="true" @(u.HasPaid?"checked":"") />
+                    </td>
+                    <td><a href="mailto:@u.EmailAddress">@u.EmailAddress</a></td>
+                    <td>@u.PayCode</td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].HasPaid" value="true" @(u.HasPaid ? "checked" : "") />
                         <input type="hidden" name="Users[@i].HasPaid" value="false" />
                     </td>
                     <td>
-                        <input type="checkbox" name="Users[@i].IsConfirmed" value="true" @(u.IsConfirmed?"checked":"") />
+                        <input type="checkbox" name="Users[@i].IsConfirmed" value="true" @(u.IsConfirmed ? "checked" : "") />
                         <input type="hidden" name="Users[@i].IsConfirmed" value="false" />
                     </td>
                     <td>
-                        <input type="checkbox" name="Users[@i].IsWinner" value="true" @(u.IsWinner?"checked":"") />
+                        <input type="checkbox" name="Users[@i].IsWinner" value="true" @(u.IsWinner ? "checked" : "") />
                         <input type="hidden" name="Users[@i].IsWinner" value="false" />
                     </td>
+                    <td>@u.PostedDate.ToString("dd/MM/yyyy")</td>
                 </tr>
             }
         </table>
-        <button type="submit" class="btn">Spara användare</button>
+        <p><button type="submit" class="btn">Spara</button></p>
     }
 </div>
 
 @* ═══════════════════════════════════════════════════════════════════
-   TAB 2 – Settings
+   TAB 2 – Övrigt
    ═══════════════════════════════════════════════════════════════════ *@
 <div class="tab-panel">
-    <h3>Inställningar</h3>
-    <p>Nya anmälningar är för tillfället: <strong>@(Model.EnableNewEntries ? "tillåtna" : "förbjudna")</strong></p>
-    @using (Html.BeginForm("ToggleNewEntries", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn">@(Model.EnableNewEntries ? "Förbjud nya anmälningar" : "Tillåt nya anmälningar")</button>
-    }
-    <hr />
-    <h3>Generera statistik</h3>
-    @if (!string.IsNullOrEmpty(Model.StatsMessage)) { <p class="ok">@Model.StatsMessage</p> }
-    @using (Html.BeginForm("GenerateStats", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn">Generera statistik</button>
-    }
-</div>
-
-@* ═══════════════════════════════════════════════════════════════════
-   TAB 3 – Blog
-   ═══════════════════════════════════════════════════════════════════ *@
-<div class="tab-panel">
-    <h3>Blogginlägg</h3>
-    <table>
-        <tr><th>ID</th><th>Titel</th><th>Datum</th><th></th></tr>
-        @foreach (var b in Model.BlogEntries)
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    { <p class="error">@Model.ErrorMessage</p> }
+    <p>
+        @(Model.EnableNewEntries ? "Systemet tillåter nya anmälningar." : "Systemet förbjuder nya anmälningar.")
+        <br /><br />
+        @using (Html.BeginForm("ToggleNewEntries", "Admin", FormMethod.Post))
         {
-            <tr>
-                <td>@b.ID</td>
-                <td>@b.Title</td>
-                <td>@b.PostedDate.ToShortDateString()</td>
-                <td>
-                    <a href="#" onclick="editBlog(@b.ID,'@Html.Raw(b.Title.Replace("'","\\'"))');return false;">Redigera</a>
-                    @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, new { style="display:inline" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <button type="submit" onclick="return confirm('Radera?')">Radera</button>
-                    }
-                </td>
-            </tr>
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn">@(Model.EnableNewEntries ? "Förbjud nya anmälningar" : "Tillåt nya anmälningar")</button>
         }
-    </table>
+    </p>
+    <hr />
+    <p>
+        När du trycker på knappen kommer procentsatser räknas ut för varje lag beroende på vad användarna (godkända) tippat.<br />
+        @using (Html.BeginForm("GenerateStats", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn">Generera statistik</button>
+        }
+        @if (!string.IsNullOrEmpty(Model.StatsMessage)) { <span class="ok">@Model.StatsMessage</span> }
+    </p>
+</div>
 
-    @using (Html.BeginForm("SaveBlogEntry", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <input type="hidden" id="hdnBlogEntryID" name="BlogEntryID" value="0" />
-        <label>Titel: <input type="text" name="Title" id="txtBlogTitle" style="width:300px" /></label><br />
-        <label>Text:<br /><textarea name="Text" id="txtBlogText" rows="6" style="width:500px"></textarea></label><br />
-        <button type="submit" id="btnSaveBlog" class="btn">Lägg till</button>
-        <button type="button" onclick="clearBlog()">Rensa</button>
-    }
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 3 – Blogg
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <div class="wrap">
+        <div class="leftside">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            { <p class="error">@Model.ErrorMessage</p> }
+            @using (Html.BeginForm("SaveBlogEntry", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnBlogEntryID" name="BlogEntryID" value="0" />
+                    Titel: <input type="text" name="Title" id="txtBlogTitle" style="width:300px" /><br />
+                    <textarea name="Text" id="txtBlogText" rows="10" style="width:400px;height:300px"></textarea><br />
+                    <button type="submit" id="btnSaveBlog" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearBlog()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Tidigare inlägg:</p>
+            <table class="border">
+                @foreach (var b in Model.BlogEntries)
+                {
+                    <tr>
+                        <td>@b.PostedDate.ToString("dd/MM/yyyy")</td>
+                        <td>@b.Title</td>
+                        <td>
+                            <a href="#" onclick="editBlog(@b.ID,'@Html.Raw(b.Title.Replace("'","\\'"))');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera inlägget?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
     <script>
         function editBlog(id, title) {
             document.getElementById('hdnBlogEntryID').value = id;
@@ -210,79 +330,308 @@
 </div>
 
 @* ═══════════════════════════════════════════════════════════════════
-   TAB 4 – Teams & Matches
+   TAB 4 – Lag
    ═══════════════════════════════════════════════════════════════════ *@
 <div class="tab-panel">
-    <h3>Lag</h3>
-    <table>
-        <tr><th>ID</th><th>Namn</th><th>Grupp</th></tr>
-        @foreach (var t in Model.Teams)
-        {
-            <tr><td>@t.ID</td><td>@t.TeamName</td><td>@t.GroupID</td></tr>
+    <div class="wrap">
+        <div class="leftside">
+            @using (Html.BeginForm("SaveTeam", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnTeamID" name="TeamID" value="0" />
+                    Lag: <input type="text" id="txtTeamName" name="TeamName" /><br />
+                    Grupp: <input type="text" id="txtTeamGroup" name="GroupID" style="width:40px" /><br />
+                    <button type="submit" id="btnSaveTeam" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearTeam()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Registrerade lag:</p>
+            <table class="border">
+                @foreach (var t in Model.Teams)
+                {
+                    <tr>
+                        <td>@t.TeamName – Grupp @t.GroupID</td>
+                        <td>
+                            <a href="#" onclick="editTeam(@t.ID,'@t.TeamName','@t.GroupID');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteTeam", "Admin", new { id = t.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera laget?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+        function editTeam(id, name, group) {
+            document.getElementById('hdnTeamID').value = id;
+            document.getElementById('txtTeamName').value = name;
+            document.getElementById('txtTeamGroup').value = group;
+            document.getElementById('btnSaveTeam').textContent = 'Uppdatera';
         }
-    </table>
-    @using (Html.BeginForm("SaveTeam", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="TeamID" value="0" />
-        <input type="text" name="TeamName" placeholder="Lagnamn" />
-        <input type="text" name="GroupID"  placeholder="Grupp (A-H)" style="width:50px" />
-        <button type="submit" class="btn">Lägg till lag</button>
-    }
-
-    <h3>Matcher</h3>
-    <table>
-        <tr><th>ID</th><th>Hemma</th><th>Borta</th><th>Datum</th></tr>
-        @foreach (var m in Model.Matches)
-        {
-            <tr>
-                <td>@m.ID</td>
-                <td>@m.HomeTeam?.TeamName</td>
-                <td>@m.AwayTeam?.TeamName</td>
-                <td>@m.Date.ToShortDateString()</td>
-            </tr>
+        function clearTeam() {
+            document.getElementById('hdnTeamID').value = '0';
+            document.getElementById('txtTeamName').value = '';
+            document.getElementById('txtTeamGroup').value = '';
+            document.getElementById('btnSaveTeam').textContent = 'Lägg till';
         }
-    </table>
-    @using (Html.BeginForm("SaveMatch", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="MatchID" value="0" />
-        @Html.DropDownList("HomeTeamID", new SelectList(allTeams,"ID","TeamName"), "-- Hemmalag --")
-        @Html.DropDownList("AwayTeamID", new SelectList(allTeams,"ID","TeamName"), "-- Bortalag --")
-        <input type="text" name="Date" placeholder="yyyy-MM-dd" />
-        <button type="submit" class="btn">Lägg till match</button>
-    }
+    </script>
 </div>
 
 @* ═══════════════════════════════════════════════════════════════════
-   TAB 5 – Top scorers
+   TAB 5 – Matcher
    ═══════════════════════════════════════════════════════════════════ *@
 <div class="tab-panel">
-    <h3>Toppscorare</h3>
-    <table>
-        <tr><th>ID</th><th>Namn</th><th>Vinnare</th><th></th></tr>
-        @foreach (var s in Model.TopScorers)
-        {
-            <tr>
-                <td>@s.ID</td>
-                <td>@s.DisplayName</td>
-                <td>@(s.IsWinner ? "✓" : "")</td>
-                <td>
-                    @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, new { style="display:inline" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <button type="submit" onclick="return confirm('Radera?')">Radera</button>
-                    }
-                </td>
-            </tr>
+    <div class="wrap">
+        <div class="leftside">
+            @using (Html.BeginForm("SaveMatch", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnMatchID" name="MatchID" value="0" />
+                    Hemma lag: @Html.DropDownList("HomeTeamID", toList(Model.AllTeams, 0, "Lag #"), new { id = "ddlMatchHomeTeam" })<br />
+                    Borta lag: @Html.DropDownList("AwayTeamID", toList(Model.AllTeams, 0, "Lag #"), new { id = "ddlMatchAwayTeam" })<br />
+                    Datum och tid: <input type="text" id="txtMatchDate" name="Date" placeholder="yyyy-MM-dd HH:mm" /><br />
+                    <button type="submit" id="btnSaveMatch" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearMatch()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Registrerade matcher:</p>
+            <table class="border">
+                @foreach (var m in Model.Matches)
+                {
+                    <tr>
+                        <td>@m.Date.ToString("yyyy/MM/dd HH:mm") : @(m.HomeTeam != null ? m.HomeTeam.TeamName : "") – @(m.AwayTeam != null ? m.AwayTeam.TeamName : "")</td>
+                        <td>
+                            <a href="#" onclick="editMatch(@m.ID,@m.HomeTeamID,@m.AwayTeamID,'@m.Date.ToString("yyyy-MM-dd HH:mm")');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteMatch", "Admin", new { id = m.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera matchen?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+        function editMatch(id, homeId, awayId, date) {
+            document.getElementById('hdnMatchID').value = id;
+            document.getElementById('ddlMatchHomeTeam').value = homeId;
+            document.getElementById('ddlMatchAwayTeam').value = awayId;
+            document.getElementById('txtMatchDate').value = date;
+            document.getElementById('btnSaveMatch').textContent = 'Uppdatera';
         }
-    </table>
-    @using (Html.BeginForm("SaveTopScorer", "Admin", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <input type="hidden" name="TopScorerID" value="0" />
-        <input type="text" name="FirstName" placeholder="Förnamn" />
-        <input type="text" name="LastName"  placeholder="Efternamn" />
-        <button type="submit" class="btn">Lägg till</button>
-    }
+        function clearMatch() {
+            document.getElementById('hdnMatchID').value = '0';
+            document.getElementById('ddlMatchHomeTeam').selectedIndex = 0;
+            document.getElementById('ddlMatchAwayTeam').selectedIndex = 0;
+            document.getElementById('txtMatchDate').value = '';
+            document.getElementById('btnSaveMatch').textContent = 'Lägg till';
+        }
+    </script>
 </div>
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 6 – Toppscorare
+   ═══════════════════════════════════════════════════════════════════ *@
+<div class="tab-panel">
+    <div class="wrap">
+        <div class="leftside">
+            <p>
+                Importera många:<br />
+                @using (Html.BeginForm("BatchImportTopScorers", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" name="Names" style="width:300px" />
+                    <button type="submit" class="btn">Importera</button><br />
+                    <label style="font-size:7pt">Separera spelarnamnen med | (ex: Zlatan Ibrahimovic|Rasmus Elm)</label>
+                }
+            </p>
+            @using (Html.BeginForm("SaveTopScorer", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnTopScorerID" name="TopScorerID" value="0" />
+                    Förnamn: <input type="text" id="txtFirstName" name="FirstName" /><br />
+                    Efternamn: <input type="text" id="txtLastName" name="LastName" /><br />
+                    <button type="submit" id="btnSaveTopScorer" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearScorer()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Potentiella skyttekungar:</p>
+            <table class="border">
+                @foreach (var s in Model.TopScorers)
+                {
+                    <tr>
+                        <td>@s.DisplayName @(s.IsWinner == true ? "✓" : "")</td>
+                        <td>
+                            <a href="#" onclick="editScorer(@s.ID,'@s.FirstName','@s.LastName');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+        function editScorer(id, firstName, lastName) {
+            document.getElementById('hdnTopScorerID').value = id;
+            document.getElementById('txtFirstName').value = firstName;
+            document.getElementById('txtLastName').value = lastName;
+            document.getElementById('btnSaveTopScorer').textContent = 'Uppdatera';
+        }
+        function clearScorer() {
+            document.getElementById('hdnTopScorerID').value = '0';
+            document.getElementById('txtFirstName').value = '';
+            document.getElementById('txtLastName').value = '';
+            document.getElementById('btnSaveTopScorer').textContent = 'Lägg till';
+        }
+
+        // ── Topscorer dynamic list + autocomplete ────────────────────────
+        (function () {
+            var list    = document.getElementById('topscorer-list');
+            var addBtn  = document.getElementById('btn-add-scorer');
+            if (!list || !addBtn) return;
+
+            var suggestions = Array.from(document.querySelectorAll('#scorer-suggestions option'))
+                                   .map(function(o){ return o.value; });
+
+            function reindex() {
+                list.querySelectorAll('.topscorer-row input').forEach(function(inp, i){
+                    inp.name = 'TopScorers[' + i + ']';
+                });
+            }
+
+            function attachAC(input) {
+                input.setAttribute('list', '');            // disable native datalist
+                var dropdown = null;
+                var activeIdx = -1;
+
+                function closeAC() {
+                    if (dropdown) { dropdown.remove(); dropdown = null; }
+                    activeIdx = -1;
+                }
+
+                function openAC(matches) {
+                    closeAC();
+                    if (!matches.length) return;
+                    dropdown = document.createElement('div');
+                    dropdown.className = 'ac-list';
+                    matches.forEach(function(val, i) {
+                        var item = document.createElement('div');
+                        item.className = 'ac-item';
+                        item.textContent = val;
+                        item.addEventListener('mousedown', function(e) {
+                            e.preventDefault();
+                            input.value = val;
+                            closeAC();
+                        });
+                        dropdown.appendChild(item);
+                    });
+                    // position below the input
+                    var rect = input.getBoundingClientRect();
+                    dropdown.style.left  = (input.offsetLeft) + 'px';
+                    dropdown.style.top   = (input.offsetTop + input.offsetHeight) + 'px';
+                    dropdown.style.width = input.offsetWidth + 'px';
+                    input.parentNode.style.position = 'relative';
+                    input.parentNode.appendChild(dropdown);
+                }
+
+                function highlight(i) {
+                    if (!dropdown) return;
+                    var items = dropdown.querySelectorAll('.ac-item');
+                    items.forEach(function(el,idx){ el.classList.toggle('ac-active', idx===i); });
+                    if (items[i]) items[i].scrollIntoView({ block: 'nearest' });
+                }
+
+                input.addEventListener('input', function() {
+                    var q = input.value.trim().toLowerCase();
+                    if (!q) { closeAC(); return; }
+                    var matches = suggestions.filter(function(s){ return s.toLowerCase().indexOf(q) !== -1; });
+                    activeIdx = -1;
+                    openAC(matches);
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    if (!dropdown) return;
+                    var items = dropdown.querySelectorAll('.ac-item');
+                    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(activeIdx+1, items.length-1); highlight(activeIdx); }
+                    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(activeIdx-1, 0); highlight(activeIdx); }
+                    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); input.value = items[activeIdx].textContent; closeAC(); }
+                    else if (e.key === 'Escape') { closeAC(); }
+                });
+
+                input.addEventListener('blur', function() { setTimeout(closeAC, 150); });
+            }
+
+            function addRow(value) {
+                var row = document.createElement('div');
+                row.className = 'topscorer-row';
+                var inp = document.createElement('input');
+                inp.type = 'text';
+                inp.value = value || '';
+                inp.className = 'scorer-ac';
+                inp.setAttribute('autocomplete', 'off');
+                var rm = document.createElement('button');
+                rm.type = 'button';
+                rm.className = 'btn-icon btn-remove';
+                rm.title = 'Ta bort';
+                rm.textContent = '✕';
+                rm.addEventListener('click', function(){ row.remove(); reindex(); });
+                row.appendChild(inp);
+                row.appendChild(rm);
+                list.appendChild(row);
+                attachAC(inp);
+                reindex();
+                inp.focus();
+            }
+
+            // Wire existing rows
+            list.querySelectorAll('.scorer-ac').forEach(function(inp) {
+                attachAC(inp);
+                inp.closest('.topscorer-row').querySelector('.btn-icon').addEventListener('click', function(){
+                    inp.closest('.topscorer-row').remove(); reindex();
+                });
+            });
+
+            addBtn.addEventListener('click', function(){ addRow(''); });
+        })();
+    </script>
+</div>
+

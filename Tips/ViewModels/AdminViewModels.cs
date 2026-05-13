@@ -22,6 +22,7 @@ namespace Tipset.ViewModels
 
         // Top scorer
         public string TopScorer { get; set; }
+        public List<string> AllTopScorerWinners { get; set; } = new List<string>();
 
         // ── Tab 2: Users ─────────────────────────────────────────────────────
         public List<User> Users { get; set; } = new List<User>();
@@ -39,10 +40,11 @@ namespace Tipset.ViewModels
         public List<TopScorer> TopScorers { get; set; } = new List<TopScorer>();
 
         // ── Shared: error / status messages ─────────────────────────────────
-        public string ErrorMessage     { get; set; }
-        public string StatsMessage     { get; set; }
-        public string UsersMessage     { get; set; }
-        public int ActiveTab           { get; set; } = 0;
+        public string ErrorMessage          { get; set; }
+        public string StatsMessage          { get; set; }
+        public string UsersMessage          { get; set; }
+        public List<string> ResultsMessages { get; set; } = new List<string>();
+        public int ActiveTab                { get; set; } = 0;
     }
 
     public class AdminSaveResultsInput
@@ -57,16 +59,15 @@ namespace Tipset.ViewModels
         public int PlayoffE1 { get; set; } public int PlayoffE2 { get; set; }
         public int PlayoffF1 { get; set; } public int PlayoffF2 { get; set; }
         public int PlayoffG1 { get; set; } public int PlayoffG2 { get; set; }
-        public int PlayoffH1 { get; set; } public int PlayoffH2 { get; set; }
+        public int PlayoffI1 { get; set; } public int PlayoffI2 { get; set; }
 
-        public int[] QFTeams     { get; set; } = { -1,-1,-1,-1,-1,-1,-1,-1 };
-        public int[] SFTeams     { get; set; } = { -1,-1,-1,-1 };
-        public int[] FinalTeams  { get; set; } = { -1,-1 };
+        public List<int> QFTeams     { get; set; } = new List<int>();
+        public List<int> SFTeams     { get; set; } = new List<int>();
+        public List<int> FinalTeams  { get; set; } = new List<int>();
         public int   BronzeTeam  { get; set; } = -1;
         public int   SilverTeam  { get; set; } = -1;
         public int   GoldTeam    { get; set; } = -1;
-        public string TopScorer  { get; set; }
-        public string AdditionalTopScorers { get; set; }  // pipe-delimited
+        public List<string> TopScorers { get; set; } = new List<string>();  // all winners, first = main
     }
 
     public class AdminUserRow
@@ -109,5 +110,10 @@ namespace Tipset.ViewModels
         public int    TopScorerID  { get; set; }   // 0 = new
         public string FirstName    { get; set; }
         public string LastName     { get; set; }
+    }
+
+    public class AdminTopScorerBatchInput
+    {
+        public string Names { get; set; }  // pipe-delimited "Förnamn Efternamn|..."
     }
 }

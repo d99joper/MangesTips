@@ -1,36 +1,63 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Admin – @ViewBag.Title</title>
-    <style>
-        body { font-family: Arial, sans-serif; font-size: 13px; margin: 20px; }
-        h2   { color: #444; }
-        .tab-nav { margin-bottom: 12px; }
-        .tab-nav a { margin-right: 8px; padding: 4px 10px; border: 1px solid #999;
-                     border-radius: 3px; text-decoration: none; color: #333; background: #f0f0f0; }
-        .tab-nav a:hover { background: #e0e0e0; }
-        .tab-nav a.active { background: #1a6bbf; color: #fff; font-weight: bold;
-                            border-color: #1a6bbf; box-shadow: 0 2px 4px rgba(0,0,0,.25); }
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-        table { border-collapse: collapse; width: 100%; margin-bottom: 10px; }
-        th, td { border: 1px solid #ccc; padding: 4px 6px; }
-        th { background: #eee; }
-        .error  { color: red;   font-weight: bold; }
-        .ok     { color: green; font-weight: bold; }
-        input[type=text], input[type=password], select, textarea
-                { padding: 3px; }
-        .btn    { padding: 4px 12px; cursor: pointer; }
-    </style>
+    <link href="@Url.Content("~/CSS/EM2016.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/EM2016.css")).Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/admin.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/admin.css")).Ticks" rel="stylesheet" type="text/css" />
+    <title>Manges VM-tips 2026</title>
+    @RenderSection("head", required: false)
 </head>
 <body>
-    <h2>Admin – Manges VM-tips</h2>
-    <p>@Html.ActionLink("Logga ut", "Logout", "Auth")</p>
-    @RenderBody()
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/images/oversloggamax2026.png")" alt="Manges VM-tips" style="margin-top:25px;" />
+                </a>
+            </div>
+            <div id="logindisplay">
+                @Html.ActionLink("Logga ut", "Logout", "Auth")
+            </div>
+            <div id="menucontainer">
+                @{ string currentController = (ViewContext.RouteData.Values["controller"] ?? "").ToString(); }
+                <ul id="menu">
+                    <li class="@(currentController == "Home" ? "active" : "")"><a href="@Url.Action("Index", "Home")">Första sidan</a></li>
+                    @if (!(bool)(ViewBag.EnableNewEntries ?? false))
+                    {
+                        <li class="@(currentController == "Statistics" ? "active" : "")"><a href="@Url.Action("Index", "Statistics")">Statistik</a></li>
+                        <li class="@(currentController == "Answers" ? "active" : "")"><a href="@Url.Action("Index", "Answers")">Facit</a></li>
+                    }
+                    <li class="@(currentController == "Blog" ? "active" : "")"><a href="@Url.Action("Index", "Blog")">Blog</a></li>
+                    @if ((bool)(ViewBag.EnableNewEntries ?? false))
+                    {
+                        <li class="@(currentController == "NyKupong" ? "active" : "")"><a href="@Url.Action("Index", "NyKupong")">Anmälan</a></li>
+                    }
+                    <li class="@(currentController == "Rules" ? "active" : "")"><a href="@Url.Action("Index", "Rules")">Regler</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <!-- Spinner overlay -->
+            <div id="admin-spinner">
+                <div class="spinner-box">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-label">Sparar…</div>
+                </div>
+            </div>
+            @RenderBody()
+            <div id="footer"></div>
+        </div>
+    </div>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117542595-1"></script>
     <script>
-        // Simple tab switcher
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-117542595-1');
+    </script>
+    <script>
+        // ── Tab switcher ──────────────────────────────────────────────────
         (function () {
             var active = parseInt(document.getElementById('activeTab').value || '0', 10);
             var panels = document.querySelectorAll('.tab-panel');
@@ -42,6 +69,18 @@
             links.forEach(function(l, i){ l.addEventListener('click', function(e){ e.preventDefault(); show(i); }); });
             show(active);
         })();
+
+        // ── Spinner on form submit ────────────────────────────────────────
+        (function () {
+            var spinner = document.getElementById('admin-spinner');
+            document.querySelectorAll('form').forEach(function (f) {
+                f.addEventListener('submit', function () {
+                    spinner.classList.add('visible');
+                });
+            });
+        })();
     </script>
+</body>
+</html>
 </body>
 </html>

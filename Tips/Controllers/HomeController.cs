@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using System.Xml.Linq;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -15,8 +14,7 @@ namespace Tipset.Controllers
         {
             var vm = new HomeViewModel();
 
-            XDocument xDoc = XDocument.Load(Server.MapPath("~/Models/SettingsExtensions.xml"));
-            vm.EnableNewEntries = bool.Parse(xDoc.Root.Element("EnableNewEntries").Attribute("On").Value);
+            vm.EnableNewEntries = new SettingsRepository().GetBool("EnableNewEntries");
 
             vm.StandingDates = _userRepository.GetStandingDates();
 

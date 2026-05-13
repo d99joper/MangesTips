@@ -18,7 +18,8 @@ namespace Tipset.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string password, string returnUrl)
         {
-            if (FormsAuthentication.Authenticate(username, password))
+            var storedPassword = System.Configuration.ConfigurationManager.AppSettings[username];
+            if (storedPassword != null && storedPassword == password)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))

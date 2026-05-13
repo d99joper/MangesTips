@@ -8,36 +8,42 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl94Bw9FM3UuWs1IFoqLhxAAAAAACAAAAAAAQZgAAAAEAACAAAABdT6dC/q2N5Fsy2t5r11vVhuCbxTo8U9CshQXsMI6S7QAAAAAOgAAAAAIAACAAAADWf0ZjMKv1oEdttDv91Je2VJ6tI3EkXbWZJtJHTJPqlyAAAABCDVaX1HLkEgt+xsDy3P5M84X0TjlJV8AtvCoBF3nHwEAAAABSKTDA1lgqUBbRQJQgsw6OoST6Gxx+Gf07KcLKTuuKVZFYHHj4rXjzAbOnaLgJSBQHSGrhzIKD1ZmreQzXvxVI</EncryptedPassword>
     <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2026/</_PublishTargetUrl>
-    <History>True|2026-05-04T00:11:39.9078468Z||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
+    <History>True|2026-05-12T22:36:48.4401895Z||;True|2026-05-12T14:57:49.2145155-07:00||;True|2026-05-12T14:17:16.5328846-07:00||;True|2026-05-12T14:14:15.6267200-07:00||;True|2026-05-04T17:38:25.6998663-07:00||;True|2026-05-03T17:11:39.9078468-07:00||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include=".gitignore">
-      <publishTime>05/03/2026 14:46:15</publishTime>
+      <publishTime>05/05/2026 09:20:45</publishTime>
     </File>
     <File Include="Admin.Master">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="Admin/Default.aspx">
-      <publishTime>05/03/2026 15:46:48</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Admin/login.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="Admin/Site.Master">
-      <publishTime>05/03/2026 15:43:23</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Admin/Web.config">
       <publishTime>12/16/2025 10:30:46</publishTime>
     </File>
     <File Include="Answers.aspx">
-      <publishTime>05/03/2026 15:43:47</publishTime>
+      <publishTime>05/12/2026 14:33:16</publishTime>
     </File>
     <File Include="AwaitingConfirmation.aspx">
-      <publishTime>05/03/2026 15:20:15</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>05/03/2026 15:11:59</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>05/12/2026 15:35:26</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>05/12/2026 15:35:26</publishTime>
     </File>
     <File Include="bin/Castle.Core.dll">
       <publishTime>04/04/2019 18:50:26</publishTime>
@@ -211,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="bin/Tips.dll">
-      <publishTime>05/03/2026 17:11:07</publishTime>
+      <publishTime>05/12/2026 15:34:13</publishTime>
     </File>
     <File Include="bin/Tips.pdb">
-      <publishTime>05/03/2026 17:11:07</publishTime>
+      <publishTime>05/12/2026 15:34:13</publishTime>
     </File>
     <File Include="bin/VMTips_2014.dll">
       <publishTime>06/15/2014 10:14:07</publishTime>
@@ -240,6 +246,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="confirm.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
+    <File Include="CSS/admin.css">
+      <publishTime>05/05/2026 15:40:12</publishTime>
+    </File>
     <File Include="CSS/autocomplete.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
@@ -253,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
     <File Include="CSS/EM2016.css">
-      <publishTime>05/03/2026 16:16:58</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="CSS/FadingOrange.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
@@ -286,7 +295,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="Details.aspx">
-      <publishTime>05/03/2026 15:11:59</publishTime>
+      <publishTime>05/12/2026 14:30:38</publishTime>
     </File>
     <File Include="Docs/tipset2018.docx">
       <publishTime>12/16/2025 10:30:46</publishTime>
@@ -406,10 +415,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/03/2026 16:58:26</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="pdfGenerator.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>05/12/2026 15:35:25</publishTime>
     </File>
     <File Include="Rules.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
@@ -417,8 +429,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Script/autocomplete.js">
       <publishTime>12/16/2025 10:30:46</publishTime>
     </File>
+    <File Include="secrets/appSettings.config">
+      <publishTime>05/05/2026 09:33:09</publishTime>
+    </File>
+    <File Include="secrets/appSettings.config.template">
+      <publishTime>05/05/2026 09:22:53</publishTime>
+    </File>
+    <File Include="secrets/connectionStrings.config">
+      <publishTime>05/05/2026 09:16:32</publishTime>
+    </File>
+    <File Include="secrets/connectionStrings.config.template">
+      <publishTime>05/05/2026 09:16:50</publishTime>
+    </File>
     <File Include="Site.Master">
-      <publishTime>05/03/2026 15:44:12</publishTime>
+      <publishTime>05/12/2026 14:54:23</publishTime>
     </File>
     <File Include="StatDetails.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
@@ -427,13 +451,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="Views/Admin/Index.cshtml">
-      <publishTime>05/03/2026 14:46:16</publishTime>
+      <publishTime>05/12/2026 14:35:10</publishTime>
     </File>
     <File Include="Views/Admin/_AdminLayout.cshtml">
-      <publishTime>05/03/2026 15:16:39</publishTime>
+      <publishTime>05/12/2026 15:20:59</publishTime>
     </File>
     <File Include="Views/Answers/Index.cshtml">
-      <publishTime>05/03/2026 16:21:04</publishTime>
+      <publishTime>05/12/2026 14:53:03</publishTime>
     </File>
     <File Include="Views/Auth/Login.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>
@@ -451,22 +475,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Views/Details/Index.cshtml">
-      <publishTime>05/03/2026 15:46:40</publishTime>
+      <publishTime>05/12/2026 14:33:21</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/03/2026 16:17:39</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Views/NyKupong/Index.cshtml">
-      <publishTime>05/03/2026 16:17:27</publishTime>
+      <publishTime>05/12/2026 14:32:17</publishTime>
     </File>
     <File Include="Views/Rules/Index.cshtml">
-      <publishTime>05/03/2026 15:38:24</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/03/2026 16:10:04</publishTime>
+      <publishTime>05/12/2026 14:55:20</publishTime>
     </File>
     <File Include="Views/Statistics/Index.cshtml">
-      <publishTime>05/03/2026 15:16:46</publishTime>
+      <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Views/Statistics/StatDetails.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>
@@ -478,7 +502,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/03/2026 16:58:45</publishTime>
+      <publishTime>05/12/2026 15:16:43</publishTime>
     </File>
   </ItemGroup>
 </Project>

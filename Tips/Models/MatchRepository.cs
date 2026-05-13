@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -11,7 +12,7 @@ namespace Tipset.Models
 
         public IQueryable<Match> GetAllMatches()
         {
-            return db.Matches;
+            return db.Matches.Include(m => m.HomeTeam).Include(m => m.AwayTeam);
         }
 
         public Match GetMatch(int id)

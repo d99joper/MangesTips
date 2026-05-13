@@ -118,10 +118,10 @@ else
                     @* Groups E-H *@
                     <table>
                         <thead><tr>
-                            <td>Grupp E</td><td>Grupp F</td><td>Grupp G</td><td>Grupp H</td>
+                            <td>Grupp E</td><td>Grupp F</td><td>Grupp G</td><td>Grupp I</td>
                         </tr></thead>
                         <tr>
-                            @foreach (var g in new[] { "E", "F", "G", "H" })
+                            @foreach (var g in new[] { "E", "F", "G", "I" })
                             {
                                 <td>1:a @Html.DropDownList("Playoff" + g + "1",
                                     new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "1").GetValue(Model)),
@@ -129,7 +129,7 @@ else
                             }
                         </tr>
                         <tr>
-                            @foreach (var g in new[] { "E", "F", "G", "H" })
+                            @foreach (var g in new[] { "E", "F", "G", "I" })
                             {
                                 <td>2:a @Html.DropDownList("Playoff" + g + "2",
                                     new SelectList(Model.GroupTeams[g], "ID", "TeamName", (int)typeof(Tipset.ViewModels.NyKupongViewModel).GetProperty("Playoff" + g + "2").GetValue(Model)),

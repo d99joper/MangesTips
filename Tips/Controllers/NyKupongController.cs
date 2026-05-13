@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Xml.Linq;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -60,8 +59,7 @@ namespace Tipset.Controllers
 
         private NyKupongViewModel BuildViewModel(NyKupongViewModel vm)
         {
-            XDocument xDoc = XDocument.Load(Server.MapPath("~/Models/SettingsExtensions.xml"));
-            vm.IsOpen = bool.Parse(xDoc.Root.Element("EnableNewEntries").Attribute("On").Value);
+            vm.IsOpen = new SettingsRepository().GetBool("EnableNewEntries");
 
             if (vm.IsOpen)
             {
@@ -76,11 +74,10 @@ namespace Tipset.Controllers
 
         private void RebuildLists(NyKupongViewModel vm)
         {
-            XDocument xDoc = XDocument.Load(Server.MapPath("~/Models/SettingsExtensions.xml"));
-            vm.IsOpen = bool.Parse(xDoc.Root.Element("EnableNewEntries").Attribute("On").Value);
+            vm.IsOpen = new SettingsRepository().GetBool("EnableNewEntries");
             vm.Matches = _matchRepository.GetAllMatches().ToList();
             vm.AllTeams = _teamRepository.GetAllTeams().ToList();
-            foreach (var g in new[] { "A", "B", "C", "D", "E", "F", "G", "H" })
+            foreach (var g in new[] { "A", "B", "C", "D", "E", "F", "G", "I" })
                 vm.GroupTeams[g] = _teamRepository.GetTeams(g).ToList();
         }
 
@@ -129,13 +126,13 @@ namespace Tipset.Controllers
                 });
             }
 
-            // Playoff teams: groups A-H
+            // Playoff teams: groups A-G, I
             var playoffPairs = new Dictionary<string, (int p1, int p2)>
             {
                 ["A"] = (vm.PlayoffA1, vm.PlayoffA2), ["B"] = (vm.PlayoffB1, vm.PlayoffB2),
                 ["C"] = (vm.PlayoffC1, vm.PlayoffC2), ["D"] = (vm.PlayoffD1, vm.PlayoffD2),
                 ["E"] = (vm.PlayoffE1, vm.PlayoffE2), ["F"] = (vm.PlayoffF1, vm.PlayoffF2),
-                ["G"] = (vm.PlayoffG1, vm.PlayoffG2), ["H"] = (vm.PlayoffH1, vm.PlayoffH2)
+                ["G"] = (vm.PlayoffG1, vm.PlayoffG2), ["I"] = (vm.PlayoffI1, vm.PlayoffI2)
             };
             foreach (var kv in playoffPairs)
             {

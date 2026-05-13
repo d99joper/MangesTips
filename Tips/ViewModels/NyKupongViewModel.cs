@@ -51,6 +51,8 @@ namespace Tipset.ViewModels
         public int PlayoffG2 { get; set; } = -1;
         public int PlayoffH1 { get; set; } = -1;
         public int PlayoffH2 { get; set; } = -1;
+        public int PlayoffI1 { get; set; } = -1;
+        public int PlayoffI2 { get; set; } = -1;
 
         // Quarter-finals (8 teams)
         public int[] QFTeams { get; set; } = { -1, -1, -1, -1, -1, -1, -1, -1 };

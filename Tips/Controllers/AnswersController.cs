@@ -19,7 +19,7 @@ namespace Tipset.Controllers
             vm.Matches = _matchRepository.GetAllMatches().ToList();
 
             vm.PlayoffTeams = new Dictionary<string, string>();
-            foreach (var group in new[] { "A", "B", "C", "D", "E", "F", "G", "H" })
+            foreach (var group in new[] { "A", "B", "C", "D", "E", "F", "G", "I" })
             {
                 foreach (int pos in new[] { 1, 2 })
                 {

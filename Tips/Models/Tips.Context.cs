@@ -27,6 +27,7 @@ namespace Tipset.Models
         public DbSet<UserQFTeam> UserQFTeam { get; set; }
         public DbSet<UserSFTeam> UserSFTeam { get; set; }
         public DbSet<UserSilverTeam> UserSilverTeam { get; set; }
+        public DbSet<AppSetting> AppSettings { get; set; }
 
         // Historical tournament entities
         public DbSet<User_2010> User_2010 { get; set; }
@@ -264,6 +265,10 @@ namespace Tipset.Models
                 .HasRequired(e => e.User_2024)
                 .WithMany(u => u.Standings_2024)
                 .HasForeignKey(e => e.UserID);
+
+            modelBuilder.Entity<AppSetting>()
+                .ToTable("AppSettings")
+                .HasKey(e => new { e.Year, e.Key });
         }
     }
 }
