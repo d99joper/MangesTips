@@ -9,6 +9,7 @@ namespace Tipset.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
+            FormsAuthentication.SignOut(); // Clear any stale auth cookie
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

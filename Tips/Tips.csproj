@@ -134,6 +134,9 @@
     <Compile Include="ViewModels\StatDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\logo20262color.gif" />
+    <Content Include="images\logo20262color.png" />
+    <Content Include="images\oversloggamax2026.png" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
