@@ -87,9 +87,25 @@ namespace Tipset.Models
 
         public List<Team> GetTeams(TeamInqueryType filter, String groupFilter)
         {
-            List<Team> teamList = GetTeams(filter);
-
-            return teamList.Where(t => t.GroupID == groupFilter).ToList();
+            switch (filter)
+            {
+                case TeamInqueryType.isInPlayoffs:
+                    return db.Teams.Where(t => t.IsInPlayOffs && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.isInQuarterFinals:
+                    return db.Teams.Where(t => t.IsInQuarterFinals && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.isInSemiFinals:
+                    return db.Teams.Where(t => t.IsInSemiFinals && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.isInFinals:
+                    return db.Teams.Where(t => t.IsInFinal && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.WonBronze:
+                    return db.Teams.Where(t => t.WonBronze && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.WonSilver:
+                    return db.Teams.Where(t => t.WonSilver && t.GroupID == groupFilter).ToList();
+                case TeamInqueryType.WonGold:
+                    return db.Teams.Where(t => t.WonGold && t.GroupID == groupFilter).ToList();
+                default:
+                    return null;
+            }
         }
 
         internal Team GetTeam(TeamInqueryType filter, string groupID, byte position)

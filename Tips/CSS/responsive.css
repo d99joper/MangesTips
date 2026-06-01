@@ -1,0 +1,196 @@
+/*----------------------------------------------------------
+  responsive.css - fluid, viewport-relative styles shared
+  across all views. Load this after site.css.
+----------------------------------------------------------*/
+
+/* SCROLL WRAPPER
+   Use class="scroll-x" on any div wrapping a wide table
+----------------------------------------------------------*/
+.scroll-x
+{
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* EDITOR LABELS (fluid override of site.css margin-only rule)
+----------------------------------------------------------*/
+.editor-label
+{
+    font-size: clamp(0.65rem, 2.6vw, 1rem);
+    margin-top: 1em;
+}
+
+/* MATCHES TABLE (Answers + Details + NyKupong)
+----------------------------------------------------------*/
+table.tips,
+table.facit,
+table.matches-table
+{
+    border-collapse: collapse;
+    /*width: 100%;*/
+    font-size: clamp(0.6rem, 2.6vw, 1rem);
+}
+
+table.tips td,
+table.facit td,
+table.matches-table td
+{
+    padding: clamp(2px, 1vw, 5px) clamp(2px, 1.2vw, 6px);
+    vertical-align: middle;
+}
+
+/* Column modifier classes used in Details */
+table.matches-table .col-group  { color: #999; }
+table.matches-table .col-team   { white-space: normal; }
+table.matches-table .col-sep    { padding: 0 2px; }
+table.matches-table .col-score  { white-space: nowrap; font-weight: bold; }
+table.matches-table .col-points { color: #555; }
+
+/* Goal inputs inside NyKupong matches table */
+table.tips .goalInput
+{
+    width: clamp(28px, 7vw, 35px);
+    font-size: inherit;
+}
+
+/* GROUP / PLAYOFF TABLES (Answers + Details + NyKupong)
+----------------------------------------------------------*/
+table.playoff,
+table.groups
+{
+    border-collapse: collapse;
+    font-size: clamp(0.6rem, 2.6vw, 1rem);
+}
+
+table.playoff td,
+table.groups td
+{
+    padding: clamp(1px, 0.8vw, 4px) clamp(2px, 1.5vw, 8px) clamp(1px, 0.8vw, 4px) 0;
+    vertical-align: top;
+}
+
+/* Group dropdowns inside NyKupong */
+table.groups { white-space: nowrap; }
+table.groups select.groupSelect
+{
+    font-size: clamp(0.6rem, 2.4vw, 0.9rem);
+    max-width: clamp(80px, 22vw, 160px);
+}
+
+/* PICK / KNOCKOUT TABLES (NyKupong QF / SF / Final)
+----------------------------------------------------------*/
+table.picks
+{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: clamp(0.6rem, 2.6vw, 1rem);
+}
+
+table.picks td
+{
+    padding: clamp(2px, 1vw, 5px) clamp(2px, 1.2vw, 5px);
+    vertical-align: middle;
+}
+
+table.picks select { font-size: clamp(0.6rem, 2.4vw, 0.9rem); width: 100%; }
+
+/* STANDINGS TABLE (Home)
+----------------------------------------------------------*/
+.standings-table
+{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.6rem, 2.8vw, 1rem);
+}
+
+.standings-table thead th
+{
+    padding: clamp(4px, 1.5vw, 8px) clamp(3px, 1.2vw, 6px);
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    white-space: nowrap;
+}
+
+.standings-table thead th a
+{
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.standings-table tbody tr
+{
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.standings-table tbody tr:hover { background-color: #EEF; }
+
+.standings-table td { padding: clamp(4px, 1.5vw, 9px) clamp(3px, 1.2vw, 6px); }
+
+.standings-table .col-pos,
+.standings-table .col-pts
+{
+    text-align: center;
+    width: clamp(30px, 8vw, 50px);
+}
+
+/* FORM ELEMENTS (NyKupong + general)
+----------------------------------------------------------*/
+select.longdate
+{
+    font-size: clamp(0.7rem, 2.5vw, 0.95rem);
+    padding: 4px;
+    margin-bottom: 12px;
+}
+
+input[type="text"],
+input[type="email"]
+{
+    font-size: clamp(0.7rem, 2.5vw, 1rem);
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+button[type="submit"]
+{
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    padding: clamp(6px, 2vw, 10px) clamp(12px, 4vw, 20px);
+}
+
+/* PLAYOFF GROUP GRID (Answers + NyKupong)
+   4 columns on desktop, 3 on small screens
+----------------------------------------------------------*/
+.playoff-grid
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: clamp(0.6rem, 2.6vw, 1rem);
+}
+
+.playoff-group
+{
+    flex: 0 0 calc(25% - 9px);
+    min-width: 0;
+}
+
+.playoff-group strong
+{
+    display: block;
+    margin-bottom: 2px;
+}
+
+.playoff-group select
+{
+    width: 100%;
+    font-size: clamp(0.6rem, 2.4vw, 0.9rem);
+    margin-top: 2px;
+}
+
+@media (max-width: 600px)
+{
+    .playoff-group { flex: 0 0 calc(33.333% - 8px); }
+}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Tipset.Helpers;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -12,6 +13,23 @@ namespace Tipset.Controllers
         private readonly UserRepository _userRepository = new UserRepository();
         private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
 
+        public ActionResult Pdf(Guid guid)
+        {
+            try
+            {
+                User currentUser = _userRepository.GetUser(guid);
+                if (currentUser == null)
+                    return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
+
+                byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, HttpContext.Server);
+                return File(pdfBytes, "application/pdf", currentUser.DisplayName + " Manges VM-tips.pdf");
+            }
+            catch (Exception ex)
+            {
+                return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas. " + ex.Message), "application/pdf", "Manges VM-tips.pdf");
+            }
+        }
+
         public ActionResult Index(int id)
         {
             var vm = new DetailsViewModel();
@@ -20,25 +38,13 @@ namespace Tipset.Controllers
                 User currentUser = _userRepository.GetUser(id);
 
                 vm.DisplayName = currentUser.DisplayName;
-                vm.Position = currentUser.Standings.Last().Position;
-                vm.TotalPoints = currentUser.Standings.Last().TotalPoints;
-                vm.PdfUrl = Url.Content("~/pdfGenerator.aspx") + "?id=" + currentUser.Guid;
+                var latestStandings = currentUser.Standings?.LastOrDefault();
 
-                var user2010 = _userRepository.GetVM2010User(currentUser.DisplayName);
-                if (user2010 != null)
-                    vm.Vm2010Html = string.Format("Placering VM-tips 2010: <a href=\"http://mangesvmtips.personablesolutions.com/Details.aspx?id={0}\" target=\"_blank\">{1}</a><br />", user2010.ID, user2010.Standings_2010.Last().Position);
+                vm.Position = latestStandings?.Position;
+                vm.TotalPoints = latestStandings?.TotalPoints ?? 0;
+                vm.PdfUrl = Url.Action("Pdf", "Details", new { guid = currentUser.Guid });
 
-                var user2012 = _userRepository.GetEM2012User(currentUser.DisplayName);
-                if (user2012 != null)
-                    vm.Em2012Html = string.Format("Placering EM-tips 2012: <a href=\"http://mangesemtips2012.personablesolutions.com/Details.aspx?id={0}\" target=\"_blank\">{1}</a><br />", user2012.ID, user2012.Standings_2012.Last().Position);
-
-                var user2014 = _userRepository.GetVM2014User(currentUser.DisplayName);
-                if (user2014 != null)
-                    vm.Vm2014Html = string.Format("Placering VM-tips 2014: <a href=\"http://mangesvmtips2014.personablesolutions.com/Details.aspx?id={0}\" target=\"_blank\">{1}</a><br />", user2014.ID, user2014.Standings_2014.Last().Position);
-
-                var user2016 = _userRepository.GetEM2016User(currentUser.DisplayName);
-                if (user2016 != null)
-                    vm.Em2016Html = string.Format("Placering EM-tips 2016: <a href=\"http://mangesemtips2016.personablesolutions.com/Details.aspx?id={0}\" target=\"_blank\">{1}</a><br />", user2016.ID, user2016.Standings_2016.Last().Position);
+                SetPreviousYears(vm, currentUser.DisplayName);
 
                 vm.UserMatches = currentUser.UserMatches;
 
@@ -52,6 +58,37 @@ namespace Tipset.Controllers
             }
 
             return View(vm);
+        }
+
+        private static readonly List<(string year, string label, string urlTemplate)> PreviousYearConfigs
+            = new List<(string, string, string)>
+        {
+            ("2010", "VM-tips 2010",  "http://mangesvmtips.personablesolutions.com/Details.aspx?id={0}"),
+            ("2012", "EM-tips 2012",  "http://mangesemtips2012.personablesolutions.com/Details.aspx?id={0}"),
+            ("2014", "VM-tips 2014",  "http://mangesvmtips2014.personablesolutions.com/Details.aspx?id={0}"),
+            ("2016", "EM-tips 2016",  "http://mangesemtips2016.personablesolutions.com/Details.aspx?id={0}"),
+            ("2018", "VM-tips 2018",  "http://mangesvmtips2018.personablesolutions.com/Details.aspx?id={0}"),
+            ("2021", "EM-tips 2021",  "http://mangesemtips2021.personablesolutions.com/Details.aspx?id={0}"),
+            ("2022", "VM-tips 2021",  "http://mangesvmtips2022.personablesolutions.com/Details.aspx?id={0}"),
+            ("2024", "EM-tips 2024",  "http://mangesemtips2024.personablesolutions.com/Details.aspx?id={0}"),
+        };
+
+        private void SetPreviousYears(DetailsViewModel vm, string displayName)
+        {
+            foreach (var (year, label, urlTemplate) in PreviousYearConfigs)
+            {
+                var user = _userRepository.GetPreviousYearUser(year, displayName);
+                if (user == null) continue;
+
+                var standing = user.Standings.LastOrDefault();
+                if (standing == null) continue;
+
+                vm.PreviousYearsHtml.Add(string.Format(
+                    "Placering {0}: <a href=\"{1}\" target=\"_blank\">{2}</a><br />",
+                    label,
+                    string.Format(urlTemplate, user.ID),
+                    standing.Position));
+            }
         }
 
         private void SetTopScorer(DetailsViewModel vm, User currentUser)
@@ -71,8 +108,9 @@ namespace Tipset.Controllers
             vm.PlayoffTeams = new Dictionary<string, string>();
             vm.GroupBonus = new Dictionary<string, string>();
 
-            foreach (var group in new[] { "A", "B", "C", "D", "E", "F", "G", "H" })
+            foreach (var group in new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I" })
             {
+                int correctInGroup = 0;
                 foreach (int pos in new[] { 1, 2 })
                 {
                     var upteam = currentUser.UserPlayoffTeams.SingleOrDefault(u => u.Position == pos && u.Team.GroupID == group);
@@ -80,7 +118,10 @@ namespace Tipset.Controllers
                     {
                         var display = upteam.Team.TeamName;
                         if (upteam.Team.IsInPlayOffs)
+                        {
                             display += string.Format(" {0}p", upteam.Points);
+                            correctInGroup++;
+                        }
                         vm.PlayoffTeams[pos + group] = display;
                     }
                     else
@@ -88,7 +129,7 @@ namespace Tipset.Controllers
                         vm.PlayoffTeams[pos + group] = "";
                     }
                 }
-                vm.GroupBonus[group] = currentUser.BonusPoints.Any(b => b.GroupID == group && b.Point == 1) ? "+1p" : "";
+                vm.GroupBonus[group] = correctInGroup == 2 ? "+2p" : "";
             }
         }
 

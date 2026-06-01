@@ -11,10 +11,7 @@ namespace Tipset.ViewModels
         public short? Position { get; set; }
         public short TotalPoints { get; set; }
 
-        public string Vm2010Html { get; set; }
-        public string Em2012Html { get; set; }
-        public string Vm2014Html { get; set; }
-        public string Em2016Html { get; set; }
+        public List<string> PreviousYearsHtml { get; set; } = new List<string>();
 
         public string PdfUrl { get; set; }
 

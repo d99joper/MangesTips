@@ -82,7 +82,7 @@ namespace Tipset.Controllers
         private static string BuildConfirmationEmailBody(string payCode, string guid)
         {
             string pdfUrl = string.Format(
-                "http://mangesvmtips2026.personablesolutions.com/pdfgenerator.aspx?id={0}", guid);
+                "http://mangesvmtips2026.personablesolutions.com/Details/Pdf/{0}", guid);
             return "Hej!" +
                    "<p>Du är nu anmäld till Manges VM-tips.</p>" +
                    "<p>Din kupong har nu skickats till Magnus.</p>" +

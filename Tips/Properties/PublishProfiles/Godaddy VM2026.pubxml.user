@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl94Bw9FM3UuWs1IFoqLhxAAAAAACAAAAAAAQZgAAAAEAACAAAABdT6dC/q2N5Fsy2t5r11vVhuCbxTo8U9CshQXsMI6S7QAAAAAOgAAAAAIAACAAAADWf0ZjMKv1oEdttDv91Je2VJ6tI3EkXbWZJtJHTJPqlyAAAABCDVaX1HLkEgt+xsDy3P5M84X0TjlJV8AtvCoBF3nHwEAAAABSKTDA1lgqUBbRQJQgsw6OoST6Gxx+Gf07KcLKTuuKVZFYHHj4rXjzAbOnaLgJSBQHSGrhzIKD1ZmreQzXvxVI</EncryptedPassword>
     <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2026/</_PublishTargetUrl>
-    <History>True|2026-05-13T23:16:55.6301471Z||;True|2026-05-13T16:13:18.7620875-07:00||;False|2026-05-13T16:09:48.2698722-07:00||;False|2026-05-13T16:09:11.9850210-07:00||;False|2026-05-13T16:08:18.6647167-07:00||;False|2026-05-13T16:08:06.6897222-07:00||;True|2026-05-12T15:36:48.4401895-07:00||;True|2026-05-12T14:57:49.2145155-07:00||;True|2026-05-12T14:17:16.5328846-07:00||;True|2026-05-12T14:14:15.6267200-07:00||;True|2026-05-04T17:38:25.6998663-07:00||;True|2026-05-03T17:11:39.9078468-07:00||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
+    <History>True|2026-06-01T19:19:30.7338496Z||;True|2026-05-27T10:41:08.2949218-07:00||;True|2026-05-26T15:38:27.1490003-07:00||;True|2026-05-22T17:56:16.6911044-07:00||;True|2026-05-22T14:30:49.2120292-07:00||;True|2026-05-22T12:28:32.6537705-07:00||;False|2026-05-22T12:21:13.3408828-07:00||;False|2026-05-22T12:19:42.1745930-07:00||;True|2026-05-22T11:14:14.0600689-07:00||;True|2026-05-22T11:09:58.8519035-07:00||;True|2026-05-22T09:49:38.6913794-07:00||;True|2026-05-21T13:11:06.7026416-07:00||;True|2026-05-21T12:48:40.0086949-07:00||;True|2026-05-20T10:59:14.0434852-07:00||;True|2026-05-20T10:01:55.1486281-07:00||;True|2026-05-19T15:02:14.4200139-07:00||;True|2026-05-19T14:57:17.5407345-07:00||;True|2026-05-18T09:14:14.6418162-07:00||;True|2026-05-18T09:11:01.2231521-07:00||;True|2026-05-17T11:04:47.3102921-07:00||;True|2026-05-15T14:12:35.0976425-07:00||;True|2026-05-14T16:32:26.8158851-07:00||;True|2026-05-13T16:16:55.6301471-07:00||;True|2026-05-13T16:13:18.7620875-07:00||;False|2026-05-13T16:09:48.2698722-07:00||;False|2026-05-13T16:09:11.9850210-07:00||;False|2026-05-13T16:08:18.6647167-07:00||;False|2026-05-13T16:08:06.6897222-07:00||;True|2026-05-12T15:36:48.4401895-07:00||;True|2026-05-12T14:57:49.2145155-07:00||;True|2026-05-12T14:17:16.5328846-07:00||;True|2026-05-12T14:14:15.6267200-07:00||;True|2026-05-04T17:38:25.6998663-07:00||;True|2026-05-03T17:11:39.9078468-07:00||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -217,10 +217,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="bin/Tips.dll">
-      <publishTime>05/13/2026 16:16:45</publishTime>
+      <publishTime>06/01/2026 12:16:59</publishTime>
     </File>
     <File Include="bin/Tips.pdb">
-      <publishTime>05/13/2026 16:16:45</publishTime>
+      <publishTime>06/01/2026 12:16:59</publishTime>
     </File>
     <File Include="bin/VMTips_2014.dll">
       <publishTime>06/15/2014 10:14:07</publishTime>
@@ -253,7 +253,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
     <File Include="CSS/Blue.css">
-      <publishTime>04/16/2026 10:36:58</publishTime>
+      <publishTime>05/21/2026 13:07:47</publishTime>
     </File>
     <File Include="CSS/EM2012_Green.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
     <File Include="CSS/EM2016.css">
-      <publishTime>05/04/2026 09:04:15</publishTime>
+      <publishTime>05/21/2026 09:15:49</publishTime>
     </File>
     <File Include="CSS/FadingOrange.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
@@ -279,11 +279,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="CSS/PaleBlue.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
+    <File Include="CSS/responsive.css">
+      <publishTime>05/22/2026 14:06:29</publishTime>
+    </File>
     <File Include="CSS/Silver.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
     </File>
     <File Include="CSS/Site.css">
-      <publishTime>04/16/2026 10:36:58</publishTime>
+      <publishTime>05/22/2026 14:21:37</publishTime>
     </File>
     <File Include="CSS/SkyBlue.css">
       <publishTime>04/16/2026 10:36:58</publishTime>
@@ -305,6 +308,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Docs/tipset2022.xlsx">
       <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="Docs/tipset2026.PDF">
+      <publishTime>05/17/2026 11:00:40</publishTime>
+    </File>
+    <File Include="Docs/tipset2026.xlsx">
+      <publishTime>05/17/2026 11:00:39</publishTime>
     </File>
     <File Include="Docs/vmtipset2014.doc">
       <publishTime>12/16/2025 10:30:46</publishTime>
@@ -451,46 +460,46 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
     <File Include="Views/Admin/Index.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>05/26/2026 15:35:16</publishTime>
     </File>
     <File Include="Views/Admin/_AdminLayout.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>05/20/2026 10:21:21</publishTime>
     </File>
     <File Include="Views/Answers/Index.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>05/22/2026 12:08:57</publishTime>
     </File>
     <File Include="Views/Auth/Login.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Views/AwaitingConfirmation/Index.cshtml">
-      <publishTime>05/03/2026 14:46:16</publishTime>
+      <publishTime>05/19/2026 15:00:43</publishTime>
     </File>
     <File Include="Views/Blog/Details.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Views/Blog/Index.cshtml">
-      <publishTime>05/03/2026 14:46:16</publishTime>
+      <publishTime>05/21/2026 12:22:08</publishTime>
     </File>
     <File Include="Views/Confirm/Index.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Views/Details/Index.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>05/27/2026 10:20:23</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/04/2026 09:04:15</publishTime>
+      <publishTime>05/26/2026 15:12:02</publishTime>
     </File>
     <File Include="Views/NyKupong/Index.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>06/01/2026 12:16:50</publishTime>
     </File>
     <File Include="Views/Rules/Index.cshtml">
       <publishTime>05/04/2026 09:04:15</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/13/2026 14:25:23</publishTime>
+      <publishTime>05/22/2026 10:58:13</publishTime>
     </File>
     <File Include="Views/Statistics/Index.cshtml">
-      <publishTime>05/04/2026 09:04:15</publishTime>
+      <publishTime>05/20/2026 09:47:36</publishTime>
     </File>
     <File Include="Views/Statistics/StatDetails.cshtml">
       <publishTime>05/03/2026 14:46:16</publishTime>

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Tipset.Models;
 using Tipset.ViewModels;
+using Tipset.Helpers.Sanitization;
 
 namespace Tipset.Controllers
 {
@@ -105,10 +107,13 @@ namespace Tipset.Controllers
             string error = null;
             try
             {
+                var ids     = input.Users.Select(r => r.UserID).ToList();
+                var userMap = _userRepo.GetAllUsers()
+                                       .Where(u => ids.Contains(u.ID))
+                                       .ToDictionary(u => u.ID);
                 foreach (var row in input.Users)
                 {
-                    var user = _userRepo.GetUser(row.UserID);
-                    if (user == null) continue;
+                    if (!userMap.TryGetValue(row.UserID, out var user)) continue;
                     user.HasPaid     = row.HasPaid;
                     user.IsConfirmed = row.IsConfirmed;
                     user.IsWinner    = row.IsWinner;
@@ -153,24 +158,33 @@ namespace Tipset.Controllers
                     return View("Index", vm);
                 }
 
+                var matchResultCounts = _userRepo.GetMatchResultCounts();
                 foreach (var match in _matchRepo.GetAllMatches())
                 {
-                    match.HomeWinPercent = userCount > 0 ? _userRepo.CountUserMatchResult(match.ID, "1") / (double)userCount : 0;
-                    match.DrawPercent    = userCount > 0 ? _userRepo.CountUserMatchResult(match.ID, "X") / (double)userCount : 0;
-                    match.AwayWinPercent = userCount > 0 ? _userRepo.CountUserMatchResult(match.ID, "2") / (double)userCount : 0;
+                    match.HomeWinPercent = matchResultCounts.TryGetValue(match.ID + "_1", out var hw) ? hw / userCount : 0;
+                    match.DrawPercent    = matchResultCounts.TryGetValue(match.ID + "_X", out var dr) ? dr / userCount : 0;
+                    match.AwayWinPercent = matchResultCounts.TryGetValue(match.ID + "_2", out var aw) ? aw / userCount : 0;
                 }
                 _matchRepo.Save();
+
+                var playoffCounts = _userRepo.GetPlayoffTeamCounts();
+                var qfCounts      = _userRepo.GetQFTeamCounts();
+                var sfCounts      = _userRepo.GetSFTeamCounts();
+                var finalCounts   = _userRepo.GetFinalTeamCounts();
+                var bronzeCounts  = _userRepo.GetBronzeTeamCounts();
+                var silverCounts  = _userRepo.GetSilverTeamCounts();
+                var goldCounts    = _userRepo.GetGoldTeamCounts();
 
                 foreach (var team in _teamRepo.GetAllTeams())
                 {
                     var ts = team.TeamStats ?? new TeamStats();
-                    ts.PlayoffPercent      = userCount > 0 ? (float)_userRepo.CountUserPlayOffTeams(team.ID)      / userCount : 0f;
-                    ts.QuarterFinalPercent = userCount > 0 ? (float)_userRepo.CountUserQuarterFinalTeams(team.ID) / userCount : 0f;
-                    ts.SemiFinalPercent    = userCount > 0 ? (float)_userRepo.CountUserSemiFinalTeams(team.ID)    / userCount : 0f;
-                    ts.FinalPercent        = userCount > 0 ? (float)_userRepo.CountUserFinalsTeams(team.ID)       / userCount : 0f;
-                    ts.BronzePercent       = userCount > 0 ? (float)_userRepo.CountUserBronzeTeams(team.ID)       / userCount : 0f;
-                    ts.SilverPercent       = userCount > 0 ? (float)_userRepo.CountUserSilverTeams(team.ID)       / userCount : 0f;
-                    ts.GoldPercent         = userCount > 0 ? (float)_userRepo.CountUserGoldTeams(team.ID)         / userCount : 0f;
+                    ts.PlayoffPercent      = playoffCounts.TryGetValue(team.ID, out var po) ? (float)po / userCount : 0f;
+                    ts.QuarterFinalPercent = qfCounts.TryGetValue(team.ID, out var qf)      ? (float)qf / userCount : 0f;
+                    ts.SemiFinalPercent    = sfCounts.TryGetValue(team.ID, out var sf)       ? (float)sf / userCount : 0f;
+                    ts.FinalPercent        = finalCounts.TryGetValue(team.ID, out var fi)    ? (float)fi / userCount : 0f;
+                    ts.BronzePercent       = bronzeCounts.TryGetValue(team.ID, out var br)   ? (float)br / userCount : 0f;
+                    ts.SilverPercent       = silverCounts.TryGetValue(team.ID, out var si)   ? (float)si / userCount : 0f;
+                    ts.GoldPercent         = goldCounts.TryGetValue(team.ID, out var go)     ? (float)go / userCount : 0f;
                     if (team.TeamStats == null) team.TeamStats = ts;
                 }
                 _teamRepo.Save();
@@ -193,25 +207,42 @@ namespace Tipset.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveBlogEntry(AdminBlogInput input)
         {
-            string error = null;
-            try
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(input.Title))
+                errors.Add("Titeln får inte vara tom.");
+            if (string.IsNullOrWhiteSpace(input.Text))
+                errors.Add("Texten får inte vara tom.");
+
+            if (errors.Count == 0)
             {
-                BlogEntry entry;
-                if (input.BlogEntryID > 0)
-                    entry = _blogRepo.GetBlogEntry(input.BlogEntryID);
-                else
+                try
                 {
-                    entry = new BlogEntry { PostedDate = DateTime.Now };
-                    _blogRepo.Add(entry);
+                    BlogEntry entry;
+                    if (input.BlogEntryID > 0)
+                        entry = _blogRepo.GetBlogEntry(input.BlogEntryID);
+                    else
+                    {
+                        entry = new BlogEntry { PostedDate = DateTime.Now };
+                        _blogRepo.Add(entry);
+                    }
+                    entry.Title = input.Title.Trim();
+                    entry.Text  = HtmlSanitizer.Sanitize(input.Text);
+                    _blogRepo.Save();
                 }
-                entry.Title = input.Title;
-                entry.Text  = input.Text;
-                _blogRepo.Save();
+                catch (Exception ex)
+                {
+                    errors.Add("Ett fel uppstod vid sparandet: " + ex.Message);
+                }
             }
-            catch (Exception ex) { error = ex.Message; }
 
             var vm = BuildViewModel(3);
-            vm.ErrorMessage = error;
+            if (errors.Count > 0)
+                vm.ErrorMessage = string.Join(" ", errors);
+            else
+                vm.BlogMessage = input.BlogEntryID > 0
+                    ? "✅ Inlägget uppdaterades."
+                    : "✅ Nytt inlägg publicerades.";
             return View("Index", vm);
         }
 
@@ -364,6 +395,7 @@ namespace Tipset.Controllers
         private AdminIndexViewModel BuildViewModel(int activeTab)
         {
             var allTeams = _teamRepo.GetAllTeams().ToList();
+            var winners  = _scorerRepo.GetWinner().ToList();
             var vm = new AdminIndexViewModel
             {
                 ActiveTab    = activeTab,
@@ -373,8 +405,8 @@ namespace Tipset.Controllers
                 BlogEntries  = _blogRepo.GetAllBlogEntries().ToList(),
                 Teams        = allTeams,
                 TopScorers   = _scorerRepo.GetAllScorers().ToList(),
-                TopScorer    = _scorerRepo.GetWinner().FirstOrDefault()?.DisplayName ?? "",
-                AllTopScorerWinners = _scorerRepo.GetWinner().Select(t => t.DisplayName).ToList(),
+                TopScorer    = winners.FirstOrDefault()?.DisplayName ?? "",
+                AllTopScorerWinners = winners.Select(t => t.DisplayName).ToList(),
                 QFSelected   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals).Select(t => t.ID).ToList(),
                 SFSelected   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInSemiFinals).Select(t => t.ID).ToList(),
                 FinSelected  = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInFinals).Select(t => t.ID).ToList(),
@@ -383,13 +415,20 @@ namespace Tipset.Controllers
                 GoldSelected   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonGold).FirstOrDefault()?.ID   ?? -1,
             };
 
-            // Playoff selections
+            var serializer = new JavaScriptSerializer();
+            vm.BlogEntriesJson = serializer.Serialize(
+                vm.BlogEntries.ToDictionary(
+                    b => b.ID.ToString(),
+                    b => new { title = b.Title, text = b.Text }
+                )
+            );
+
+            // Playoff selections — load all playoff teams once, look up in memory
+            var allPlayoffTeams = _teamRepo.GetPlayoffTeams().ToList();
             foreach (var g in new[] { "A","B","C","D","E","F","G","I" })
             {
-                var t1 = _teamRepo.GetTeam(TeamRepository.TeamInqueryType.isInPlayoffs, g, 1);
-                var t2 = _teamRepo.GetTeam(TeamRepository.TeamInqueryType.isInPlayoffs, g, 2);
-                vm.PlayoffSelected[g + "1"] = t1?.ID ?? -1;
-                vm.PlayoffSelected[g + "2"] = t2?.ID ?? -1;
+                vm.PlayoffSelected[g + "1"] = allPlayoffTeams.FirstOrDefault(t => t.GroupID == g && t.PlayOffPos == 1)?.ID ?? -1;
+                vm.PlayoffSelected[g + "2"] = allPlayoffTeams.FirstOrDefault(t => t.GroupID == g && t.PlayOffPos == 2)?.ID ?? -1;
             }
 
             vm.EnableNewEntries = new SettingsRepository().GetBool("EnableNewEntries");
@@ -410,11 +449,13 @@ namespace Tipset.Controllers
                 ("G",input.PlayoffG1,1),("G",input.PlayoffG2,2),
                 ("I",input.PlayoffI1,1),("I",input.PlayoffI2,2),
             };
+
+            var ids     = pairs.Select(p => p.Item2).Where(id => id > 0).Distinct().ToList();
+            var teamMap = _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+
             foreach (var (g, id, pos) in pairs)
             {
-                if (id <= 0) continue;
-                var team = _teamRepo.GetTeam(id);
-                if (team == null) continue;
+                if (id <= 0 || !teamMap.TryGetValue(id, out var team)) continue;
                 team.IsInPlayOffs = true;
                 team.PlayOffPos   = (byte)pos;
             }
@@ -422,18 +463,25 @@ namespace Tipset.Controllers
 
         private void ApplyKnockoutTeams(AdminSaveResultsInput input)
         {
+            var allIds = (input.QFTeams ?? new List<int>())
+                .Concat(input.SFTeams ?? new List<int>())
+                .Concat(input.FinalTeams ?? new List<int>())
+                .Concat(new[] { input.BronzeTeam, input.SilverTeam, input.GoldTeam }.Where(id => id > 0))
+                .Distinct().ToList();
+            var teamMap = _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+
             foreach (var id in input.QFTeams ?? new List<int>())
-            { var t = _teamRepo.GetTeam(id); if (t != null) t.IsInQuarterFinals = true; }
+            { if (teamMap.TryGetValue(id, out var t)) t.IsInQuarterFinals = true; }
 
             foreach (var id in input.SFTeams ?? new List<int>())
-            { var t = _teamRepo.GetTeam(id); if (t != null) t.IsInSemiFinals = true; }
+            { if (teamMap.TryGetValue(id, out var t)) t.IsInSemiFinals = true; }
 
             foreach (var id in input.FinalTeams ?? new List<int>())
-            { var t = _teamRepo.GetTeam(id); if (t != null) t.IsInFinal = true; }
+            { if (teamMap.TryGetValue(id, out var t)) t.IsInFinal = true; }
 
-            if (input.BronzeTeam > 0) { var t = _teamRepo.GetTeam(input.BronzeTeam); if (t != null) t.WonBronze = true; }
-            if (input.SilverTeam > 0) { var t = _teamRepo.GetTeam(input.SilverTeam); if (t != null) t.WonSilver = true; }
-            if (input.GoldTeam   > 0) { var t = _teamRepo.GetTeam(input.GoldTeam);   if (t != null) t.WonGold   = true; }
+            if (input.BronzeTeam > 0 && teamMap.TryGetValue(input.BronzeTeam, out var bt)) bt.WonBronze = true;
+            if (input.SilverTeam > 0 && teamMap.TryGetValue(input.SilverTeam, out var st)) st.WonSilver = true;
+            if (input.GoldTeam   > 0 && teamMap.TryGetValue(input.GoldTeam,   out var gt)) gt.WonGold   = true;
         }
 
         private void SetWinner(string displayName)
@@ -445,66 +493,107 @@ namespace Tipset.Controllers
 
         private void UpdateUsers()
         {
+            // Truncate to seconds to avoid datetime precision mismatch with SQL Server
             var dtNow = DateTime.UtcNow.AddHours(2);
-            var users   = _userRepo.GetAllActiveUsers();
-            var matches = _matchRepo.GetAllMatches();
+            dtNow = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, dtNow.Hour, dtNow.Minute, dtNow.Second);
+
+            // Single query — all related collections eager-loaded to avoid N+1
+            var users   = _userRepo.GetAllActiveUsersWithDetails();
+            var matches = _matchRepo.GetAllMatches().ToList();
             var guid    = Guid.NewGuid();
+
+            // Reset all bonus points first to avoid double-counting when applying bonuses
+            _userRepo.ResetAllBonusPoints();
+
+            // Fetch all team lists once, before the user loop
+            var playoffTeams = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInPlayoffs).ToList();
+            var qfTeams      = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals).ToList();
+            var sfTeams      = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInSemiFinals).ToList();
+            var finalTeams   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInFinals).ToList();
+            var bronzeTeams  = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonBronze).ToList();
+            var silverTeams  = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonSilver).ToList();
+            var goldTeams    = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonGold).ToList();
+            var winners      = _scorerRepo.GetWinner().ToList();
+
+            // Pre-build lookup sets keyed by TeamID for O(1) checks in the inner loops
+            var playoffTeamIds = new HashSet<int>(playoffTeams.Select(t => t.ID));
+            var qfTeamIds      = new HashSet<int>(qfTeams.Select(t => t.ID));
+            var sfTeamIds      = new HashSet<int>(sfTeams.Select(t => t.ID));
+            var finalTeamIds   = new HashSet<int>(finalTeams.Select(t => t.ID));
+            var bronzeTeamIds  = new HashSet<int>(bronzeTeams.Select(t => t.ID));
+            var silverTeamIds  = new HashSet<int>(silverTeams.Select(t => t.ID));
+            var goldTeamIds    = new HashSet<int>(goldTeams.Select(t => t.ID));
+            var winnerIds      = new HashSet<int>(winners.Select(w => w.ID));
+
+            // Index playoff teams by ID for position lookup
+            var playoffTeamById = playoffTeams.ToDictionary(t => t.ID);
 
             foreach (var user in users)
             {
                 short total = 0;
 
+                // Build per-user lookups from the already-loaded collections
+                var userMatchById       = user.UserMatches.ToDictionary(um => um.MatchID);
+                var userPlayoffByTeamId = user.UserPlayoffTeams.ToDictionary(t => t.TeamID);
+                var userQFByTeamId      = user.UserQFTeams.ToDictionary(t => t.TeamID);
+                var userSFByTeamId      = user.UserSFTeams.ToDictionary(t => t.TeamID);
+                var userFinalByTeamId   = user.UserFinalTeams.ToDictionary(t => t.TeamID);
+                var userBronzeByTeamId  = user.UserBronzeTeam.ToDictionary(t => t.TeamID);
+                var userSilverByTeamId  = user.UserSilverTeam.ToDictionary(t => t.TeamID);
+                var userGoldByTeamId    = user.UserGoldTeam.ToDictionary(t => t.TeamID);
+
                 foreach (var match in matches)
                 {
-                    var um = user.UserMatches.SingleOrDefault(x => x.MatchID == match.ID);
-                    if (um == null) continue;
+                    if (!userMatchById.TryGetValue(match.ID, out var um)) continue;
                     um.Points = 0;
                     if (match.ResultMark != null)
                     {
                         if (um.HomeGoals == match.HomeGoals && um.AwayGoals == match.AwayGoals) um.Points++;
-                        if (match.ResultMark == "1" && um.HomeGoals > um.AwayGoals)  um.Points = (byte)(um.Points + 2);
-                        else if (match.ResultMark == "X" && um.HomeGoals == um.AwayGoals) um.Points = (byte)(um.Points + 2);
-                        else if (match.ResultMark == "2" && um.HomeGoals < um.AwayGoals)  um.Points = (byte)(um.Points + 2);
+                        if      (match.ResultMark == "1" && um.HomeGoals > um.AwayGoals)   um.Points = (byte)(um.Points + 2);
+                        else if (match.ResultMark == "X" && um.HomeGoals == um.AwayGoals)  um.Points = (byte)(um.Points + 2);
+                        else if (match.ResultMark == "2" && um.HomeGoals < um.AwayGoals)   um.Points = (byte)(um.Points + 2);
                     }
                     total += (short)(um.Points ?? 0);
                 }
 
                 // Playoff bonus
-                foreach (var pt in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInPlayoffs))
+                foreach (var teamId in playoffTeamIds)
                 {
-                    var uteam = user.UserPlayoffTeams.SingleOrDefault(t => t.TeamID == pt.ID);
-                    if (uteam == null) continue;
+                    if (!userPlayoffByTeamId.TryGetValue(teamId, out var uteam)) continue;
                     uteam.Points = 2;
-                    var bp = uteam.User.BonusPoints.SingleOrDefault(b => b.GroupID == uteam.Team.GroupID);
+                    var bp = user.BonusPoints.SingleOrDefault(b => b.GroupID == uteam.Team.GroupID);
                     if (bp != null)
                     {
                         if (uteam.Points == 2 && bp.HalfPoint) bp.Point = 2;
                         else if (uteam.Points == 2 && !bp.HalfPoint) bp.HalfPoint = true;
                     }
-                    if (uteam.Position == pt.PlayOffPos) uteam.Points = (byte)(uteam.Points + 2);
-                    total += (short)(uteam.Points + (bp?.Point ?? 0));
+                    if (playoffTeamById.TryGetValue(teamId, out var pt) && uteam.Position == pt.PlayOffPos)
+                        uteam.Points = (byte)(uteam.Points + 2);
+                    total += (short)uteam.Points;
                 }
+                // Add group bonus once per group
+                foreach (var bp in user.BonusPoints)
+                    total += bp.Point;
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals))
-                { var u = user.UserQFTeams.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 4; total += 4; } }
+                foreach (var teamId in qfTeamIds)
+                { if (userQFByTeamId.TryGetValue(teamId, out var u)) { u.Points = 4; total += 4; } }
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInSemiFinals))
-                { var u = user.UserSFTeams.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 4; total += 4; } }
+                foreach (var teamId in sfTeamIds)
+                { if (userSFByTeamId.TryGetValue(teamId, out var u)) { u.Points = 4; total += 4; } }
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInFinals))
-                { var u = user.UserFinalTeams.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 4; total += 4; } }
+                foreach (var teamId in finalTeamIds)
+                { if (userFinalByTeamId.TryGetValue(teamId, out var u)) { u.Points = 4; total += 4; } }
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonBronze))
-                { var u = user.UserBronzeTeam.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 10; total += 10; } }
+                foreach (var teamId in bronzeTeamIds)
+                { if (userBronzeByTeamId.TryGetValue(teamId, out var u)) { u.Points = 5; total += 5; } }
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonSilver))
-                { var u = user.UserSilverTeam.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 10; total += 10; } }
+                foreach (var teamId in silverTeamIds)
+                { if (userSilverByTeamId.TryGetValue(teamId, out var u)) { u.Points = 5; total += 5; } }
 
-                foreach (var t in _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonGold))
-                { var u = user.UserGoldTeam.SingleOrDefault(x => x.TeamID == t.ID); if (u != null) { u.Points = 10; total += 10; } }
+                foreach (var teamId in goldTeamIds)
+                { if (userGoldByTeamId.TryGetValue(teamId, out var u)) { u.Points = 15; total += 15; } }
 
-                foreach (var scorer in _scorerRepo.GetWinner())
-                    if (user.TopScorerID == scorer.ID) total += 10;
+                if (winnerIds.Contains(user.TopScorerID ?? -1)) total += 10;
 
                 user.Standings.Add(new Standing { TotalPoints = total, UpdateDate = dtNow, Guid = guid });
             }

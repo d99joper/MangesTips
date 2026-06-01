@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Tipset.Models;
 
 namespace Tipset.ViewModels
@@ -31,7 +32,8 @@ namespace Tipset.ViewModels
         public bool EnableNewEntries { get; set; }
 
         // ── Tab 4: Blog ──────────────────────────────────────────────────────
-        public List<BlogEntry> BlogEntries { get; set; } = new List<BlogEntry>();
+        public List<BlogEntry> BlogEntries     { get; set; } = new List<BlogEntry>();
+        public string          BlogEntriesJson { get; set; } = "{}";
 
         // ── Tab 5: Teams & Matches ───────────────────────────────────────────
         public List<Team> Teams { get; set; } = new List<Team>();
@@ -43,6 +45,7 @@ namespace Tipset.ViewModels
         public string ErrorMessage          { get; set; }
         public string StatsMessage          { get; set; }
         public string UsersMessage          { get; set; }
+        public string BlogMessage           { get; set; }
         public List<string> ResultsMessages { get; set; } = new List<string>();
         public int ActiveTab                { get; set; } = 0;
     }
@@ -59,6 +62,7 @@ namespace Tipset.ViewModels
         public int PlayoffE1 { get; set; } public int PlayoffE2 { get; set; }
         public int PlayoffF1 { get; set; } public int PlayoffF2 { get; set; }
         public int PlayoffG1 { get; set; } public int PlayoffG2 { get; set; }
+        public int PlayoffH1 { get; set; } public int PlayoffH2 { get; set; }
         public int PlayoffI1 { get; set; } public int PlayoffI2 { get; set; }
 
         public List<int> QFTeams     { get; set; } = new List<int>();
@@ -87,6 +91,7 @@ namespace Tipset.ViewModels
     {
         public int    BlogEntryID  { get; set; }  // 0 = new
         public string Title        { get; set; }
+        [AllowHtml]
         public string Text         { get; set; }
     }
 

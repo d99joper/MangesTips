@@ -55,13 +55,13 @@ namespace Tipset.ViewModels
         public int PlayoffI2 { get; set; } = -1;
 
         // Quarter-finals (8 teams)
-        public int[] QFTeams { get; set; } = { -1, -1, -1, -1, -1, -1, -1, -1 };
+        public List<int> QFTeams { get; set; } = new List<int> { -1, -1, -1, -1, -1, -1, -1, -1 };
 
         // Semi-finals (4 teams)
-        public int[] SFTeams { get; set; } = { -1, -1, -1, -1 };
+        public List<int> SFTeams { get; set; } = new List<int> { -1, -1, -1, -1 };
 
         // Finals (2 teams)
-        public int[] FinalTeams { get; set; } = { -1, -1 };
+        public List<int> FinalTeams { get; set; } = new List<int> { -1, -1 };
 
         // Individual awards
         public string TopScorer { get; set; }
