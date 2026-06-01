@@ -1,52 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ACB165DD-7A3A-4F92-8664-F24A06793C56}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tips</RootNamespace>
-    <AssemblyName>Tips</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>4.0</OldToolsVersion>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <TargetFrameworkProfile />
-    <Use64BitIISExpress />
-    <UseGlobalApplicationHostFile />
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit">
@@ -56,50 +19,21 @@
       <HintPath>lib\ceTe.DynamicPDF.35.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="netstandard">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework">
-      <Version>6.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Web.Infrastructure">
-      <Version>2.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="NETStandard.Library">
-      <Version>2.0.3</Version>
-    </PackageReference>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.9" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.9" />
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -108,98 +42,23 @@
     <Content Include="Global.asax">
       <SubType>Component</SubType>
     </Content>
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\AwaitingConfirmationController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ConfirmController.cs" />
-    <Compile Include="Controllers\NyKupongController.cs" />
-    <Compile Include="Controllers\StatisticsController.cs" />
-    <Compile Include="Global.asax.cs">
+    <Compile Update="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DetailsController.cs" />
-    <Compile Include="Helpers\Helpers.cs" />
-    <Compile Include="Helpers\PdfGenerator.cs" />
-    <Compile Include="Models\AppSetting.cs" />
-    <Compile Include="Models\IPreviousYearUser.cs" />
-    <Compile Include="Models\SettingsRepository.cs" />
-    <Compile Include="ViewModels\AdminViewModels.cs" />
-    <Compile Include="ViewModels\DetailsViewModel.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RulesController.cs" />
-    <Compile Include="Controllers\BlogController.cs" />
-    <Compile Include="Controllers\AnswersController.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\AnswersViewModel.cs" />
-    <Compile Include="ViewModels\NyKupongViewModel.cs" />
-    <Compile Include="ViewModels\StatisticsViewModel.cs" />
-    <Compile Include="ViewModels\StatDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\logo20262color.gif" />
     <Content Include="images\logo20262color.png" />
     <Content Include="images\oversloggamax2026.png" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Details\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\SendEmail.cs" />
-    <Compile Include="Helpers\TopScorer.asmx.cs">
+    <Compile Update="Helpers\TopScorer.asmx.cs">
       <DependentUpon>TopScorer.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Helpers\TopScorers.ashx.cs">
+    <Compile Update="Helpers\TopScorers.ashx.cs">
       <DependentUpon>TopScorers.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BlogEntry.cs" />
-    <Compile Include="Models\BlogRepository.cs" />
-    <Compile Include="Models\BonusPoints.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\IMatchRepository.cs" />
-    <Compile Include="Models\ITeamRepository.cs" />
-    <Compile Include="Models\IUserRepository.cs" />
-    <Compile Include="Models\Match.cs" />
-    <Compile Include="Models\MatchRepository.cs" />
-    <Compile Include="Models\Standing.cs" />
-    <Compile Include="Models\StandingDate.cs" />
-    <Compile Include="Models\Standings_2010.cs" />
-    <Compile Include="Models\Standings_2012.cs" />
-    <Compile Include="Models\Standings_2014.cs" />
-    <Compile Include="Models\Standings_2016.cs" />
-    <Compile Include="Models\Standings_2018.cs" />
-    <Compile Include="Models\Standings_2024.cs" />
-    <Compile Include="Models\Standings_2022.cs" />
-    <Compile Include="Models\Standings_2021.cs" />
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamRepository.cs" />
-    <Compile Include="Models\TeamStats.cs" />
-    <Compile Include="Models\Tips.Context.cs" />
-    <Compile Include="Models\TopScorer.cs" />
-    <Compile Include="Models\TopScorerRepository.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserBronzeTeam.cs" />
-    <Compile Include="Models\UserExtensions.cs" />
-    <Compile Include="Models\UserFinalTeam.cs" />
-    <Compile Include="Models\UserGoldTeam.cs" />
-    <Compile Include="Models\UserMatch.cs" />
-    <Compile Include="Models\UserPlayoffTeam.cs" />
-    <Compile Include="Models\UserQFTeam.cs" />
-    <Compile Include="Models\UserRepository.cs" />
-    <Compile Include="Models\UserSFTeam.cs" />
-    <Compile Include="Models\UserSilverTeam.cs" />
-    <Compile Include="Models\User_2010.cs" />
-    <Compile Include="Models\User_2012.cs" />
-    <Compile Include="Models\User_2014.cs" />
-    <Compile Include="Models\User_2016.cs" />
-    <Compile Include="Models\User_2018.cs" />
-    <Compile Include="Models\User_2024.cs" />
-    <Compile Include="Models\User_2022.cs" />
-    <Compile Include="Models\User_2021.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -248,7 +107,7 @@
     <Content Include="Script\autocomplete.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config">
+    <Content Update="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -260,57 +119,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Docs\emtips2012.doc" />
     <Content Include="Docs\vmtipset2014.doc" />
-    <Content Include="packages.config" />
     <Content Include="Docs\tipset2018.docx" />
     <Content Include="Docs\tipset2018.xlsx" />
     <Content Include="Docs\tipset2022.xlsx" />
     <Content Include="Docs\tipset2026.PDF" />
     <Content Include="Docs\tipset2026.xlsx" />
-    <None Include="Properties\PublishProfiles\Godaddy VM2022.pubxml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Rules\Index.cshtml" />
-    <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Blog\Details.cshtml" />
-    <Content Include="Views\Answers\Index.cshtml" />
-    <Content Include="Views\Statistics\Index.cshtml" />
-    <Content Include="Views\Statistics\StatDetails.cshtml" />
-    <Content Include="Views\NyKupong\Index.cshtml" />
-    <Content Include="Views\Confirm\Index.cshtml" />
-    <Content Include="Views\AwaitingConfirmation\Index.cshtml" />
-    <Content Include="Views\Admin\_AdminLayout.cshtml" />
-    <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="secrets\connectionStrings.config" />
     <Content Include="secrets\connectionStrings.config.template" />
-    <Content Include="secrets\appSettings.config" />
     <Content Include="secrets\appSettings.config.template" />
   </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51171</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
+  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
+    <Compile Remove="Models\Tips1.cs" />
+    <Compile Remove="Models\Tips.Designer.cs" />
+    <Compile Remove="Models\BonusPoint.cs" />
+  </ItemGroup>
 </Project>
