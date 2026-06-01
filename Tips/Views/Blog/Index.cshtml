@@ -4,7 +4,7 @@
 }
 
 <div id="wrap">
-    <div id="leftside">
+    
         @foreach (var entry in Model)
         {
             <span class="blogHeader"><a href="@Url.Action("Details", "Blog", new { id = entry.ID })">@entry.Title</a></span>
@@ -23,5 +23,4 @@
                 }
             </div>
         }
-    </div>
 </div>

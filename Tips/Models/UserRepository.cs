@@ -26,16 +26,32 @@ namespace Tipset.Models
             return GetAllUsers().Where(u => u.HasPaid);
         }
 
+        // Eager-loads all collections needed by UpdateUsers to avoid N+1 queries.
+        public List<User> GetAllActiveUsersWithDetails()
+        {
+            return db.Users
+                .Where(u => u.HasPaid)
+                .Include(u => u.UserMatches)
+                .Include(u => u.UserPlayoffTeams.Select(t => t.Team))
+                .Include(u => u.BonusPoints)
+                .Include(u => u.UserQFTeams)
+                .Include(u => u.UserSFTeams)
+                .Include(u => u.UserFinalTeams)
+                .Include(u => u.UserBronzeTeam)
+                .Include(u => u.UserSilverTeam)
+                .Include(u => u.UserGoldTeam)
+                .Include(u => u.Standings)
+                .ToList();
+        }
+
         public IQueryable<Standing> GetStandings()
-        { 
-            DateTime maxDate = (from s in db.Standings
-                                select s.UpdateDate).Max();
+        {
+            var maxDate = db.Standings.Max(s => s.UpdateDate);
 
             return from s in db.Standings
                    where s.UpdateDate == maxDate && s.User.HasPaid
                    orderby s.TotalPoints descending
                    select s;
-
         }
 
         public IQueryable<Standing> GetStandings(Guid guid)
@@ -107,14 +123,7 @@ namespace Tipset.Models
 
         public void ResetAllBonusPoints()
         {
-            IQueryable<BonusPoints> bps = db.BonusPoints;
-            foreach (BonusPoints bp in bps)
-            {
-                bp.Point = 0;
-                bp.HalfPoint = false;
-            }
-
-            Save();
+            db.Database.ExecuteSqlCommand("UPDATE BonusPoints_2026 SET Point = 0, HalfPoint = 0");
         }
 
         internal int CountUserPlayOffTeams(int intFilterTeamID)
@@ -152,29 +161,85 @@ namespace Tipset.Models
             return db.UserGoldTeam.Where(ut => ut.TeamID == intFilterTeamID && ut.User.HasPaid).Count();
         }
 
-        internal User_2010 GetVM2010User(string strDisplayName)
+        internal IPreviousYearUser GetPreviousYearUser(string year, string displayName)
         {
-            return db.User_2010.Where(u => u.DisplayName == strDisplayName && u.HasPaid).FirstOrDefault();
-        }
-
-        internal User_2012 GetEM2012User(string strDisplayName)
-        {
-            return db.User_2012.Where(u => u.DisplayName == strDisplayName && u.HasPaid).FirstOrDefault();
-        }
-
-        internal User_2014 GetVM2014User(string strDisplayName)
-        {
-            return db.User_2014.Where(u => u.DisplayName == strDisplayName && u.HasPaid).FirstOrDefault();
-        }
-
-        internal User_2016 GetEM2016User(string strDisplayName)
-        {
-            return db.User_2016.Where(u => u.DisplayName == strDisplayName && u.HasPaid).FirstOrDefault();
+            switch (year)
+            {
+                case "2010": return db.User_2010.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2012": return db.User_2012.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2014": return db.User_2014.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2016": return db.User_2016.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2018": return db.User_2018.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2021": return db.User_2021.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2022": return db.User_2022.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2024": return db.User_2024.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                default:     return null;
+            }
         }
 
         internal double CountUserMatchResult(int matchID, String resultMark)
         {
             return db.UserMatches.Where(um => um.MatchID == matchID && um.ResultMark == resultMark && um.User.HasPaid).Count();
+        }
+
+        // Returns counts keyed by "matchId_resultMark" for all paid users
+        internal Dictionary<string, double> GetMatchResultCounts()
+        {
+            return db.UserMatches
+                .Where(um => um.User.HasPaid)
+                .GroupBy(um => new { um.MatchID, um.ResultMark })
+                .Select(g => new { g.Key.MatchID, g.Key.ResultMark, Count = (double)g.Count() })
+                .ToList()
+                .ToDictionary(x => x.MatchID + "_" + x.ResultMark, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetPlayoffTeamCounts()
+        {
+            return db.UserPlayoffTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetQFTeamCounts()
+        {
+            return db.UserQFTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetSFTeamCounts()
+        {
+            return db.UserSFTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetFinalTeamCounts()
+        {
+            return db.UserFinalTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetBronzeTeamCounts()
+        {
+            return db.UserBronzeTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetSilverTeamCounts()
+        {
+            return db.UserSilverTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
+        }
+
+        internal Dictionary<int, int> GetGoldTeamCounts()
+        {
+            return db.UserGoldTeam.Where(ut => ut.User.HasPaid)
+                .GroupBy(ut => ut.TeamID).Select(g => new { g.Key, Count = g.Count() })
+                .ToDictionary(x => x.Key, x => x.Count);
         }
 
         internal static List<UserMatch> GetAllUserMatches(int matchID, string resultMark)
@@ -281,3 +346,5 @@ namespace Tipset.Models
         }
     }
 }
+
+

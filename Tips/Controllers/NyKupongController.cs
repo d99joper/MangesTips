@@ -17,8 +17,16 @@ namespace Tipset.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var vm = BuildViewModel(new NyKupongViewModel());
-            return View(vm);
+            try
+            {
+                var vm = BuildViewModel(new NyKupongViewModel());
+                return View(vm);
+            }
+            catch (Exception ex)
+            {
+                // Tillfälligt för felsökning – ta bort sedan
+                return Content("GET-fel: " + ex.ToString());
+            }
         }
 
         [HttpPost]
@@ -85,13 +93,13 @@ namespace Tipset.Controllers
         {
             bool valid = true;
 
-            if (vm.QFTeams == null || vm.QFTeams.Any(t => t == -1) || vm.QFTeams.Distinct().Count() != vm.QFTeams.Length)
+            if (vm.QFTeams == null || vm.QFTeams.Any(t => t == -1) || vm.QFTeams.Distinct().Count() != vm.QFTeams.Count)
             { vm.QFError = true; valid = false; }
 
-            if (vm.SFTeams == null || vm.SFTeams.Any(t => t == -1) || vm.SFTeams.Distinct().Count() != vm.SFTeams.Length)
+            if (vm.SFTeams == null || vm.SFTeams.Any(t => t == -1) || vm.SFTeams.Distinct().Count() != vm.SFTeams.Count)
             { vm.SFError = true; valid = false; }
 
-            if (vm.FinalTeams == null || vm.FinalTeams.Any(t => t == -1) || vm.FinalTeams.Distinct().Count() != vm.FinalTeams.Length)
+            if (vm.FinalTeams == null || vm.FinalTeams.Any(t => t == -1) || vm.FinalTeams.Distinct().Count() != vm.FinalTeams.Count)
             { vm.FinalError = true; valid = false; }
 
             if (_topScorerRepository.GetTopScorer(vm.TopScorer ?? "") == null)

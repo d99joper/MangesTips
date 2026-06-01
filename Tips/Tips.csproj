@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="CSS\admin.css" />
+    <Content Include="CSS\responsive.css" />
     <Content Include="Global.asax">
       <SubType>Component</SubType>
     </Content>
@@ -119,7 +120,10 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DetailsController.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\PdfGenerator.cs" />
     <Compile Include="Models\AppSetting.cs" />
+    <Compile Include="Models\IPreviousYearUser.cs" />
     <Compile Include="Models\SettingsRepository.cs" />
     <Compile Include="ViewModels\AdminViewModels.cs" />
     <Compile Include="ViewModels\DetailsViewModel.cs" />
@@ -262,6 +266,8 @@
     <Content Include="Docs\tipset2018.docx" />
     <Content Include="Docs\tipset2018.xlsx" />
     <Content Include="Docs\tipset2022.xlsx" />
+    <Content Include="Docs\tipset2026.PDF" />
+    <Content Include="Docs\tipset2026.xlsx" />
     <None Include="Properties\PublishProfiles\Godaddy VM2022.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Rules\Index.cshtml" />

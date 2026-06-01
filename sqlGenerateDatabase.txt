@@ -658,3 +658,20 @@ GO
 ALTER TABLE [dbo].[UserSilverTeam_2022] CHECK CONSTRAINT [FK_UserSilverTeam_User_2022]
 GO
 
+-- User lookups
+CREATE INDEX IX_User_HasPaid ON [dbo].[User_2026] ([HasPaid]);
+CREATE INDEX IX_User_Guid ON [dbo].[User_2022] ([Guid]);
+CREATE INDEX IX_User_IsConfirmed ON [dbo].[User_2022] ([IsConfirmed]);
+
+-- Standings lookups
+CREATE INDEX IX_Standings_UpdateDate ON [dbo].[Standings_2026] ([UpdateDate]);
+CREATE INDEX IX_Standings_Guid ON [dbo].[Standings_2022] ([Guid]);
+
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2010] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2012] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2014] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2016] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2018] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2021] ([DisplayName]);  
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2022] ([DisplayName]);
+CREATE INDEX IX_User_DisplayName ON [dbo].[User_2024] ([DisplayName]);

@@ -13,6 +13,11 @@
 @section head {
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
     <style>
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         #tabs .ui-tabs-nav li.ui-tabs-active a,
         #tabs .ui-tabs-nav li.ui-state-active a {
             background: #1a6bbf;
@@ -64,6 +69,7 @@
         </ul>
 
         <div id="tab-matches">
+            <div class="table-scroll">
             <table class="stats">
                 <thead>
                     <tr>
@@ -94,17 +100,19 @@
                     }
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div id="tab-teams">
+            <div class="table-scroll">
             <table class="stats">
                 <thead>
                     <tr>
                         <th><a href="@Url.Action("Index", new { sort = "TeamName",      dir = tnDir, tab = 1 })">Lag</a></th>
                         <th><a href="@Url.Action("Index", new { sort = "Playoff",       dir = poDir, tab = 1 })">Slutspel</a></th>
-                        <th><a href="@Url.Action("Index", new { sort = "QuarterFinals", dir = qfDir, tab = 1 })">Kvartsfinaler</a></th>
-                        <th><a href="@Url.Action("Index", new { sort = "SemiFinals",    dir = sfDir, tab = 1 })">Semifinaler</a></th>
-                        <th><a href="@Url.Action("Index", new { sort = "Finals",        dir = fiDir, tab = 1 })">Finaler</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "QuarterFinals", dir = qfDir, tab = 1 })">Kvartsfinal</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "SemiFinals",    dir = sfDir, tab = 1 })">Semifinal</a></th>
+                        <th><a href="@Url.Action("Index", new { sort = "Finals",        dir = fiDir, tab = 1 })">Final</a></th>
                         <th><a href="@Url.Action("Index", new { sort = "Bronze",        dir = brDir, tab = 1 })">Brons</a></th>
                         <th><a href="@Url.Action("Index", new { sort = "Silver",        dir = siDir, tab = 1 })">Silver</a></th>
                         <th><a href="@Url.Action("Index", new { sort = "Gold",          dir = goDir, tab = 1 })">Guld</a></th>
@@ -117,9 +125,9 @@
                         <tr>
                             <td>@t.TeamName</td>
                             <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "playoff",       teamid = t.ID })" title="@t.TeamName (Slutspel)">@(ts != null ? string.Format("{0:P0}", ts.PlayoffPercent) : "")</a></td>
-                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "quarterfinals", teamid = t.ID })" title="@t.TeamName (Kvartsfinaler)">@(ts != null ? string.Format("{0:P0}", ts.QuarterFinalPercent) : "")</a></td>
-                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "semifinals",    teamid = t.ID })" title="@t.TeamName (Semifinaler)">@(ts != null ? string.Format("{0:P0}", ts.SemiFinalPercent) : "")</a></td>
-                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "finals",        teamid = t.ID })" title="@t.TeamName (Finaler)">@(ts != null ? string.Format("{0:P0}", ts.FinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "quarterfinals", teamid = t.ID })" title="@t.TeamName (Kvartsfinal)">@(ts != null ? string.Format("{0:P0}", ts.QuarterFinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "semifinals",    teamid = t.ID })" title="@t.TeamName (Semifinal)">@(ts != null ? string.Format("{0:P0}", ts.SemiFinalPercent) : "")</a></td>
+                            <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "finals",        teamid = t.ID })" title="@t.TeamName (Final)">@(ts != null ? string.Format("{0:P0}", ts.FinalPercent) : "")</a></td>
                             <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "bronze",        teamid = t.ID })" title="@t.TeamName (Brons)">@(ts != null ? string.Format("{0:P0}", ts.BronzePercent) : "")</a></td>
                             <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "silver",        teamid = t.ID })" title="@t.TeamName (Silver)">@(ts != null ? string.Format("{0:P0}", ts.SilverPercent) : "")</a></td>
                             <td><a href="@Url.Action("StatDetails", new { type = "playoffs", stage = "gold",          teamid = t.ID })" title="@t.TeamName (Guld)">@(ts != null ? string.Format("{0:P0}", ts.GoldPercent) : "")</a></td>
@@ -127,14 +135,16 @@
                     }
                 </tbody>
             </table>
+            </div>
         </div>
 
         <div id="tab-topscorer">
+            <div class="table-scroll">
             <table class="stats">
                 <thead>
                     <tr>
                         <th>Namn</th>
-                        <th>Vinnarchans</th>
+                        <th>Procent</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,6 +157,7 @@
                     }
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </div>

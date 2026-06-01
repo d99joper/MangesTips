@@ -4,8 +4,9 @@
 }
 
 <div id="wrap">
-    <div id="leftside">
+    
         <div class="editor-field">1. Tipsraden. Tippa resultatet i gruppspelet, t.ex 2-0.</div>
+        <div class="scroll-x">
         <table class="tips">
             @foreach (var match in Model.Matches)
             {
@@ -21,37 +22,25 @@
                 </tr>
             }
         </table>
+        </div>
 
         <br /><br />
         <div class="editor-label">2. Vidare från gruppen</div>
-        <table class="facit">
-            <thead>
-                <tr>
-                    <td>Grupp A</td><td>Grupp B</td><td>Grupp C</td><td>Grupp D</td>
-                </tr>
-            </thead>
-            <tr>
-                @foreach (var g in new[] { "A", "B", "C", "D" }) { <td>1. @Model.PlayoffTeams["1" + g]</td> }
-            </tr>
-            <tr>
-                @foreach (var g in new[] { "A", "B", "C", "D" }) { <td>2. @Model.PlayoffTeams["2" + g]</td> }
-            </tr>
-            <thead>
-                <tr>
-                    <td align="center">Grupp E</td><td align="center">Grupp F</td><td align="center">Grupp G</td><td align="center">Grupp I</td>
-                </tr>
-            </thead>
-            <tr>
-                @foreach (var g in new[] { "E", "F", "G", "I" }) { <td>1. @Model.PlayoffTeams["1" + g]</td> }
-            </tr>
-            <tr>
-                @foreach (var g in new[] { "E", "F", "G", "I" }) { <td>2. @Model.PlayoffTeams["2" + g]</td> }
-            </tr>
-        </table>
+        <div class="playoff-grid">
+            @foreach (var g in new[] { "A", "B", "C", "D", "E", "F", "G", "I" })
+            {
+                <div class="playoff-group">
+                    <strong>Grupp @g</strong>
+                    <div>1. @Model.PlayoffTeams["1" + g]</div>
+                    <div>2. @Model.PlayoffTeams["2" + g]</div>
+                </div>
+            }
+        </div>
 
         <br />
         <div class="editor-label">3. Vilka åtta lag går till kvartsfinal?</div>
-        <table>
+        <div class="scroll-x">
+        <table class="picks">
             @for (int i = 0; i < Model.QFTeams.Count; i += 2)
             {
                 <tr>
@@ -60,10 +49,12 @@
                 </tr>
             }
         </table>
+        </div>
 
         <br />
         <div class="editor-label">4. Vilka fyra lag går till semifinal?</div>
-        <table>
+        <div class="scroll-x">
+        <table class="picks">
             @for (int i = 0; i < Model.SFTeams.Count; i += 2)
             {
                 <tr>
@@ -72,14 +63,17 @@
                 </tr>
             }
         </table>
+        </div>
 
         <br />
         <div class="editor-label">5. Vilka två lag går till final?</div>
-        <table>
+        <div class="scroll-x">
+        <table class="picks">
             <tr>
                 @foreach (var t in Model.FinalTeams) { <td style="width:120px;">@t</td> }
             </tr>
         </table>
+        </div>
 
         <br />
         <div class="editor-label">6. Skyttekung: @Model.TopScorer</div>
@@ -89,9 +83,5 @@
         <div class="editor-label">8. Silver: @Model.Silver</div>
         <br />
         <div class="editor-label">9. Guld: @Model.Gold</div>
-    </div>
 
-    <div id="rightside">
-        <center><img class="logo45" src="@Url.Content("~/images/oversloggamax2026.png")" alt="Manges VM-tips" /></center>
-    </div>
 </div>

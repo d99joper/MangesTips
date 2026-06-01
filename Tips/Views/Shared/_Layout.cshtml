@@ -1,27 +1,28 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="@Url.Content("~/CSS/Site.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/Site.css")).Ticks" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/CSS/EM2016.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/EM2016.css")).Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/responsive.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/responsive.css")).Ticks" rel="stylesheet" type="text/css" />
     <title>Manges VM-tips 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0" />
     <meta property="og:title" content="Manges VM-tips" />
     <meta property="og:description" content="Det perfekta tillbehöret till fotbolls-VM. Inlägg, resultatlista och statistik på ett ställe." />
     <meta property="og:image" content="http://mangesvmtips2026.personablesolutions.com/images/oversloggamax2026.png" />
     @RenderSection("head", required: false)
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C47RP4QYY"></script>
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-4565723-8', 'personablesolutions.com');
-        ga('send', 'pageview');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3C47RP4QYY');
     </script>
 </head>
 <body>
     <div class="page">
         <div id="header">
-            <div id="title" >
+            <div id="title">
                 <a href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/images/oversloggamax2026.png")" alt="Manges VM-tips" /></a>
             </div>
             <div id="logindisplay">
@@ -29,6 +30,9 @@
             </div>
             <div id="menucontainer">
                 @{ string currentController = (ViewContext.RouteData.Values["controller"] ?? "").ToString(); }
+                <!-- Hidden checkbox used as toggle – no JavaScript needed -->
+                <input type="checkbox" id="menu-toggle" />
+                <label for="menu-toggle" id="menu-toggle-btn">&#9776; Meny</label>
                 <ul id="menu">
                     <li class="@(currentController == "Home" ? "active" : "")"><a href="@Url.Action("Index", "Home")">Första sidan</a></li>
                     @if (!(bool)(ViewBag.EnableNewEntries ?? false))
@@ -42,7 +46,6 @@
                         <li class="@(currentController == "NyKupong" ? "active" : "")"><a href="@Url.Action("Index", "NyKupong")">Anmälan</a></li>
                     }
                     <li class="@(currentController == "Rules" ? "active" : "")"><a href="@Url.Action("Index", "Rules")">Regler</a></li>
-                    @*<li><a href="http://mangesvmochemtips.wikia.com/wiki/Manges_VM-_och_EM-tips_Wiki" target="_blank">Wiki</a></li>*@
                 </ul>
             </div>
         </div>
