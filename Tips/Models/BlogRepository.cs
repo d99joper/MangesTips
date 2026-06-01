@@ -7,7 +7,12 @@ namespace Tipset.Models
 {
     public class BlogRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public BlogRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public void Save()
         {

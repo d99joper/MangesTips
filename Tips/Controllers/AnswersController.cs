@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -8,9 +8,18 @@ namespace Tipset.Controllers
 {
     public class AnswersController : BaseController
     {
-        private readonly TeamRepository _teamRepository = new TeamRepository();
-        private readonly MatchRepository _matchRepository = new MatchRepository();
-        private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
+        private readonly TeamRepository _teamRepository;
+        private readonly MatchRepository _matchRepository;
+        private readonly TopScorerRepository _topScorerRepository;
+
+        public AnswersController(TeamRepository teamRepository, MatchRepository matchRepository,
+            TopScorerRepository topScorerRepository, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _teamRepository = teamRepository;
+            _matchRepository = matchRepository;
+            _topScorerRepository = topScorerRepository;
+        }
 
         public ActionResult Index()
         {

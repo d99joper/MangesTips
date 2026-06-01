@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl94Bw9FM3UuWs1IFoqLhxAAAAAACAAAAAAAQZgAAAAEAACAAAABgk1+RyXz/O1gabm7ZjPsKMYXSTbqwZwD2Lc5O1xfaqgAAAAAOgAAAAAIAACAAAACnnv69k3TJ+qCIASLJ1Z3Mp2bE3MnrgTK1drOCjF7zICAAAABxVjDnAn0Q/DbPhzOJaJDqhdPPsCSp7CMaIqsPZvOk/0AAAAD8rNN8s+CFdvjkArp6Qv2gvTsCfUnS7Yv80k48pK07Qb4avdekK7Rif1n6lAoneIace8dwf7U+QJTPE+BhwAD2</EncryptedPassword>
+    <_PublishTargetUrl>ftp://personablesolutions.com/moderdotnettest/</_PublishTargetUrl>
+    <History>True|2026-06-01T22:40:22.2138621Z||;True|2026-06-01T15:33:03.9826220-07:00||;True|2026-06-01T15:32:13.3890287-07:00||;False|2026-06-01T15:31:05.3119251-07:00||;False|2026-06-01T15:30:14.7161611-07:00||;True|2026-06-01T15:26:14.2580009-07:00||;True|2026-06-01T15:24:26.6307280-07:00||;True|2026-06-01T15:21:49.3900597-07:00||;True|2026-06-01T15:12:56.9146731-07:00||;True|2026-06-01T15:07:47.1767870-07:00||;True|2026-06-01T15:01:48.1968737-07:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>06/01/2026 14:27:07</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>06/01/2026 14:27:03</publishTime>
+    </File>
+    <File Include="appsettings.Secrets.json">
+      <publishTime>06/01/2026 14:52:14</publishTime>
+    </File>
+    <File Include="ceTe.DynamicPDF.35.dll">
+      <publishTime>05/03/2026 15:11:59</publishTime>
+    </File>
+    <File Include="dotnet-tools.json">
+      <publishTime>06/01/2026 14:57:51</publishTime>
+    </File>
+    <File Include="EntityFramework.dll">
+      <publishTime>04/20/2026 16:50:08</publishTime>
+    </File>
+    <File Include="EntityFramework.SqlServer.dll">
+      <publishTime>04/20/2026 16:50:28</publishTime>
+    </File>
+    <File Include="Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/31/2023 08:00:30</publishTime>
+    </File>
+    <File Include="runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll">
+      <publishTime>10/26/2023 16:34:06</publishTime>
+    </File>
+    <File Include="runtimes/win-arm64/native/sni.dll">
+      <publishTime>07/12/2017 04:24:24</publishTime>
+    </File>
+    <File Include="runtimes/win-x64/native/sni.dll">
+      <publishTime>07/12/2017 04:24:22</publishTime>
+    </File>
+    <File Include="runtimes/win-x86/native/sni.dll">
+      <publishTime>07/12/2017 04:24:22</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/31/2023 07:59:50</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll">
+      <publishTime>10/26/2023 16:34:10</publishTime>
+    </File>
+    <File Include="secrets/appSettings.config">
+      <publishTime>05/05/2026 09:33:09</publishTime>
+    </File>
+    <File Include="secrets/connectionStrings.config">
+      <publishTime>05/05/2026 09:16:32</publishTime>
+    </File>
+    <File Include="System.CodeDom.dll">
+      <publishTime>10/22/2021 16:47:46</publishTime>
+    </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>10/31/2023 07:59:08</publishTime>
+    </File>
+    <File Include="System.Data.SqlClient.dll">
+      <publishTime>10/26/2023 16:27:26</publishTime>
+    </File>
+    <File Include="System.Drawing.Common.dll">
+      <publishTime>10/31/2023 15:14:48</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>10/31/2023 07:59:04</publishTime>
+    </File>
+    <File Include="Tips.deps.json">
+      <publishTime>06/01/2026 15:00:34</publishTime>
+    </File>
+    <File Include="Tips.dll">
+      <publishTime>06/01/2026 15:00:34</publishTime>
+    </File>
+    <File Include="Tips.exe">
+      <publishTime>06/01/2026 15:00:34</publishTime>
+    </File>
+    <File Include="Tips.pdb">
+      <publishTime>06/01/2026 15:00:34</publishTime>
+    </File>
+    <File Include="Tips.runtimeconfig.json">
+      <publishTime>06/01/2026 14:45:22</publishTime>
+    </File>
+    <File Include="Tips.staticwebassets.endpoints.json">
+      <publishTime>06/01/2026 15:00:35</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>05/03/2026 14:46:16</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/01/2026 15:00:35</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/admin.css">
+      <publishTime>05/13/2026 14:25:23</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/autocomplete.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Blue.css">
+      <publishTime>05/21/2026 13:07:47</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2012_Green.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2012_Purple.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2016.css">
+      <publishTime>06/01/2026 13:38:05</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/FadingOrange.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/FadingOrange_old.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Green.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Orange.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/PaleBlue.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/responsive.css">
+      <publishTime>06/01/2026 13:38:05</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Silver.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Site.css">
+      <publishTime>06/01/2026 13:38:05</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/SkyBlue.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/VM2014.css">
+      <publishTime>04/16/2026 10:36:58</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/emtips2012.doc">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2018.docx">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2018.xlsx">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2022.xlsx">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2026.PDF">
+      <publishTime>06/01/2026 13:38:05</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2026.xlsx">
+      <publishTime>06/01/2026 13:38:05</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2_old.doc">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset_old.doc">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/vmtipset2014.doc">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/egoboy.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/fadingBackground.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/gradient.jpeg">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/greengradient.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/icon-edit.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/icon_delete.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/Image411.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggacolor.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012400.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggo2018.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggo2018.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo20262color.gif">
+      <publishTime>05/04/2026 09:04:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo20262color.png">
+      <publishTime>05/04/2026 09:04:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.jpg">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_header_2014.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/mangesvmtips.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/mangesvmtips.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/orangeGradient.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/oversloggamax2026.png">
+      <publishTime>05/04/2026 09:04:15</publishTime>
+    </File>
+    <File Include="wwwroot/images/overstlogga.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/overstlogga2022small3.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/progress_indicator.gif">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/images/purpleGradient.png">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="wwwroot/Script/autocomplete.js">
+      <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-﻿@model Tipset.ViewModels.AdminIndexViewModel
+@model Tipset.ViewModels.AdminIndexViewModel
 @{
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
     ViewBag.Title = "Översikt";
@@ -306,7 +306,7 @@
                             </a>
                         </td>
                         <td>
-                            @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, null, new { style = "display:inline" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <button type="submit" onclick="return confirm('Radera inlägget?')" style="background:none;border:none;cursor:pointer;padding:0;">
@@ -371,7 +371,7 @@
                             </a>
                         </td>
                         <td>
-                            @using (Html.BeginForm("DeleteTeam", "Admin", new { id = t.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            @using (Html.BeginForm("DeleteTeam", "Admin", new { id = t.ID }, FormMethod.Post, null, new { style = "display:inline" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <button type="submit" onclick="return confirm('Radera laget?')" style="background:none;border:none;cursor:pointer;padding:0;">
@@ -433,7 +433,7 @@
                             </a>
                         </td>
                         <td>
-                            @using (Html.BeginForm("DeleteMatch", "Admin", new { id = m.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            @using (Html.BeginForm("DeleteMatch", "Admin", new { id = m.ID }, FormMethod.Post, null, new { style = "display:inline" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <button type="submit" onclick="return confirm('Radera matchen?')" style="background:none;border:none;cursor:pointer;padding:0;">
@@ -506,7 +506,7 @@
                             </a>
                         </td>
                         <td>
-                            @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, new { style = "display:inline" }))
+                            @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, null, new { style = "display:inline" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <button type="submit" onclick="return confirm('Radera?')" style="background:none;border:none;cursor:pointer;padding:0;">

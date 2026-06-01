@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Web;
 namespace Tipset.Models
 {
     public class UserRepository : IUserRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public UserRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public IQueryable<User> GetAllUsers()
         {
@@ -32,7 +36,7 @@ namespace Tipset.Models
             return db.Users
                 .Where(u => u.HasPaid)
                 .Include(u => u.UserMatches)
-                .Include(u => u.UserPlayoffTeams.Select(t => t.Team))
+                .Include(u => u.UserPlayoffTeams).ThenInclude(t => t.Team)
                 .Include(u => u.BonusPoints)
                 .Include(u => u.UserQFTeams)
                 .Include(u => u.UserSFTeams)
@@ -123,7 +127,7 @@ namespace Tipset.Models
 
         public void ResetAllBonusPoints()
         {
-            db.Database.ExecuteSqlCommand("UPDATE BonusPoints_2026 SET Point = 0, HalfPoint = 0");
+            db.Database.ExecuteSqlRaw("UPDATE BonusPoints_2026 SET Point = 0, HalfPoint = 0");
         }
 
         internal int CountUserPlayOffTeams(int intFilterTeamID)
@@ -242,23 +246,18 @@ namespace Tipset.Models
                 .ToDictionary(x => x.Key, x => x.Count);
         }
 
-        internal static List<UserMatch> GetAllUserMatches(int matchID, string resultMark)
+        internal List<UserMatch> GetAllUserMatches(int matchID, string resultMark)
         {
-            using (Tips_Entities db = new Tips_Entities())
-            {
-                return db.UserMatches
-                    .Include(um => um.User)
-                    .Include(um => um.Match)
-                    .Where(um => um.MatchID == matchID && um.ResultMark == resultMark && um.User.HasPaid)
-                    .OrderBy(um => um.User.DisplayName)
-                    .ToList();
-            }
+            return db.UserMatches
+                .Include(um => um.User)
+                .Include(um => um.Match)
+                .Where(um => um.MatchID == matchID && um.ResultMark == resultMark && um.User.HasPaid)
+                .OrderBy(um => um.User.DisplayName)
+                .ToList();
         }
 
-        internal static List<User> GetUserPlayoffTeams(string stage, int teamid)
+        internal List<User> GetUserPlayoffTeams(string stage, int teamid)
         {
-            using(Tips_Entities db = new Tips_Entities())
-            {
                 switch (stage)
                 {
                     case "playoff":
@@ -306,25 +305,18 @@ namespace Tipset.Models
                     default:
                         return null;
                 }
-            }
         }
 
-        internal static List<User> GetUsersForTopscorer(int topscorerID)
+        internal List<User> GetUsersForTopscorer(int topscorerID)
         {
-            using (Tips_Entities db = new Tips_Entities())
-            {
-
-                return db.Users
-                    .Where(u => u.TopScorerID == topscorerID && u.HasPaid)
-                    .OrderBy(u => u.DisplayName)
-                    .ToList();
-            }
+            return db.Users
+                .Where(u => u.TopScorerID == topscorerID && u.HasPaid)
+                .OrderBy(u => u.DisplayName)
+                .ToList();
         }
 
-        internal static bool CorrectTeamInStage(int teamID, string stage)
+        internal bool CorrectTeamInStage(int teamID, string stage)
         {
-            using (Tips_Entities db = new Tips_Entities())
-            {
                 switch (stage)
                 {
                     case "playoff":
@@ -342,7 +334,6 @@ namespace Tipset.Models
                     default:
                         return false;
                 }
-            }
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
+using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 using Tipset.ViewModels;
 using Tipset.Helpers.Sanitization;
@@ -12,11 +13,24 @@ namespace Tipset.Controllers
     [Authorize]
     public class AdminController : BaseController
     {
-        private readonly TeamRepository      _teamRepo      = new TeamRepository();
-        private readonly MatchRepository     _matchRepo     = new MatchRepository();
-        private readonly UserRepository      _userRepo      = new UserRepository();
-        private readonly BlogRepository      _blogRepo      = new BlogRepository();
-        private readonly TopScorerRepository _scorerRepo    = new TopScorerRepository();
+        private readonly TeamRepository      _teamRepo;
+        private readonly MatchRepository     _matchRepo;
+        private readonly UserRepository      _userRepo;
+        private readonly BlogRepository      _blogRepo;
+        private readonly TopScorerRepository _scorerRepo;
+        private readonly SettingsRepository  _settingsRepo;
+
+        public AdminController(TeamRepository teamRepo, MatchRepository matchRepo, UserRepository userRepo,
+            BlogRepository blogRepo, TopScorerRepository scorerRepo, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _teamRepo    = teamRepo;
+            _matchRepo   = matchRepo;
+            _userRepo    = userRepo;
+            _blogRepo    = blogRepo;
+            _scorerRepo  = scorerRepo;
+            _settingsRepo = settingsRepo;
+        }
 
         // ── GET /Admin ────────────────────────────────────────────────────────
         public ActionResult Index(int tab = 0)
@@ -134,7 +148,7 @@ namespace Tipset.Controllers
         {
             try
             {
-                var settings = new SettingsRepository();
+                var settings = _settingsRepo;
                 settings.Set("EnableNewEntries", (!settings.GetBool("EnableNewEntries")).ToString().ToLower());
             }
             catch (Exception ex) { TempData["ErrorMessage"] = ex.Message; }
@@ -415,8 +429,7 @@ namespace Tipset.Controllers
                 GoldSelected   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonGold).FirstOrDefault()?.ID   ?? -1,
             };
 
-            var serializer = new JavaScriptSerializer();
-            vm.BlogEntriesJson = serializer.Serialize(
+            vm.BlogEntriesJson = JsonSerializer.Serialize(
                 vm.BlogEntries.ToDictionary(
                     b => b.ID.ToString(),
                     b => new { title = b.Title, text = b.Text }
@@ -431,7 +444,7 @@ namespace Tipset.Controllers
                 vm.PlayoffSelected[g + "2"] = allPlayoffTeams.FirstOrDefault(t => t.GroupID == g && t.PlayOffPos == 2)?.ID ?? -1;
             }
 
-            vm.EnableNewEntries = new SettingsRepository().GetBool("EnableNewEntries");
+            vm.EnableNewEntries = _settingsRepo.GetBool("EnableNewEntries");
 
             return vm;
         }

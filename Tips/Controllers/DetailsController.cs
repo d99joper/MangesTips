@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Helpers;
 using Tipset.Models;
 using Tipset.ViewModels;
@@ -10,8 +11,18 @@ namespace Tipset.Controllers
 {
     public class DetailsController : BaseController
     {
-        private readonly UserRepository _userRepository = new UserRepository();
-        private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
+        private readonly UserRepository _userRepository;
+        private readonly TopScorerRepository _topScorerRepository;
+        private readonly IWebHostEnvironment _env;
+
+        public DetailsController(UserRepository userRepository, TopScorerRepository topScorerRepository,
+            IWebHostEnvironment env, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _userRepository = userRepository;
+            _topScorerRepository = topScorerRepository;
+            _env = env;
+        }
 
         public ActionResult Pdf(Guid guid)
         {
@@ -21,7 +32,7 @@ namespace Tipset.Controllers
                 if (currentUser == null)
                     return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
 
-                byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, HttpContext.Server);
+                byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, _env);
                 return File(pdfBytes, "application/pdf", currentUser.DisplayName + " Manges VM-tips.pdf");
             }
             catch (Exception ex)

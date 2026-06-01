@@ -18,7 +18,12 @@ namespace Tipset.Models
             WonGold = 7
         }
 
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public TeamRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public IQueryable<Team> GetAllTeams()
         {

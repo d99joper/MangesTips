@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -8,13 +8,19 @@ namespace Tipset.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly UserRepository _userRepository;
+
+        public HomeController(UserRepository userRepository, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _userRepository = userRepository;
+        }
 
         public ActionResult Index(Guid? date, string sort, string dir)
         {
             var vm = new HomeViewModel();
 
-            vm.EnableNewEntries = new SettingsRepository().GetBool("EnableNewEntries");
+            vm.EnableNewEntries = ViewBag.EnableNewEntries;
 
             vm.StandingDates = _userRepository.GetStandingDates();
 

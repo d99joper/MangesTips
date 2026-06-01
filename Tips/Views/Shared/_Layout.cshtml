@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment __env
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="@Url.Content("~/CSS/Site.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/Site.css")).Ticks" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/CSS/EM2016.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/EM2016.css")).Ticks" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/CSS/responsive.css")?v=@System.IO.File.GetLastWriteTime(Server.MapPath("~/CSS/responsive.css")).Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/Site.css")?v=@System.IO.File.GetLastWriteTime(System.IO.Path.Combine(__env.WebRootPath,"CSS","Site.css")).Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/EM2016.css")?v=@System.IO.File.GetLastWriteTime(System.IO.Path.Combine(__env.WebRootPath,"CSS","EM2016.css")).Ticks" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/CSS/responsive.css")?v=@System.IO.File.GetLastWriteTime(System.IO.Path.Combine(__env.WebRootPath,"CSS","responsive.css")).Ticks" rel="stylesheet" type="text/css" />
     <title>Manges VM-tips 2026</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0" />
     <meta property="og:title" content="Manges VM-tips" />

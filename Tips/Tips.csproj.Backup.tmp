@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ceTe.DynamicPDF.35">
+      <HintPath>lib\ceTe.DynamicPDF.35.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="CSS\admin.css" />
+    <Content Include="CSS\responsive.css" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\logo20262color.gif" />
+    <Content Include="images\logo20262color.png" />
+    <Content Include="images\oversloggamax2026.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="App_Start\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSS\autocomplete.css" />
+    <Content Include="CSS\Blue.css" />
+    <Content Include="CSS\EM2012_Green.css" />
+    <Content Include="CSS\EM2012_Purple.css" />
+    <Content Include="CSS\EM2016.css" />
+    <Content Include="CSS\FadingOrange.css" />
+    <Content Include="CSS\FadingOrange_old.css" />
+    <Content Include="CSS\Green.css" />
+    <Content Include="CSS\Orange.css" />
+    <Content Include="CSS\PaleBlue.css" />
+    <Content Include="CSS\Silver.css" />
+    <Content Include="CSS\Site.css" />
+    <Content Include="CSS\SkyBlue.css" />
+    <Content Include="CSS\VM2014.css" />
+    <Content Include="Helpers\TopScorer.asmx" />
+    <Content Include="images\egoboy.png" />
+    <Content Include="images\fadingBackground.png" />
+    <Content Include="images\gradient.jpeg" />
+    <Content Include="images\greengradient.png" />
+    <Content Include="images\icon-edit.png" />
+    <Content Include="images\icon_delete.gif" />
+    <Content Include="images\Image411.png" />
+    <Content Include="images\loggacolor.png" />
+    <Content Include="images\loggan2012.gif" />
+    <Content Include="images\loggan2012.png" />
+    <Content Include="images\loggan2012400.png" />
+    <Content Include="images\loggo2018.gif" />
+    <Content Include="images\loggo2018.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logo_2014.gif" />
+    <Content Include="images\logo_2014.jpg" />
+    <Content Include="images\logo_2014.png" />
+    <Content Include="images\logo_header_2014.png" />
+    <Content Include="images\mangesvmtips.gif" />
+    <Content Include="images\mangesvmtips.png" />
+    <Content Include="images\orangeGradient.png" />
+    <Content Include="images\overstlogga.png" />
+    <Content Include="images\overstlogga2022small3.png" />
+    <Content Include="images\progress_indicator.gif" />
+    <Content Include="images\purpleGradient.png" />
+    <Content Include="Script\autocomplete.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Helpers\TopScorers.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Docs\vmtipset2014.doc" />
+    <Content Include="Docs\tipset2018.docx" />
+    <Content Include="Docs\tipset2018.xlsx" />
+    <Content Include="Docs\tipset2022.xlsx" />
+    <Content Include="Docs\tipset2026.PDF" />
+    <Content Include="Docs\tipset2026.xlsx" />
+    <Content Include="secrets\connectionStrings.config.template" />
+    <Content Include="secrets\appSettings.config.template" />
+  </ItemGroup>
+  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
+    <Compile Remove="Models\Tips1.cs" />
+    <Compile Remove="Models\Tips.Designer.cs" />
+    <Compile Remove="Models\BonusPoint.cs" />
+  </ItemGroup>
+</Project>

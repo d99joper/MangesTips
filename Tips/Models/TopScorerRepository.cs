@@ -7,7 +7,12 @@ namespace Tipset.Models
 {
     public class TopScorerRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public TopScorerRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public IQueryable<TopScorer> GetAllScorers()
         {

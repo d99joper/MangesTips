@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Web;
 
 namespace Tipset.Models
 {
     public class MatchRepository : IMatchRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public MatchRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public IQueryable<Match> GetAllMatches()
         {

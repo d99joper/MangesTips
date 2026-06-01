@@ -7,3 +7,4 @@ Tips/bin/Tips.dll.config
 **/obj/
 *.csproj.user
 secrets/
+appsettings.Secrets.json
