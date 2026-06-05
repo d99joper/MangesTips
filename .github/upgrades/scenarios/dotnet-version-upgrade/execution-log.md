@@ -33,3 +33,8 @@ Auth migration already completed in 03.01/03.02/03.03. FormsAuthentication fully
 
 PdfGenerator already fixed (IWebHostEnvironment) in a previous step. ASMX/ASHX code-behind files were already removed. Fixed two lingering build errors in NyKupongController: replaced `new SettingsRepository()` call with injected `_settingsRepo`, and changed `_settingsRepo` in BaseController from `private` to `protected`. Solution now builds with 0 errors and 0 warnings.
 
+
+## [2026-06-01 16:05] 04-validation
+
+EF6 → EF Core 8 migration complete. Removed EntityFramework 6.5.2 package; added EF Core 8.x SqlServer, Proxies, and Design packages. Rewrote Tips.Context.cs with DbContextOptions constructor and EF Core fluent API (HasOne/IsRequired/OnDelete). Deleted Tips.edmx, Tips.Designer.cs, Tips1.cs, Tips.Context.Partial.cs. Fixed repositories (System.Data.Entity → Microsoft.EntityFrameworkCore, ExecuteSqlCommand → ExecuteSqlRaw, nested Include → ThenInclude, static methods → instance methods). Updated Program.cs to use AddDbContext with UseSqlServer + UseLazyLoadingProxies. Injected UserRepository into StatisticsController. Fixed BaseController._settingsRepo visibility and NyKupongController dependency usage. Final build: 0 errors, 0 warnings. All EF6 artifacts verified removed.
+

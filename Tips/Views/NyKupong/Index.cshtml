@@ -12,6 +12,11 @@
                 source: "@Url.Content("~/Helpers/TopScorers.ashx")",
                 delay: 100
             });
+
+            $("form").on("submit", function () {
+                var btn = $(this).find("button[type='submit']");
+                btn.prop("disabled", true).text("Skickar...");
+            });
         });
     </script>
 }

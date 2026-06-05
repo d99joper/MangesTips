@@ -102,8 +102,6 @@
     <Content Include="Docs\tipset2022.xlsx" />
     <Content Include="Docs\tipset2026.PDF" />
     <Content Include="Docs\tipset2026.xlsx" />
-    <Content Include="secrets\connectionStrings.config.template" />
-    <Content Include="secrets\appSettings.config.template" />
   </ItemGroup>
   <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="Models\BonusPoint.cs" />

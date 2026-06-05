@@ -6,7 +6,7 @@ using Tipset.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Load secrets file (gitignored) — overrides placeholder values in appsettings.json
-builder.Configuration.AddJsonFile("appsettings.Secrets.json", optional: true, reloadOnChange: false);
+builder.Configuration.AddJsonFile("secrets/appsettings.Secrets.json", optional: true, reloadOnChange: false);
 
 // Add MVC with views
 builder.Services.AddControllersWithViews();
