@@ -13,6 +13,7 @@ namespace Tipset.Controllers
         private readonly UserRepository _userRepository = new UserRepository();
         private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
 
+        [Route("Details/pdf/{guid}")]
         public ActionResult Pdf(Guid guid)
         {
             try
