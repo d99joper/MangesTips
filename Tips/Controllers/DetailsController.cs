@@ -24,11 +24,15 @@ namespace Tipset.Controllers
             _env = env;
         }
 
-        public ActionResult Pdf(Guid guid)
+        [Route("Details/pdf/{guid}")]
+        public ActionResult Pdf(Guid? guid)
         {
             try
             {
-                User currentUser = _userRepository.GetUser(guid);
+                if (guid == null)
+                    return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
+
+                User currentUser = _userRepository.GetUser(guid.Value);
                 if (currentUser == null)
                     return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
 
