@@ -8,3 +8,4 @@ Tips/bin/Tips.dll.config
 *.csproj.user
 secrets/
 appsettings.Secrets.json
+*.tmp
