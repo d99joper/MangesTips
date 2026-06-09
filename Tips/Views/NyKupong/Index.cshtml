@@ -9,7 +9,8 @@
     <script>
         $(document).ready(function () {
             $("#txtTopScorer").autocomplete({
-                source: "@Url.Content("~/Helpers/TopScorers.ashx")",
+                // Point directly to the new API endpoint
+                source: "@Url.Content("~/api/TopScorers")",
                 delay: 100
             });
 

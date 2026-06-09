@@ -105,7 +105,5 @@
   </ItemGroup>
   <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="Models\BonusPoint.cs" />
-    <Content Remove="Helpers\TopScorer.asmx" />
-    <Content Remove="Helpers\TopScorers.ashx" />
   </ItemGroup>
 </Project>
