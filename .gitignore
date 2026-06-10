@@ -73,6 +73,7 @@ UpgradeLog*
 secrets/
 appsettings.Secrets.json
 appsettings.Development.json
+app_offline.htm
 secrets.json
 
 .github/
