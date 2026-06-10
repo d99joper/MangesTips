@@ -13,23 +13,38 @@ namespace Tipset.Controllers
         private readonly UserRepository _userRepository = new UserRepository();
         private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
 
-        [Route("Details/pdf/{guid}")]
+        [Route("Details/pdf/{guid}", Name = "PdfDownloadRoute")]
         public ActionResult Pdf(Guid guid)
         {
             try
             {
                 User currentUser = _userRepository.GetUser(guid);
                 if (currentUser == null)
-                    return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
+                {
+                    byte[] errorBytes = PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas.");
+                    return File(errorBytes, "application/pdf"); // Removed filename to allow inline viewing
+                }
 
                 byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, HttpContext.Server);
-                return File(pdfBytes, "application/pdf", currentUser.DisplayName + " Manges VM-tips.pdf");
+
+                // 1. Tell the browser to display it inside the window, but suggest a filename if they hit save
+                string filename = $"{currentUser.DisplayName} Manges VM-tips.pdf";
+                Response.AppendHeader("Content-Disposition", new System.Net.Mime.ContentDisposition
+                {
+                    Inline = true,
+                    FileName = filename
+                }.ToString());
+
+                // 2. Return just the bytes and content type
+                return File(pdfBytes, "application/pdf");
             }
             catch (Exception ex)
             {
-                return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas. " + ex.Message), "application/pdf", "Manges VM-tips.pdf");
+                byte[] catchBytes = PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas. " + ex.Message);
+                return File(catchBytes, "application/pdf");
             }
         }
+
 
         public ActionResult Index(int id)
         {
@@ -43,7 +58,7 @@ namespace Tipset.Controllers
 
                 vm.Position = latestStandings?.Position;
                 vm.TotalPoints = latestStandings?.TotalPoints ?? 0;
-                vm.PdfUrl = Url.Action("Pdf", "Details", new { guid = currentUser.Guid });
+                vm.PdfUrl = Url.RouteUrl("PdfDownloadRoute", new { guid = currentUser.Guid });
 
                 SetPreviousYears(vm, currentUser.DisplayName);
 
