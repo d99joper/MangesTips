@@ -74,3 +74,5 @@ secrets/
 appsettings.Secrets.json
 appsettings.Development.json
 secrets.json
+
+.github/
