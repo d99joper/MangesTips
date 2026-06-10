@@ -102,7 +102,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore" />
     <Content Include="CSS\admin.css" />
     <Content Include="CSS\responsive.css" />
     <Content Include="Global.asax">
