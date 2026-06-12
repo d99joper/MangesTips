@@ -85,7 +85,7 @@ namespace Tipset.Controllers
             ("2016", "EM-tips 2016",  "http://mangesemtips2016.personablesolutions.com/Details.aspx?id={0}"),
             ("2018", "VM-tips 2018",  "http://mangesvmtips2018.personablesolutions.com/Details.aspx?id={0}"),
             ("2021", "EM-tips 2021",  "http://mangesemtips2021.personablesolutions.com/Details.aspx?id={0}"),
-            ("2022", "VM-tips 2021",  "http://mangesvmtips2022.personablesolutions.com/Details.aspx?id={0}"),
+            ("2022", "VM-tips 2022",  "http://mangesvmtips2022.personablesolutions.com/Details.aspx?id={0}"),
             ("2024", "EM-tips 2024",  "http://mangesemtips2024.personablesolutions.com/Details.aspx?id={0}"),
         };
 
