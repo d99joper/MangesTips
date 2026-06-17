@@ -33,7 +33,7 @@ namespace Tipset.Controllers
                 Matches = _matchRepository.GetAllMatches().ToList()
             };
 
-            IQueryable<Team> teams = _teamRepository.GetAllTeams();
+            IQueryable<Team> teams = _teamRepository.GetAllTeamsWithStats();
             bool asc = vm.SortDir == "asc";
             switch (vm.SortColumn)
             {

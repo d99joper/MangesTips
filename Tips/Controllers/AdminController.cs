@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using Tipset.Helpers.Sanitization;
 using Tipset.Models;
 using Tipset.ViewModels;
-using Tipset.Helpers.Sanitization;
 
 namespace Tipset.Controllers
 {
@@ -18,7 +19,7 @@ namespace Tipset.Controllers
         private readonly UserRepository      _userRepo;
         private readonly BlogRepository      _blogRepo;
         private readonly TopScorerRepository _scorerRepo;
-        private readonly SettingsRepository  _settingsRepo;
+        //private readonly SettingsRepository  _settingsRepo;
 
         public AdminController(TeamRepository teamRepo, MatchRepository matchRepo, UserRepository userRepo,
             BlogRepository blogRepo, TopScorerRepository scorerRepo, SettingsRepository settingsRepo)
@@ -29,7 +30,6 @@ namespace Tipset.Controllers
             _userRepo    = userRepo;
             _blogRepo    = blogRepo;
             _scorerRepo  = scorerRepo;
-            _settingsRepo = settingsRepo;
         }
 
         // ── GET /Admin ────────────────────────────────────────────────────────
@@ -107,7 +107,16 @@ namespace Tipset.Controllers
                 messages.Add("❌ Fel: " + ex.Message);
             }
 
-            var vm = BuildViewModel(0);
+            AdminIndexViewModel vm;
+            try
+            {
+                vm = BuildViewModel(0);
+            }
+            catch
+            {
+                // Context may be dirty after failed UpdateUsers — return minimal error view
+                vm = new AdminIndexViewModel { ActiveTab = 0 };
+            }
             vm.ErrorMessage     = error;
             vm.ResultsMessages  = messages;
             return View("Index", vm);
@@ -464,7 +473,10 @@ namespace Tipset.Controllers
             };
 
             var ids     = pairs.Select(p => p.Item2).Where(id => id > 0).Distinct().ToList();
-            var teamMap = _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+            var teamMap = ids.Count == 0
+                ? new Dictionary<int, Team>()
+                : _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
 
             foreach (var (g, id, pos) in pairs)
             {
@@ -479,9 +491,14 @@ namespace Tipset.Controllers
             var allIds = (input.QFTeams ?? new List<int>())
                 .Concat(input.SFTeams ?? new List<int>())
                 .Concat(input.FinalTeams ?? new List<int>())
-                .Concat(new[] { input.BronzeTeam, input.SilverTeam, input.GoldTeam }.Where(id => id > 0))
+                .Concat(new[] { input.BronzeTeam, input.SilverTeam, input.GoldTeam })
+                .Where(id => id > 0)
                 .Distinct().ToList();
-            var teamMap = _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+
+            var teamMap = allIds.Count == 0
+                ? new Dictionary<int, Team>()
+                : _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
 
             foreach (var id in input.QFTeams ?? new List<int>())
             { if (teamMap.TryGetValue(id, out var t)) t.IsInQuarterFinals = true; }
@@ -512,7 +529,7 @@ namespace Tipset.Controllers
 
             // Single query — all related collections eager-loaded to avoid N+1
             var users   = _userRepo.GetAllActiveUsersWithDetails();
-            var matches = _matchRepo.GetAllMatches().ToList();
+            var matches = _matchRepo.GetAllMatches().AsNoTracking().ToList();
             var guid    = Guid.NewGuid();
 
             // Reset all bonus points first to avoid double-counting when applying bonuses

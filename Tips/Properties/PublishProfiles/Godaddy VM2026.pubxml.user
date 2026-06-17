@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAl94Bw9FM3UuWs1IFoqLhxAAAAAACAAAAAAAQZgAAAAEAACAAAABdT6dC/q2N5Fsy2t5r11vVhuCbxTo8U9CshQXsMI6S7QAAAAAOgAAAAAIAACAAAADWf0ZjMKv1oEdttDv91Je2VJ6tI3EkXbWZJtJHTJPqlyAAAABCDVaX1HLkEgt+xsDy3P5M84X0TjlJV8AtvCoBF3nHwEAAAABSKTDA1lgqUBbRQJQgsw6OoST6Gxx+Gf07KcLKTuuKVZFYHHj4rXjzAbOnaLgJSBQHSGrhzIKD1ZmreQzXvxVI</EncryptedPassword>
     <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2026/</_PublishTargetUrl>
-    <History>True|2026-06-01T19:19:30.7338496Z||;True|2026-05-27T10:41:08.2949218-07:00||;True|2026-05-26T15:38:27.1490003-07:00||;True|2026-05-22T17:56:16.6911044-07:00||;True|2026-05-22T14:30:49.2120292-07:00||;True|2026-05-22T12:28:32.6537705-07:00||;False|2026-05-22T12:21:13.3408828-07:00||;False|2026-05-22T12:19:42.1745930-07:00||;True|2026-05-22T11:14:14.0600689-07:00||;True|2026-05-22T11:09:58.8519035-07:00||;True|2026-05-22T09:49:38.6913794-07:00||;True|2026-05-21T13:11:06.7026416-07:00||;True|2026-05-21T12:48:40.0086949-07:00||;True|2026-05-20T10:59:14.0434852-07:00||;True|2026-05-20T10:01:55.1486281-07:00||;True|2026-05-19T15:02:14.4200139-07:00||;True|2026-05-19T14:57:17.5407345-07:00||;True|2026-05-18T09:14:14.6418162-07:00||;True|2026-05-18T09:11:01.2231521-07:00||;True|2026-05-17T11:04:47.3102921-07:00||;True|2026-05-15T14:12:35.0976425-07:00||;True|2026-05-14T16:32:26.8158851-07:00||;True|2026-05-13T16:16:55.6301471-07:00||;True|2026-05-13T16:13:18.7620875-07:00||;False|2026-05-13T16:09:48.2698722-07:00||;False|2026-05-13T16:09:11.9850210-07:00||;False|2026-05-13T16:08:18.6647167-07:00||;False|2026-05-13T16:08:06.6897222-07:00||;True|2026-05-12T15:36:48.4401895-07:00||;True|2026-05-12T14:57:49.2145155-07:00||;True|2026-05-12T14:17:16.5328846-07:00||;True|2026-05-12T14:14:15.6267200-07:00||;True|2026-05-04T17:38:25.6998663-07:00||;True|2026-05-03T17:11:39.9078468-07:00||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
+    <History>True|2026-06-14T23:06:40.1780430Z||;True|2026-06-14T16:03:38.6083323-07:00||;True|2026-06-14T15:53:26.3863936-07:00||;True|2026-06-13T17:21:27.5446404-07:00||;False|2026-06-13T17:09:14.2901768-07:00||;True|2026-06-13T08:40:21.9598000-07:00||;False|2026-06-13T08:37:15.9915295-07:00||;True|2026-06-12T18:00:15.0677357-07:00||;True|2026-06-01T12:19:30.7338496-07:00||;True|2026-05-27T10:41:08.2949218-07:00||;True|2026-05-26T15:38:27.1490003-07:00||;True|2026-05-22T17:56:16.6911044-07:00||;True|2026-05-22T14:30:49.2120292-07:00||;True|2026-05-22T12:28:32.6537705-07:00||;False|2026-05-22T12:21:13.3408828-07:00||;False|2026-05-22T12:19:42.1745930-07:00||;True|2026-05-22T11:14:14.0600689-07:00||;True|2026-05-22T11:09:58.8519035-07:00||;True|2026-05-22T09:49:38.6913794-07:00||;True|2026-05-21T13:11:06.7026416-07:00||;True|2026-05-21T12:48:40.0086949-07:00||;True|2026-05-20T10:59:14.0434852-07:00||;True|2026-05-20T10:01:55.1486281-07:00||;True|2026-05-19T15:02:14.4200139-07:00||;True|2026-05-19T14:57:17.5407345-07:00||;True|2026-05-18T09:14:14.6418162-07:00||;True|2026-05-18T09:11:01.2231521-07:00||;True|2026-05-17T11:04:47.3102921-07:00||;True|2026-05-15T14:12:35.0976425-07:00||;True|2026-05-14T16:32:26.8158851-07:00||;True|2026-05-13T16:16:55.6301471-07:00||;True|2026-05-13T16:13:18.7620875-07:00||;False|2026-05-13T16:09:48.2698722-07:00||;False|2026-05-13T16:09:11.9850210-07:00||;False|2026-05-13T16:08:18.6647167-07:00||;False|2026-05-13T16:08:06.6897222-07:00||;True|2026-05-12T15:36:48.4401895-07:00||;True|2026-05-12T14:57:49.2145155-07:00||;True|2026-05-12T14:17:16.5328846-07:00||;True|2026-05-12T14:14:15.6267200-07:00||;True|2026-05-04T17:38:25.6998663-07:00||;True|2026-05-03T17:11:39.9078468-07:00||;True|2026-05-03T16:56:02.5119563-07:00||;True|2026-05-03T16:28:43.0620705-07:00||;False|2026-05-03T16:26:06.4064514-07:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -33,8 +33,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Answers.aspx">
       <publishTime>05/12/2026 14:33:16</publishTime>
     </File>
+    <File Include="appsettings.Development.json">
+      <publishTime>06/09/2026 17:34:07</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
     <File Include="AwaitingConfirmation.aspx">
       <publishTime>05/04/2026 09:04:15</publishTime>
+    </File>
+    <File Include="Azure.Core.dll">
+      <publishTime>02/26/2024 07:24:40</publishTime>
+    </File>
+    <File Include="Azure.Identity.dll">
+      <publishTime>06/10/2024 09:43:48</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>05/03/2026 15:11:59</publishTime>
@@ -243,6 +255,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="BlogPage.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
+    <File Include="Castle.Core.dll">
+      <publishTime>03/09/2025 14:06:12</publishTime>
+    </File>
+    <File Include="ceTe.DynamicPDF.35.dll">
+      <publishTime>05/03/2026 15:11:59</publishTime>
+    </File>
     <File Include="confirm.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
@@ -317,6 +335,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Docs/vmtipset2014.doc">
       <publishTime>12/16/2025 10:30:46</publishTime>
+    </File>
+    <File Include="dotnet-tools.json">
+      <publishTime>06/12/2026 16:04:06</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>05/03/2026 14:46:15</publishTime>
@@ -414,6 +435,75 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="images/purpleGradient.png">
       <publishTime>12/16/2025 10:30:46</publishTime>
     </File>
+    <File Include="Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>10/22/2021 16:47:36</publishTime>
+    </File>
+    <File Include="Microsoft.Data.SqlClient.dll">
+      <publishTime>04/25/2025 09:10:38</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>05/15/2026 11:41:56</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>05/15/2026 11:42:34</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Proxies.dll">
+      <publishTime>05/15/2026 11:42:54</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>05/15/2026 11:42:48</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <publishTime>05/15/2026 11:43:24</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Caching.Memory.dll">
+      <publishTime>09/16/2024 16:10:10</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>09/16/2024 16:09:34</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.dll">
+      <publishTime>09/16/2024 16:09:36</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>09/16/2024 16:09:58</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.dll">
+      <publishTime>09/16/2024 16:10:06</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Options.dll">
+      <publishTime>01/17/2024 19:05:26</publishTime>
+    </File>
+    <File Include="Microsoft.Identity.Client.dll">
+      <publishTime>06/06/2024 15:09:28</publishTime>
+    </File>
+    <File Include="Microsoft.Identity.Client.Extensions.Msal.dll">
+      <publishTime>06/06/2024 15:14:52</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Abstractions.dll">
+      <publishTime>11/30/2023 20:56:56</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>11/30/2023 20:34:00</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>11/30/2023 20:35:22</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>11/30/2023 20:37:28</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>11/30/2023 20:48:08</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>11/30/2023 20:41:50</publishTime>
+    </File>
+    <File Include="Microsoft.SqlServer.Server.dll">
+      <publishTime>01/27/2022 09:19:08</publishTime>
+    </File>
+    <File Include="Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/31/2023 08:00:30</publishTime>
+    </File>
     <File Include="Models/SettingsExtensions.xml">
       <publishTime>05/03/2026 16:23:10</publishTime>
     </File>
@@ -435,6 +525,36 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Rules.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
     </File>
+    <File Include="runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll">
+      <publishTime>04/25/2025 09:10:54</publishTime>
+    </File>
+    <File Include="runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll">
+      <publishTime>04/22/2025 12:59:02</publishTime>
+    </File>
+    <File Include="runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll">
+      <publishTime>04/22/2025 12:59:14</publishTime>
+    </File>
+    <File Include="runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll">
+      <publishTime>04/22/2025 12:59:14</publishTime>
+    </File>
+    <File Include="runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll">
+      <publishTime>04/22/2025 13:01:04</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net6.0/Microsoft.Data.SqlClient.dll">
+      <publishTime>04/25/2025 09:11:08</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net6.0/System.Runtime.Caching.dll">
+      <publishTime>10/22/2021 16:52:44</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>10/22/2021 16:51:04</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net6.0/System.Windows.Extensions.dll">
+      <publishTime>10/22/2021 16:49:58</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll">
+      <publishTime>10/31/2023 07:59:50</publishTime>
+    </File>
     <File Include="Script/autocomplete.js">
       <publishTime>12/16/2025 10:30:46</publishTime>
     </File>
@@ -444,8 +564,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="secrets/appSettings.config.template">
       <publishTime>05/05/2026 09:22:53</publishTime>
     </File>
+    <File Include="secrets/appsettings.Secrets.json">
+      <publishTime>06/09/2026 17:52:10</publishTime>
+    </File>
     <File Include="secrets/connectionStrings.config">
-      <publishTime>05/05/2026 09:16:32</publishTime>
+      <publishTime>06/09/2026 17:52:50</publishTime>
     </File>
     <File Include="secrets/connectionStrings.config.template">
       <publishTime>05/05/2026 09:16:50</publishTime>
@@ -458,6 +581,51 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Statistics.aspx">
       <publishTime>05/03/2026 15:11:59</publishTime>
+    </File>
+    <File Include="System.ClientModel.dll">
+      <publishTime>01/03/2024 09:43:00</publishTime>
+    </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>08/19/2022 12:58:02</publishTime>
+    </File>
+    <File Include="System.Drawing.Common.dll">
+      <publishTime>10/31/2023 15:14:48</publishTime>
+    </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>11/30/2023 20:31:48</publishTime>
+    </File>
+    <File Include="System.Memory.Data.dll">
+      <publishTime>04/08/2021 09:45:54</publishTime>
+    </File>
+    <File Include="System.Runtime.Caching.dll">
+      <publishTime>10/22/2021 16:52:02</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>10/22/2021 16:51:04</publishTime>
+    </File>
+    <File Include="System.Security.Permissions.dll">
+      <publishTime>10/22/2021 16:49:50</publishTime>
+    </File>
+    <File Include="System.Windows.Extensions.dll">
+      <publishTime>10/22/2021 16:49:44</publishTime>
+    </File>
+    <File Include="Tips.deps.json">
+      <publishTime>06/14/2026 16:06:28</publishTime>
+    </File>
+    <File Include="Tips.dll">
+      <publishTime>06/14/2026 16:06:27</publishTime>
+    </File>
+    <File Include="Tips.exe">
+      <publishTime>06/14/2026 16:06:27</publishTime>
+    </File>
+    <File Include="Tips.pdb">
+      <publishTime>06/14/2026 16:06:27</publishTime>
+    </File>
+    <File Include="Tips.runtimeconfig.json">
+      <publishTime>06/14/2026 15:46:23</publishTime>
+    </File>
+    <File Include="Tips.staticwebassets.endpoints.json">
+      <publishTime>06/14/2026 16:06:28</publishTime>
     </File>
     <File Include="Views/Admin/Index.cshtml">
       <publishTime>05/26/2026 15:35:16</publishTime>
@@ -511,7 +679,184 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2026 14:46:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/13/2026 16:03:27</publishTime>
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/app_offline.htm">
+      <publishTime>06/09/2026 17:34:07</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/admin.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/autocomplete.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Blue.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2012_Green.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2012_Purple.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/EM2016.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/FadingOrange.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/FadingOrange_old.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Green.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Orange.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/PaleBlue.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/responsive.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Silver.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/Site.css">
+      <publishTime>06/12/2026 17:48:22</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/SkyBlue.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/CSS/VM2014.css">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/emtips2012.doc">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2018.docx">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2018.xlsx">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2022.xlsx">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2026.PDF">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2026.xlsx">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset2_old.doc">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/tipset_old.doc">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Docs/vmtipset2014.doc">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/egoboy.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/fadingBackground.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/gradient.jpeg">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/greengradient.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/icon-edit.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/icon_delete.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/Image411.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggacolor.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggan2012400.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggo2018.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/loggo2018.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo20262color.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo20262color.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.jpg">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_2014.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/logo_header_2014.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/mangesvmtips.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/mangesvmtips.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/orangeGradient.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/oversloggamax2026.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/overstlogga.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/overstlogga2022small3.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/progress_indicator.gif">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/images/purpleGradient.png">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Script/autocomplete.js">
+      <publishTime>06/12/2026 16:04:06</publishTime>
+    </File>
+    <File Include="wwwroot/Script/site.js">
+      <publishTime>06/13/2026 17:08:29</publishTime>
+    </File>
+    <File Include="wwwroot/soccer-ball-2.png">
+      <publishTime>06/14/2026 16:05:13</publishTime>
+    </File>
+    <File Include="wwwroot/soccer-ball.svg">
+      <publishTime>06/14/2026 15:56:59</publishTime>
+    </File>
+    <File Include="wwwroot/trionda-favicon.svg">
+      <publishTime>06/14/2026 16:00:38</publishTime>
     </File>
   </ItemGroup>
 </Project>

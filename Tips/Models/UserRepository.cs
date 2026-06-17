@@ -15,7 +15,7 @@ namespace Tipset.Models
 
         public IQueryable<User> GetAllUsers()
         {
-            return db.Users;    
+            return db.Users.AsNoTracking();    
         }
 
         public IQueryable<User> GetAllConfirmedUsers()
@@ -45,6 +45,7 @@ namespace Tipset.Models
                 .Include(u => u.UserSilverTeam)
                 .Include(u => u.UserGoldTeam)
                 .Include(u => u.Standings)
+                .AsSplitQuery()
                 .ToList();
         }
 
@@ -60,15 +61,28 @@ namespace Tipset.Models
 
         public IQueryable<Standing> GetStandings(Guid guid)
         {
-            return from s in db.Standings
-                   where s.Guid == guid && s.User.HasPaid
-                   orderby s.TotalPoints descending
-                   select s;
+            return db.Standings
+                .Include(s => s.User)
+                .Where(s => s.Guid == guid && s.User.HasPaid)
+                .OrderByDescending(s => s.TotalPoints);
         }
 
         public User GetUser(int id)
         {
-            return db.Users.SingleOrDefault(u => u.ID == id);
+            return db.Users
+                .Include(u => u.Standings)
+                .Include(u => u.UserMatches).ThenInclude(um => um.Match).ThenInclude(m => m.HomeTeam)
+                .Include(u => u.UserMatches).ThenInclude(um => um.Match).ThenInclude(m => m.AwayTeam)
+                .Include(u => u.UserPlayoffTeams).ThenInclude(t => t.Team)
+                .Include(u => u.UserQFTeams).ThenInclude(t => t.Team)
+                .Include(u => u.UserSFTeams).ThenInclude(t => t.Team)
+                .Include(u => u.UserFinalTeams).ThenInclude(t => t.Team)
+                .Include(u => u.UserBronzeTeam).ThenInclude(t => t.Team)
+                .Include(u => u.UserSilverTeam).ThenInclude(t => t.Team)
+                .Include(u => u.UserGoldTeam).ThenInclude(t => t.Team)
+                .Include(u => u.TopScorer)
+                .AsSplitQuery()
+                .SingleOrDefault(u => u.ID == id);
         }
 
         public User GetUser(Guid guid)
@@ -169,14 +183,14 @@ namespace Tipset.Models
         {
             switch (year)
             {
-                case "2010": return db.User_2010.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2012": return db.User_2012.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2014": return db.User_2014.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2016": return db.User_2016.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2018": return db.User_2018.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2021": return db.User_2021.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2022": return db.User_2022.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
-                case "2024": return db.User_2024.FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2010": return db.User_2010.Include(u => u.Standings_2010).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2012": return db.User_2012.Include(u => u.Standings_2012).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2014": return db.User_2014.Include(u => u.Standings_2014).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2016": return db.User_2016.Include(u => u.Standings_2016).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2018": return db.User_2018.Include(u => u.Standings_2018).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2021": return db.User_2021.Include(u => u.Standings_2021).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2022": return db.User_2022.Include(u => u.Standings_2022).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
+                case "2024": return db.User_2024.Include(u => u.Standings_2024).FirstOrDefault(u => u.DisplayName == displayName && u.HasPaid);
                 default:     return null;
             }
         }

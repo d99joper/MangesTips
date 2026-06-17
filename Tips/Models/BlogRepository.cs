@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Tipset.Models
 {
@@ -23,7 +20,7 @@ namespace Tipset.Models
 
         public IQueryable<BlogEntry> GetAllBlogEntries()
         {
-            return db.BlogEntry.OrderByDescending(b => b.ID);
+            return db.BlogEntry.AsNoTracking().OrderByDescending(b => b.ID);
         }
 
         public BlogEntry GetBlogEntry(int ID)

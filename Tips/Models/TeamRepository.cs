@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Tipset.Models
 {
-    public class TeamRepository : Tipset.Models.ITeamRepository 
+    public class TeamRepository : ITeamRepository 
     {
         public enum TeamInqueryType
         {
@@ -25,14 +22,19 @@ namespace Tipset.Models
             this.db = db;
         }
 
+        public IQueryable<Team> GetAllTeamsWithStats()
+        {
+            return db.Teams.Include(t => t.TeamStats).OrderBy(t => t.TeamName);
+        }
+
         public IQueryable<Team> GetAllTeams()
         {
-            return db.Teams.OrderBy(t => t.TeamName);
+            return db.Teams.AsNoTracking().OrderBy(t => t.TeamName);
         }
 
         public IQueryable<Team> GetTeams(string filter)
         {
-            return db.Teams.Where(t => t.GroupID == filter).OrderBy(t => t.TeamName);
+            return db.Teams.AsNoTracking().Include(t => t.TeamStats).Where(t => t.GroupID == filter).OrderBy(t => t.TeamName);
         }
 
         public Team GetTeam(int id)
@@ -42,7 +44,7 @@ namespace Tipset.Models
 
         public IQueryable<Team> GetPlayoffTeams()
         {
-            return db.Teams.Where(t => t.IsInPlayOffs).OrderBy(t => t.TeamName);
+            return db.Teams.AsNoTracking().Where(t => t.IsInPlayOffs).OrderBy(t => t.TeamName);
         }
 
         public void Save()
@@ -72,19 +74,19 @@ namespace Tipset.Models
             switch (filter)
             { 
                 case TeamInqueryType.isInPlayoffs:
-                    return db.Teams.Where(t => t.IsInPlayOffs).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInPlayOffs).ToList();
                 case TeamInqueryType.isInQuarterFinals:
-                    return db.Teams.Where(t => t.IsInQuarterFinals).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInQuarterFinals).ToList();
                 case TeamInqueryType.isInSemiFinals:
-                    return db.Teams.Where(t => t.IsInSemiFinals).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInSemiFinals).ToList();
                 case TeamInqueryType.isInFinals:
-                    return db.Teams.Where(t => t.IsInFinal).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInFinal).ToList();
                 case TeamInqueryType.WonBronze:
-                    return db.Teams.Where(t => t.WonBronze).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonBronze).ToList();
                 case TeamInqueryType.WonSilver:
-                    return db.Teams.Where(t => t.WonSilver).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonSilver).ToList();
                 case TeamInqueryType.WonGold:
-                    return db.Teams.Where(t => t.WonGold).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonGold).ToList();
                 default:
                     return null;
             }
@@ -95,19 +97,19 @@ namespace Tipset.Models
             switch (filter)
             {
                 case TeamInqueryType.isInPlayoffs:
-                    return db.Teams.Where(t => t.IsInPlayOffs && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInPlayOffs && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.isInQuarterFinals:
-                    return db.Teams.Where(t => t.IsInQuarterFinals && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInQuarterFinals && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.isInSemiFinals:
-                    return db.Teams.Where(t => t.IsInSemiFinals && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInSemiFinals && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.isInFinals:
-                    return db.Teams.Where(t => t.IsInFinal && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.IsInFinal && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.WonBronze:
-                    return db.Teams.Where(t => t.WonBronze && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonBronze && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.WonSilver:
-                    return db.Teams.Where(t => t.WonSilver && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonSilver && t.GroupID == groupFilter).ToList();
                 case TeamInqueryType.WonGold:
-                    return db.Teams.Where(t => t.WonGold && t.GroupID == groupFilter).ToList();
+                    return db.Teams.AsNoTracking().Where(t => t.WonGold && t.GroupID == groupFilter).ToList();
                 default:
                     return null;
             }

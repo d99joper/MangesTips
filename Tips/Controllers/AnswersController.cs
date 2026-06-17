@@ -27,22 +27,21 @@ namespace Tipset.Controllers
 
             vm.Matches = _matchRepository.GetAllMatches().ToList();
 
+            var playoffTeams = _teamRepository.GetPlayoffTeams().ToList();
+
             vm.PlayoffTeams = new Dictionary<string, string>();
             foreach (var group in new[] { "A", "B", "C", "D", "E", "F", "G", "I" })
             {
                 foreach (int pos in new[] { 1, 2 })
                 {
-                    var team = _teamRepository.GetTeam(TeamRepository.TeamInqueryType.isInPlayoffs, group, (byte)pos);
+                    var team = playoffTeams.SingleOrDefault(t => t.GroupID == group && t.PlayOffPos == pos);
                     vm.PlayoffTeams[pos + group] = team?.TeamName ?? "";
                 }
             }
 
-            vm.QFTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals)
-                .ConvertAll(t => t.TeamName);
-            vm.SFTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInSemiFinals)
-                .ConvertAll(t => t.TeamName);
-            vm.FinalTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInFinals)
-                .ConvertAll(t => t.TeamName);
+            vm.QFTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals).ConvertAll(t => t.TeamName);
+            vm.SFTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInSemiFinals).ConvertAll(t => t.TeamName);
+            vm.FinalTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.isInFinals).ConvertAll(t => t.TeamName);
 
             var bronzeTeams = _teamRepository.GetTeams(TeamRepository.TeamInqueryType.WonBronze);
             vm.Bronze = bronzeTeams.Count > 0 ? bronzeTeams[0].TeamName : "";
@@ -54,9 +53,7 @@ namespace Tipset.Controllers
             vm.Gold = goldTeams.Count > 0 ? goldTeams[0].TeamName : "";
 
             var topScorers = _topScorerRepository.GetWinner();
-            vm.TopScorer = topScorers.Count > 0
-                ? string.Join(", ", topScorers.ConvertAll(t => t.DisplayName))
-                : "";
+            vm.TopScorer = topScorers.Count > 0 ? string.Join(", ", topScorers.ConvertAll(t => t.DisplayName)) : "";
 
             return View(vm);
         }

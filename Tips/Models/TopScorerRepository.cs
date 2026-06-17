@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Tipset.Models
 {
     public class TopScorerRepository
@@ -13,7 +15,7 @@ namespace Tipset.Models
 
         public IQueryable<TopScorer> GetAllScorers()
         {
-            return db.TopScorers;
+            return db.TopScorers.AsNoTracking().Include(t => t.Users);
         }
 
         public TopScorer GetTopScorer(int id)
@@ -28,7 +30,7 @@ namespace Tipset.Models
 
         public List<TopScorer> GetWinner()
         {
-            return db.TopScorers.Where(t => t.IsWinner == true).ToList<TopScorer>();
+            return db.TopScorers.AsNoTracking().Where(t => t.IsWinner == true).ToList<TopScorer>();
         }
 
         public void ResetWinner()
