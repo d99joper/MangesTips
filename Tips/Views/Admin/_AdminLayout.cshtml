@@ -11,6 +11,15 @@
     @RenderSection("head", required: false)
 </head>
 <body>
+
+     <!-- Spinner overlay -->
+    <div id="admin-spinner">
+        <div class="spinner-box">
+            <div class="spinner-ring"></div>
+            <div class="spinner-label">Sparar…</div>
+        </div>
+    </div>
+
     <div class="page">
         <div id="header">
             <div id="title">
@@ -38,15 +47,22 @@
                     <li class="@(currentController == "Rules" ? "active" : "")"><a href="@Url.Action("Index", "Rules")">Regler</a></li>
                 </ul>
             </div>
+
         </div>
         <div id="main">
-            <!-- Spinner overlay -->
-            <div id="admin-spinner">
-                <div class="spinner-box">
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-label">Sparar…</div>
-                </div>
+           
+            
+
+            <div class="tab-nav">
+                <a class="@(currentController == "AdminResults" ? "active" : "")" href="/Admin/Results">Facit</a>
+                <a class="@(currentController == "AdminUsers" ? "active" : "")" href="/Admin/Users">Användare</a>
+                <a class="@(currentController == "AdminSettings" ? "active" : "")" href="/Admin/Settings">Övrigt</a>
+                <a class="@(currentController == "AdminBlog" ? "active" : "")" href="/Admin/Blog">Blogg</a>
+                <a class="@(currentController == "AdminTeams" ? "active" : "")" href="/Admin/Teams">Lag</a>
+                <a class="@(currentController == "AdminMatches" ? "active" : "")" href="/Admin/Matches">Matcher</a>
+                <a class="@(currentController == "AdminTopScorers" ? "active" : "")" href="/Admin/TopScorers">Potentiella toppskyttar</a>
             </div>
+
             @RenderBody()
             <div id="footer"></div>
         </div>
@@ -60,26 +76,20 @@
         gtag('config', 'UA-117542595-1');
     </script>
     <script>
-        // ── Tab switcher ──────────────────────────────────────────────────
-        (function () {
-            var active = parseInt(document.getElementById('activeTab').value || '0', 10);
-            var panels = document.querySelectorAll('.tab-panel');
-            var links  = document.querySelectorAll('.tab-nav a');
-            function show(i) {
-                panels.forEach(function(p,idx){ p.classList.toggle('active', idx===i); });
-                links.forEach(function(l,idx){ l.classList.toggle('active', idx===i); });
-            }
-            links.forEach(function(l, i){ l.addEventListener('click', function(e){ e.preventDefault(); show(i); }); });
-            show(active);
-        })();
 
         // ── Spinner on form submit ────────────────────────────────────────
         (function () {
             var spinner = document.getElementById('admin-spinner');
+            if (!spinner) return;
+
             document.querySelectorAll('form').forEach(function (f) {
                 f.addEventListener('submit', function () {
                     spinner.classList.add('visible');
                 });
+            });
+
+            window.addEventListener('pageshow', function () {
+                spinner.classList.remove('visible');
             });
         })();
     </script>

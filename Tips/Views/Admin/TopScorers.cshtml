@@ -1,0 +1,186 @@
+﻿@model Tipset.ViewModels.AdminTopScorersViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Potentiella skyttekungar";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 6 – Toppscorare
+   ═══════════════════════════════════════════════════════════════════ *@
+<div>
+    <div class="wrap">
+        <div class="leftside">
+            <p>
+                Importera många:<br />
+                @using (Html.BeginForm("BatchImportTopScorers", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" name="Names" style="width:300px" />
+                    <button type="submit" class="btn">Importera</button><br />
+                    <label style="font-size:7pt">Separera spelarnamnen med | (ex: Zlatan Ibrahimovic|Rasmus Elm)</label>
+                }
+            </p>
+            @using (Html.BeginForm("SaveTopScorer", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnTopScorerID" name="TopScorerID" value="0" />
+                    Förnamn: <input type="text" id="txtFirstName" name="FirstName" /><br />
+                    Efternamn: <input type="text" id="txtLastName" name="LastName" /><br />
+                    <button type="submit" id="btnSaveTopScorer" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearScorer()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Potentiella skyttekungar:</p>
+            <table class="border">
+                @foreach (var s in Model.TopScorers)
+                {
+                    <tr>
+                        <td>@s.DisplayName @(s.IsWinner == true ? "✓" : "")</td>
+                        <td>
+                            <a href="#" onclick="editScorer(@s.ID,'@s.FirstName','@s.LastName');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteTopScorer", "Admin", new { id = s.ID }, FormMethod.Post, null, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+            function editScorer(id, firstName, lastName) {
+                document.getElementById('hdnTopScorerID').value = id;
+                document.getElementById('txtFirstName').value = firstName;
+                document.getElementById('txtLastName').value = lastName;
+                document.getElementById('btnSaveTopScorer').textContent = 'Uppdatera';
+            }
+            function clearScorer() {
+                document.getElementById('hdnTopScorerID').value = '0';
+                document.getElementById('txtFirstName').value = '';
+                document.getElementById('txtLastName').value = '';
+                document.getElementById('btnSaveTopScorer').textContent = 'Lägg till';
+            }
+
+            // ── Topscorer dynamic list + autocomplete ────────────────────────
+            (function () {
+                var list    = document.getElementById('topscorer-list');
+                var addBtn  = document.getElementById('btn-add-scorer');
+                if (!list || !addBtn) return;
+
+                var suggestions = Array.from(document.querySelectorAll('#scorer-suggestions option'))
+                                       .map(function(o){ return o.value; });
+
+                function reindex() {
+                    list.querySelectorAll('.topscorer-row input').forEach(function(inp, i){
+                        inp.name = 'TopScorers[' + i + ']';
+                    });
+                }
+
+                function attachAC(input) {
+                    input.setAttribute('list', '');            // disable native datalist
+                    var dropdown = null;
+                    var activeIdx = -1;
+
+                    function closeAC() {
+                        if (dropdown) { dropdown.remove(); dropdown = null; }
+                        activeIdx = -1;
+                    }
+
+                    function openAC(matches) {
+                        closeAC();
+                        if (!matches.length) return;
+                        dropdown = document.createElement('div');
+                        dropdown.className = 'ac-list';
+                        matches.forEach(function(val, i) {
+                            var item = document.createElement('div');
+                            item.className = 'ac-item';
+                            item.textContent = val;
+                            item.addEventListener('mousedown', function(e) {
+                                e.preventDefault();
+                                input.value = val;
+                                closeAC();
+                            });
+                            dropdown.appendChild(item);
+                        });
+                        // position below the input
+                        var rect = input.getBoundingClientRect();
+                        dropdown.style.left  = (input.offsetLeft) + 'px';
+                        dropdown.style.top   = (input.offsetTop + input.offsetHeight) + 'px';
+                        dropdown.style.width = input.offsetWidth + 'px';
+                        input.parentNode.style.position = 'relative';
+                        input.parentNode.appendChild(dropdown);
+                    }
+
+                    function highlight(i) {
+                        if (!dropdown) return;
+                        var items = dropdown.querySelectorAll('.ac-item');
+                        items.forEach(function(el,idx){ el.classList.toggle('ac-active', idx===i); });
+                        if (items[i]) items[i].scrollIntoView({ block: 'nearest' });
+                    }
+
+                    input.addEventListener('input', function() {
+                        var q = input.value.trim().toLowerCase();
+                        if (!q) { closeAC(); return; }
+                        var matches = suggestions.filter(function(s){ return s.toLowerCase().indexOf(q) !== -1; });
+                        activeIdx = -1;
+                        openAC(matches);
+                    });
+
+                    input.addEventListener('keydown', function(e) {
+                        if (!dropdown) return;
+                        var items = dropdown.querySelectorAll('.ac-item');
+                        if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = Math.min(activeIdx+1, items.length-1); highlight(activeIdx); }
+                        else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = Math.max(activeIdx-1, 0); highlight(activeIdx); }
+                        else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); input.value = items[activeIdx].textContent; closeAC(); }
+                        else if (e.key === 'Escape') { closeAC(); }
+                    });
+
+                    input.addEventListener('blur', function() { setTimeout(closeAC, 150); });
+                }
+
+                function addRow(value) {
+                    var row = document.createElement('div');
+                    row.className = 'topscorer-row';
+                    var inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.value = value || '';
+                    inp.className = 'scorer-ac';
+                    inp.setAttribute('autocomplete', 'off');
+                    var rm = document.createElement('button');
+                    rm.type = 'button';
+                    rm.className = 'btn-icon btn-remove';
+                    rm.title = 'Ta bort';
+                    rm.textContent = '✕';
+                    rm.addEventListener('click', function(){ row.remove(); reindex(); });
+                    row.appendChild(inp);
+                    row.appendChild(rm);
+                    list.appendChild(row);
+                    attachAC(inp);
+                    reindex();
+                    inp.focus();
+                }
+
+                // Wire existing rows
+                list.querySelectorAll('.scorer-ac').forEach(function(inp) {
+                    attachAC(inp);
+                    inp.closest('.topscorer-row').querySelector('.btn-icon').addEventListener('click', function(){
+                        inp.closest('.topscorer-row').remove(); reindex();
+                    });
+                });
+
+                addBtn.addEventListener('click', function(){ addRow(''); });
+            })();
+    </script>
+</div>

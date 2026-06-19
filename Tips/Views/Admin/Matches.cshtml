@@ -1,0 +1,70 @@
+﻿@model Tipset.ViewModels.AdminMatchesViewModel
+@using Tipset.Helpers
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Matcher";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 5 – Matcher
+   ═══════════════════════════════════════════════════════════════════ *@
+<div>
+    <div class="wrap">
+        <div class="leftside">
+            @using (Html.BeginForm("SaveMatch", "Admin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnMatchID" name="MatchID" value="0" />
+                    Hemma lag: @Html.DropDownList("HomeTeamID", DropdownHelper.ToTeamList(Model.AllTeams, 0, "Lag #"), new { id = "ddlMatchHomeTeam" })<br />
+                    Borta lag: @Html.DropDownList("AwayTeamID", DropdownHelper.ToTeamList(Model.AllTeams, 0, "Lag #"), new { id = "ddlMatchAwayTeam" })<br />
+                    Datum och tid: <input type="text" id="txtMatchDate" name="Date" placeholder="yyyy-MM-dd HH:mm" /><br />
+                    <button type="submit" id="btnSaveMatch" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearMatch()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Registrerade matcher:</p>
+            <table class="border">
+                @foreach (var m in Model.Matches)
+                {
+                    <tr>
+                        <td>@m.Date.ToString("yyyy/MM/dd HH:mm") : @(m.HomeTeam != null ? m.HomeTeam.TeamName : "") – @(m.AwayTeam != null ? m.AwayTeam.TeamName : "")</td>
+                        <td>
+                            <a href="#" onclick="editMatch(@m.ID,@m.HomeTeamID,@m.AwayTeamID,'@m.Date.ToString("yyyy-MM-dd HH:mm")');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteMatch", "Admin", new { id = m.ID }, FormMethod.Post, null, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera matchen?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+            function editMatch(id, homeId, awayId, date) {
+                document.getElementById('hdnMatchID').value = id;
+                document.getElementById('ddlMatchHomeTeam').value = homeId;
+                document.getElementById('ddlMatchAwayTeam').value = awayId;
+                document.getElementById('txtMatchDate').value = date;
+                document.getElementById('btnSaveMatch').textContent = 'Uppdatera';
+            }
+            function clearMatch() {
+                document.getElementById('hdnMatchID').value = '0';
+                document.getElementById('ddlMatchHomeTeam').selectedIndex = 0;
+                document.getElementById('ddlMatchAwayTeam').selectedIndex = 0;
+                document.getElementById('txtMatchDate').value = '';
+                document.getElementById('btnSaveMatch').textContent = 'Lägg till';
+            }
+    </script>
+</div>

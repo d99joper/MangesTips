@@ -12,6 +12,7 @@ using Tipset.ViewModels;
 namespace Tipset.Controllers
 {
     [Authorize]
+    [Route("Admin")]
     public class AdminController : BaseController
     {
         private readonly TeamRepository      _teamRepo;
@@ -32,94 +33,20 @@ namespace Tipset.Controllers
             _scorerRepo  = scorerRepo;
         }
 
-        // ── GET /Admin ────────────────────────────────────────────────────────
-        public ActionResult Index(int tab = 0)
+        // ── GET /Admin ───────────────────────────────────────────────────────
+        // Landing page. Redirects to the first migrated tab.
+        // Tabs not yet migrated still render here via the legacy tab param.
+        [HttpGet("")]
+        public ActionResult Index(int tab = -1)
         {
+            if (tab == -1)
+                return RedirectToAction("Index", "AdminResults");
+
+            // Legacy path for tabs 2–6 until they're migrated
             var vm = BuildViewModel(tab);
             if (TempData["ErrorMessage"] != null)
                 vm.ErrorMessage = TempData["ErrorMessage"].ToString();
-            return View(vm);
-        }
-
-        // ── POST: Save match results + recalculate points ─────────────────────
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveResults(AdminSaveResultsInput input)
-        {
-            var messages = new List<string>();
-            string error = null;
-            try
-            {
-                // 1. Save match scores
-                int scored = 0, cleared = 0;
-                foreach (var m in input.Matches)
-                {
-                    var match = _matchRepo.GetMatch(m.MatchID);
-                    if (match == null) continue;
-                    byte hg, ag;
-                    if (byte.TryParse(m.HomeGoals, out hg) && byte.TryParse(m.AwayGoals, out ag))
-                    {
-                        match.HomeGoals  = hg;
-                        match.AwayGoals  = ag;
-                        match.ResultMark = hg > ag ? "1" : hg == ag ? "X" : "2";
-                        scored++;
-                    }
-                    else
-                    {
-                        match.HomeGoals  = null;
-                        match.AwayGoals  = null;
-                        match.ResultMark = null;
-                        cleared++;
-                    }
-                }
-                _matchRepo.Save();
-                messages.Add(string.Format("✔ Matchresultat sparade ({0} satta, {1} rensade).", scored, cleared));
-
-                // 2. Reset teams then re-apply
-                _teamRepo.ResetAllTeams();
-                ApplyPlayoffTeams(input);
-                messages.Add("✔ Vidare från gruppen sparade.");
-                ApplyKnockoutTeams(input);
-                _teamRepo.Save();
-                messages.Add("✔ KO-faser (QF/SF/Final/medaljer) sparade.");
-
-                // 3. Top scorers
-                _scorerRepo.ResetWinner();
-                int scorerCount = 0;
-                if (input.TopScorers != null)
-                    foreach (var s in input.TopScorers.Where(s => !string.IsNullOrWhiteSpace(s)))
-                    {
-                        SetWinner(s);
-                        scorerCount++;
-                    }
-                _scorerRepo.Save();
-                messages.Add(string.Format("✔ Skyttekung sparad ({0} st).", scorerCount));
-
-                // 4. Recalculate user points
-                UpdateUsers();
-                messages.Add("✔ Användarpoäng omräknade.");
-
-                messages.Add("✅ Allt sparat!");
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-                messages.Add("❌ Fel: " + ex.Message);
-            }
-
-            AdminIndexViewModel vm;
-            try
-            {
-                vm = BuildViewModel(0);
-            }
-            catch
-            {
-                // Context may be dirty after failed UpdateUsers — return minimal error view
-                vm = new AdminIndexViewModel { ActiveTab = 0 };
-            }
-            vm.ErrorMessage     = error;
-            vm.ResultsMessages  = messages;
-            return View("Index", vm);
+            return View("~/Views/Admin/Index.cshtml", vm);
         }
 
         // ── POST: Save user flags ─────────────────────────────────────────────

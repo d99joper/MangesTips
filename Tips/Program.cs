@@ -37,6 +37,10 @@ builder.Services.AddScoped<MatchRepository>();
 builder.Services.AddScoped<BlogRepository>();
 builder.Services.AddScoped<TopScorerRepository>();
 
+builder.Services.AddSession();
+builder.Services.AddControllersWithViews()
+    .AddSessionStateTempDataProvider();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -48,6 +52,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
