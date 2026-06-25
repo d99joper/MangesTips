@@ -10,7 +10,7 @@
 <div>
     <div class="wrap">
         <div class="leftside">
-            @using (Html.BeginForm("SaveTeam", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("Save", "AdminTeams", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <p>

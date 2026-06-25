@@ -32,6 +32,11 @@ namespace Tipset.Models
             return db.Teams.AsNoTracking().OrderBy(t => t.TeamName);
         }
 
+        public IQueryable<Team> GetTeamsForUpdate(List<int> ids)
+        {
+            return db.Teams.Where(t => ids.Contains(t.ID));
+        }
+
         public IQueryable<Team> GetTeams(string filter)
         {
             return db.Teams.AsNoTracking().Include(t => t.TeamStats).Where(t => t.GroupID == filter).OrderBy(t => t.TeamName);
@@ -52,10 +57,10 @@ namespace Tipset.Models
             db.SaveChanges();
         }
 
-        public void ResetAllTeams()
+        public Dictionary<int, Team> ResetAndGetTeams()
         {
-            IQueryable allTeams = GetAllTeams();
-            foreach (Team team in allTeams)
+            var allTeams = db.Teams.ToList(); // tracked
+            foreach (var team in allTeams)
             {
                 team.IsInPlayOffs = false;
                 team.IsInQuarterFinals = false;
@@ -65,8 +70,9 @@ namespace Tipset.Models
                 team.WonSilver = false;
                 team.WonGold = false;
             }
-
             Save();
+            return allTeams.ToDictionary(t => t.ID);
+
         }
 
         public List<Team> GetTeams(TeamInqueryType filter)

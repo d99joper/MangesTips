@@ -24,7 +24,7 @@
     <hr />
     <p>
         När du trycker på knappen kommer procentsatser räknas ut för varje lag beroende på vad användarna (godkända) tippat.<br />
-        @using (Html.BeginForm("GenerateStats", "Admin", FormMethod.Post))
+        @using (Html.BeginForm("GenerateStats", "AdminSettings", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <button type="submit" class="btn">Generera statistik</button>

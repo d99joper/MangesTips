@@ -12,7 +12,7 @@
         <div class="leftside">
             <p>
                 Importera många:<br />
-                @using (Html.BeginForm("BatchImportTopScorers", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("BatchImport", "AdminTopScorers", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <input type="text" name="Names" style="width:300px" />
@@ -20,7 +20,7 @@
                     <label style="font-size:7pt">Separera spelarnamnen med | (ex: Zlatan Ibrahimovic|Rasmus Elm)</label>
                 }
             </p>
-            @using (Html.BeginForm("SaveTopScorer", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("Save", "AdminTopScorers", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <p>

@@ -44,7 +44,7 @@ namespace Tipset.Models
                 .Include(u => u.UserBronzeTeam)
                 .Include(u => u.UserSilverTeam)
                 .Include(u => u.UserGoldTeam)
-                .Include(u => u.Standings)
+                //.Include(u => u.Standings)
                 .AsSplitQuery()
                 .ToList();
         }

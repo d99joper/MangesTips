@@ -14,7 +14,7 @@
             {
                 <p class="error">@Model.ErrorMessage</p>
             }
-            @using (Html.BeginForm("SaveBlogEntry", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("Save", "AdminBlog", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <p>

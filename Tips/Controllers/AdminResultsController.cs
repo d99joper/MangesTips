@@ -15,15 +15,17 @@ namespace Tipset.Controllers
         private readonly MatchRepository _matchRepo;
         private readonly UserRepository _userRepo;
         private readonly TopScorerRepository _scorerRepo;
+        private readonly Tips_Entities _db;
 
         public AdminResultsController(TeamRepository teamRepo, MatchRepository matchRepo,
-            UserRepository userRepo, TopScorerRepository scorerRepo, SettingsRepository settingsRepo)
+            UserRepository userRepo, TopScorerRepository scorerRepo, SettingsRepository settingsRepo, Tips_Entities db)
             : base(settingsRepo)
         {
             _teamRepo = teamRepo;
             _matchRepo = matchRepo;
             _userRepo = userRepo;
             _scorerRepo = scorerRepo;
+            _db = db;
         }
 
         // ── GET /Admin/Results ──────────────────────────────────────────────
@@ -47,6 +49,8 @@ namespace Tipset.Controllers
         {
             var messages = new List<string>();
             string error = null;
+
+            using var transaction = _db.Database.BeginTransaction();
             try
             {
                 int scored = 0, cleared = 0;
@@ -72,10 +76,10 @@ namespace Tipset.Controllers
                 _matchRepo.Save();
                 messages.Add($"✔ Matchresultat sparade ({scored} satta, {cleared} rensade).");
 
-                _teamRepo.ResetAllTeams();
-                ApplyPlayoffTeams(input);
+                var allTeamMap = _teamRepo.ResetAndGetTeams();
+                ApplyPlayoffTeams(input, allTeamMap);
                 messages.Add("✔ Vidare från gruppen sparade.");
-                ApplyKnockoutTeams(input);
+                ApplyKnockoutTeams(input, allTeamMap);
                 _teamRepo.Save();
                 messages.Add("✔ KO-faser (QF/SF/Final/medaljer) sparade.");
 
@@ -89,16 +93,30 @@ namespace Tipset.Controllers
                     }
                 _scorerRepo.Save();
                 messages.Add($"✔ Skyttekung sparad ({scorerCount} st).");
+                transaction.Commit();
+                messages.Add("✔ Matchresultat, lag och skyttekung sparade.");
+                
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                error = ex.Message;
+                messages.Add("❌ Fel: " + ex.Message);
+                TempData["ResultsMessages"] = JsonSerializer.Serialize(messages);
+                TempData["ErrorMessage"] = error;
+                return RedirectToAction("Index");
+            }
 
+            try
+            {
                 UpdateUsers();
                 messages.Add("✔ Användarpoäng omräknade.");
-
                 messages.Add("✅ Allt sparat!");
             }
             catch (Exception ex)
             {
                 error = ex.Message;
-                messages.Add("❌ Fel: " + ex.Message);
+                messages.Add("❌ Fel vid poängberäkning: " + ex.Message);
             }
 
             TempData["ResultsMessages"] =  JsonSerializer.Serialize(messages);
@@ -140,7 +158,7 @@ namespace Tipset.Controllers
             return vm;
         }
 
-        private void ApplyPlayoffTeams(AdminSaveResultsInput input)
+        private static void ApplyPlayoffTeams(AdminSaveResultsInput input, Dictionary<int, Team> teamMap)
         {
             var pairs = new[]
             {
@@ -155,9 +173,9 @@ namespace Tipset.Controllers
             };
 
             var ids = pairs.Select(p => p.Item2).Where(id => id > 0).Distinct().ToList();
-            var teamMap = ids.Count == 0
-                ? new Dictionary<int, Team>()
-                : _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = ids.Count == 0
+            //    ? new Dictionary<int, Team>()
+            //    : _teamRepo.GetTeamsForUpdate(ids).ToDictionary(t => t.ID);
 
             foreach (var (g, id, pos) in pairs)
             {
@@ -167,7 +185,7 @@ namespace Tipset.Controllers
             }
         }
 
-        private void ApplyKnockoutTeams(AdminSaveResultsInput input)
+        private static void ApplyKnockoutTeams(AdminSaveResultsInput input, Dictionary<int, Team> teamMap)
         {
             var allIds = (input.QFTeams ?? new List<int>())
                 .Concat(input.SFTeams ?? new List<int>())
@@ -176,9 +194,9 @@ namespace Tipset.Controllers
                 .Where(id => id > 0)
                 .Distinct().ToList();
 
-            var teamMap = allIds.Count == 0
-                ? new Dictionary<int, Team>()
-                : _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = allIds.Count == 0
+            //    ? new Dictionary<int, Team>()
+            //    : _teamRepo.GetTeamsForUpdate(allIds).ToDictionary(t => t.ID);
 
             foreach (var id in input.QFTeams ?? new List<int>())
             { if (teamMap.TryGetValue(id, out var t)) t.IsInQuarterFinals = true; }
@@ -210,7 +228,26 @@ namespace Tipset.Controllers
             var matches = _matchRepo.GetAllMatches().AsNoTracking().ToList();
             var guid = Guid.NewGuid();
 
-            _userRepo.ResetAllBonusPoints();
+            // Reset all tracked points in-memory BEFORE raw SQL, so EF doesn't
+            // overwrite the reset with stale loaded values on Save()
+            foreach (var user in users)
+            {
+                foreach (var bp in user.BonusPoints)
+                {
+                    bp.Point = 0;
+                    bp.HalfPoint = false;
+                }
+                foreach (var t in user.UserMatches) t.Points = 0;
+                foreach (var t in user.UserPlayoffTeams) t.Points = 0;
+                foreach (var t in user.UserQFTeams) t.Points = 0;
+                foreach (var t in user.UserSFTeams) t.Points = 0;
+                foreach (var t in user.UserFinalTeams) t.Points = 0;
+                foreach (var t in user.UserBronzeTeam) t.Points = 0;
+                foreach (var t in user.UserSilverTeam) t.Points = 0;
+                foreach (var t in user.UserGoldTeam) t.Points = 0;
+            }
+
+            //_userRepo.ResetAllBonusPoints();
 
             var playoffTeams = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInPlayoffs).ToList();
             var qfTeams = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.isInQuarterFinals).ToList();
@@ -291,7 +328,14 @@ namespace Tipset.Controllers
 
                 if (winnerIds.Contains(user.TopScorerID ?? -1)) total += 10;
 
-                user.Standings.Add(new Standing { TotalPoints = total, UpdateDate = dtNow, Guid = guid });
+                //user.Standings.Add(new Standing { TotalPoints = total, UpdateDate = dtNow, Guid = guid });
+                _db.Standings.Add(new Standing
+                {
+                    UserID = user.ID,
+                    TotalPoints = total,
+                    UpdateDate = dtNow,
+                    Guid = guid
+                });
             }
 
             _userRepo.Save();

@@ -41,6 +41,11 @@ builder.Services.AddSession();
 builder.Services.AddControllersWithViews()
     .AddSessionStateTempDataProvider();
 
+builder.Services.AddDbContext<Tips_Entities>(options =>
+    options.UseSqlServer(connStr, sqlOptions =>
+        sqlOptions.CommandTimeout(300)) // 5 minutes
+    .UseLazyLoadingProxies());
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
