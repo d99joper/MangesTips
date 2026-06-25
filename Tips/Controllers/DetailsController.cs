@@ -15,10 +15,6 @@ namespace Tipset.Controllers
         private readonly TopScorerRepository _topScorerRepository;
         private readonly IWebHostEnvironment _env;
 
-<<<<<<< HEAD
-        [Route("Details/pdf/{guid}", Name = "PdfDownloadRoute")]
-        public ActionResult Pdf(Guid guid)
-=======
         public DetailsController(UserRepository userRepository, TopScorerRepository topScorerRepository,
             IWebHostEnvironment env, SettingsRepository settingsRepo)
             : base(settingsRepo)
@@ -30,7 +26,6 @@ namespace Tipset.Controllers
 
         [Route("Details/pdf/{guid}")]
         public ActionResult Pdf(Guid? guid)
->>>>>>> main
         {
             try
             {
@@ -39,36 +34,16 @@ namespace Tipset.Controllers
 
                 User currentUser = _userRepository.GetUser(guid.Value);
                 if (currentUser == null)
-                {
-                    byte[] errorBytes = PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas.");
-                    return File(errorBytes, "application/pdf"); // Removed filename to allow inline viewing
-                }
+                    return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas."), "application/pdf", "Manges VM-tips.pdf");
 
-<<<<<<< HEAD
-                byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, HttpContext.Server);
-
-                // 1. Tell the browser to display it inside the window, but suggest a filename if they hit save
-                string filename = $"{currentUser.DisplayName} Manges VM-tips.pdf";
-                Response.AppendHeader("Content-Disposition", new System.Net.Mime.ContentDisposition
-                {
-                    Inline = true,
-                    FileName = filename
-                }.ToString());
-
-                // 2. Return just the bytes and content type
-                return File(pdfBytes, "application/pdf");
-=======
                 byte[] pdfBytes = PdfGenerator.RenderCompletePDF(currentUser, _env);
                 return File(pdfBytes, "application/pdf", currentUser.DisplayName + " Manges VM-tips.pdf");
->>>>>>> main
             }
             catch (Exception ex)
             {
-                byte[] catchBytes = PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas. " + ex.Message);
-                return File(catchBytes, "application/pdf");
+                return File(PdfGenerator.RenderErrorPDF("Din kupong kunde inte hittas. " + ex.Message), "application/pdf", "Manges VM-tips.pdf");
             }
         }
-
 
         public ActionResult Index(int id)
         {
@@ -82,7 +57,7 @@ namespace Tipset.Controllers
 
                 vm.Position = latestStandings?.Position;
                 vm.TotalPoints = latestStandings?.TotalPoints ?? 0;
-                vm.PdfUrl = Url.RouteUrl("PdfDownloadRoute", new { guid = currentUser.Guid });
+                vm.PdfUrl = Url.Action("Pdf", "Details", new { guid = currentUser.Guid });
 
                 SetPreviousYears(vm, currentUser.DisplayName);
 

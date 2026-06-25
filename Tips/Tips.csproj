@@ -1,210 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
-  <PropertyGroup>
-    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="App_Data\**" />
-    <Compile Remove="App_Start\**" />
-    <Content Remove="App_Data\**" />
-    <Content Remove="App_Start\**" />
-    <EmbeddedResource Remove="App_Data\**" />
-    <EmbeddedResource Remove="App_Start\**" />
-    <None Remove="App_Data\**" />
-    <None Remove="App_Start\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="ceTe.DynamicPDF.35">
-      <HintPath>lib\ceTe.DynamicPDF.35.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.*">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.*" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-<<<<<<< HEAD
-    <Content Include="CSS\admin.css" />
-    <Content Include="CSS\responsive.css" />
-    <Content Include="Global.asax">
-      <SubType>Component</SubType>
-    </Content>
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\AwaitingConfirmationController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\ConfirmController.cs" />
-    <Compile Include="Controllers\NyKupongController.cs" />
-    <Compile Include="Controllers\StatisticsController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DetailsController.cs" />
-    <Compile Include="Helpers\Helpers.cs" />
-    <Compile Include="Helpers\PdfGenerator.cs" />
-    <Compile Include="Models\AppSetting.cs" />
-    <Compile Include="Models\IPreviousYearUser.cs" />
-    <Compile Include="Models\SettingsRepository.cs" />
-    <Compile Include="ViewModels\AdminViewModels.cs" />
-    <Compile Include="ViewModels\DetailsViewModel.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RulesController.cs" />
-    <Compile Include="Controllers\BlogController.cs" />
-    <Compile Include="Controllers\AnswersController.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\AnswersViewModel.cs" />
-    <Compile Include="ViewModels\NyKupongViewModel.cs" />
-    <Compile Include="ViewModels\StatisticsViewModel.cs" />
-    <Compile Include="ViewModels\StatDetailsViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="images\logo20262color.gif" />
-    <Content Include="images\logo20262color.png" />
-    <Content Include="images\oversloggamax2026.png" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Details\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Helpers\SendEmail.cs" />
-    <Compile Include="Helpers\TopScorer.asmx.cs">
-      <DependentUpon>TopScorer.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Helpers\TopScorers.ashx.cs">
-      <DependentUpon>TopScorers.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BlogEntry.cs" />
-    <Compile Include="Models\BlogRepository.cs" />
-    <Compile Include="Models\BonusPoints.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\IMatchRepository.cs" />
-    <Compile Include="Models\ITeamRepository.cs" />
-    <Compile Include="Models\IUserRepository.cs" />
-    <Compile Include="Models\Match.cs" />
-    <Compile Include="Models\MatchRepository.cs" />
-    <Compile Include="Models\Standing.cs" />
-    <Compile Include="Models\StandingDate.cs" />
-    <Compile Include="Models\Standings_2010.cs" />
-    <Compile Include="Models\Standings_2012.cs" />
-    <Compile Include="Models\Standings_2014.cs" />
-    <Compile Include="Models\Standings_2016.cs" />
-    <Compile Include="Models\Standings_2018.cs" />
-    <Compile Include="Models\Standings_2024.cs" />
-    <Compile Include="Models\Standings_2022.cs" />
-    <Compile Include="Models\Standings_2021.cs" />
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamRepository.cs" />
-    <Compile Include="Models\TeamStats.cs" />
-    <Compile Include="Models\Tips.Context.cs" />
-    <Compile Include="Models\TopScorer.cs" />
-    <Compile Include="Models\TopScorerRepository.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserBronzeTeam.cs" />
-    <Compile Include="Models\UserExtensions.cs" />
-    <Compile Include="Models\UserFinalTeam.cs" />
-    <Compile Include="Models\UserGoldTeam.cs" />
-    <Compile Include="Models\UserMatch.cs" />
-    <Compile Include="Models\UserPlayoffTeam.cs" />
-    <Compile Include="Models\UserQFTeam.cs" />
-    <Compile Include="Models\UserRepository.cs" />
-    <Compile Include="Models\UserSFTeam.cs" />
-    <Compile Include="Models\UserSilverTeam.cs" />
-    <Compile Include="Models\User_2010.cs" />
-    <Compile Include="Models\User_2012.cs" />
-    <Compile Include="Models\User_2014.cs" />
-    <Compile Include="Models\User_2016.cs" />
-    <Compile Include="Models\User_2018.cs" />
-    <Compile Include="Models\User_2024.cs" />
-    <Compile Include="Models\User_2022.cs" />
-    <Compile Include="Models\User_2021.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CSS\autocomplete.css" />
-    <Content Include="CSS\Blue.css" />
-    <Content Include="CSS\EM2012_Green.css" />
-    <Content Include="CSS\EM2012_Purple.css" />
-    <Content Include="CSS\EM2016.css" />
-    <Content Include="CSS\FadingOrange.css" />
-    <Content Include="CSS\FadingOrange_old.css" />
-    <Content Include="CSS\Green.css" />
-    <Content Include="CSS\Orange.css" />
-    <Content Include="CSS\PaleBlue.css" />
-    <Content Include="CSS\Silver.css" />
-    <Content Include="CSS\Site.css" />
-    <Content Include="CSS\SkyBlue.css" />
-    <Content Include="CSS\VM2014.css" />
-    <Content Include="Helpers\TopScorer.asmx" />
-    <Content Include="images\egoboy.png" />
-    <Content Include="images\fadingBackground.png" />
-    <Content Include="images\gradient.jpeg" />
-    <Content Include="images\greengradient.png" />
-    <Content Include="images\icon-edit.png" />
-    <Content Include="images\icon_delete.gif" />
-    <Content Include="images\Image411.png" />
-    <Content Include="images\loggacolor.png" />
-    <Content Include="images\loggan2012.gif" />
-    <Content Include="images\loggan2012.png" />
-    <Content Include="images\loggan2012400.png" />
-    <Content Include="images\loggo2018.gif" />
-    <Content Include="images\loggo2018.png" />
-    <Content Include="images\logo.png" />
-    <Content Include="images\logo_2014.gif" />
-    <Content Include="images\logo_2014.jpg" />
-    <Content Include="images\logo_2014.png" />
-    <Content Include="images\logo_header_2014.png" />
-    <Content Include="images\mangesvmtips.gif" />
-    <Content Include="images\mangesvmtips.png" />
-    <Content Include="images\orangeGradient.png" />
-    <Content Include="images\overstlogga.png" />
-    <Content Include="images\overstlogga2022small3.png" />
-    <Content Include="images\progress_indicator.gif" />
-    <Content Include="images\purpleGradient.png" />
-    <Content Include="Script\autocomplete.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Helpers\TopScorers.ashx" />
-=======
-    <Content Include=".gitignore" />
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<OutputPath>bin\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<Optimize>false</Optimize>
+		<OutputPath>bin\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup>
+		<IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="App_Data\**" />
+		<Compile Remove="App_Start\**" />
+		<Content Remove="App_Data\**" />
+		<Content Remove="App_Start\**" />
+		<EmbeddedResource Remove="App_Data\**" />
+		<EmbeddedResource Remove="App_Start\**" />
+		<None Remove="App_Data\**" />
+		<None Remove="App_Start\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="ceTe.DynamicPDF.35">
+			<HintPath>lib\ceTe.DynamicPDF.35.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.*">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.*" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include=".gitignore" />
 
->>>>>>> main
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
-    <Compile Remove="Models\BonusPoint.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\app_offline.htm" />
-  </ItemGroup>
+	</ItemGroup>
+	<ItemGroup>
+		<Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+		<Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+	</ItemGroup>
+	<ItemGroup Label="Compile items now included by globbing that were not in the original project file">
+		<Compile Remove="Models\BonusPoint.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\app_offline.htm" />
+	</ItemGroup>
 </Project>
