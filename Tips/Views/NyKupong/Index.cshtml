@@ -9,8 +9,14 @@
     <script>
         $(document).ready(function () {
             $("#txtTopScorer").autocomplete({
-                source: "@Url.Content("~/Helpers/TopScorers.ashx")",
+                // Point directly to the new API endpoint
+                source: "@Url.Content("~/api/TopScorers")",
                 delay: 100
+            });
+
+            $("form").on("submit", function () {
+                var btn = $(this).find("button[type='submit']");
+                btn.prop("disabled", true).text("Skickar...");
             });
         });
     </script>

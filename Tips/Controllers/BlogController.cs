@@ -1,16 +1,23 @@
-﻿using System;
+using System;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 
 namespace Tipset.Controllers
 {
     public class BlogController : BaseController
     {
-        private readonly BlogRepository _blogRepository = new BlogRepository();
-        private static readonly TimeZone _localZone = TimeZone.CurrentTimeZone;
+        private readonly BlogRepository _blogRepository;
+        private static readonly TimeZoneInfo _localZone = TimeZoneInfo.Local;
+
+        public BlogController(BlogRepository blogRepository, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _blogRepository = blogRepository;
+        }
 
         public ActionResult Index()
         {
@@ -22,12 +29,11 @@ namespace Tipset.Controllers
         {
             var entry = _blogRepository.GetBlogEntry(id);
             if (entry == null)
-                return HttpNotFound();
+                return NotFound();
             return View(entry);
         }
 
         [HttpPost]
-        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult AddComment(int id, string name, string control, string text)
         {
@@ -42,9 +48,9 @@ namespace Tipset.Controllers
                     var entry = _blogRepository.GetBlogEntry(id);
                     var c = new Comment
                     {
-                        PostedBy = HttpUtility.HtmlEncode(name),
-                        PostedDate = _localZone.ToUniversalTime(DateTime.Now).AddHours(2),
-                        Text = HttpUtility.HtmlEncode(text).Replace("\n", "<br />")
+                        PostedBy = WebUtility.HtmlEncode(name),
+                        PostedDate = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, _localZone).AddHours(2),
+                        Text = WebUtility.HtmlEncode(text).Replace("\n", "<br />")
                     };
                     entry.Comments.Add(c);
                     _blogRepository.Save();

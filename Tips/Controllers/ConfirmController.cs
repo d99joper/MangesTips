@@ -1,13 +1,18 @@
-﻿using System;
+using System;
 using System.Text;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 
 namespace Tipset.Controllers
 {
     public class ConfirmController : Controller
     {
-        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly UserRepository _userRepository;
+
+        public ConfirmController(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public ActionResult Index(Guid? id)
         {

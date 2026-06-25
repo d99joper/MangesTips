@@ -1,0 +1,180 @@
+﻿@model Tipset.ViewModels.AdminResultsViewModel
+@using Tipset.Helpers
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Facit";
+}
+
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p class="error">@Model.ErrorMessage</p>
+}
+
+@if (Model.ResultsMessages != null && Model.ResultsMessages.Count > 0)
+{
+    <div class="save-log">
+        @foreach (var msg in Model.ResultsMessages)
+        {
+            <div class="@(msg.StartsWith("❌") ? "save-log-error" : msg.StartsWith("✅") ? "save-log-done" : "save-log-step")">@msg</div>
+        }
+    </div>
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 0 – Facit
+   ═══════════════════════════════════════════════════════════════════ *@
+<div >
+    @using (Html.BeginForm("Save", "AdminResults", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="wrap">
+            <div class="leftside">
+                <div class="editor-field">1. Tipsraden. Tippa resultatet i gruppspelet, t.ex 2-0.</div>
+                <table class="tips">
+                    @for (int i = 0; i < Model.Matches.Count; i++)
+                    {
+                        var m = Model.Matches[i];
+                        <tr>
+                            <td>@(m.Date.ToString("d/M"))</td>
+                            <td>@(m.HomeTeam != null ? m.HomeTeam.GroupID : "")</td>
+                            <td>@(m.HomeTeam != null ? m.HomeTeam.TeamName : "")</td>
+                            <td>-</td>
+                            <td>@(m.AwayTeam != null ? m.AwayTeam.TeamName : "")</td>
+                            <td>
+                                <input type="hidden" name="Matches[@i].MatchID" value="@m.ID" />
+                                <input type="text" name="Matches[@i].HomeGoals" value="@(m.HomeGoals)" maxlength="2" class="goalInput" style="width:30px" />
+                            </td>
+                            <td>-</td>
+                            <td>
+                                <input type="text" name="Matches[@i].AwayGoals" value="@(m.AwayGoals)" maxlength="2" class="goalInput" style="width:30px" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div class="rightside">
+                <img src="@Url.Content("~/images/logo20262color.png")" alt="Manges VM-tips" width="350" />
+
+                <div class="editor-label">2. Vidare från gruppen</div>
+                <table>
+                    <thead>
+                        <tr>
+                            @foreach (var g in new[] { "A", "B", "C", "D" })
+                            {
+                                <td>Grupp @g</td>
+                            }
+                        </tr>
+                    </thead>
+                    @foreach (var pos in new[] { 1, 2 })
+                    {
+                        <tr>
+                            @foreach (var g in new[] { "A", "B", "C", "D" })
+                            {
+                                var sid = Model.PlayoffSelected.ContainsKey(g + pos) ? Model.PlayoffSelected[g + pos] : -1;
+                                <td>@pos. @Html.DropDownList("Playoff" + g + pos, DropdownHelper.ToTeamList(Model.AllTeams.Where(t => t.GroupID == g), sid, "Lag " + pos))</td>
+                            }
+                        </tr>
+                    }
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            @foreach (var g in new[] { "E", "F", "G", "I" })
+                            {
+                                <td>Grupp @g</td>
+                            }
+                        </tr>
+                    </thead>
+                    @foreach (var pos in new[] { 1, 2 })
+                    {
+                        <tr>
+                            @foreach (var g in new[] { "E", "F", "G", "I" })
+                            {
+                                var sid = Model.PlayoffSelected.ContainsKey(g + pos) ? Model.PlayoffSelected[g + pos] : -1;
+                                <td>@pos. @Html.DropDownList("Playoff" + g + pos, DropdownHelper.ToTeamList(Model.AllTeams.Where(t => t.GroupID == g), sid, "Lag " + pos))</td>
+                            }
+                        </tr>
+                    }
+                </table>
+
+                <div class="editor-label">3. Vilka åtta lag går till kvartsfinal?</div>
+                <table>
+                    @for (int i = 0; i < 8; i += 2)
+                    {
+                        var s1 = i < Model.QFSelected.Count ? Model.QFSelected[i] : -1;
+                        var s2 = i + 1 < Model.QFSelected.Count ? Model.QFSelected[i + 1] : -1;
+                        <tr>
+                            <td>Lag @(i + 1): @Html.DropDownList("QFTeams[" + i + "]", DropdownHelper.ToTeamList(Model.AllTeams, s1, "Lag " + (i + 1)))</td>
+                            <td>Lag @(i + 2): @Html.DropDownList("QFTeams[" + (i + 1) + "]", DropdownHelper.ToTeamList(Model.AllTeams, s2, "Lag " + (i + 2)))</td>
+                        </tr>
+                    }
+                </table>
+
+                <div class="editor-label">4. Vilka fyra lag går till semifinal?</div>
+                <table>
+                    @for (int i = 0; i < 4; i += 2)
+                    {
+                        var s1 = i < Model.SFSelected.Count ? Model.SFSelected[i] : -1;
+                        var s2 = i + 1 < Model.SFSelected.Count ? Model.SFSelected[i + 1] : -1;
+                        <tr>
+                            <td>Lag @(i + 1): @Html.DropDownList("SFTeams[" + i + "]", DropdownHelper.ToTeamList(Model.AllTeams, s1, "Lag " + (i + 1)))</td>
+                            <td>Lag @(i + 2): @Html.DropDownList("SFTeams[" + (i + 1) + "]", DropdownHelper.ToTeamList(Model.AllTeams, s2, "Lag " + (i + 2)))</td>
+                        </tr>
+                    }
+                </table>
+
+                <div class="editor-label">5. Vilka två lag går till final?</div>
+                <table>
+                    <tr>
+                        @for (int i = 0; i < 2; i++)
+                        {
+                            var sid = i < Model.FinSelected.Count ? Model.FinSelected[i] : -1;
+                            <td>Lag @(i + 1): @Html.DropDownList("FinalTeams[" + i + "]", DropdownHelper.ToTeamList(Model.AllTeams, sid, "Lag " + (i + 1)))</td>
+                        }
+                    </tr>
+                </table>
+
+                <div class="editor-label">6. Skyttekung:</div>
+                @{
+                    var winners = Model.AllTopScorerWinners != null && Model.AllTopScorerWinners.Count > 0
+                            ? Model.AllTopScorerWinners
+                            : new List<string> { "" };
+                }
+                <div id="topscorer-list">
+                    @for (int ts = 0; ts < winners.Count; ts++)
+                    {
+                        <div class="topscorer-row">
+                            <input type="text" name="TopScorers[@ts]" value="@winners[ts]" class="scorer-ac" autocomplete="off" />
+                            <button type="button" class="btn-icon btn-remove" title="Ta bort">✕</button>
+                        </div>
+                    }
+                </div>
+                <button type="button" id="btn-add-scorer" class="btn">+ En till…</button>
+
+                <datalist id="scorer-suggestions">
+                    @foreach (var sc in Model.TopScorers)
+                    {
+                        <option value="@sc.DisplayName"></option>
+                    }
+                </datalist>
+
+                <div class="editor-label">7. Brons:</div>
+                @Html.DropDownList("BronzeTeam", DropdownHelper.ToTeamList(Model.AllTeams, Model.BronzeSelected, "Lag #"))
+
+                <div class="editor-label">8. Silver:</div>
+                @Html.DropDownList("SilverTeam", DropdownHelper.ToTeamList(Model.AllTeams, Model.SilverSelected, "Lag #"))
+
+                <div class="editor-label">9. Guld:</div>
+                @Html.DropDownList("GoldTeam", DropdownHelper.ToTeamList(Model.AllTeams, Model.GoldSelected, "Lag #"))
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <br />
+        <button type="submit" class="btn">Spara facit &amp; beräkna poäng</button>
+    }
+</div>
+
+

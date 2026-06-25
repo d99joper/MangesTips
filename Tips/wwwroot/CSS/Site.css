@@ -503,65 +503,81 @@ ul.AutoCompleteExtender_CompletionList        { list-style-type: none; }
 /* RESPONSIVE — small screens (mobile)
 ----------------------------------------------------------*/
 @media (max-width: 768px) {
-    body { font-size: .85em; }
+    body {
+        font-size: .85em;
+    }
 
-    .page
-    {
+    .page {
         width: 100%;
         max-width: 100%;
         margin: 0;
         box-sizing: border-box;
     }
 
-    #main { padding: 15px 12px 10px 12px; }
+    #main {
+        padding: 15px 12px 10px 12px;
+    }
 
-    #wrap, div.wrap
-    {
+    #wrap, div.wrap {
         max-width: 100%;
         margin: 0;
         padding: 0;
     }
 
-    #menu-toggle-btn { display: block; }
+    #menu-toggle-btn {
+        display: block;
+    }
 
-    ul#menu
-    {
+    ul#menu {
         display: none;
         text-align: left;
         padding: 0;
         margin: 0;
     }
 
-    #menu-toggle:checked ~ ul#menu { display: block; }
-
-    ul#menu li { display: block; }
-
-    ul#menu li a
-    {
+    #menu-toggle:checked ~ ul#menu {
         display: block;
-        padding: 12px 16px;
-        border-left: none;
-        border-right: none;
-        border-top: none;
-        border-bottom: solid 1px;
-        line-height: 1.4em;
     }
 
-    #title img { max-height: 40px; }
-
-/* RESPONSIVE — very small screens (<450px), lock size + shrink content text
-----------------------------------------------------------*/
-/*@media (max-width: 449px) {
-    #wrap, #leftside
-    {
-        font-size: .8em;
+    ul#menu li {
+        display: block;
     }
 
-    #wrap p, #leftside p,
-    #wrap td, #leftside td,
-    #wrap li, #leftside li,
-    .blogHeader, #blogEntry, #blogFooter
-    {
-        font-size: .9em;
+        ul#menu li a {
+            display: block;
+            padding: 12px 16px;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            border-bottom: solid 1px;
+            line-height: 1.4em;
+        }
+
+    #title img {
+        max-height: 40px;
     }
-}*/
+}
+/* ── Page navigation spinner (append at end of file) ─────────────────────────────────── */
+#page-spinner {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,.65);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+    #page-spinner.visible {
+        display: flex;
+    }
+
+#nav-spinner {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}

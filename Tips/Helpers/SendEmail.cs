@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Web;
-using System.Web.Services;
-using System.Web.Services.Protocols;
 using System.Net.Mail;
 
 namespace Tipset.Helpers

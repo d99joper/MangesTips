@@ -62,3 +62,5 @@ table td, table th    { padding: 4px 8px; }
                         border-radius: 50%; animation: spin .8s linear infinite; }
 .spinner-label        { font-size: 14px; color: #444; }
 @keyframes spin       { to { transform: rotate(360deg); } }
+
+

@@ -1,0 +1,66 @@
+﻿@model Tipset.ViewModels.AdminTeamsViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Lag";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 4 – Lag
+   ═══════════════════════════════════════════════════════════════════ *@
+<div>
+    <div class="wrap">
+        <div class="leftside">
+            @using (Html.BeginForm("Save", "AdminTeams", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnTeamID" name="TeamID" value="0" />
+                    Lag: <input type="text" id="txtTeamName" name="TeamName" /><br />
+                    Grupp: <input type="text" id="txtTeamGroup" name="GroupID" style="width:40px" /><br />
+                    <button type="submit" id="btnSaveTeam" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearTeam()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Registrerade lag:</p>
+            <table class="border">
+                @foreach (var t in Model.Teams)
+                {
+                    <tr>
+                        <td>@t.TeamName – Grupp @t.GroupID</td>
+                        <td>
+                            <a href="#" onclick="editTeam(@t.ID,'@t.TeamName','@t.GroupID');return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteTeam", "Admin", new { id = t.ID }, FormMethod.Post, null, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera laget?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+            function editTeam(id, name, group) {
+                document.getElementById('hdnTeamID').value = id;
+                document.getElementById('txtTeamName').value = name;
+                document.getElementById('txtTeamGroup').value = group;
+                document.getElementById('btnSaveTeam').textContent = 'Uppdatera';
+            }
+            function clearTeam() {
+                document.getElementById('hdnTeamID').value = '0';
+                document.getElementById('txtTeamName').value = '';
+                document.getElementById('txtTeamGroup').value = '';
+                document.getElementById('btnSaveTeam').textContent = 'Lägg till';
+            }
+    </script>
+</div>/div>

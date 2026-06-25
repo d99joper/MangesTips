@@ -1,15 +1,16 @@
 using System;
+using System.IO;
 using System.Linq;
-using System.Web;
 using ceTe.DynamicPDF;
 using ceTe.DynamicPDF.PageElements;
+using Microsoft.AspNetCore.Hosting;
 using Tipset.Models;
 
 namespace Tipset.Helpers
 {
     public static class PdfGenerator
     {
-        public static byte[] RenderCompletePDF(User currentUser, HttpServerUtilityBase server)
+        public static byte[] RenderCompletePDF(User currentUser, IWebHostEnvironment env)
         {
             Document document = new Document();
             document.Author = "Jonas Persson";
@@ -38,7 +39,7 @@ namespace Tipset.Helpers
             // section 2 (starts at y≈406) or outside the right page edge (available width ≈227pt).
             // logo20262color.gif: 538×650px @96dpi → 403×488pt natural → scale 0.5 → 202×244pt ✓
             // loggo2018.gif:      200×433px @96dpi → 150×325pt natural → scale 0.8 → 120×260pt ✓
-            string imagePath = server.MapPath("~/images/logo20262color.gif");
+            string imagePath = System.IO.Path.Combine(env.WebRootPath ?? env.ContentRootPath, "images", "logo20262color.gif");
             float imageScale = 0.5f;
             if (System.IO.File.Exists(imagePath))
                 page.Elements.Add(new Image(imagePath, 260, 30, imageScale));

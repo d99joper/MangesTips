@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -9,10 +9,20 @@ namespace Tipset.Controllers
 {
     public class NyKupongController : BaseController
     {
-        private readonly TeamRepository _teamRepository = new TeamRepository();
-        private readonly MatchRepository _matchRepository = new MatchRepository();
-        private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
-        private readonly UserRepository _userRepository = new UserRepository();
+        private readonly TeamRepository _teamRepository;
+        private readonly MatchRepository _matchRepository;
+        private readonly TopScorerRepository _topScorerRepository;
+        private readonly UserRepository _userRepository;
+
+        public NyKupongController(TeamRepository teamRepository, MatchRepository matchRepository,
+            TopScorerRepository topScorerRepository, UserRepository userRepository, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _teamRepository = teamRepository;
+            _matchRepository = matchRepository;
+            _topScorerRepository = topScorerRepository;
+            _userRepository = userRepository;
+        }
 
         [HttpGet]
         public ActionResult Index()
@@ -67,7 +77,7 @@ namespace Tipset.Controllers
 
         private NyKupongViewModel BuildViewModel(NyKupongViewModel vm)
         {
-            vm.IsOpen = new SettingsRepository().GetBool("EnableNewEntries");
+            vm.IsOpen = _settingsRepo.GetBool("EnableNewEntries");
 
             if (vm.IsOpen)
             {
@@ -82,7 +92,7 @@ namespace Tipset.Controllers
 
         private void RebuildLists(NyKupongViewModel vm)
         {
-            vm.IsOpen = new SettingsRepository().GetBool("EnableNewEntries");
+            vm.IsOpen = _settingsRepo.GetBool("EnableNewEntries");
             vm.Matches = _matchRepository.GetAllMatches().ToList();
             vm.AllTeams = _teamRepository.GetAllTeams().ToList();
             foreach (var g in new[] { "A", "B", "C", "D", "E", "F", "G", "I" })

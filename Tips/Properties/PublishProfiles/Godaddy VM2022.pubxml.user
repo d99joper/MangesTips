@@ -8,7 +8,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>
     </EncryptedPassword>
-    <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2022/</_PublishTargetUrl>
+    <_PublishTargetUrl>ftp://personablesolutions.com/mangesVMTips2026/</_PublishTargetUrl>
+    <History>False|2026-06-02T00:01:38.1857403Z||;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="Admin.Master">

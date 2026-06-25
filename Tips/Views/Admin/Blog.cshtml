@@ -1,0 +1,79 @@
+﻿@model Tipset.ViewModels.AdminBlogViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Blog";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 3 – Blogg
+   ═══════════════════════════════════════════════════════════════════ *@
+<div>
+    <div class="wrap">
+        <div class="leftside">
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <p class="error">@Model.ErrorMessage</p>
+            }
+            @using (Html.BeginForm("Save", "AdminBlog", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    <input type="hidden" id="hdnBlogEntryID" name="BlogEntryID" value="0" />
+                    Titel: <input type="text" name="Title" id="txtBlogTitle" style="width:300px" /><br />
+                    <textarea name="Text" id="txtBlogText" rows="10" style="width:400px;height:300px"></textarea><br />
+                    <small style="color:#666">
+                        Tillåtna HTML-taggar: &lt;p&gt; &lt;br&gt; &lt;b&gt; &lt;strong&gt; &lt;i&gt; &lt;em&gt;
+                        &lt;u&gt; &lt;ul&gt; &lt;ol&gt; &lt;li&gt; &lt;a href="..."&gt; &lt;h2&gt; &lt;h3&gt; &lt;blockquote&gt;
+                    </small><br />
+                    <button type="submit" id="btnSaveBlog" class="btn">Lägg till</button>
+                    <button type="button" onclick="clearBlog()">Rensa</button>
+                </p>
+            }
+        </div>
+        <div class="rightside">
+            <p>Tidigare inlägg:</p>
+            <table class="border">
+                @foreach (var b in Model.BlogEntries)
+                {
+                    <tr>
+                        <td>@b.PostedDate.ToString("dd/MM/yyyy")</td>
+                        <td>@b.Title</td>
+                        <td>
+                            <a href="#" onclick="editBlog(@b.ID);return false;">
+                                <img src="@Url.Content("~/images/icon-edit.png")" alt="Redigera" />
+                            </a>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("DeleteBlogEntry", "Admin", new { id = b.ID }, FormMethod.Post, null, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" onclick="return confirm('Radera inlägget?')" style="background:none;border:none;cursor:pointer;padding:0;">
+                                    <img src="@Url.Content("~/images/icon_delete.gif")" alt="Radera" />
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <script>
+            var blogEntries = @Html.Raw(Model.BlogEntriesJson);
+
+            function editBlog(id) {
+                var entry = blogEntries[id];
+                if (!entry) return;
+                document.getElementById('hdnBlogEntryID').value    = id;
+                document.getElementById('txtBlogTitle').value      = entry.title;
+                document.getElementById('txtBlogText').value       = entry.text;
+                document.getElementById('btnSaveBlog').textContent = 'Uppdatera';
+            }
+            function clearBlog() {
+                document.getElementById('hdnBlogEntryID').value    = '0';
+                document.getElementById('txtBlogTitle').value      = '';
+                document.getElementById('txtBlogText').value       = '';
+                document.getElementById('btnSaveBlog').textContent = 'Lägg till';
+            }
+    </script>
+</div>

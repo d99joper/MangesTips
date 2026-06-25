@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Tipset.Models
 {
     public class TopScorerRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public TopScorerRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public IQueryable<TopScorer> GetAllScorers()
         {
-            return db.TopScorers;
+            return db.TopScorers.AsNoTracking().Include(t => t.Users);
         }
 
         public TopScorer GetTopScorer(int id)
@@ -26,7 +30,7 @@ namespace Tipset.Models
 
         public List<TopScorer> GetWinner()
         {
-            return db.TopScorers.Where(t => t.IsWinner == true).ToList<TopScorer>();
+            return db.TopScorers.AsNoTracking().Where(t => t.IsWinner == true).ToList<TopScorer>();
         }
 
         public void ResetWinner()

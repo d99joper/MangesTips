@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Tipset.Models
 {
     public class BlogRepository
     {
-        private Tips_Entities db = new Tips_Entities();
+        private Tips_Entities db;
+
+        public BlogRepository(Tips_Entities db)
+        {
+            this.db = db;
+        }
 
         public void Save()
         {
@@ -18,7 +20,7 @@ namespace Tipset.Models
 
         public IQueryable<BlogEntry> GetAllBlogEntries()
         {
-            return db.BlogEntry.OrderByDescending(b => b.ID);
+            return db.BlogEntry.AsNoTracking().OrderByDescending(b => b.ID);
         }
 
         public BlogEntry GetBlogEntry(int ID)

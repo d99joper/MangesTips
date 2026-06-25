@@ -4,11 +4,12 @@ namespace Tipset.Models
 {
     public class SettingsRepository
     {
-        private readonly Tips_Entities db  = new Tips_Entities();
+        private readonly Tips_Entities db;
         private readonly int           _year;
 
-        public SettingsRepository(int year = 2026)
+        public SettingsRepository(Tips_Entities db, int year = 2026)
         {
+            this.db = db;
             _year = year;
         }
 

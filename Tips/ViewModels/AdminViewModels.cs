@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
 using Tipset.Models;
 
 namespace Tipset.ViewModels
@@ -91,7 +90,6 @@ namespace Tipset.ViewModels
     {
         public int    BlogEntryID  { get; set; }  // 0 = new
         public string Title        { get; set; }
-        [AllowHtml]
         public string Text         { get; set; }
     }
 

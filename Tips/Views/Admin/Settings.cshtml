@@ -1,0 +1,37 @@
+﻿@model Tipset.ViewModels.AdminSettingsViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Övrigt";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 2 – Övrigt
+   ═══════════════════════════════════════════════════════════════════ *@
+<div>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p class="error">@Model.ErrorMessage</p>
+    }
+    <p>
+        @(Model.EnableNewEntries ? "Systemet tillåter nya anmälningar." : "Systemet förbjuder nya anmälningar.")
+        <br /><br />
+        @using (Html.BeginForm("ToggleNewEntries", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn">@(Model.EnableNewEntries ? "Förbjud nya anmälningar" : "Tillåt nya anmälningar")</button>
+        }
+    </p>
+    <hr />
+    <p>
+        När du trycker på knappen kommer procentsatser räknas ut för varje lag beroende på vad användarna (godkända) tippat.<br />
+        @using (Html.BeginForm("GenerateStats", "AdminSettings", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn">Generera statistik</button>
+        }
+        @if (!string.IsNullOrEmpty(Model.StatsMessage))
+        {
+            <span class="ok">@Model.StatsMessage</span>
+        }
+    </p>
+</div>

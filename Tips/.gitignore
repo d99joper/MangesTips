@@ -1,0 +1,11 @@
+﻿.vs/
+**/.vs/
+./.vs/
+**/bin/
+Tips/bin/Tips.dll.config
+**/bin/*.config
+**/obj/
+*.csproj.user
+secrets/
+appsettings.Secrets.json
+*.tmp

@@ -1,0 +1,61 @@
+﻿@model Tipset.ViewModels.AdminUsersViewModel
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewBag.Title = "Översikt";
+}
+
+@* ═══════════════════════════════════════════════════════════════════
+   TAB 1 – Användare
+   ═══════════════════════════════════════════════════════════════════ *@
+<div >
+    @if (!string.IsNullOrEmpty(Model.UsersMessage))
+    {
+        <p class="ok">@Model.UsersMessage</p>
+    }
+    @using (Html.BeginForm("Save", "AdminUsers", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <p><button type="submit" class="btn">Spara</button></p>
+        <table class="border">
+            <thead>
+                <tr>
+                    <th>Fullständigt namn</th>
+                    <th>E-post</th>
+                    <th>Personlig kod</th>
+                    <th>Har betalt</th>
+                    <th>Bekräftad</th>
+                    <th>Vinnare</th>
+                    <th>Inskickat</th>
+                </tr>
+            </thead>
+            @for (int i = 0; i < Model.Users.Count; i++)
+            {
+                var u = Model.Users[i];
+                <tr>
+                    <td>
+                        @u.DisplayName
+                        <input type="hidden" name="Users[@i].UserID" value="@u.ID" />
+                    </td>
+                    <td><a href="mailto:@u.EmailAddress">@u.EmailAddress</a></td>
+                    <td>@u.PayCode</td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].HasPaid" value="true" @(u.HasPaid ? "checked" : "") />
+                        <input type="hidden" name="Users[@i].HasPaid" value="false" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].IsConfirmed" value="true" @(u.IsConfirmed ? "checked" : "") />
+                        <input type="hidden" name="Users[@i].IsConfirmed" value="false" />
+                    </td>
+                    <td>
+                        <input type="checkbox" name="Users[@i].IsWinner" value="true" @(u.IsWinner ? "checked" : "") />
+                        <input type="hidden" name="Users[@i].IsWinner" value="false" />
+                    </td>
+                    <td>@u.PostedDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </table>
+        <p><button type="submit" class="btn">Spara</button></p>
+    }
+</div>
+
+

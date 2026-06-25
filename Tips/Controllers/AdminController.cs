@@ -1,102 +1,52 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
+using System.Text.Json;
+using Tipset.Helpers.Sanitization;
 using Tipset.Models;
 using Tipset.ViewModels;
-using Tipset.Helpers.Sanitization;
 
 namespace Tipset.Controllers
 {
     [Authorize]
+    [Route("Admin")]
     public class AdminController : BaseController
     {
-        private readonly TeamRepository      _teamRepo      = new TeamRepository();
-        private readonly MatchRepository     _matchRepo     = new MatchRepository();
-        private readonly UserRepository      _userRepo      = new UserRepository();
-        private readonly BlogRepository      _blogRepo      = new BlogRepository();
-        private readonly TopScorerRepository _scorerRepo    = new TopScorerRepository();
+        private readonly TeamRepository      _teamRepo;
+        private readonly MatchRepository     _matchRepo;
+        private readonly UserRepository      _userRepo;
+        private readonly BlogRepository      _blogRepo;
+        private readonly TopScorerRepository _scorerRepo;
+        //private readonly SettingsRepository  _settingsRepo;
 
-        // ── GET /Admin ────────────────────────────────────────────────────────
-        public ActionResult Index(int tab = 0)
+        public AdminController(TeamRepository teamRepo, MatchRepository matchRepo, UserRepository userRepo,
+            BlogRepository blogRepo, TopScorerRepository scorerRepo, SettingsRepository settingsRepo)
+            : base(settingsRepo)
         {
+            _teamRepo    = teamRepo;
+            _matchRepo   = matchRepo;
+            _userRepo    = userRepo;
+            _blogRepo    = blogRepo;
+            _scorerRepo  = scorerRepo;
+        }
+
+        // ── GET /Admin ───────────────────────────────────────────────────────
+        // Landing page. Redirects to the first migrated tab.
+        // Tabs not yet migrated still render here via the legacy tab param.
+        [HttpGet("")]
+        public ActionResult Index(int tab = -1)
+        {
+            if (tab == -1)
+                return RedirectToAction("Index", "AdminResults");
+
+            // Legacy path for tabs 2–6 until they're migrated
             var vm = BuildViewModel(tab);
             if (TempData["ErrorMessage"] != null)
                 vm.ErrorMessage = TempData["ErrorMessage"].ToString();
-            return View(vm);
-        }
-
-        // ── POST: Save match results + recalculate points ─────────────────────
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveResults(AdminSaveResultsInput input)
-        {
-            var messages = new List<string>();
-            string error = null;
-            try
-            {
-                // 1. Save match scores
-                int scored = 0, cleared = 0;
-                foreach (var m in input.Matches)
-                {
-                    var match = _matchRepo.GetMatch(m.MatchID);
-                    if (match == null) continue;
-                    byte hg, ag;
-                    if (byte.TryParse(m.HomeGoals, out hg) && byte.TryParse(m.AwayGoals, out ag))
-                    {
-                        match.HomeGoals  = hg;
-                        match.AwayGoals  = ag;
-                        match.ResultMark = hg > ag ? "1" : hg == ag ? "X" : "2";
-                        scored++;
-                    }
-                    else
-                    {
-                        match.HomeGoals  = null;
-                        match.AwayGoals  = null;
-                        match.ResultMark = null;
-                        cleared++;
-                    }
-                }
-                _matchRepo.Save();
-                messages.Add(string.Format("✔ Matchresultat sparade ({0} satta, {1} rensade).", scored, cleared));
-
-                // 2. Reset teams then re-apply
-                _teamRepo.ResetAllTeams();
-                ApplyPlayoffTeams(input);
-                messages.Add("✔ Vidare från gruppen sparade.");
-                ApplyKnockoutTeams(input);
-                _teamRepo.Save();
-                messages.Add("✔ KO-faser (QF/SF/Final/medaljer) sparade.");
-
-                // 3. Top scorers
-                _scorerRepo.ResetWinner();
-                int scorerCount = 0;
-                if (input.TopScorers != null)
-                    foreach (var s in input.TopScorers.Where(s => !string.IsNullOrWhiteSpace(s)))
-                    {
-                        SetWinner(s);
-                        scorerCount++;
-                    }
-                _scorerRepo.Save();
-                messages.Add(string.Format("✔ Skyttekung sparad ({0} st).", scorerCount));
-
-                // 4. Recalculate user points
-                UpdateUsers();
-                messages.Add("✔ Användarpoäng omräknade.");
-
-                messages.Add("✅ Allt sparat!");
-            }
-            catch (Exception ex)
-            {
-                error = ex.Message;
-                messages.Add("❌ Fel: " + ex.Message);
-            }
-
-            var vm = BuildViewModel(0);
-            vm.ErrorMessage     = error;
-            vm.ResultsMessages  = messages;
-            return View("Index", vm);
+            return View("~/Views/Admin/Index.cshtml", vm);
         }
 
         // ── POST: Save user flags ─────────────────────────────────────────────
@@ -134,7 +84,7 @@ namespace Tipset.Controllers
         {
             try
             {
-                var settings = new SettingsRepository();
+                var settings = _settingsRepo;
                 settings.Set("EnableNewEntries", (!settings.GetBool("EnableNewEntries")).ToString().ToLower());
             }
             catch (Exception ex) { TempData["ErrorMessage"] = ex.Message; }
@@ -415,8 +365,7 @@ namespace Tipset.Controllers
                 GoldSelected   = _teamRepo.GetTeams(TeamRepository.TeamInqueryType.WonGold).FirstOrDefault()?.ID   ?? -1,
             };
 
-            var serializer = new JavaScriptSerializer();
-            vm.BlogEntriesJson = serializer.Serialize(
+            vm.BlogEntriesJson = JsonSerializer.Serialize(
                 vm.BlogEntries.ToDictionary(
                     b => b.ID.ToString(),
                     b => new { title = b.Title, text = b.Text }
@@ -431,7 +380,7 @@ namespace Tipset.Controllers
                 vm.PlayoffSelected[g + "2"] = allPlayoffTeams.FirstOrDefault(t => t.GroupID == g && t.PlayOffPos == 2)?.ID ?? -1;
             }
 
-            vm.EnableNewEntries = new SettingsRepository().GetBool("EnableNewEntries");
+            vm.EnableNewEntries = _settingsRepo.GetBool("EnableNewEntries");
 
             return vm;
         }
@@ -451,7 +400,10 @@ namespace Tipset.Controllers
             };
 
             var ids     = pairs.Select(p => p.Item2).Where(id => id > 0).Distinct().ToList();
-            var teamMap = _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+            var teamMap = ids.Count == 0
+                ? new Dictionary<int, Team>()
+                : _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = _teamRepo.GetAllTeams().Where(t => ids.Contains(t.ID)).ToDictionary(t => t.ID);
 
             foreach (var (g, id, pos) in pairs)
             {
@@ -466,9 +418,14 @@ namespace Tipset.Controllers
             var allIds = (input.QFTeams ?? new List<int>())
                 .Concat(input.SFTeams ?? new List<int>())
                 .Concat(input.FinalTeams ?? new List<int>())
-                .Concat(new[] { input.BronzeTeam, input.SilverTeam, input.GoldTeam }.Where(id => id > 0))
+                .Concat(new[] { input.BronzeTeam, input.SilverTeam, input.GoldTeam })
+                .Where(id => id > 0)
                 .Distinct().ToList();
-            var teamMap = _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+
+            var teamMap = allIds.Count == 0
+                ? new Dictionary<int, Team>()
+                : _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
+            //var teamMap = _teamRepo.GetAllTeams().Where(t => allIds.Contains(t.ID)).ToDictionary(t => t.ID);
 
             foreach (var id in input.QFTeams ?? new List<int>())
             { if (teamMap.TryGetValue(id, out var t)) t.IsInQuarterFinals = true; }
@@ -499,7 +456,7 @@ namespace Tipset.Controllers
 
             // Single query — all related collections eager-loaded to avoid N+1
             var users   = _userRepo.GetAllActiveUsersWithDetails();
-            var matches = _matchRepo.GetAllMatches().ToList();
+            var matches = _matchRepo.GetAllMatches().AsNoTracking().ToList();
             var guid    = Guid.NewGuid();
 
             // Reset all bonus points first to avoid double-counting when applying bonuses

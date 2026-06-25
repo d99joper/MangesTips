@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Tipset.Models;
 using Tipset.ViewModels;
 
@@ -8,9 +8,20 @@ namespace Tipset.Controllers
 {
     public class StatisticsController : BaseController
     {
-        private readonly TeamRepository _teamRepository = new TeamRepository();
-        private readonly MatchRepository _matchRepository = new MatchRepository();
-        private readonly TopScorerRepository _topScorerRepository = new TopScorerRepository();
+        private readonly TeamRepository _teamRepository;
+        private readonly MatchRepository _matchRepository;
+        private readonly TopScorerRepository _topScorerRepository;
+        private readonly UserRepository _userRepository;
+
+        public StatisticsController(TeamRepository teamRepository, MatchRepository matchRepository,
+            TopScorerRepository topScorerRepository, UserRepository userRepository, SettingsRepository settingsRepo)
+            : base(settingsRepo)
+        {
+            _teamRepository = teamRepository;
+            _matchRepository = matchRepository;
+            _topScorerRepository = topScorerRepository;
+            _userRepository = userRepository;
+        }
 
         public ActionResult Index(string sort, string dir, int tab = 0)
         {
@@ -22,7 +33,7 @@ namespace Tipset.Controllers
                 Matches = _matchRepository.GetAllMatches().ToList()
             };
 
-            IQueryable<Team> teams = _teamRepository.GetAllTeams();
+            IQueryable<Team> teams = _teamRepository.GetAllTeamsWithStats();
             bool asc = vm.SortDir == "asc";
             switch (vm.SortColumn)
             {
@@ -56,7 +67,7 @@ namespace Tipset.Controllers
             switch (type)
             {
                 case "Match":
-                    foreach (var um in UserRepository.GetAllUserMatches(id.Value, result))
+                    foreach (var um in _userRepository.GetAllUserMatches(id.Value, result))
                     {
                         bool correct = um.Match.HomeGoals == um.HomeGoals && um.Match.AwayGoals == um.AwayGoals;
                         vm.Rows.Add(new StatDetailRow
@@ -68,16 +79,16 @@ namespace Tipset.Controllers
                     }
                     break;
                 case "playoffs":
-                    bool correctTeam = UserRepository.CorrectTeamInStage(teamid.Value, stage);
-                    foreach (var u in UserRepository.GetUserPlayoffTeams(stage, teamid.Value))
+                    bool correctTeam = _userRepository.CorrectTeamInStage(teamid.Value, stage);
+                    foreach (var u in _userRepository.GetUserPlayoffTeams(stage, teamid.Value))
                         vm.Rows.Add(new StatDetailRow { DisplayName = u.DisplayName, IsHighlighted = correctTeam });
                     break;
                 case "topscorer":
-                    foreach (var u in UserRepository.GetUsersForTopscorer(id.Value))
+                    foreach (var u in _userRepository.GetUsersForTopscorer(id.Value))
                         vm.Rows.Add(new StatDetailRow { DisplayName = u.DisplayName, IsHighlighted = false });
                     break;
                 default:
-                    return HttpNotFound();
+                    return NotFound();
             }
 
             return PartialView(vm);
